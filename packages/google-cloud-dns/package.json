@@ -53,7 +53,7 @@
     "@google-cloud/promisify": "^5.0.0",
     "arrify": "^2.0.0",
     "dns-zonefile": "0.2.10",
-    "google-gax": "^5.0.1-rc.0",
+    "google-gax": "^5.0.0",
     "lodash.groupby": "^4.6.0",
     "string-format-obj": "^1.1.1"
   },
@@ -69,7 +69,7 @@
     "codecov": "^3.8.3",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^3.0.0",
+    "jsdoc-fresh": "^4.0.0",
     "jsdoc-region-tag": "^3.0.0",
     "linkinator": "^6.1.2",
     "long": "^5.3.1",

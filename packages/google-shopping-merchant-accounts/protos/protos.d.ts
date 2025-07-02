@@ -1089,9 +1089,6 @@ export namespace google {
                             /** ImpactedDestination impacts. */
                             public impacts: google.shopping.merchant.accounts.v1beta.AccountIssue.ImpactedDestination.IImpact[];
 
-                            /** ImpactedDestination _reportingContext. */
-                            public _reportingContext?: "reportingContext";
-
                             /**
                              * Creates a new ImpactedDestination instance using the specified properties.
                              * @param [properties] Properties to set
@@ -1926,9 +1923,6 @@ export namespace google {
                         /** CreateAndConfigureAccountRequest service. */
                         public service: google.shopping.merchant.accounts.v1beta.CreateAndConfigureAccountRequest.IAddAccountService[];
 
-                        /** CreateAndConfigureAccountRequest _acceptTermsOfService. */
-                        public _acceptTermsOfService?: "acceptTermsOfService";
-
                         /**
                          * Creates a new CreateAndConfigureAccountRequest instance using the specified properties.
                          * @param [properties] Properties to set
@@ -2139,9 +2133,6 @@ export namespace google {
 
                             /** AddAccountService serviceType. */
                             public serviceType?: "accountAggregation";
-
-                            /** AddAccountService _provider. */
-                            public _provider?: "provider";
 
                             /**
                              * Creates a new AddAccountService instance using the specified properties.
@@ -4287,15 +4278,6 @@ export namespace google {
                         /** AutomaticImprovements shippingImprovements. */
                         public shippingImprovements?: (google.shopping.merchant.accounts.v1beta.IAutomaticShippingImprovements|null);
 
-                        /** AutomaticImprovements _itemUpdates. */
-                        public _itemUpdates?: "itemUpdates";
-
-                        /** AutomaticImprovements _imageImprovements. */
-                        public _imageImprovements?: "imageImprovements";
-
-                        /** AutomaticImprovements _shippingImprovements. */
-                        public _shippingImprovements?: "shippingImprovements";
-
                         /**
                          * Creates a new AutomaticImprovements instance using the specified properties.
                          * @param [properties] Properties to set
@@ -4534,18 +4516,6 @@ export namespace google {
                             /** ItemUpdatesAccountLevelSettings allowConditionUpdates. */
                             public allowConditionUpdates?: (boolean|null);
 
-                            /** ItemUpdatesAccountLevelSettings _allowPriceUpdates. */
-                            public _allowPriceUpdates?: "allowPriceUpdates";
-
-                            /** ItemUpdatesAccountLevelSettings _allowAvailabilityUpdates. */
-                            public _allowAvailabilityUpdates?: "allowAvailabilityUpdates";
-
-                            /** ItemUpdatesAccountLevelSettings _allowStrictAvailabilityUpdates. */
-                            public _allowStrictAvailabilityUpdates?: "allowStrictAvailabilityUpdates";
-
-                            /** ItemUpdatesAccountLevelSettings _allowConditionUpdates. */
-                            public _allowConditionUpdates?: "allowConditionUpdates";
-
                             /**
                              * Creates a new ItemUpdatesAccountLevelSettings instance using the specified properties.
                              * @param [properties] Properties to set
@@ -4650,9 +4620,6 @@ export namespace google {
                         /** AutomaticImageImprovements effectiveAllowAutomaticImageImprovements. */
                         public effectiveAllowAutomaticImageImprovements: boolean;
 
-                        /** AutomaticImageImprovements _accountImageImprovementsSettings. */
-                        public _accountImageImprovementsSettings?: "accountImageImprovementsSettings";
-
                         /**
                          * Creates a new AutomaticImageImprovements instance using the specified properties.
                          * @param [properties] Properties to set
@@ -4752,9 +4719,6 @@ export namespace google {
                             /** ImageImprovementsAccountLevelSettings allowAutomaticImageImprovements. */
                             public allowAutomaticImageImprovements?: (boolean|null);
 
-                            /** ImageImprovementsAccountLevelSettings _allowAutomaticImageImprovements. */
-                            public _allowAutomaticImageImprovements?: "allowAutomaticImageImprovements";
-
                             /**
                              * Creates a new ImageImprovementsAccountLevelSettings instance using the specified properties.
                              * @param [properties] Properties to set
@@ -4852,9 +4816,6 @@ export namespace google {
 
                         /** AutomaticShippingImprovements allowShippingImprovements. */
                         public allowShippingImprovements?: (boolean|null);
-
-                        /** AutomaticShippingImprovements _allowShippingImprovements. */
-                        public _allowShippingImprovements?: "allowShippingImprovements";
 
                         /**
                          * Creates a new AutomaticShippingImprovements instance using the specified properties.
@@ -5765,21 +5726,6 @@ export namespace google {
                         /** BusinessInfo koreanBusinessRegistrationNumber. */
                         public koreanBusinessRegistrationNumber?: (string|null);
 
-                        /** BusinessInfo _address. */
-                        public _address?: "address";
-
-                        /** BusinessInfo _phone. */
-                        public _phone?: "phone";
-
-                        /** BusinessInfo _phoneVerificationState. */
-                        public _phoneVerificationState?: "phoneVerificationState";
-
-                        /** BusinessInfo _customerService. */
-                        public _customerService?: "customerService";
-
-                        /** BusinessInfo _koreanBusinessRegistrationNumber. */
-                        public _koreanBusinessRegistrationNumber?: "koreanBusinessRegistrationNumber";
-
                         /**
                          * Creates a new BusinessInfo instance using the specified properties.
                          * @param [properties] Properties to set
@@ -6089,15 +6035,6 @@ export namespace google {
                         /** CustomerService phone. */
                         public phone?: (google.type.IPhoneNumber|null);
 
-                        /** CustomerService _uri. */
-                        public _uri?: "uri";
-
-                        /** CustomerService _email. */
-                        public _email?: "email";
-
-                        /** CustomerService _phone. */
-                        public _phone?: "phone";
-
                         /**
                          * Creates a new CustomerService instance using the specified properties.
                          * @param [properties] Properties to set
@@ -6181,6 +6118,778 @@ export namespace google {
                         PHONE_VERIFICATION_STATE_UNSPECIFIED = 0,
                         PHONE_VERIFICATION_STATE_VERIFIED = 1,
                         PHONE_VERIFICATION_STATE_UNVERIFIED = 2
+                    }
+
+                    /** Represents a CheckoutSettingsService */
+                    class CheckoutSettingsService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new CheckoutSettingsService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new CheckoutSettingsService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CheckoutSettingsService;
+
+                        /**
+                         * Calls GetCheckoutSettings.
+                         * @param request GetCheckoutSettingsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and CheckoutSettings
+                         */
+                        public getCheckoutSettings(request: google.shopping.merchant.accounts.v1beta.IGetCheckoutSettingsRequest, callback: google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.GetCheckoutSettingsCallback): void;
+
+                        /**
+                         * Calls GetCheckoutSettings.
+                         * @param request GetCheckoutSettingsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getCheckoutSettings(request: google.shopping.merchant.accounts.v1beta.IGetCheckoutSettingsRequest): Promise<google.shopping.merchant.accounts.v1beta.CheckoutSettings>;
+
+                        /**
+                         * Calls CreateCheckoutSettings.
+                         * @param request CreateCheckoutSettingsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and CheckoutSettings
+                         */
+                        public createCheckoutSettings(request: google.shopping.merchant.accounts.v1beta.ICreateCheckoutSettingsRequest, callback: google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.CreateCheckoutSettingsCallback): void;
+
+                        /**
+                         * Calls CreateCheckoutSettings.
+                         * @param request CreateCheckoutSettingsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createCheckoutSettings(request: google.shopping.merchant.accounts.v1beta.ICreateCheckoutSettingsRequest): Promise<google.shopping.merchant.accounts.v1beta.CheckoutSettings>;
+
+                        /**
+                         * Calls UpdateCheckoutSettings.
+                         * @param request UpdateCheckoutSettingsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and CheckoutSettings
+                         */
+                        public updateCheckoutSettings(request: google.shopping.merchant.accounts.v1beta.IUpdateCheckoutSettingsRequest, callback: google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.UpdateCheckoutSettingsCallback): void;
+
+                        /**
+                         * Calls UpdateCheckoutSettings.
+                         * @param request UpdateCheckoutSettingsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateCheckoutSettings(request: google.shopping.merchant.accounts.v1beta.IUpdateCheckoutSettingsRequest): Promise<google.shopping.merchant.accounts.v1beta.CheckoutSettings>;
+
+                        /**
+                         * Calls DeleteCheckoutSettings.
+                         * @param request DeleteCheckoutSettingsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteCheckoutSettings(request: google.shopping.merchant.accounts.v1beta.IDeleteCheckoutSettingsRequest, callback: google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.DeleteCheckoutSettingsCallback): void;
+
+                        /**
+                         * Calls DeleteCheckoutSettings.
+                         * @param request DeleteCheckoutSettingsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteCheckoutSettings(request: google.shopping.merchant.accounts.v1beta.IDeleteCheckoutSettingsRequest): Promise<google.protobuf.Empty>;
+                    }
+
+                    namespace CheckoutSettingsService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.CheckoutSettingsService|getCheckoutSettings}.
+                         * @param error Error, if any
+                         * @param [response] CheckoutSettings
+                         */
+                        type GetCheckoutSettingsCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.CheckoutSettings) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.CheckoutSettingsService|createCheckoutSettings}.
+                         * @param error Error, if any
+                         * @param [response] CheckoutSettings
+                         */
+                        type CreateCheckoutSettingsCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.CheckoutSettings) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.CheckoutSettingsService|updateCheckoutSettings}.
+                         * @param error Error, if any
+                         * @param [response] CheckoutSettings
+                         */
+                        type UpdateCheckoutSettingsCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.CheckoutSettings) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.CheckoutSettingsService|deleteCheckoutSettings}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteCheckoutSettingsCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                    }
+
+                    /** Properties of a GetCheckoutSettingsRequest. */
+                    interface IGetCheckoutSettingsRequest {
+
+                        /** GetCheckoutSettingsRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetCheckoutSettingsRequest. */
+                    class GetCheckoutSettingsRequest implements IGetCheckoutSettingsRequest {
+
+                        /**
+                         * Constructs a new GetCheckoutSettingsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IGetCheckoutSettingsRequest);
+
+                        /** GetCheckoutSettingsRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetCheckoutSettingsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetCheckoutSettingsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IGetCheckoutSettingsRequest): google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest;
+
+                        /**
+                         * Encodes the specified GetCheckoutSettingsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest.verify|verify} messages.
+                         * @param message GetCheckoutSettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IGetCheckoutSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetCheckoutSettingsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest.verify|verify} messages.
+                         * @param message GetCheckoutSettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IGetCheckoutSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetCheckoutSettingsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetCheckoutSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest;
+
+                        /**
+                         * Decodes a GetCheckoutSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetCheckoutSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest;
+
+                        /**
+                         * Verifies a GetCheckoutSettingsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetCheckoutSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetCheckoutSettingsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest;
+
+                        /**
+                         * Creates a plain object from a GetCheckoutSettingsRequest message. Also converts values to other types if specified.
+                         * @param message GetCheckoutSettingsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetCheckoutSettingsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetCheckoutSettingsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CreateCheckoutSettingsRequest. */
+                    interface ICreateCheckoutSettingsRequest {
+
+                        /** CreateCheckoutSettingsRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateCheckoutSettingsRequest checkoutSettings */
+                        checkoutSettings?: (google.shopping.merchant.accounts.v1beta.ICheckoutSettings|null);
+                    }
+
+                    /** Represents a CreateCheckoutSettingsRequest. */
+                    class CreateCheckoutSettingsRequest implements ICreateCheckoutSettingsRequest {
+
+                        /**
+                         * Constructs a new CreateCheckoutSettingsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.ICreateCheckoutSettingsRequest);
+
+                        /** CreateCheckoutSettingsRequest parent. */
+                        public parent: string;
+
+                        /** CreateCheckoutSettingsRequest checkoutSettings. */
+                        public checkoutSettings?: (google.shopping.merchant.accounts.v1beta.ICheckoutSettings|null);
+
+                        /**
+                         * Creates a new CreateCheckoutSettingsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateCheckoutSettingsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.ICreateCheckoutSettingsRequest): google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest;
+
+                        /**
+                         * Encodes the specified CreateCheckoutSettingsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest.verify|verify} messages.
+                         * @param message CreateCheckoutSettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.ICreateCheckoutSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateCheckoutSettingsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest.verify|verify} messages.
+                         * @param message CreateCheckoutSettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.ICreateCheckoutSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateCheckoutSettingsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateCheckoutSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest;
+
+                        /**
+                         * Decodes a CreateCheckoutSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateCheckoutSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest;
+
+                        /**
+                         * Verifies a CreateCheckoutSettingsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateCheckoutSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateCheckoutSettingsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest;
+
+                        /**
+                         * Creates a plain object from a CreateCheckoutSettingsRequest message. Also converts values to other types if specified.
+                         * @param message CreateCheckoutSettingsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateCheckoutSettingsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateCheckoutSettingsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateCheckoutSettingsRequest. */
+                    interface IUpdateCheckoutSettingsRequest {
+
+                        /** UpdateCheckoutSettingsRequest checkoutSettings */
+                        checkoutSettings?: (google.shopping.merchant.accounts.v1beta.ICheckoutSettings|null);
+
+                        /** UpdateCheckoutSettingsRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateCheckoutSettingsRequest. */
+                    class UpdateCheckoutSettingsRequest implements IUpdateCheckoutSettingsRequest {
+
+                        /**
+                         * Constructs a new UpdateCheckoutSettingsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IUpdateCheckoutSettingsRequest);
+
+                        /** UpdateCheckoutSettingsRequest checkoutSettings. */
+                        public checkoutSettings?: (google.shopping.merchant.accounts.v1beta.ICheckoutSettings|null);
+
+                        /** UpdateCheckoutSettingsRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateCheckoutSettingsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateCheckoutSettingsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IUpdateCheckoutSettingsRequest): google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest;
+
+                        /**
+                         * Encodes the specified UpdateCheckoutSettingsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest.verify|verify} messages.
+                         * @param message UpdateCheckoutSettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IUpdateCheckoutSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateCheckoutSettingsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest.verify|verify} messages.
+                         * @param message UpdateCheckoutSettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IUpdateCheckoutSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateCheckoutSettingsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateCheckoutSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest;
+
+                        /**
+                         * Decodes an UpdateCheckoutSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateCheckoutSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest;
+
+                        /**
+                         * Verifies an UpdateCheckoutSettingsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateCheckoutSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateCheckoutSettingsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateCheckoutSettingsRequest message. Also converts values to other types if specified.
+                         * @param message UpdateCheckoutSettingsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateCheckoutSettingsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateCheckoutSettingsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteCheckoutSettingsRequest. */
+                    interface IDeleteCheckoutSettingsRequest {
+
+                        /** DeleteCheckoutSettingsRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteCheckoutSettingsRequest. */
+                    class DeleteCheckoutSettingsRequest implements IDeleteCheckoutSettingsRequest {
+
+                        /**
+                         * Constructs a new DeleteCheckoutSettingsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IDeleteCheckoutSettingsRequest);
+
+                        /** DeleteCheckoutSettingsRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteCheckoutSettingsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteCheckoutSettingsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IDeleteCheckoutSettingsRequest): google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest;
+
+                        /**
+                         * Encodes the specified DeleteCheckoutSettingsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest.verify|verify} messages.
+                         * @param message DeleteCheckoutSettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IDeleteCheckoutSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteCheckoutSettingsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest.verify|verify} messages.
+                         * @param message DeleteCheckoutSettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IDeleteCheckoutSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteCheckoutSettingsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteCheckoutSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest;
+
+                        /**
+                         * Decodes a DeleteCheckoutSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteCheckoutSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest;
+
+                        /**
+                         * Verifies a DeleteCheckoutSettingsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteCheckoutSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteCheckoutSettingsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteCheckoutSettingsRequest message. Also converts values to other types if specified.
+                         * @param message DeleteCheckoutSettingsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteCheckoutSettingsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteCheckoutSettingsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CheckoutSettings. */
+                    interface ICheckoutSettings {
+
+                        /** CheckoutSettings name */
+                        name?: (string|null);
+
+                        /** CheckoutSettings uriSettings */
+                        uriSettings?: (google.shopping.merchant.accounts.v1beta.IUriSettings|null);
+
+                        /** CheckoutSettings eligibleDestinations */
+                        eligibleDestinations?: (google.shopping.type.Destination.DestinationEnum[]|null);
+
+                        /** CheckoutSettings enrollmentState */
+                        enrollmentState?: (google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState|keyof typeof google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState|null);
+
+                        /** CheckoutSettings reviewState */
+                        reviewState?: (google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState|keyof typeof google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState|null);
+
+                        /** CheckoutSettings effectiveUriSettings */
+                        effectiveUriSettings?: (google.shopping.merchant.accounts.v1beta.IUriSettings|null);
+
+                        /** CheckoutSettings effectiveEnrollmentState */
+                        effectiveEnrollmentState?: (google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState|keyof typeof google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState|null);
+
+                        /** CheckoutSettings effectiveReviewState */
+                        effectiveReviewState?: (google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState|keyof typeof google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState|null);
+                    }
+
+                    /** Represents a CheckoutSettings. */
+                    class CheckoutSettings implements ICheckoutSettings {
+
+                        /**
+                         * Constructs a new CheckoutSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.ICheckoutSettings);
+
+                        /** CheckoutSettings name. */
+                        public name: string;
+
+                        /** CheckoutSettings uriSettings. */
+                        public uriSettings?: (google.shopping.merchant.accounts.v1beta.IUriSettings|null);
+
+                        /** CheckoutSettings eligibleDestinations. */
+                        public eligibleDestinations: google.shopping.type.Destination.DestinationEnum[];
+
+                        /** CheckoutSettings enrollmentState. */
+                        public enrollmentState?: (google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState|keyof typeof google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState|null);
+
+                        /** CheckoutSettings reviewState. */
+                        public reviewState?: (google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState|keyof typeof google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState|null);
+
+                        /** CheckoutSettings effectiveUriSettings. */
+                        public effectiveUriSettings?: (google.shopping.merchant.accounts.v1beta.IUriSettings|null);
+
+                        /** CheckoutSettings effectiveEnrollmentState. */
+                        public effectiveEnrollmentState?: (google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState|keyof typeof google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState|null);
+
+                        /** CheckoutSettings effectiveReviewState. */
+                        public effectiveReviewState?: (google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState|keyof typeof google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState|null);
+
+                        /**
+                         * Creates a new CheckoutSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CheckoutSettings instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.ICheckoutSettings): google.shopping.merchant.accounts.v1beta.CheckoutSettings;
+
+                        /**
+                         * Encodes the specified CheckoutSettings message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CheckoutSettings.verify|verify} messages.
+                         * @param message CheckoutSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.ICheckoutSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CheckoutSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CheckoutSettings.verify|verify} messages.
+                         * @param message CheckoutSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.ICheckoutSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CheckoutSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CheckoutSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.CheckoutSettings;
+
+                        /**
+                         * Decodes a CheckoutSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CheckoutSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.CheckoutSettings;
+
+                        /**
+                         * Verifies a CheckoutSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CheckoutSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CheckoutSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.CheckoutSettings;
+
+                        /**
+                         * Creates a plain object from a CheckoutSettings message. Also converts values to other types if specified.
+                         * @param message CheckoutSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.CheckoutSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CheckoutSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CheckoutSettings
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CheckoutSettings {
+
+                        /** CheckoutEnrollmentState enum. */
+                        enum CheckoutEnrollmentState {
+                            CHECKOUT_ENROLLMENT_STATE_UNSPECIFIED = 0,
+                            INACTIVE = 1,
+                            ENROLLED = 2,
+                            OPTED_OUT = 3
+                        }
+
+                        /** CheckoutReviewState enum. */
+                        enum CheckoutReviewState {
+                            CHECKOUT_REVIEW_STATE_UNSPECIFIED = 0,
+                            IN_REVIEW = 1,
+                            APPROVED = 2,
+                            DISAPPROVED = 3
+                        }
+                    }
+
+                    /** Properties of an UriSettings. */
+                    interface IUriSettings {
+
+                        /** UriSettings checkoutUriTemplate */
+                        checkoutUriTemplate?: (string|null);
+
+                        /** UriSettings cartUriTemplate */
+                        cartUriTemplate?: (string|null);
+                    }
+
+                    /** Represents an UriSettings. */
+                    class UriSettings implements IUriSettings {
+
+                        /**
+                         * Constructs a new UriSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IUriSettings);
+
+                        /** UriSettings checkoutUriTemplate. */
+                        public checkoutUriTemplate?: (string|null);
+
+                        /** UriSettings cartUriTemplate. */
+                        public cartUriTemplate?: (string|null);
+
+                        /** UriSettings uriTemplate. */
+                        public uriTemplate?: ("checkoutUriTemplate"|"cartUriTemplate");
+
+                        /**
+                         * Creates a new UriSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UriSettings instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IUriSettings): google.shopping.merchant.accounts.v1beta.UriSettings;
+
+                        /**
+                         * Encodes the specified UriSettings message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UriSettings.verify|verify} messages.
+                         * @param message UriSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IUriSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UriSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UriSettings.verify|verify} messages.
+                         * @param message UriSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IUriSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UriSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UriSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.UriSettings;
+
+                        /**
+                         * Decodes an UriSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UriSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.UriSettings;
+
+                        /**
+                         * Verifies an UriSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UriSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UriSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.UriSettings;
+
+                        /**
+                         * Creates a plain object from an UriSettings message. Also converts values to other types if specified.
+                         * @param message UriSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.UriSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UriSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UriSettings
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Represents an EmailPreferencesService */
@@ -7310,9 +8019,6 @@ export namespace google {
 
                         /** Homepage claimed. */
                         public claimed: boolean;
-
-                        /** Homepage _uri. */
-                        public _uri?: "uri";
 
                         /**
                          * Creates a new Homepage instance using the specified properties.
@@ -10963,18 +11669,6 @@ export namespace google {
                         /** OnlineReturnPolicy returnLabelSource. */
                         public returnLabelSource?: (google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource|keyof typeof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource|null);
 
-                        /** OnlineReturnPolicy _acceptDefectiveOnly. */
-                        public _acceptDefectiveOnly?: "acceptDefectiveOnly";
-
-                        /** OnlineReturnPolicy _processRefundDays. */
-                        public _processRefundDays?: "processRefundDays";
-
-                        /** OnlineReturnPolicy _acceptExchange. */
-                        public _acceptExchange?: "acceptExchange";
-
-                        /** OnlineReturnPolicy _returnLabelSource. */
-                        public _returnLabelSource?: "returnLabelSource";
-
                         /**
                          * Creates a new OnlineReturnPolicy instance using the specified properties.
                          * @param [properties] Properties to set
@@ -13184,9 +13878,6 @@ export namespace google {
                         /** Region shippingEligible. */
                         public shippingEligible?: (google.protobuf.IBoolValue|null);
 
-                        /** Region _displayName. */
-                        public _displayName?: "displayName";
-
                         /**
                          * Creates a new Region instance using the specified properties.
                          * @param [properties] Properties to set
@@ -13834,30 +14525,6 @@ export namespace google {
                         /** Service loyaltyPrograms. */
                         public loyaltyPrograms: google.shopping.merchant.accounts.v1beta.Service.ILoyaltyProgram[];
 
-                        /** Service _serviceName. */
-                        public _serviceName?: "serviceName";
-
-                        /** Service _active. */
-                        public _active?: "active";
-
-                        /** Service _currencyCode. */
-                        public _currencyCode?: "currencyCode";
-
-                        /** Service _deliveryTime. */
-                        public _deliveryTime?: "deliveryTime";
-
-                        /** Service _shipmentType. */
-                        public _shipmentType?: "shipmentType";
-
-                        /** Service _minimumOrderValue. */
-                        public _minimumOrderValue?: "minimumOrderValue";
-
-                        /** Service _minimumOrderValueTable. */
-                        public _minimumOrderValueTable?: "minimumOrderValueTable";
-
-                        /** Service _storeConfig. */
-                        public _storeConfig?: "storeConfig";
-
                         /**
                          * Creates a new Service instance using the specified properties.
                          * @param [properties] Properties to set
@@ -13975,15 +14642,6 @@ export namespace google {
                             /** StoreConfig serviceRadius. */
                             public serviceRadius?: (google.shopping.merchant.accounts.v1beta.IDistance|null);
 
-                            /** StoreConfig _storeServiceType. */
-                            public _storeServiceType?: "storeServiceType";
-
-                            /** StoreConfig _cutoffConfig. */
-                            public _cutoffConfig?: "cutoffConfig";
-
-                            /** StoreConfig _serviceRadius. */
-                            public _serviceRadius?: "serviceRadius";
-
                             /**
                              * Creates a new StoreConfig instance using the specified properties.
                              * @param [properties] Properties to set
@@ -14095,15 +14753,6 @@ export namespace google {
                                 /** CutoffConfig noDeliveryPostCutoff. */
                                 public noDeliveryPostCutoff?: (boolean|null);
 
-                                /** CutoffConfig _localCutoffTime. */
-                                public _localCutoffTime?: "localCutoffTime";
-
-                                /** CutoffConfig _storeCloseOffsetHours. */
-                                public _storeCloseOffsetHours?: "storeCloseOffsetHours";
-
-                                /** CutoffConfig _noDeliveryPostCutoff. */
-                                public _noDeliveryPostCutoff?: "noDeliveryPostCutoff";
-
                                 /**
                                  * Creates a new CutoffConfig instance using the specified properties.
                                  * @param [properties] Properties to set
@@ -14208,12 +14857,6 @@ export namespace google {
 
                                     /** LocalCutoffTime minute. */
                                     public minute?: (number|Long|string|null);
-
-                                    /** LocalCutoffTime _hour. */
-                                    public _hour?: "hour";
-
-                                    /** LocalCutoffTime _minute. */
-                                    public _minute?: "minute";
 
                                     /**
                                      * Creates a new LocalCutoffTime instance using the specified properties.
@@ -14327,9 +14970,6 @@ export namespace google {
                             /** LoyaltyProgram loyaltyProgramTiers. */
                             public loyaltyProgramTiers: google.shopping.merchant.accounts.v1beta.Service.LoyaltyProgram.ILoyaltyProgramTiers[];
 
-                            /** LoyaltyProgram _programLabel. */
-                            public _programLabel?: "programLabel";
-
                             /**
                              * Creates a new LoyaltyProgram instance using the specified properties.
                              * @param [properties] Properties to set
@@ -14428,9 +15068,6 @@ export namespace google {
 
                                 /** LoyaltyProgramTiers tierLabel. */
                                 public tierLabel?: (string|null);
-
-                                /** LoyaltyProgramTiers _tierLabel. */
-                                public _tierLabel?: "tierLabel";
 
                                 /**
                                  * Creates a new LoyaltyProgramTiers instance using the specified properties.
@@ -14544,12 +15181,6 @@ export namespace google {
 
                         /** Distance unit. */
                         public unit?: (google.shopping.merchant.accounts.v1beta.Distance.Unit|keyof typeof google.shopping.merchant.accounts.v1beta.Distance.Unit|null);
-
-                        /** Distance _value. */
-                        public _value?: "value";
-
-                        /** Distance _unit. */
-                        public _unit?: "unit";
 
                         /**
                          * Creates a new Distance instance using the specified properties.
@@ -14682,21 +15313,6 @@ export namespace google {
                         /** Warehouse businessDayConfig. */
                         public businessDayConfig?: (google.shopping.merchant.accounts.v1beta.IBusinessDayConfig|null);
 
-                        /** Warehouse _name. */
-                        public _name?: "name";
-
-                        /** Warehouse _shippingAddress. */
-                        public _shippingAddress?: "shippingAddress";
-
-                        /** Warehouse _cutoffTime. */
-                        public _cutoffTime?: "cutoffTime";
-
-                        /** Warehouse _handlingDays. */
-                        public _handlingDays?: "handlingDays";
-
-                        /** Warehouse _businessDayConfig. */
-                        public _businessDayConfig?: "businessDayConfig";
-
                         /**
                          * Creates a new Warehouse instance using the specified properties.
                          * @param [properties] Properties to set
@@ -14799,12 +15415,6 @@ export namespace google {
 
                         /** WarehouseCutoffTime minute. */
                         public minute?: (number|null);
-
-                        /** WarehouseCutoffTime _hour. */
-                        public _hour?: "hour";
-
-                        /** WarehouseCutoffTime _minute. */
-                        public _minute?: "minute";
 
                         /**
                          * Creates a new WarehouseCutoffTime instance using the specified properties.
@@ -14926,21 +15536,6 @@ export namespace google {
 
                         /** Address regionCode. */
                         public regionCode?: (string|null);
-
-                        /** Address _streetAddress. */
-                        public _streetAddress?: "streetAddress";
-
-                        /** Address _city. */
-                        public _city?: "city";
-
-                        /** Address _administrativeArea. */
-                        public _administrativeArea?: "administrativeArea";
-
-                        /** Address _postalCode. */
-                        public _postalCode?: "postalCode";
-
-                        /** Address _regionCode. */
-                        public _regionCode?: "regionCode";
 
                         /**
                          * Creates a new Address instance using the specified properties.
@@ -15087,30 +15682,6 @@ export namespace google {
                         /** DeliveryTime warehouseBasedDeliveryTimes. */
                         public warehouseBasedDeliveryTimes: google.shopping.merchant.accounts.v1beta.IWarehouseBasedDeliveryTime[];
 
-                        /** DeliveryTime _minTransitDays. */
-                        public _minTransitDays?: "minTransitDays";
-
-                        /** DeliveryTime _maxTransitDays. */
-                        public _maxTransitDays?: "maxTransitDays";
-
-                        /** DeliveryTime _cutoffTime. */
-                        public _cutoffTime?: "cutoffTime";
-
-                        /** DeliveryTime _minHandlingDays. */
-                        public _minHandlingDays?: "minHandlingDays";
-
-                        /** DeliveryTime _maxHandlingDays. */
-                        public _maxHandlingDays?: "maxHandlingDays";
-
-                        /** DeliveryTime _transitTimeTable. */
-                        public _transitTimeTable?: "transitTimeTable";
-
-                        /** DeliveryTime _handlingBusinessDayConfig. */
-                        public _handlingBusinessDayConfig?: "handlingBusinessDayConfig";
-
-                        /** DeliveryTime _transitBusinessDayConfig. */
-                        public _transitBusinessDayConfig?: "transitBusinessDayConfig";
-
                         /**
                          * Creates a new DeliveryTime instance using the specified properties.
                          * @param [properties] Properties to set
@@ -15219,15 +15790,6 @@ export namespace google {
 
                         /** CutoffTime timeZone. */
                         public timeZone?: (string|null);
-
-                        /** CutoffTime _hour. */
-                        public _hour?: "hour";
-
-                        /** CutoffTime _minute. */
-                        public _minute?: "minute";
-
-                        /** CutoffTime _timeZone. */
-                        public _timeZone?: "timeZone";
 
                         /**
                          * Creates a new CutoffTime instance using the specified properties.
@@ -15450,15 +16012,6 @@ export namespace google {
                         /** WarehouseBasedDeliveryTime warehouse. */
                         public warehouse?: (string|null);
 
-                        /** WarehouseBasedDeliveryTime _carrier. */
-                        public _carrier?: "carrier";
-
-                        /** WarehouseBasedDeliveryTime _carrierService. */
-                        public _carrierService?: "carrierService";
-
-                        /** WarehouseBasedDeliveryTime _warehouse. */
-                        public _warehouse?: "warehouse";
-
                         /**
                          * Creates a new WarehouseBasedDeliveryTime instance using the specified properties.
                          * @param [properties] Properties to set
@@ -15586,15 +16139,6 @@ export namespace google {
                         /** RateGroup name. */
                         public name?: (string|null);
 
-                        /** RateGroup _singleValue. */
-                        public _singleValue?: "singleValue";
-
-                        /** RateGroup _mainTable. */
-                        public _mainTable?: "mainTable";
-
-                        /** RateGroup _name. */
-                        public _name?: "name";
-
                         /**
                          * Creates a new RateGroup instance using the specified properties.
                          * @param [properties] Properties to set
@@ -15709,15 +16253,6 @@ export namespace google {
 
                         /** Table rows. */
                         public rows: google.shopping.merchant.accounts.v1beta.IRow[];
-
-                        /** Table _name. */
-                        public _name?: "name";
-
-                        /** Table _rowHeaders. */
-                        public _rowHeaders?: "rowHeaders";
-
-                        /** Table _columnHeaders. */
-                        public _columnHeaders?: "columnHeaders";
 
                         /**
                          * Creates a new Table instance using the specified properties.
@@ -16032,12 +16567,6 @@ export namespace google {
                                 /** TransitTimeValue maxTransitDays. */
                                 public maxTransitDays?: (number|null);
 
-                                /** TransitTimeValue _minTransitDays. */
-                                public _minTransitDays?: "minTransitDays";
-
-                                /** TransitTimeValue _maxTransitDays. */
-                                public _maxTransitDays?: "maxTransitDays";
-
                                 /**
                                  * Creates a new TransitTimeValue instance using the specified properties.
                                  * @param [properties] Properties to set
@@ -16241,9 +16770,6 @@ export namespace google {
 
                             /** StoreCodeSetWithMov value. */
                             public value?: (google.shopping.type.IPrice|null);
-
-                            /** StoreCodeSetWithMov _value. */
-                            public _value?: "value";
 
                             /**
                              * Creates a new StoreCodeSetWithMov instance using the specified properties.
@@ -16682,21 +17208,6 @@ export namespace google {
                         /** Value subtable. */
                         public subtable?: (string|null);
 
-                        /** Value _noShipping. */
-                        public _noShipping?: "noShipping";
-
-                        /** Value _flatRate. */
-                        public _flatRate?: "flatRate";
-
-                        /** Value _pricePercentage. */
-                        public _pricePercentage?: "pricePercentage";
-
-                        /** Value _carrierRate. */
-                        public _carrierRate?: "carrierRate";
-
-                        /** Value _subtable. */
-                        public _subtable?: "subtable";
-
                         /**
                          * Creates a new Value instance using the specified properties.
                          * @param [properties] Properties to set
@@ -16823,24 +17334,6 @@ export namespace google {
 
                         /** CarrierRate flatAdjustment. */
                         public flatAdjustment?: (google.shopping.type.IPrice|null);
-
-                        /** CarrierRate _name. */
-                        public _name?: "name";
-
-                        /** CarrierRate _carrier. */
-                        public _carrier?: "carrier";
-
-                        /** CarrierRate _carrierService. */
-                        public _carrierService?: "carrierService";
-
-                        /** CarrierRate _originPostalCode. */
-                        public _originPostalCode?: "originPostalCode";
-
-                        /** CarrierRate _percentageAdjustment. */
-                        public _percentageAdjustment?: "percentageAdjustment";
-
-                        /** CarrierRate _flatAdjustment. */
-                        public _flatAdjustment?: "flatAdjustment";
 
                         /**
                          * Creates a new CarrierRate instance using the specified properties.
@@ -17249,9 +17742,6 @@ export namespace google {
 
                         /** TermsOfService external. */
                         public external: boolean;
-
-                        /** TermsOfService _fileUri. */
-                        public _fileUri?: "fileUri";
 
                         /**
                          * Creates a new TermsOfService instance using the specified properties.
@@ -17755,12 +18245,6 @@ export namespace google {
                         /** TermsOfServiceAgreementState required. */
                         public required?: (google.shopping.merchant.accounts.v1beta.IRequired|null);
 
-                        /** TermsOfServiceAgreementState _accepted. */
-                        public _accepted?: "accepted";
-
-                        /** TermsOfServiceAgreementState _required. */
-                        public _required?: "required";
-
                         /**
                          * Creates a new TermsOfServiceAgreementState instance using the specified properties.
                          * @param [properties] Properties to set
@@ -17869,9 +18353,6 @@ export namespace google {
 
                         /** Accepted validUntil. */
                         public validUntil?: (google.type.IDate|null);
-
-                        /** Accepted _validUntil. */
-                        public _validUntil?: "validUntil";
 
                         /**
                          * Creates a new Accepted instance using the specified properties.
@@ -18279,9 +18760,6 @@ export namespace google {
                 /** Weight unit. */
                 public unit: (google.shopping.type.Weight.WeightUnit|keyof typeof google.shopping.type.Weight.WeightUnit);
 
-                /** Weight _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
                 /**
                  * Creates a new Weight instance using the specified properties.
                  * @param [properties] Properties to set
@@ -18395,12 +18873,6 @@ export namespace google {
                 /** Price currencyCode. */
                 public currencyCode?: (string|null);
 
-                /** Price _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
-                /** Price _currencyCode. */
-                public _currencyCode?: "currencyCode";
-
                 /**
                  * Creates a new Price instance using the specified properties.
                  * @param [properties] Properties to set
@@ -18509,12 +18981,6 @@ export namespace google {
 
                 /** CustomAttribute groupValues. */
                 public groupValues: google.shopping.type.ICustomAttribute[];
-
-                /** CustomAttribute _name. */
-                public _name?: "name";
-
-                /** CustomAttribute _value. */
-                public _value?: "value";
 
                 /**
                  * Creates a new CustomAttribute instance using the specified properties.
@@ -19570,6 +20036,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -19610,6 +20079,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -23828,6 +24300,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -24076,7 +24551,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -24107,7 +24582,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -26310,7 +26785,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -26323,7 +26798,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.
