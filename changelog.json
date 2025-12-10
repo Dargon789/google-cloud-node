@@ -5,6 +5,397 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "014486d7cd802ac3058931edb3c783843db2ce28",
+          "message": "[geminidataanalytics] add QueryData method",
+          "issues": [
+            "6923"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "356f0ab3-2df9-4046-b397-8c84c75575f0",
+      "createTime": "2025-12-09T16:50:16.936Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a0c0db8be96f32f2f3e115987664a23a1f38ae57",
+          "message": "[maintenance] add support for v1 version of Maintenance API",
+          "issues": [
+            "6925"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/maintenance-api",
+      "id": "800ef513-32eb-4f8d-b16f-a8c7521bfeb2",
+      "createTime": "2025-12-09T16:50:16.913Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b9e87cd0803304763d1df797c884e849f07f25fb",
+          "message": "[merchantapi] A new field `radius_area` is added to message `.google.shopping.merchant.accounts.v1.Region`",
+          "issues": [
+            "6914"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/accounts",
+      "id": "93680a5d-0d77-4ea4-828a-677d09bd457c",
+      "createTime": "2025-12-09T16:50:16.894Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c33709f5aed86bdb4f02e2d17d5bfa00ccae88fd",
+          "message": "[parallelstore] add transfer metadata options proto definition",
+          "issues": [
+            "6916"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "5bb16540-9954-49c4-a603-1d90d7df0e26",
+      "createTime": "2025-12-09T16:50:16.870Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ba483b8ddc806b80123007ba164e1981c18bd532",
+          "message": "[cloudbuild] Update GCB with latest proto changes",
+          "issues": [
+            "6910"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "f52e8394-3d3a-4ec8-8c27-a121bebf6de3",
+      "createTime": "2025-12-09T16:50:16.851Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "984f5acd15ef79c3cdb63f89e2deee5cc5c65387",
+          "message": "[artifactregistry] add ExportArtifact API",
+          "issues": [
+            "6919"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "6686e7eb-3c7f-4d0a-88a2-cfe6524f8f5b",
+      "createTime": "2025-12-09T16:50:16.829Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9c2a1242e88b9878532106dc301f7ec524632997",
+          "message": "[run] add SourceCode proto to Run container config",
+          "issues": [
+            "6926"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "c097c9e6-9b74-4a27-b1f1-e9db17f18635",
+      "createTime": "2025-12-09T16:50:16.788Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "6.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "b73fe2a0-1f48-44e1-82e7-c52862532da7",
+      "createTime": "2025-12-09T16:50:16.718Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "8352678de4dfdf7cfe8d2a6eb284395983bd9fa3",
+          "message": "[channel] Changed field behavior for an existing field `entitlement_granularity` in message `.google.cloud.channel.v1.RepricingConfig`",
+          "issues": [
+            "6915"
+          ]
+        }
+      ],
+      "version": "4.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "7f8db709-f8f9-483a-8d74-0b8ddeb763ab",
+      "createTime": "2025-12-09T16:50:16.638Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "6fb8d09786816740eb2c5128ce833d5bc649a915",
+          "message": "Fix issue when using UrlContext tool",
+          "issues": [
+            "6911"
+          ],
+          "breakingChangeNote": "fix issue when using UrlContext tool ([#6911](https://github.com/googleapis/google-cloud-node/issues/6911))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "392b6163-bac6-4dea-81ab-b63ec07888a5",
+      "createTime": "2025-12-09T16:50:16.537Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cad552ea0441d9f636bbbb7d0298326a14baad8e",
+          "message": "Add initial files for google.cloud.vectorsearch.v1beta",
+          "issues": [
+            "6906"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "eba97f8f-98e2-410a-9504-18dde6c20e2b",
+      "createTime": "2025-12-03T02:42:21.544Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4a62a4cd4bdded4811488b25f56f8fa4b165d4ed",
+          "message": "[eventarc] add wide-scope Eventarc GoogleApiSource flags",
+          "issues": [
+            "6909"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "de07a942-99c3-4365-864f-5b64ecd9b5bc",
+      "createTime": "2025-12-03T02:42:21.520Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1403b5b709a040898dbcd15b390485804840b778",
+          "message": "[marketingplatformadminapi] add the `ListOrganizations`, `FindSalesPartnerManagedClients`, and `ReportPropertyUsage` methods",
+          "issues": [
+            "6858"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/marketing-platform-admin",
+      "id": "d121492d-957b-4b9c-98ed-4fe833a0a826",
+      "createTime": "2025-11-21T23:14:19.352Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b26f79d452a55f26a309166362ca3a6a1cda89c1",
+          "message": "[backupdr] Adding new fields for CMEK and Retention Inheritance features",
+          "issues": [
+            "6901"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/backupdr",
+      "id": "fea4a715-ca58-401c-8207-ff5ab55c3a74",
+      "createTime": "2025-11-21T23:14:19.333Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7e76acee01946bf65d665ed04cd6305cdc331297",
+          "message": "[merchantapi] Add the AccountLimit resource and its service to the quota bundle",
+          "issues": [
+            "6883"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "6837c0fd-e0c4-4905-86b3-3e244d2222b6",
+      "createTime": "2025-11-21T23:14:19.317Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ce760fd66ce4e290b00205f3c9f6a81863622fd1",
+          "message": "[artifactregistry] add image_manifest field in DockerImage",
+          "issues": [
+            "6888"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "f14ff9af-5137-4a00-92e6-57fb778b46da",
+      "createTime": "2025-11-21T23:14:19.298Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f3c58114c24765dfb3d3969ba5e411fb9fb9b3f8",
+          "message": "[sql] introduces auto_upgrade_enabled option for MySQL in DatabaseInstance.Settings",
+          "issues": [
+            "6904"
+          ]
+        }
+      ],
+      "version": "0.23.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "bbc70fe6-2114-40df-85dc-adc75100651c",
+      "createTime": "2025-11-21T23:14:19.282Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e77b12e03a97fa7c42df57561af6ab1c3bae3a3f",
+          "message": "[netapp] Add Squash Mode to Export Policy",
+          "issues": [
+            "6905"
+          ]
+        }
+      ],
+      "version": "0.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "f0bebda4-5efb-4f4c-b40e-3d6a12cee012",
+      "createTime": "2025-11-21T23:14:19.263Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54e3b03149fd8f91ea076b691ec0e32d45748421",
+          "message": "[cx] add support for defining custom actions in code. See https://cloud.google.com/dialogflow/cx/docs/concept/playbook/code-block for more information",
+          "issues": [
+            "6879"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "b1a6810a-6fc7-41e9-b27d-932746a0dbe6",
+      "createTime": "2025-11-21T23:14:19.240Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "68d767e5690cee2f953657ef74412d18212e056e",
+          "message": "[compute] Update Compute Engine v1beta API to revision 20251019",
+          "issues": [
+            "6869"
+          ]
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "19a0c325-49f7-4c7a-ac8a-8fea111a475d",
+      "createTime": "2025-11-21T23:14:19.212Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ea62cf5717fb0fcb8eb4d3e37260c9f89c3b8076",
+          "message": "[batch] added new provisioning models",
+          "issues": [
+            "6902"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "a2d7bf44-244d-4313-a9e9-47eb54eaff9d",
+      "createTime": "2025-11-21T23:14:19.189Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7b6c79b20551dde858cd932174c1fb558408172f",
+          "message": "Add support for developer connect based deployment",
+          "issues": [
+            "6900"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "beb5cac2dbd8cad292d67e3641306824c3ecab85",
+          "message": "Add `ReplicatedVoiceConfig` to `VoiceConfig` to enable Gemini TTS voice replication",
+          "issues": [
+            "6899"
+          ]
+        }
+      ],
+      "version": "5.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "6748c978-c276-4f5d-a0a0-997afac91035",
+      "createTime": "2025-11-21T23:14:19.156Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "a637d5caaa14186adaae5e8a708f5faee3a17084",
           "message": "[geminidataanalytics] Adding a new SchemaRelationship message to define relationships between table schema",
           "issues": [
@@ -66927,5 +67318,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-11-11T01:02:09.511Z"
+  "updateTime": "2025-12-09T16:50:16.936Z"
 }
