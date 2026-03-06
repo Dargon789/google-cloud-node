@@ -4,6 +4,35 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.7.0...compute-v6.8.0) (2026-03-02)
+
+
+### Features
+
+* [compute] Update Compute Engine v1beta API to revision 20260106 ([#1147](https://github.com/googleapis/google-cloud-node/issues/1147)) ([#7272](https://github.com/googleapis/google-cloud-node/issues/7272)) ([2d1a22c](https://github.com/googleapis/google-cloud-node/commit/2d1a22c828cd8dfecb2083d3bc270210a79a41e3))
+* [compute] Update Compute Engine v1beta API to revision 20260213 ([#7296](https://github.com/googleapis/google-cloud-node/issues/7296)) ([1bacdf2](https://github.com/googleapis/google-cloud-node/commit/1bacdf222c3995c0b3e44d972c952645367e3fa0))
+
+## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.6.0...compute-v6.7.0) (2026-01-16)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20251230 ([#1144](https://github.com/googleapis/google-cloud-node/issues/1144)) ([#6998](https://github.com/googleapis/google-cloud-node/issues/6998)) ([8cfd124](https://github.com/googleapis/google-cloud-node/commit/8cfd124c5323240e4a3b95608395dc1ce7034b93))
+
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.5.0...compute-v6.6.0) (2025-12-09)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20251031 ([#6920](https://github.com/googleapis/google-cloud-node/issues/6920)) ([95f3adb](https://github.com/googleapis/google-cloud-node/commit/95f3adb6308c65eb000f841cc05460a8979a9d4f))
+
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.4.0...compute-v6.5.0) (2025-11-21)
+
+
+### Features
+
+* [compute] Update Compute Engine v1beta API to revision 20251019 ([#6869](https://github.com/googleapis/google-cloud-node/issues/6869)) ([68d767e](https://github.com/googleapis/google-cloud-node/commit/68d767e5690cee2f953657ef74412d18212e056e))
+
 ## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.3.0...compute-v6.4.0) (2025-10-13)
 
 

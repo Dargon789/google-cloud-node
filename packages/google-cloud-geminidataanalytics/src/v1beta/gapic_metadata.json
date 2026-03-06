@@ -15,6 +15,21 @@
                 "getDataAgent"
               ]
             },
+            "CreateDataAgentSync": {
+              "methods": [
+                "createDataAgentSync"
+              ]
+            },
+            "UpdateDataAgentSync": {
+              "methods": [
+                "updateDataAgentSync"
+              ]
+            },
+            "DeleteDataAgentSync": {
+              "methods": [
+                "deleteDataAgentSync"
+              ]
+            },
             "GetIamPolicy": {
               "methods": [
                 "getIamPolicy"
@@ -62,6 +77,21 @@
             "GetDataAgent": {
               "methods": [
                 "getDataAgent"
+              ]
+            },
+            "CreateDataAgentSync": {
+              "methods": [
+                "createDataAgentSync"
+              ]
+            },
+            "UpdateDataAgentSync": {
+              "methods": [
+                "updateDataAgentSync"
+              ]
+            },
+            "DeleteDataAgentSync": {
+              "methods": [
+                "deleteDataAgentSync"
               ]
             },
             "GetIamPolicy": {
@@ -127,6 +157,11 @@
                 "getConversation"
               ]
             },
+            "QueryData": {
+              "methods": [
+                "queryData"
+              ]
+            },
             "Chat": {
               "methods": [
                 "chat"
@@ -164,6 +199,11 @@
             "GetConversation": {
               "methods": [
                 "getConversation"
+              ]
+            },
+            "QueryData": {
+              "methods": [
+                "queryData"
               ]
             },
             "ListConversations": {

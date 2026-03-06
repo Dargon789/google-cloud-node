@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -895,7 +895,7 @@ export class OrganizationVpcFlowLogsServiceClient {
  *   Required. The parent resource of the VpcFlowLogsConfig,
  *   in one of the following formats:
  *
- *   - For project-level resourcs: `projects/{project_id}/locations/global`
+ *   - For project-level resources: `projects/{project_id}/locations/global`
  *
  *   - For organization-level resources:
  *   `organizations/{organization_id}/locations/global`
@@ -1006,7 +1006,7 @@ export class OrganizationVpcFlowLogsServiceClient {
  *   Required. The parent resource of the VpcFlowLogsConfig,
  *   in one of the following formats:
  *
- *   - For project-level resourcs: `projects/{project_id}/locations/global`
+ *   - For project-level resources: `projects/{project_id}/locations/global`
  *
  *   - For organization-level resources:
  *   `organizations/{organization_id}/locations/global`
@@ -1066,7 +1066,7 @@ export class OrganizationVpcFlowLogsServiceClient {
  *   Required. The parent resource of the VpcFlowLogsConfig,
  *   in one of the following formats:
  *
- *   - For project-level resourcs: `projects/{project_id}/locations/global`
+ *   - For project-level resources: `projects/{project_id}/locations/global`
  *
  *   - For organization-level resources:
  *   `organizations/{organization_id}/locations/global`

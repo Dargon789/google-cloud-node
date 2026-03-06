@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12489,6 +12489,9 @@ export namespace grafeas {
 
             /** BaseImage layerCount */
             layerCount?: (number|null);
+
+            /** BaseImage registry */
+            registry?: (string|null);
         }
 
         /** Represents a BaseImage. */
@@ -12508,6 +12511,9 @@ export namespace grafeas {
 
             /** BaseImage layerCount. */
             public layerCount: number;
+
+            /** BaseImage registry. */
+            public registry: string;
 
             /**
              * Creates a new BaseImage instance using the specified properties.

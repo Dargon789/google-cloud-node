@@ -1,5 +1,19 @@
 # Changelog
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v5.4.0...cloudbuild-v5.5.0) (2026-01-22)
+
+
+### Features
+
+* [cloudbuild] Added backup retention days in BDRBackupRestoreJobLog ([#7012](https://github.com/googleapis/google-cloud-node/issues/7012)) ([7792cae](https://github.com/googleapis/google-cloud-node/commit/7792cae7282a9254f8bf6e1200a2ec53bdaa00cc))
+
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v5.3.1...cloudbuild-v5.4.0) (2025-12-09)
+
+
+### Features
+
+* [cloudbuild] Update GCB with latest proto changes ([#6910](https://github.com/googleapis/google-cloud-node/issues/6910)) ([ba483b8](https://github.com/googleapis/google-cloud-node/commit/ba483b8ddc806b80123007ba164e1981c18bd532))
+
 ## [5.3.1](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v5.3.0...cloudbuild-v5.3.1) (2025-10-13)
 
 

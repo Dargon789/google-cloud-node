@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.5.0...containeranalysis-v6.6.0) (2026-02-19)
+
+
+### Features
+
+* [containeranalysis] A new field `registry` is added to message `.grafeas.v1.BaseImage` ([#7258](https://github.com/googleapis/google-cloud-node/issues/7258)) ([53e98e9](https://github.com/googleapis/google-cloud-node/commit/53e98e9da1468dab3b86a08b6704d9f384f64fc1))
+
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.4.0...containeranalysis-v6.5.0) (2026-01-31)
+
+
+### Features
+
+* [containeranalysis] A new field `last_vulnerability_update_time` is added to message `.grafeas.v1.DiscoveryOccurrence` ([#7039](https://github.com/googleapis/google-cloud-node/issues/7039)) ([c56f26b](https://github.com/googleapis/google-cloud-node/commit/c56f26b50db6cfce1183931d19314764423ff0db))
+
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.3.1...containeranalysis-v6.4.0) (2026-01-16)
+
+
+### Features
+
+* [containeranalysis] A new message `File` is added ([#6987](https://github.com/googleapis/google-cloud-node/issues/6987)) ([0413036](https://github.com/googleapis/google-cloud-node/commit/04130369a1e730a90e456ea2d33b1320de67f03b))
+
 ## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.3.0...containeranalysis-v6.3.1) (2025-10-13)
 
 

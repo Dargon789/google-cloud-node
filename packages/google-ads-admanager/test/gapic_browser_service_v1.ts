@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1587,6 +1587,44 @@ describe('v1.BrowserServiceClient', () => {
                 const result = client.matchLabelFromLabelName(fakePath);
                 assert.strictEqual(result, "labelValue");
                 assert((client.pathTemplates.labelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('lineItem', async () => {
+            const fakePath = "/rendered/path/lineItem";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                line_item: "lineItemValue",
+            };
+            const client = new browserserviceModule.v1.BrowserServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.lineItemPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.lineItemPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('lineItemPath', () => {
+                const result = client.lineItemPath("networkCodeValue", "lineItemValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.lineItemPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromLineItemName', () => {
+                const result = client.matchNetworkCodeFromLineItemName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.lineItemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLineItemFromLineItemName', () => {
+                const result = client.matchLineItemFromLineItemName(fakePath);
+                assert.strictEqual(result, "lineItemValue");
+                assert((client.pathTemplates.lineItemPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

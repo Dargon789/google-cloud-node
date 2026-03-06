@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "Google.Ads.DataManager.V1";
-option go_package = "google.golang.org/genproto/googleapis/ads/datamanager/v1;datamanager";
+option go_package = "cloud.google.com/go/datamanager/apiv1/datamanagerpb;datamanagerpb";
 option java_multiple_files = true;
 option java_outer_classname = "EventProto";
 option java_package = "com.google.ads.datamanager.v1";
@@ -72,7 +72,7 @@ message Event {
 
   // Optional. The conversion value associated with the event, for value-based
   // conversions.
-  double conversion_value = 9 [(google.api.field_behavior) = OPTIONAL];
+  optional double conversion_value = 9 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Signal for where the event happened (web, app, in-store, etc.).
   EventSource event_source = 10 [(google.api.field_behavior) = OPTIONAL];
@@ -98,6 +98,23 @@ message Event {
   // Optional. Advertiser-assessed information about the user at the time that
   // the event happened.
   UserProperties user_properties = 15 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The name of the event. Required for GA4 events.
+  string event_name = 16 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. A unique identifier for the user instance of a web client for
+  // this GA4 web stream.
+  string client_id = 17 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. A unique identifier for a user, as defined by the advertiser.
+  string user_id = 18 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. A bucket of any [event
+  // parameters](https://developers.google.com/analytics/devguides/collection/protocol/ga4/reference/events)
+  // to be included within the event that were not already specified using other
+  // structured fields.
+  repeated EventParameter additional_event_parameters = 19
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Identifiers and other information used to match the conversion event with
@@ -139,6 +156,15 @@ message CustomVariable {
   // will be used.
   repeated string destination_references = 3
       [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Event parameter for GA4 events.
+message EventParameter {
+  // Required. The name of the parameter to use.
+  string parameter_name = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The string representation of the value of the parameter to set.
+  string value = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
 // The source of the event.

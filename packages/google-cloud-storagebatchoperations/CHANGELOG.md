@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/storagebatchoperations-v0.2.0...storagebatchoperations-v0.3.0) (2026-03-02)
+
+
+### Features
+
+* [storagebatchoperations] add new transformation `update_object_custom_context` ([#7309](https://github.com/googleapis/google-cloud-node/issues/7309)) ([4b8da3e](https://github.com/googleapis/google-cloud-node/commit/4b8da3eefef2c4af0f39f186b4d60257fa146eae))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/storagebatchoperations-v0.1.1...storagebatchoperations-v0.2.0) (2026-02-19)
+
+
+### Features
+
+* [storagebatchoperations] add QUEUED state to Storage Batch Operations API ([#7250](https://github.com/googleapis/google-cloud-node/issues/7250)) ([0bf04ff](https://github.com/googleapis/google-cloud-node/commit/0bf04ff629e4010a55463b0d960e65c07d8cf3ee))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/storagebatchoperations-v0.1.0...storagebatchoperations-v0.1.1) (2025-10-13)
 
 

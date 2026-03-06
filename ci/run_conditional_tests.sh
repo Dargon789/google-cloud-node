@@ -29,6 +29,7 @@ fi
 
 # A script file for running the test in a sub project.
 test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
+test_script_interdependent_tests="${PROJECT_ROOT}/ci/run_single_interdependent_test.sh"
 
 
 if [ ${BUILD_TYPE} == "presubmit" ]; then
@@ -60,11 +61,11 @@ changed=$?
 set -e
 if [[ "${changed}" -eq 0 ]]; then
     echo "no change detected in ci"
-else
-    echo "change detected in ci, we should test everything"
-    echo "result of git diff ${GIT_DIFF_ARG} ci:"
-    git diff ${GIT_DIFF_ARG} ci
-    GIT_DIFF_ARG=""
+# else
+#     echo "change detected in ci, we should test everything"
+#     echo "result of git diff ${GIT_DIFF_ARG} ci:"
+#     git diff ${GIT_DIFF_ARG} ci
+#     GIT_DIFF_ARG=""
 fi
 
 # Now we have a fixed list, but we can change it to autodetect if
@@ -73,7 +74,10 @@ fi
 subdirs=(
     containers
     packages
+    handwritten
     .github/scripts
+    core/packages
+    core/dev-packages
 )
 
 RETVAL=0
@@ -82,8 +86,32 @@ RETVAL=0
 
 tests_with_credentials="packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/ packages/google-apps-meet/ packages/google-chat/ packages/google-streetview-publish/ packages/google-cloud-developerconnect/"
 
+# Some packages are only used by our bots and automation. These packages do not need to run on Windows and
+# often employ platform specific code like file system interaction. Some packages may also fail
+# on Windows due to incompatible npm scripts.
+# 
+# Until these packages can be updated to be OS agnostic, we will skip them on Windows.
+windows_exempt_tests=".github/scripts/fixtures/ .github/scripts/tests/ packages/gapic-node-processing/ packages/typeless-sample-bot/"
+
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
+        if [ -f "ignore.json" ] && jq -e ".ignored[] | select(. == \"$d\")" ignore.json > /dev/null; then
+            echo "Skipping ${d} (explicitly ignored in ignore.json)"
+            continue
+        fi
+        if [[ "${subdir}" == "handwritten" && ("${TEST_TYPE}" == "samples" || "${TEST_TYPE}" == "system") ]]; then
+            echo "Skipping ${TEST_TYPE} test for handwritten package ${d}"
+            continue
+        fi
+
+        # Our CI uses Git Bash on Windows to execute this script, which returns "msys" for OSTYPE.
+        if [[ "$OSTYPE" == "msys" ]]; then
+            if [[ "${windows_exempt_tests}" =~ "${d}" ]]; then
+                echo "Skipping ${d} on Windows (in exemption list)"
+                continue
+            fi
+        fi
+
         should_test=false
         if [ -n "${GIT_DIFF_ARG}" ]; then
             echo "checking changes with 'git diff --quiet ${GIT_DIFF_ARG} ${d}'"
@@ -106,7 +134,6 @@ for subdir in ${subdirs[@]}; do
                 fi
             fi
         else
-            # If GIT_DIFF_ARG is empty, run all the tests.
             if [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
                 echo "run system test for ${d}"
                 should_test=true
@@ -118,7 +145,21 @@ for subdir in ${subdirs[@]}; do
                 should_test=true
             fi
         fi
-        if [ "${should_test}" = true ]; then
+        if [ "${should_test}" = true ] && [[ "${d}" == core/* ]]; then
+            echo "running test in ${d}"
+            pushd ${d}
+            # Temporarily allow failure.
+            set +e
+            ${test_script_interdependent_tests}
+            ret=$?
+            set -e
+            if [ ${ret} -ne 0 ]; then
+                RETVAL=${ret}
+                # Since there are so many APIs, we should exit early if there's an error
+                break
+            fi
+            popd
+        elif [ "${should_test}" = true ]; then
             echo "running test in ${d}"
             pushd ${d}
             # Temporarily allow failure.

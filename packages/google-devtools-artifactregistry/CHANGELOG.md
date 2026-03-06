@@ -1,5 +1,33 @@
 # Changelog
 
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v4.6.0...artifact-registry-v4.7.0) (2026-01-22)
+
+
+### Features
+
+* [Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior ([#7013](https://github.com/googleapis/google-cloud-node/issues/7013)) ([0dbd123](https://github.com/googleapis/google-cloud-node/commit/0dbd123f45ccc049dbc6697655cd861d1200bf07))
+
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v4.5.0...artifact-registry-v4.6.0) (2026-01-12)
+
+
+### Features
+
+* [artifactregistry] add Fingerprint to Artifact Registry Version resource ([#6960](https://github.com/googleapis/google-cloud-node/issues/6960)) ([5655c23](https://github.com/googleapis/google-cloud-node/commit/5655c23d30f8ce5e6f724aa210b667aa91ea3725))
+
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v4.4.0...artifact-registry-v4.5.0) (2025-12-09)
+
+
+### Features
+
+* [artifactregistry] add ExportArtifact API ([#6919](https://github.com/googleapis/google-cloud-node/issues/6919)) ([984f5ac](https://github.com/googleapis/google-cloud-node/commit/984f5acd15ef79c3cdb63f89e2deee5cc5c65387))
+
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v4.3.1...artifact-registry-v4.4.0) (2025-11-21)
+
+
+### Features
+
+* [artifactregistry] add image_manifest field in DockerImage ([#6888](https://github.com/googleapis/google-cloud-node/issues/6888)) ([ce760fd](https://github.com/googleapis/google-cloud-node/commit/ce760fd66ce4e290b00205f3c9f6a81863622fd1))
+
 ## [4.3.1](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v4.3.0...artifact-registry-v4.3.1) (2025-10-13)
 
 

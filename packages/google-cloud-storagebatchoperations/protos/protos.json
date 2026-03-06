@@ -126,6 +126,42 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "ListBucketOperations": {
+                          "requestType": "ListBucketOperationsRequest",
+                          "responseType": "ListBucketOperationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/jobs/*}/bucketOperations",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/jobs/*}/bucketOperations"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetBucketOperation": {
+                          "requestType": "GetBucketOperationRequest",
+                          "responseType": "BucketOperation",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/jobs/*/bucketOperations/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/jobs/*/bucketOperations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -227,6 +263,7 @@
                           "type": "string",
                           "id": 4,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -246,6 +283,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -265,6 +303,14 @@
                           "type": "string",
                           "id": 2,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -272,6 +318,76 @@
                     },
                     "CancelJobResponse": {
                       "fields": {}
+                    },
+                    "ListBucketOperationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "storagebatchoperations.googleapis.com/BucketOperation"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListBucketOperationsResponse": {
+                      "fields": {
+                        "bucketOperations": {
+                          "rule": "repeated",
+                          "type": "BucketOperation",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetBucketOperationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "storagebatchoperations.googleapis.com/BucketOperation"
+                          }
+                        }
+                      }
                     },
                     "OperationMetadata": {
                       "fields": {
@@ -337,7 +453,8 @@
                             "putObjectHold",
                             "deleteObject",
                             "putMetadata",
-                            "rewriteObject"
+                            "rewriteObject",
+                            "updateObjectCustomContext"
                           ]
                         }
                       },
@@ -375,6 +492,10 @@
                         "rewriteObject": {
                           "type": "RewriteObject",
                           "id": 20
+                        },
+                        "updateObjectCustomContext": {
+                          "type": "UpdateObjectCustomContext",
+                          "id": 23
                         },
                         "loggingConfig": {
                           "type": "LoggingConfig",
@@ -425,6 +546,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "dryRun": {
+                          "type": "bool",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "isMultiBucketJob": {
+                          "type": "bool",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -434,7 +569,129 @@
                             "RUNNING": 1,
                             "SUCCEEDED": 2,
                             "CANCELED": 3,
-                            "FAILED": 4
+                            "FAILED": 4,
+                            "QUEUED": 5
+                          }
+                        }
+                      }
+                    },
+                    "BucketOperation": {
+                      "options": {
+                        "(google.api.resource).type": "storagebatchoperations.googleapis.com/BucketOperation",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/jobs/{job}/bucketOperations/{bucket_operation}",
+                        "(google.api.resource).plural": "bucketoperations",
+                        "(google.api.resource).singular": "bucketOperation"
+                      },
+                      "oneofs": {
+                        "objectConfiguration": {
+                          "oneof": [
+                            "prefixList",
+                            "manifest"
+                          ]
+                        },
+                        "transformation": {
+                          "oneof": [
+                            "putObjectHold",
+                            "deleteObject",
+                            "putMetadata",
+                            "rewriteObject",
+                            "updateObjectCustomContext"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "bucketName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "prefixList": {
+                          "type": "PrefixList",
+                          "id": 3
+                        },
+                        "manifest": {
+                          "type": "Manifest",
+                          "id": 4
+                        },
+                        "putObjectHold": {
+                          "type": "PutObjectHold",
+                          "id": 11
+                        },
+                        "deleteObject": {
+                          "type": "DeleteObject",
+                          "id": 12
+                        },
+                        "putMetadata": {
+                          "type": "PutMetadata",
+                          "id": 13
+                        },
+                        "rewriteObject": {
+                          "type": "RewriteObject",
+                          "id": 14
+                        },
+                        "updateObjectCustomContext": {
+                          "type": "UpdateObjectCustomContext",
+                          "id": 15
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "completeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "counters": {
+                          "type": "Counters",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "errorSummaries": {
+                          "rule": "repeated",
+                          "type": "ErrorSummary",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "QUEUED": 1,
+                            "RUNNING": 2,
+                            "SUCCEEDED": 3,
+                            "CANCELED": 4,
+                            "FAILED": 5
                           }
                         }
                       }
@@ -561,6 +818,47 @@
                         }
                       }
                     },
+                    "ObjectRetention": {
+                      "oneofs": {
+                        "_retainUntilTime": {
+                          "oneof": [
+                            "retainUntilTime"
+                          ]
+                        },
+                        "_retentionMode": {
+                          "oneof": [
+                            "retentionMode"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "retainUntilTime": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "retentionMode": {
+                          "type": "RetentionMode",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RetentionMode": {
+                          "values": {
+                            "RETENTION_MODE_UNSPECIFIED": 0,
+                            "LOCKED": 1,
+                            "UNLOCKED": 2
+                          }
+                        }
+                      }
+                    },
                     "PutMetadata": {
                       "oneofs": {
                         "_contentDisposition": {
@@ -591,6 +889,11 @@
                         "_customTime": {
                           "oneof": [
                             "customTime"
+                          ]
+                        },
+                        "_objectRetention": {
+                          "oneof": [
+                            "objectRetention"
                           ]
                         }
                       },
@@ -650,6 +953,72 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "objectRetention": {
+                          "type": "ObjectRetention",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ObjectCustomContextPayload": {
+                      "oneofs": {
+                        "_value": {
+                          "oneof": [
+                            "value"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "value": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CustomContextUpdates": {
+                      "fields": {
+                        "updates": {
+                          "keyType": "string",
+                          "type": "ObjectCustomContextPayload",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "keysToClear": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateObjectCustomContext": {
+                      "oneofs": {
+                        "action": {
+                          "oneof": [
+                            "customContextUpdates",
+                            "clearAll"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "customContextUpdates": {
+                          "type": "CustomContextUpdates",
+                          "id": 1
+                        },
+                        "clearAll": {
+                          "type": "bool",
+                          "id": 2
                         }
                       }
                     },
@@ -699,6 +1068,13 @@
                       }
                     },
                     "Counters": {
+                      "oneofs": {
+                        "_totalBytesFound": {
+                          "oneof": [
+                            "totalBytesFound"
+                          ]
+                        }
+                      },
                       "fields": {
                         "totalObjectCount": {
                           "type": "int64",
@@ -719,6 +1095,14 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "totalBytesFound": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -1185,6 +1569,30 @@
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7,
                 "IDENTIFIER": 8
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
               }
             },
             "resourceReference": {

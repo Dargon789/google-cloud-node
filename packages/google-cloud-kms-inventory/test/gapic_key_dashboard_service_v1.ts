@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -926,6 +926,52 @@ describe('v1.KeyDashboardServiceClient', () => {
                 const result = client.matchCryptoKeyVersionFromPublicKeyName(fakePath);
                 assert.strictEqual(result, "cryptoKeyVersionValue");
                 assert((client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('retiredResource', async () => {
+            const fakePath = "/rendered/path/retiredResource";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                retired_resource: "retiredResourceValue",
+            };
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.retiredResourcePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.retiredResourcePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('retiredResourcePath', () => {
+                const result = client.retiredResourcePath("projectValue", "locationValue", "retiredResourceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.retiredResourcePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRetiredResourceName', () => {
+                const result = client.matchProjectFromRetiredResourceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.retiredResourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRetiredResourceName', () => {
+                const result = client.matchLocationFromRetiredResourceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.retiredResourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRetiredResourceFromRetiredResourceName', () => {
+                const result = client.matchRetiredResourceFromRetiredResourceName(fakePath);
+                assert.strictEqual(result, "retiredResourceValue");
+                assert((client.pathTemplates.retiredResourcePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
