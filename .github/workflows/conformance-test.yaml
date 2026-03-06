@@ -12,10 +12,10 @@ jobs:
   conformance-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 14
+          node-version: 16
       - run: node --version
       - run: cd handwritten/storage && npm install
       - run: cd handwritten/storage && npm run conformance-test
