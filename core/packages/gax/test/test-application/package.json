@@ -24,7 +24,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@grpc/grpc-js": "~1.6.0",
+    "@grpc/grpc-js": "~1.14.3",
     "google-gax": "file:./google-gax.tgz",
     "protobufjs": "^7.0.0",
     "pumpify": "^2.0.1",
