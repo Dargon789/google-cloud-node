@@ -108862,6 +108862,9 @@ export namespace google {
 
                     /** CopyModelRequest encryptionSpec */
                     encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
+
+                    /** CopyModelRequest customServiceAccount */
+                    customServiceAccount?: (string|null);
                 }
 
                 /** Represents a CopyModelRequest. */
@@ -108887,6 +108890,9 @@ export namespace google {
 
                     /** CopyModelRequest encryptionSpec. */
                     public encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
+
+                    /** CopyModelRequest customServiceAccount. */
+                    public customServiceAccount: string;
 
                     /** CopyModelRequest destinationModel. */
                     public destinationModel?: ("modelId"|"parentModel");
