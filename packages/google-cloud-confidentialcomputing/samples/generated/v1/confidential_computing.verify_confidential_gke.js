@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,6 +39,10 @@ function main(challenge) {
    *  provided Challenge will be consumed, and cannot be used again.
    */
   // const challenge = 'abc123'
+  /**
+   *  Optional. A collection of fields that modify the token output.
+   */
+  // const options = {}
 
   // Imports the Confidentialcomputing library
   const {ConfidentialComputingClient} = require('@google-cloud/confidentialcomputing').v1;

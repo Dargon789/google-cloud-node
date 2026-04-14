@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -246,6 +246,9 @@ export namespace google {
                     /** Endpoint redisCluster */
                     redisCluster?: (string|null);
 
+                    /** Endpoint gkePod */
+                    gkePod?: (string|null);
+
                     /** Endpoint cloudFunction */
                     cloudFunction?: (google.cloud.networkmanagement.v1.Endpoint.ICloudFunctionEndpoint|null);
 
@@ -309,6 +312,9 @@ export namespace google {
 
                     /** Endpoint redisCluster. */
                     public redisCluster: string;
+
+                    /** Endpoint gkePod. */
+                    public gkePod: string;
 
                     /** Endpoint cloudFunction. */
                     public cloudFunction?: (google.cloud.networkmanagement.v1.Endpoint.ICloudFunctionEndpoint|null);
@@ -412,7 +418,8 @@ export namespace google {
                     enum NetworkType {
                         NETWORK_TYPE_UNSPECIFIED = 0,
                         GCP_NETWORK = 1,
-                        NON_GCP_NETWORK = 2
+                        NON_GCP_NETWORK = 2,
+                        INTERNET = 3
                     }
 
                     /** ForwardingRuleTarget enum. */
@@ -1633,6 +1640,18 @@ export namespace google {
                     /** Step gkeMaster */
                     gkeMaster?: (google.cloud.networkmanagement.v1.IGKEMasterInfo|null);
 
+                    /** Step gkePod */
+                    gkePod?: (google.cloud.networkmanagement.v1.IGkePodInfo|null);
+
+                    /** Step ipMasqueradingSkipped */
+                    ipMasqueradingSkipped?: (google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo|null);
+
+                    /** Step gkeNetworkPolicy */
+                    gkeNetworkPolicy?: (google.cloud.networkmanagement.v1.IGkeNetworkPolicyInfo|null);
+
+                    /** Step gkeNetworkPolicySkipped */
+                    gkeNetworkPolicySkipped?: (google.cloud.networkmanagement.v1.IGkeNetworkPolicySkippedInfo|null);
+
                     /** Step cloudSqlInstance */
                     cloudSqlInstance?: (google.cloud.networkmanagement.v1.ICloudSQLInstanceInfo|null);
 
@@ -1665,6 +1684,9 @@ export namespace google {
 
                     /** Step serverlessNeg */
                     serverlessNeg?: (google.cloud.networkmanagement.v1.IServerlessNegInfo|null);
+
+                    /** Step ngfwPacketInspection */
+                    ngfwPacketInspection?: (google.cloud.networkmanagement.v1.INgfwPacketInspectionInfo|null);
                 }
 
                 /** Represents a Step. */
@@ -1748,6 +1770,18 @@ export namespace google {
                     /** Step gkeMaster. */
                     public gkeMaster?: (google.cloud.networkmanagement.v1.IGKEMasterInfo|null);
 
+                    /** Step gkePod. */
+                    public gkePod?: (google.cloud.networkmanagement.v1.IGkePodInfo|null);
+
+                    /** Step ipMasqueradingSkipped. */
+                    public ipMasqueradingSkipped?: (google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo|null);
+
+                    /** Step gkeNetworkPolicy. */
+                    public gkeNetworkPolicy?: (google.cloud.networkmanagement.v1.IGkeNetworkPolicyInfo|null);
+
+                    /** Step gkeNetworkPolicySkipped. */
+                    public gkeNetworkPolicySkipped?: (google.cloud.networkmanagement.v1.IGkeNetworkPolicySkippedInfo|null);
+
                     /** Step cloudSqlInstance. */
                     public cloudSqlInstance?: (google.cloud.networkmanagement.v1.ICloudSQLInstanceInfo|null);
 
@@ -1781,8 +1815,11 @@ export namespace google {
                     /** Step serverlessNeg. */
                     public serverlessNeg?: (google.cloud.networkmanagement.v1.IServerlessNegInfo|null);
 
+                    /** Step ngfwPacketInspection. */
+                    public ngfwPacketInspection?: (google.cloud.networkmanagement.v1.INgfwPacketInspectionInfo|null);
+
                     /** Step stepInfo. */
-                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg");
+                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"gkePod"|"ipMasqueradingSkipped"|"gkeNetworkPolicy"|"gkeNetworkPolicySkipped"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|"ngfwPacketInspection");
 
                     /**
                      * Creates a new Step instance using the specified properties.
@@ -1873,6 +1910,7 @@ export namespace google {
                         START_FROM_PRIVATE_NETWORK = 3,
                         START_FROM_GKE_MASTER = 21,
                         START_FROM_CLOUD_SQL_INSTANCE = 22,
+                        START_FROM_GKE_POD = 39,
                         START_FROM_REDIS_INSTANCE = 32,
                         START_FROM_REDIS_CLUSTER = 33,
                         START_FROM_CLOUD_FUNCTION = 23,
@@ -1895,9 +1933,16 @@ export namespace google {
                         ARRIVE_AT_VPN_TUNNEL = 13,
                         ARRIVE_AT_INTERCONNECT_ATTACHMENT = 37,
                         ARRIVE_AT_VPC_CONNECTOR = 24,
+                        ARRIVE_AT_GKE_POD = 44,
                         DIRECT_VPC_EGRESS_CONNECTION = 35,
                         SERVERLESS_EXTERNAL_CONNECTION = 36,
+                        NGFW_PACKET_INSPECTION = 47,
                         NAT = 14,
+                        SKIP_GKE_POD_IP_MASQUERADING = 40,
+                        SKIP_GKE_INGRESS_NETWORK_POLICY = 41,
+                        SKIP_GKE_EGRESS_NETWORK_POLICY = 42,
+                        APPLY_INGRESS_GKE_NETWORK_POLICY = 45,
+                        APPLY_EGRESS_GKE_NETWORK_POLICY = 46,
                         PROXY_CONNECTION = 15,
                         DELIVER = 16,
                         DROP = 17,
@@ -2375,6 +2420,8 @@ export namespace google {
                         SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE = 4,
                         NETWORK_FIREWALL_POLICY_RULE = 5,
                         NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6,
+                        SYSTEM_NETWORK_FIREWALL_POLICY_RULE = 7,
+                        SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE = 8,
                         UNSUPPORTED_FIREWALL_POLICY_RULE = 100,
                         TRACKING_STATE = 101,
                         ANALYSIS_SKIPPED = 102
@@ -4036,7 +4083,8 @@ export namespace google {
                         CLOUD_RUN_REVISION = 14,
                         GOOGLE_MANAGED_SERVICE = 15,
                         REDIS_INSTANCE = 16,
-                        REDIS_CLUSTER = 17
+                        REDIS_CLUSTER = 17,
+                        GKE_POD = 19
                     }
 
                     /** GoogleServiceType enum. */
@@ -4313,6 +4361,9 @@ export namespace google {
                         PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS = 29,
                         PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS = 36,
                         NO_SOURCE_LOCATION = 5,
+                        NO_SOURCE_GCP_NETWORK_LOCATION = 42,
+                        NO_SOURCE_NON_GCP_NETWORK_LOCATION = 43,
+                        NO_SOURCE_INTERNET_LOCATION = 44,
                         INVALID_ARGUMENT = 6,
                         TRACE_TOO_LONG = 9,
                         INTERNAL_ERROR = 10,
@@ -4327,6 +4378,7 @@ export namespace google {
                         GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT = 19,
                         GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT = 39,
                         SOURCE_PSC_CLOUD_SQL_UNSUPPORTED = 20,
+                        SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED = 45,
                         SOURCE_REDIS_CLUSTER_UNSUPPORTED = 34,
                         SOURCE_REDIS_INSTANCE_UNSUPPORTED = 35,
                         SOURCE_FORWARDING_RULE_UNSUPPORTED = 21,
@@ -4334,7 +4386,8 @@ export namespace google {
                         UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT = 30,
                         UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG = 31,
                         NO_SERVERLESS_IP_RANGES = 37,
-                        IP_VERSION_PROTOCOL_MISMATCH = 40
+                        IP_VERSION_PROTOCOL_MISMATCH = 40,
+                        GKE_POD_UNKNOWN_ENDPOINT_LOCATION = 41
                     }
                 }
 
@@ -4490,6 +4543,7 @@ export namespace google {
                         ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED = 52,
                         ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID = 53,
                         NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS = 44,
+                        NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS = 109,
                         NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS = 98,
                         VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH = 45,
                         VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH = 46,
@@ -4504,6 +4558,7 @@ export namespace google {
                         INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS = 85,
                         INSTANCE_NOT_RUNNING = 14,
                         GKE_CLUSTER_NOT_RUNNING = 27,
+                        GKE_POD_NOT_RUNNING = 103,
                         CLOUD_SQL_INSTANCE_NOT_RUNNING = 28,
                         REDIS_INSTANCE_NOT_RUNNING = 68,
                         REDIS_CLUSTER_NOT_RUNNING = 69,
@@ -4566,6 +4621,7 @@ export namespace google {
                         UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION = 88,
                         TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED = 89,
                         NO_MATCHING_NAT64_GATEWAY = 90,
+                        NO_CONFIGURED_PRIVATE_NAT64_RULE = 107,
                         LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH = 96,
                         NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION = 97,
                         CLOUD_NAT_PROTOCOL_UNSUPPORTED = 99,
@@ -4573,7 +4629,10 @@ export namespace google {
                         L2_INTERCONNECT_UNSUPPORTED_PORT = 101,
                         L2_INTERCONNECT_DESTINATION_IP_MISMATCH = 102,
                         NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED = 104,
-                        HYBRID_SUBNET_REGION_MISMATCH = 105
+                        HYBRID_SUBNET_REGION_MISMATCH = 105,
+                        HYBRID_SUBNET_NO_ROUTE = 106,
+                        GKE_NETWORK_POLICY = 108,
+                        NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION = 110
                     }
                 }
 
@@ -4696,6 +4755,458 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GkePodInfo. */
+                interface IGkePodInfo {
+
+                    /** GkePodInfo podUri */
+                    podUri?: (string|null);
+
+                    /** GkePodInfo ipAddress */
+                    ipAddress?: (string|null);
+
+                    /** GkePodInfo networkUri */
+                    networkUri?: (string|null);
+                }
+
+                /** Represents a GkePodInfo. */
+                class GkePodInfo implements IGkePodInfo {
+
+                    /**
+                     * Constructs a new GkePodInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IGkePodInfo);
+
+                    /** GkePodInfo podUri. */
+                    public podUri: string;
+
+                    /** GkePodInfo ipAddress. */
+                    public ipAddress: string;
+
+                    /** GkePodInfo networkUri. */
+                    public networkUri: string;
+
+                    /**
+                     * Creates a new GkePodInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkePodInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IGkePodInfo): google.cloud.networkmanagement.v1.GkePodInfo;
+
+                    /**
+                     * Encodes the specified GkePodInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.GkePodInfo.verify|verify} messages.
+                     * @param message GkePodInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IGkePodInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkePodInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.GkePodInfo.verify|verify} messages.
+                     * @param message GkePodInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IGkePodInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkePodInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkePodInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.GkePodInfo;
+
+                    /**
+                     * Decodes a GkePodInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkePodInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.GkePodInfo;
+
+                    /**
+                     * Verifies a GkePodInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkePodInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkePodInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.GkePodInfo;
+
+                    /**
+                     * Creates a plain object from a GkePodInfo message. Also converts values to other types if specified.
+                     * @param message GkePodInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.GkePodInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkePodInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GkePodInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IpMasqueradingSkippedInfo. */
+                interface IIpMasqueradingSkippedInfo {
+
+                    /** IpMasqueradingSkippedInfo reason */
+                    reason?: (google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason|keyof typeof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason|null);
+
+                    /** IpMasqueradingSkippedInfo nonMasqueradeRange */
+                    nonMasqueradeRange?: (string|null);
+                }
+
+                /** Represents an IpMasqueradingSkippedInfo. */
+                class IpMasqueradingSkippedInfo implements IIpMasqueradingSkippedInfo {
+
+                    /**
+                     * Constructs a new IpMasqueradingSkippedInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo);
+
+                    /** IpMasqueradingSkippedInfo reason. */
+                    public reason: (google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason|keyof typeof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason);
+
+                    /** IpMasqueradingSkippedInfo nonMasqueradeRange. */
+                    public nonMasqueradeRange: string;
+
+                    /**
+                     * Creates a new IpMasqueradingSkippedInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IpMasqueradingSkippedInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo): google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Encodes the specified IpMasqueradingSkippedInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                     * @param message IpMasqueradingSkippedInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IpMasqueradingSkippedInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                     * @param message IpMasqueradingSkippedInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IpMasqueradingSkippedInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IpMasqueradingSkippedInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Verifies an IpMasqueradingSkippedInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IpMasqueradingSkippedInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IpMasqueradingSkippedInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Creates a plain object from an IpMasqueradingSkippedInfo message. Also converts values to other types if specified.
+                     * @param message IpMasqueradingSkippedInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IpMasqueradingSkippedInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IpMasqueradingSkippedInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IpMasqueradingSkippedInfo {
+
+                    /** Reason enum. */
+                    enum Reason {
+                        REASON_UNSPECIFIED = 0,
+                        DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE = 1,
+                        DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE = 2,
+                        DESTINATION_ON_SAME_NODE = 3,
+                        DEFAULT_SNAT_DISABLED = 4,
+                        NO_MASQUERADING_FOR_IPV6 = 5,
+                        POD_USES_NODE_NETWORK_NAMESPACE = 6,
+                        NO_MASQUERADING_FOR_RETURN_PACKET = 7
+                    }
+                }
+
+                /** Properties of a GkeNetworkPolicyInfo. */
+                interface IGkeNetworkPolicyInfo {
+
+                    /** GkeNetworkPolicyInfo displayName */
+                    displayName?: (string|null);
+
+                    /** GkeNetworkPolicyInfo uri */
+                    uri?: (string|null);
+
+                    /** GkeNetworkPolicyInfo direction */
+                    direction?: (string|null);
+
+                    /** GkeNetworkPolicyInfo action */
+                    action?: (string|null);
+                }
+
+                /** Represents a GkeNetworkPolicyInfo. */
+                class GkeNetworkPolicyInfo implements IGkeNetworkPolicyInfo {
+
+                    /**
+                     * Constructs a new GkeNetworkPolicyInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IGkeNetworkPolicyInfo);
+
+                    /** GkeNetworkPolicyInfo displayName. */
+                    public displayName: string;
+
+                    /** GkeNetworkPolicyInfo uri. */
+                    public uri: string;
+
+                    /** GkeNetworkPolicyInfo direction. */
+                    public direction: string;
+
+                    /** GkeNetworkPolicyInfo action. */
+                    public action: string;
+
+                    /**
+                     * Creates a new GkeNetworkPolicyInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkeNetworkPolicyInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IGkeNetworkPolicyInfo): google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo;
+
+                    /**
+                     * Encodes the specified GkeNetworkPolicyInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo.verify|verify} messages.
+                     * @param message GkeNetworkPolicyInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IGkeNetworkPolicyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkeNetworkPolicyInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo.verify|verify} messages.
+                     * @param message GkeNetworkPolicyInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IGkeNetworkPolicyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkeNetworkPolicyInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkeNetworkPolicyInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo;
+
+                    /**
+                     * Decodes a GkeNetworkPolicyInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkeNetworkPolicyInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo;
+
+                    /**
+                     * Verifies a GkeNetworkPolicyInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkeNetworkPolicyInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkeNetworkPolicyInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo;
+
+                    /**
+                     * Creates a plain object from a GkeNetworkPolicyInfo message. Also converts values to other types if specified.
+                     * @param message GkeNetworkPolicyInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkeNetworkPolicyInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GkeNetworkPolicyInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GkeNetworkPolicySkippedInfo. */
+                interface IGkeNetworkPolicySkippedInfo {
+
+                    /** GkeNetworkPolicySkippedInfo reason */
+                    reason?: (google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.Reason|keyof typeof google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.Reason|null);
+                }
+
+                /** Represents a GkeNetworkPolicySkippedInfo. */
+                class GkeNetworkPolicySkippedInfo implements IGkeNetworkPolicySkippedInfo {
+
+                    /**
+                     * Constructs a new GkeNetworkPolicySkippedInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IGkeNetworkPolicySkippedInfo);
+
+                    /** GkeNetworkPolicySkippedInfo reason. */
+                    public reason: (google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.Reason|keyof typeof google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.Reason);
+
+                    /**
+                     * Creates a new GkeNetworkPolicySkippedInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkeNetworkPolicySkippedInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IGkeNetworkPolicySkippedInfo): google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo;
+
+                    /**
+                     * Encodes the specified GkeNetworkPolicySkippedInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.verify|verify} messages.
+                     * @param message GkeNetworkPolicySkippedInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IGkeNetworkPolicySkippedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkeNetworkPolicySkippedInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.verify|verify} messages.
+                     * @param message GkeNetworkPolicySkippedInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IGkeNetworkPolicySkippedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkeNetworkPolicySkippedInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkeNetworkPolicySkippedInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo;
+
+                    /**
+                     * Decodes a GkeNetworkPolicySkippedInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkeNetworkPolicySkippedInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo;
+
+                    /**
+                     * Verifies a GkeNetworkPolicySkippedInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkeNetworkPolicySkippedInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkeNetworkPolicySkippedInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo;
+
+                    /**
+                     * Creates a plain object from a GkeNetworkPolicySkippedInfo message. Also converts values to other types if specified.
+                     * @param message GkeNetworkPolicySkippedInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkeNetworkPolicySkippedInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GkeNetworkPolicySkippedInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GkeNetworkPolicySkippedInfo {
+
+                    /** Reason enum. */
+                    enum Reason {
+                        REASON_UNSPECIFIED = 0,
+                        NETWORK_POLICY_DISABLED = 1,
+                        INGRESS_SOURCE_ON_SAME_NODE = 2,
+                        EGRESS_FROM_NODE_NETWORK_NAMESPACE_POD = 3,
+                        NETWORK_POLICY_NOT_APPLIED_TO_RESPONSE_TRAFFIC = 4,
+                        NETWORK_POLICY_ANALYSIS_UNSUPPORTED = 100
+                    }
                 }
 
                 /** Properties of a CloudSQLInstanceInfo. */
@@ -5792,6 +6303,9 @@ export namespace google {
 
                     /** NatInfo natGatewayName */
                     natGatewayName?: (string|null);
+
+                    /** NatInfo cloudNatGatewayType */
+                    cloudNatGatewayType?: (google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType|keyof typeof google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType|null);
                 }
 
                 /** Represents a NatInfo. */
@@ -5841,6 +6355,9 @@ export namespace google {
 
                     /** NatInfo natGatewayName. */
                     public natGatewayName: string;
+
+                    /** NatInfo cloudNatGatewayType. */
+                    public cloudNatGatewayType: (google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType|keyof typeof google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType);
 
                     /**
                      * Creates a new NatInfo instance using the specified properties.
@@ -5930,6 +6447,16 @@ export namespace google {
                         CLOUD_NAT = 3,
                         PRIVATE_SERVICE_CONNECT = 4,
                         GKE_POD_IP_MASQUERADING = 5
+                    }
+
+                    /** CloudNatGatewayType enum. */
+                    enum CloudNatGatewayType {
+                        CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED = 0,
+                        PUBLIC_NAT44 = 1,
+                        PUBLIC_NAT64 = 2,
+                        PRIVATE_NAT_NCC = 3,
+                        PRIVATE_NAT_HYBRID = 4,
+                        PRIVATE_NAT64 = 5
                     }
                 }
 
@@ -6456,6 +6983,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ServerlessNegInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NgfwPacketInspectionInfo. */
+                interface INgfwPacketInspectionInfo {
+
+                    /** NgfwPacketInspectionInfo securityProfileGroupUri */
+                    securityProfileGroupUri?: (string|null);
+                }
+
+                /** Represents a NgfwPacketInspectionInfo. */
+                class NgfwPacketInspectionInfo implements INgfwPacketInspectionInfo {
+
+                    /**
+                     * Constructs a new NgfwPacketInspectionInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.INgfwPacketInspectionInfo);
+
+                    /** NgfwPacketInspectionInfo securityProfileGroupUri. */
+                    public securityProfileGroupUri: string;
+
+                    /**
+                     * Creates a new NgfwPacketInspectionInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NgfwPacketInspectionInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.INgfwPacketInspectionInfo): google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo;
+
+                    /**
+                     * Encodes the specified NgfwPacketInspectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo.verify|verify} messages.
+                     * @param message NgfwPacketInspectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.INgfwPacketInspectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NgfwPacketInspectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo.verify|verify} messages.
+                     * @param message NgfwPacketInspectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.INgfwPacketInspectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NgfwPacketInspectionInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NgfwPacketInspectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo;
+
+                    /**
+                     * Decodes a NgfwPacketInspectionInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NgfwPacketInspectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo;
+
+                    /**
+                     * Verifies a NgfwPacketInspectionInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NgfwPacketInspectionInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NgfwPacketInspectionInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo;
+
+                    /**
+                     * Creates a plain object from a NgfwPacketInspectionInfo message. Also converts values to other types if specified.
+                     * @param message NgfwPacketInspectionInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NgfwPacketInspectionInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NgfwPacketInspectionInfo
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -9517,6 +10141,9 @@ export namespace google {
                     /** Endpoint redisCluster */
                     redisCluster?: (string|null);
 
+                    /** Endpoint gkePod */
+                    gkePod?: (string|null);
+
                     /** Endpoint cloudFunction */
                     cloudFunction?: (google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint|null);
 
@@ -9580,6 +10207,9 @@ export namespace google {
 
                     /** Endpoint redisCluster. */
                     public redisCluster: string;
+
+                    /** Endpoint gkePod. */
+                    public gkePod: string;
 
                     /** Endpoint cloudFunction. */
                     public cloudFunction?: (google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint|null);
@@ -9683,7 +10313,8 @@ export namespace google {
                     enum NetworkType {
                         NETWORK_TYPE_UNSPECIFIED = 0,
                         GCP_NETWORK = 1,
-                        NON_GCP_NETWORK = 2
+                        NON_GCP_NETWORK = 2,
+                        INTERNET = 3
                     }
 
                     /** ForwardingRuleTarget enum. */
@@ -10904,6 +11535,18 @@ export namespace google {
                     /** Step gkeMaster */
                     gkeMaster?: (google.cloud.networkmanagement.v1beta1.IGKEMasterInfo|null);
 
+                    /** Step gkePod */
+                    gkePod?: (google.cloud.networkmanagement.v1beta1.IGkePodInfo|null);
+
+                    /** Step ipMasqueradingSkipped */
+                    ipMasqueradingSkipped?: (google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo|null);
+
+                    /** Step gkeNetworkPolicy */
+                    gkeNetworkPolicy?: (google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicyInfo|null);
+
+                    /** Step gkeNetworkPolicySkipped */
+                    gkeNetworkPolicySkipped?: (google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicySkippedInfo|null);
+
                     /** Step cloudSqlInstance */
                     cloudSqlInstance?: (google.cloud.networkmanagement.v1beta1.ICloudSQLInstanceInfo|null);
 
@@ -10936,6 +11579,9 @@ export namespace google {
 
                     /** Step serverlessNeg */
                     serverlessNeg?: (google.cloud.networkmanagement.v1beta1.IServerlessNegInfo|null);
+
+                    /** Step ngfwPacketInspection */
+                    ngfwPacketInspection?: (google.cloud.networkmanagement.v1beta1.INgfwPacketInspectionInfo|null);
                 }
 
                 /** Represents a Step. */
@@ -11019,6 +11665,18 @@ export namespace google {
                     /** Step gkeMaster. */
                     public gkeMaster?: (google.cloud.networkmanagement.v1beta1.IGKEMasterInfo|null);
 
+                    /** Step gkePod. */
+                    public gkePod?: (google.cloud.networkmanagement.v1beta1.IGkePodInfo|null);
+
+                    /** Step ipMasqueradingSkipped. */
+                    public ipMasqueradingSkipped?: (google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo|null);
+
+                    /** Step gkeNetworkPolicy. */
+                    public gkeNetworkPolicy?: (google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicyInfo|null);
+
+                    /** Step gkeNetworkPolicySkipped. */
+                    public gkeNetworkPolicySkipped?: (google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicySkippedInfo|null);
+
                     /** Step cloudSqlInstance. */
                     public cloudSqlInstance?: (google.cloud.networkmanagement.v1beta1.ICloudSQLInstanceInfo|null);
 
@@ -11052,8 +11710,11 @@ export namespace google {
                     /** Step serverlessNeg. */
                     public serverlessNeg?: (google.cloud.networkmanagement.v1beta1.IServerlessNegInfo|null);
 
+                    /** Step ngfwPacketInspection. */
+                    public ngfwPacketInspection?: (google.cloud.networkmanagement.v1beta1.INgfwPacketInspectionInfo|null);
+
                     /** Step stepInfo. */
-                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg");
+                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"gkePod"|"ipMasqueradingSkipped"|"gkeNetworkPolicy"|"gkeNetworkPolicySkipped"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|"ngfwPacketInspection");
 
                     /**
                      * Creates a new Step instance using the specified properties.
@@ -11144,6 +11805,7 @@ export namespace google {
                         START_FROM_PRIVATE_NETWORK = 3,
                         START_FROM_GKE_MASTER = 21,
                         START_FROM_CLOUD_SQL_INSTANCE = 22,
+                        START_FROM_GKE_POD = 39,
                         START_FROM_REDIS_INSTANCE = 32,
                         START_FROM_REDIS_CLUSTER = 33,
                         START_FROM_CLOUD_FUNCTION = 23,
@@ -11166,9 +11828,16 @@ export namespace google {
                         ARRIVE_AT_VPN_TUNNEL = 13,
                         ARRIVE_AT_INTERCONNECT_ATTACHMENT = 37,
                         ARRIVE_AT_VPC_CONNECTOR = 24,
+                        ARRIVE_AT_GKE_POD = 44,
                         DIRECT_VPC_EGRESS_CONNECTION = 35,
                         SERVERLESS_EXTERNAL_CONNECTION = 36,
+                        NGFW_PACKET_INSPECTION = 47,
                         NAT = 14,
+                        SKIP_GKE_POD_IP_MASQUERADING = 40,
+                        SKIP_GKE_INGRESS_NETWORK_POLICY = 41,
+                        SKIP_GKE_EGRESS_NETWORK_POLICY = 42,
+                        APPLY_INGRESS_GKE_NETWORK_POLICY = 45,
+                        APPLY_EGRESS_GKE_NETWORK_POLICY = 46,
                         PROXY_CONNECTION = 15,
                         DELIVER = 16,
                         DROP = 17,
@@ -11646,6 +12315,8 @@ export namespace google {
                         SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE = 4,
                         NETWORK_FIREWALL_POLICY_RULE = 5,
                         NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6,
+                        SYSTEM_NETWORK_FIREWALL_POLICY_RULE = 7,
+                        SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE = 8,
                         UNSUPPORTED_FIREWALL_POLICY_RULE = 100,
                         TRACKING_STATE = 101,
                         ANALYSIS_SKIPPED = 102
@@ -13307,7 +13978,8 @@ export namespace google {
                         CLOUD_RUN_REVISION = 14,
                         GOOGLE_MANAGED_SERVICE = 15,
                         REDIS_INSTANCE = 16,
-                        REDIS_CLUSTER = 17
+                        REDIS_CLUSTER = 17,
+                        GKE_POD = 19
                     }
 
                     /** GoogleServiceType enum. */
@@ -13584,6 +14256,9 @@ export namespace google {
                         PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS = 29,
                         PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS = 36,
                         NO_SOURCE_LOCATION = 5,
+                        NO_SOURCE_GCP_NETWORK_LOCATION = 42,
+                        NO_SOURCE_NON_GCP_NETWORK_LOCATION = 43,
+                        NO_SOURCE_INTERNET_LOCATION = 44,
                         INVALID_ARGUMENT = 6,
                         TRACE_TOO_LONG = 9,
                         INTERNAL_ERROR = 10,
@@ -13598,6 +14273,7 @@ export namespace google {
                         GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT = 19,
                         GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT = 39,
                         SOURCE_PSC_CLOUD_SQL_UNSUPPORTED = 20,
+                        SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED = 45,
                         SOURCE_REDIS_CLUSTER_UNSUPPORTED = 34,
                         SOURCE_REDIS_INSTANCE_UNSUPPORTED = 35,
                         SOURCE_FORWARDING_RULE_UNSUPPORTED = 21,
@@ -13605,7 +14281,8 @@ export namespace google {
                         UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT = 30,
                         UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG = 31,
                         NO_SERVERLESS_IP_RANGES = 37,
-                        IP_VERSION_PROTOCOL_MISMATCH = 40
+                        IP_VERSION_PROTOCOL_MISMATCH = 40,
+                        GKE_POD_UNKNOWN_ENDPOINT_LOCATION = 41
                     }
                 }
 
@@ -13761,6 +14438,7 @@ export namespace google {
                         ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED = 52,
                         ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID = 53,
                         NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS = 44,
+                        NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS = 109,
                         NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS = 98,
                         VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH = 45,
                         VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH = 46,
@@ -13775,6 +14453,7 @@ export namespace google {
                         INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS = 85,
                         INSTANCE_NOT_RUNNING = 14,
                         GKE_CLUSTER_NOT_RUNNING = 27,
+                        GKE_POD_NOT_RUNNING = 103,
                         CLOUD_SQL_INSTANCE_NOT_RUNNING = 28,
                         REDIS_INSTANCE_NOT_RUNNING = 68,
                         REDIS_CLUSTER_NOT_RUNNING = 69,
@@ -13837,6 +14516,7 @@ export namespace google {
                         UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION = 88,
                         TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED = 89,
                         NO_MATCHING_NAT64_GATEWAY = 90,
+                        NO_CONFIGURED_PRIVATE_NAT64_RULE = 107,
                         LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH = 96,
                         NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION = 97,
                         CLOUD_NAT_PROTOCOL_UNSUPPORTED = 99,
@@ -13844,7 +14524,10 @@ export namespace google {
                         L2_INTERCONNECT_UNSUPPORTED_PORT = 101,
                         L2_INTERCONNECT_DESTINATION_IP_MISMATCH = 102,
                         NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED = 104,
-                        HYBRID_SUBNET_REGION_MISMATCH = 105
+                        HYBRID_SUBNET_REGION_MISMATCH = 105,
+                        HYBRID_SUBNET_NO_ROUTE = 106,
+                        GKE_NETWORK_POLICY = 108,
+                        NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION = 110
                     }
                 }
 
@@ -13967,6 +14650,458 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GkePodInfo. */
+                interface IGkePodInfo {
+
+                    /** GkePodInfo podUri */
+                    podUri?: (string|null);
+
+                    /** GkePodInfo ipAddress */
+                    ipAddress?: (string|null);
+
+                    /** GkePodInfo networkUri */
+                    networkUri?: (string|null);
+                }
+
+                /** Represents a GkePodInfo. */
+                class GkePodInfo implements IGkePodInfo {
+
+                    /**
+                     * Constructs a new GkePodInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IGkePodInfo);
+
+                    /** GkePodInfo podUri. */
+                    public podUri: string;
+
+                    /** GkePodInfo ipAddress. */
+                    public ipAddress: string;
+
+                    /** GkePodInfo networkUri. */
+                    public networkUri: string;
+
+                    /**
+                     * Creates a new GkePodInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkePodInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IGkePodInfo): google.cloud.networkmanagement.v1beta1.GkePodInfo;
+
+                    /**
+                     * Encodes the specified GkePodInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkePodInfo.verify|verify} messages.
+                     * @param message GkePodInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IGkePodInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkePodInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkePodInfo.verify|verify} messages.
+                     * @param message GkePodInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IGkePodInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkePodInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkePodInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.GkePodInfo;
+
+                    /**
+                     * Decodes a GkePodInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkePodInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.GkePodInfo;
+
+                    /**
+                     * Verifies a GkePodInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkePodInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkePodInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.GkePodInfo;
+
+                    /**
+                     * Creates a plain object from a GkePodInfo message. Also converts values to other types if specified.
+                     * @param message GkePodInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.GkePodInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkePodInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GkePodInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IpMasqueradingSkippedInfo. */
+                interface IIpMasqueradingSkippedInfo {
+
+                    /** IpMasqueradingSkippedInfo reason */
+                    reason?: (google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason|keyof typeof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason|null);
+
+                    /** IpMasqueradingSkippedInfo nonMasqueradeRange */
+                    nonMasqueradeRange?: (string|null);
+                }
+
+                /** Represents an IpMasqueradingSkippedInfo. */
+                class IpMasqueradingSkippedInfo implements IIpMasqueradingSkippedInfo {
+
+                    /**
+                     * Constructs a new IpMasqueradingSkippedInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo);
+
+                    /** IpMasqueradingSkippedInfo reason. */
+                    public reason: (google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason|keyof typeof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason);
+
+                    /** IpMasqueradingSkippedInfo nonMasqueradeRange. */
+                    public nonMasqueradeRange: string;
+
+                    /**
+                     * Creates a new IpMasqueradingSkippedInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IpMasqueradingSkippedInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo): google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Encodes the specified IpMasqueradingSkippedInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                     * @param message IpMasqueradingSkippedInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IpMasqueradingSkippedInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                     * @param message IpMasqueradingSkippedInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IpMasqueradingSkippedInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IpMasqueradingSkippedInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Verifies an IpMasqueradingSkippedInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IpMasqueradingSkippedInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IpMasqueradingSkippedInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Creates a plain object from an IpMasqueradingSkippedInfo message. Also converts values to other types if specified.
+                     * @param message IpMasqueradingSkippedInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IpMasqueradingSkippedInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IpMasqueradingSkippedInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IpMasqueradingSkippedInfo {
+
+                    /** Reason enum. */
+                    enum Reason {
+                        REASON_UNSPECIFIED = 0,
+                        DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE = 1,
+                        DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE = 2,
+                        DESTINATION_ON_SAME_NODE = 3,
+                        DEFAULT_SNAT_DISABLED = 4,
+                        NO_MASQUERADING_FOR_IPV6 = 5,
+                        POD_USES_NODE_NETWORK_NAMESPACE = 6,
+                        NO_MASQUERADING_FOR_RETURN_PACKET = 7
+                    }
+                }
+
+                /** Properties of a GkeNetworkPolicyInfo. */
+                interface IGkeNetworkPolicyInfo {
+
+                    /** GkeNetworkPolicyInfo displayName */
+                    displayName?: (string|null);
+
+                    /** GkeNetworkPolicyInfo uri */
+                    uri?: (string|null);
+
+                    /** GkeNetworkPolicyInfo direction */
+                    direction?: (string|null);
+
+                    /** GkeNetworkPolicyInfo action */
+                    action?: (string|null);
+                }
+
+                /** Represents a GkeNetworkPolicyInfo. */
+                class GkeNetworkPolicyInfo implements IGkeNetworkPolicyInfo {
+
+                    /**
+                     * Constructs a new GkeNetworkPolicyInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicyInfo);
+
+                    /** GkeNetworkPolicyInfo displayName. */
+                    public displayName: string;
+
+                    /** GkeNetworkPolicyInfo uri. */
+                    public uri: string;
+
+                    /** GkeNetworkPolicyInfo direction. */
+                    public direction: string;
+
+                    /** GkeNetworkPolicyInfo action. */
+                    public action: string;
+
+                    /**
+                     * Creates a new GkeNetworkPolicyInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkeNetworkPolicyInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicyInfo): google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo;
+
+                    /**
+                     * Encodes the specified GkeNetworkPolicyInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo.verify|verify} messages.
+                     * @param message GkeNetworkPolicyInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkeNetworkPolicyInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo.verify|verify} messages.
+                     * @param message GkeNetworkPolicyInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkeNetworkPolicyInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkeNetworkPolicyInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo;
+
+                    /**
+                     * Decodes a GkeNetworkPolicyInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkeNetworkPolicyInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo;
+
+                    /**
+                     * Verifies a GkeNetworkPolicyInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkeNetworkPolicyInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkeNetworkPolicyInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo;
+
+                    /**
+                     * Creates a plain object from a GkeNetworkPolicyInfo message. Also converts values to other types if specified.
+                     * @param message GkeNetworkPolicyInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkeNetworkPolicyInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GkeNetworkPolicyInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GkeNetworkPolicySkippedInfo. */
+                interface IGkeNetworkPolicySkippedInfo {
+
+                    /** GkeNetworkPolicySkippedInfo reason */
+                    reason?: (google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.Reason|keyof typeof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.Reason|null);
+                }
+
+                /** Represents a GkeNetworkPolicySkippedInfo. */
+                class GkeNetworkPolicySkippedInfo implements IGkeNetworkPolicySkippedInfo {
+
+                    /**
+                     * Constructs a new GkeNetworkPolicySkippedInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicySkippedInfo);
+
+                    /** GkeNetworkPolicySkippedInfo reason. */
+                    public reason: (google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.Reason|keyof typeof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.Reason);
+
+                    /**
+                     * Creates a new GkeNetworkPolicySkippedInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkeNetworkPolicySkippedInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicySkippedInfo): google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo;
+
+                    /**
+                     * Encodes the specified GkeNetworkPolicySkippedInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.verify|verify} messages.
+                     * @param message GkeNetworkPolicySkippedInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicySkippedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkeNetworkPolicySkippedInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.verify|verify} messages.
+                     * @param message GkeNetworkPolicySkippedInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicySkippedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkeNetworkPolicySkippedInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkeNetworkPolicySkippedInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo;
+
+                    /**
+                     * Decodes a GkeNetworkPolicySkippedInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkeNetworkPolicySkippedInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo;
+
+                    /**
+                     * Verifies a GkeNetworkPolicySkippedInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkeNetworkPolicySkippedInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkeNetworkPolicySkippedInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo;
+
+                    /**
+                     * Creates a plain object from a GkeNetworkPolicySkippedInfo message. Also converts values to other types if specified.
+                     * @param message GkeNetworkPolicySkippedInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkeNetworkPolicySkippedInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GkeNetworkPolicySkippedInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GkeNetworkPolicySkippedInfo {
+
+                    /** Reason enum. */
+                    enum Reason {
+                        REASON_UNSPECIFIED = 0,
+                        NETWORK_POLICY_DISABLED = 1,
+                        INGRESS_SOURCE_ON_SAME_NODE = 2,
+                        EGRESS_FROM_NODE_NETWORK_NAMESPACE_POD = 3,
+                        NETWORK_POLICY_NOT_APPLIED_TO_RESPONSE_TRAFFIC = 4,
+                        NETWORK_POLICY_ANALYSIS_UNSUPPORTED = 100
+                    }
                 }
 
                 /** Properties of a CloudSQLInstanceInfo. */
@@ -15063,6 +16198,9 @@ export namespace google {
 
                     /** NatInfo natGatewayName */
                     natGatewayName?: (string|null);
+
+                    /** NatInfo cloudNatGatewayType */
+                    cloudNatGatewayType?: (google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType|keyof typeof google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType|null);
                 }
 
                 /** Represents a NatInfo. */
@@ -15112,6 +16250,9 @@ export namespace google {
 
                     /** NatInfo natGatewayName. */
                     public natGatewayName: string;
+
+                    /** NatInfo cloudNatGatewayType. */
+                    public cloudNatGatewayType: (google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType|keyof typeof google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType);
 
                     /**
                      * Creates a new NatInfo instance using the specified properties.
@@ -15201,6 +16342,16 @@ export namespace google {
                         CLOUD_NAT = 3,
                         PRIVATE_SERVICE_CONNECT = 4,
                         GKE_POD_IP_MASQUERADING = 5
+                    }
+
+                    /** CloudNatGatewayType enum. */
+                    enum CloudNatGatewayType {
+                        CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED = 0,
+                        PUBLIC_NAT44 = 1,
+                        PUBLIC_NAT64 = 2,
+                        PRIVATE_NAT_NCC = 3,
+                        PRIVATE_NAT_HYBRID = 4,
+                        PRIVATE_NAT64 = 5
                     }
                 }
 
@@ -15727,6 +16878,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ServerlessNegInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NgfwPacketInspectionInfo. */
+                interface INgfwPacketInspectionInfo {
+
+                    /** NgfwPacketInspectionInfo securityProfileGroupUri */
+                    securityProfileGroupUri?: (string|null);
+                }
+
+                /** Represents a NgfwPacketInspectionInfo. */
+                class NgfwPacketInspectionInfo implements INgfwPacketInspectionInfo {
+
+                    /**
+                     * Constructs a new NgfwPacketInspectionInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.INgfwPacketInspectionInfo);
+
+                    /** NgfwPacketInspectionInfo securityProfileGroupUri. */
+                    public securityProfileGroupUri: string;
+
+                    /**
+                     * Creates a new NgfwPacketInspectionInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NgfwPacketInspectionInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.INgfwPacketInspectionInfo): google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo;
+
+                    /**
+                     * Encodes the specified NgfwPacketInspectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo.verify|verify} messages.
+                     * @param message NgfwPacketInspectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.INgfwPacketInspectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NgfwPacketInspectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo.verify|verify} messages.
+                     * @param message NgfwPacketInspectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.INgfwPacketInspectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NgfwPacketInspectionInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NgfwPacketInspectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo;
+
+                    /**
+                     * Decodes a NgfwPacketInspectionInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NgfwPacketInspectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo;
+
+                    /**
+                     * Verifies a NgfwPacketInspectionInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NgfwPacketInspectionInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NgfwPacketInspectionInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo;
+
+                    /**
+                     * Creates a plain object from a NgfwPacketInspectionInfo message. Also converts values to other types if specified.
+                     * @param message NgfwPacketInspectionInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NgfwPacketInspectionInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NgfwPacketInspectionInfo
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

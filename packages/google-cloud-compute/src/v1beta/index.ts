@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -47,6 +47,7 @@ export {InstanceGroupsClient} from './instance_groups_client';
 export {InstancesClient} from './instances_client';
 export {InstanceSettingsServiceClient} from './instance_settings_service_client';
 export {InstanceTemplatesClient} from './instance_templates_client';
+export {InstantSnapshotGroupsClient} from './instant_snapshot_groups_client';
 export {InstantSnapshotsClient} from './instant_snapshots_client';
 export {InterconnectAttachmentGroupsClient} from './interconnect_attachment_groups_client';
 export {InterconnectAttachmentsClient} from './interconnect_attachments_client';
@@ -90,7 +91,9 @@ export {RegionInstanceGroupManagersClient} from './region_instance_group_manager
 export {RegionInstanceGroupsClient} from './region_instance_groups_client';
 export {RegionInstancesClient} from './region_instances_client';
 export {RegionInstanceTemplatesClient} from './region_instance_templates_client';
+export {RegionInstantSnapshotGroupsClient} from './region_instant_snapshot_groups_client';
 export {RegionInstantSnapshotsClient} from './region_instant_snapshots_client';
+export {RegionMultiMigMembersClient} from './region_multi_mig_members_client';
 export {RegionMultiMigsClient} from './region_multi_migs_client';
 export {RegionNetworkEndpointGroupsClient} from './region_network_endpoint_groups_client';
 export {RegionNetworkFirewallPoliciesClient} from './region_network_firewall_policies_client';
@@ -110,12 +113,16 @@ export {RegionUrlMapsClient} from './region_url_maps_client';
 export {RegionZonesClient} from './region_zones_client';
 export {ReservationBlocksClient} from './reservation_blocks_client';
 export {ReservationsClient} from './reservations_client';
+export {ReservationSlotsClient} from './reservation_slots_client';
 export {ReservationSubBlocksClient} from './reservation_sub_blocks_client';
 export {ResourcePoliciesClient} from './resource_policies_client';
+export {RolloutPlansClient} from './rollout_plans_client';
+export {RolloutsClient} from './rollouts_client';
 export {RoutersClient} from './routers_client';
 export {RoutesClient} from './routes_client';
 export {SecurityPoliciesClient} from './security_policies_client';
 export {ServiceAttachmentsClient} from './service_attachments_client';
+export {SnapshotGroupsClient} from './snapshot_groups_client';
 export {SnapshotsClient} from './snapshots_client';
 export {SnapshotSettingsServiceClient} from './snapshot_settings_service_client';
 export {SslCertificatesClient} from './ssl_certificates_client';

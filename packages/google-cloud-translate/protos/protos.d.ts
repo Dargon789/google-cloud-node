@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -686,6 +686,9 @@ export namespace google {
                     /** AdaptiveMtTranslateRequest content */
                     content?: (string[]|null);
 
+                    /** AdaptiveMtTranslateRequest mimeType */
+                    mimeType?: (string|null);
+
                     /** AdaptiveMtTranslateRequest referenceSentenceConfig */
                     referenceSentenceConfig?: (google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig|null);
 
@@ -710,6 +713,9 @@ export namespace google {
 
                     /** AdaptiveMtTranslateRequest content. */
                     public content: string[];
+
+                    /** AdaptiveMtTranslateRequest mimeType. */
+                    public mimeType: string;
 
                     /** AdaptiveMtTranslateRequest referenceSentenceConfig. */
                     public referenceSentenceConfig?: (google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig|null);

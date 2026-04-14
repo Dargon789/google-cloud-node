@@ -3415,6 +3415,10 @@
                 "layerDetails": {
                   "type": "LayerDetails",
                   "id": 2
+                },
+                "lineNumber": {
+                  "type": "int32",
+                  "id": 3
                 }
               }
             },
@@ -3431,6 +3435,10 @@
                 "layerCount": {
                   "type": "int32",
                   "id": 3
+                },
+                "registry": {
+                  "type": "string",
+                  "id": 4
                 }
               }
             },

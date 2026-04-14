@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -64,6 +64,11 @@ function main(parent, messages) {
    *  Required. Content of current conversation.
    */
   // const messages = [1,2,3,4]
+  /**
+   *  Optional. The thinking mode to use for the agent loop.
+   *  Defaults to THINKING_MODE_UNSPECIFIED if not specified.
+   */
+  // const thinkingMode = {}
 
   // Imports the Geminidataanalytics library
   const {DataChatServiceClient} = require('@google-cloud/geminidataanalytics').v1alpha;

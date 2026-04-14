@@ -4,9 +4,10 @@
 
 # [Google Cloud Memorystore for Redis API: Nodejs Client][homepage]
 
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
 
 [![npm version](https://img.shields.io/npm/v/@google-cloud/redis-cluster.svg)](https://www.npmjs.org/package/@google-cloud/redis-cluster)
 
@@ -66,6 +67,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get backup collection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.get_backup_collection.js) |
 | get cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.get_cluster.js) |
 | get cluster certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.get_cluster_certificate_authority.js) |
+| get shared regional certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.get_shared_regional_certificate_authority.js) |
 | list backup collections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.list_backup_collections.js) |
 | list backups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.list_backups.js) |
 | list clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.list_clusters.js) |
@@ -81,6 +83,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get backup collection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.get_backup_collection.js) |
 | get cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.get_cluster.js) |
 | get cluster certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.get_cluster_certificate_authority.js) |
+| get shared regional certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.get_shared_regional_certificate_authority.js) |
 | list backup collections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.list_backup_collections.js) |
 | list backups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.list_backups.js) |
 | list clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.list_clusters.js) |

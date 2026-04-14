@@ -412,6 +412,26 @@
                                 }
                               ]
                             },
+                            "CreateTestAccount": {
+                              "requestType": "CreateTestAccountRequest",
+                              "responseType": "Account",
+                              "options": {
+                                "(google.api.http).post": "/accounts/v1/{parent=accounts/*}:createTestAccount",
+                                "(google.api.http).body": "account",
+                                "(google.api.method_signature)": "parent,account"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/accounts/v1/{parent=accounts/*}:createTestAccount",
+                                    "body": "account"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,account"
+                                }
+                              ]
+                            },
                             "DeleteAccount": {
                               "requestType": "DeleteAccountRequest",
                               "responseType": "google.protobuf.Empty",
@@ -694,6 +714,25 @@
                                     "(google.api.field_behavior)": "REQUIRED"
                                   }
                                 }
+                              }
+                            }
+                          }
+                        },
+                        "CreateTestAccountRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/Account"
+                              }
+                            },
+                            "account": {
+                              "type": "Account",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
                           }
@@ -4784,6 +4823,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "radiusArea": {
+                              "type": "RadiusArea",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -4834,6 +4880,47 @@
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "RadiusArea": {
+                              "fields": {
+                                "regionCode": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "latLng": {
+                                  "type": "google.type.LatLng",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "radius": {
+                                  "type": "double",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "radiusUnits": {
+                                  "type": "RadiusUnits",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "RadiusUnits": {
+                                  "values": {
+                                    "RADIUS_UNITS_UNSPECIFIED": 0,
+                                    "MILES": 1,
+                                    "KILOMETERS": 2
                                   }
                                 }
                               }
@@ -12471,7 +12558,13 @@
                         "LOCAL_INVENTORY_ADS": 3,
                         "FREE_LISTINGS": 4,
                         "FREE_LOCAL_LISTINGS": 5,
-                        "YOUTUBE_SHOPPING": 6
+                        "YOUTUBE_SHOPPING": 6,
+                        "YOUTUBE_SHOPPING_CHECKOUT": 7,
+                        "YOUTUBE_AFFILIATE": 8,
+                        "FREE_VEHICLE_LISTINGS": 9,
+                        "VEHICLE_ADS": 10,
+                        "CLOUD_RETAIL": 11,
+                        "LOCAL_CLOUD_RETAIL": 12
                       }
                     }
                   }
@@ -12496,11 +12589,16 @@
                         "LOCAL_INVENTORY_ADS": 5,
                         "VEHICLE_INVENTORY_ADS": 6,
                         "FREE_LISTINGS": 7,
+                        "FREE_LISTINGS_UCP_CHECKOUT": 19,
                         "FREE_LOCAL_LISTINGS": 8,
                         "FREE_LOCAL_VEHICLE_LISTINGS": 9,
+                        "YOUTUBE_AFFILIATE": 18,
                         "YOUTUBE_SHOPPING": 10,
                         "CLOUD_RETAIL": 11,
-                        "LOCAL_CLOUD_RETAIL": 12
+                        "LOCAL_CLOUD_RETAIL": 12,
+                        "PRODUCT_REVIEWS": 15,
+                        "MERCHANT_REVIEWS": 16,
+                        "YOUTUBE_CHECKOUT": 17
                       }
                     }
                   }
@@ -14615,6 +14713,18 @@
                 "day": {
                   "type": "int32",
                   "id": 3
+                }
+              }
+            },
+            "LatLng": {
+              "fields": {
+                "latitude": {
+                  "type": "double",
+                  "id": 1
+                },
+                "longitude": {
+                  "type": "double",
+                  "id": 2
                 }
               }
             },

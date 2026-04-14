@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.7.0...backupdr-v0.8.0) (2026-01-31)
+
+
+### Features
+
+* [backupdr] Add support for AlloyDB backup and restore ([#7050](https://github.com/googleapis/google-cloud-node/issues/7050)) ([a184916](https://github.com/googleapis/google-cloud-node/commit/a18491688b779f910a20a65b8725db519ede1ebb))
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.6.0...backupdr-v0.7.0) (2025-11-21)
+
+
+### Features
+
+* [backupdr] Adding new fields for CMEK and Retention Inheritance features ([#6901](https://github.com/googleapis/google-cloud-node/issues/6901)) ([b26f79d](https://github.com/googleapis/google-cloud-node/commit/b26f79d452a55f26a309166362ca3a6a1cda89c1))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.5.1...backupdr-v0.6.0) (2025-11-11)
 
 

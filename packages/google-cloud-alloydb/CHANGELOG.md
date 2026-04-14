@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.4.0...alloydb-v2.5.0) (2026-03-18)
+
+
+### Features
+
+* [alloydb] Add a new field to support Dataplex integration configuration ([#7322](https://github.com/googleapis/google-cloud-node/issues/7322)) ([a74e547](https://github.com/googleapis/google-cloud-node/commit/a74e547ff722d19a3e50adf06bef03f46231daef))
+
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.3.0...alloydb-v2.4.0) (2026-01-22)
+
+
+### Features
+
+* [Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior ([#7013](https://github.com/googleapis/google-cloud-node/issues/7013)) ([0dbd123](https://github.com/googleapis/google-cloud-node/commit/0dbd123f45ccc049dbc6697655cd861d1200bf07))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.2.1...alloydb-v2.3.0) (2026-01-12)
+
+
+### Features
+
+* [alloydb] add POSTGRES_18 to DatabaseVersion ([#6955](https://github.com/googleapis/google-cloud-node/issues/6955)) ([fcfdd73](https://github.com/googleapis/google-cloud-node/commit/fcfdd73f0fd8acdf1849f5fccb97b3f9a969c72c))
+
 ## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.2.0...alloydb-v2.2.1) (2025-10-13)
 
 

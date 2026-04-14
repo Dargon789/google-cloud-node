@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v3.1.0...accounts-v3.2.0) (2026-03-18)
+
+
+### Features
+
+* [merchantapi] Add CreateTestAccount RPC to Accounts service for creating test-only Merchant Center accounts ([#7640](https://github.com/googleapis/google-cloud-node/issues/7640)) ([7f03646](https://github.com/googleapis/google-cloud-node/commit/7f03646a5e0d259336b2a6fb902200b6c5d70733))
+
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v3.0.1...accounts-v3.1.0) (2025-12-09)
+
+
+### Features
+
+* [merchantapi] A new field `radius_area` is added to message `.google.shopping.merchant.accounts.v1.Region` ([#6914](https://github.com/googleapis/google-cloud-node/issues/6914)) ([b9e87cd](https://github.com/googleapis/google-cloud-node/commit/b9e87cd0803304763d1df797c884e849f07f25fb))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/accounts-v3.0.0...accounts-v3.0.1) (2025-10-13)
 
 

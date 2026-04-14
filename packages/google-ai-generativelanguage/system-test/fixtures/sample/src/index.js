@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,8 +21,15 @@
 const generativelanguage = require('@google-ai/generativelanguage');
 
 function main() {
+  const cacheServiceClient = new generativelanguage.CacheServiceClient();
+  const discussServiceClient = new generativelanguage.DiscussServiceClient();
+  const fileServiceClient = new generativelanguage.FileServiceClient();
   const generativeServiceClient = new generativelanguage.GenerativeServiceClient();
   const modelServiceClient = new generativelanguage.ModelServiceClient();
+  const permissionServiceClient = new generativelanguage.PermissionServiceClient();
+  const predictionServiceClient = new generativelanguage.PredictionServiceClient();
+  const retrieverServiceClient = new generativelanguage.RetrieverServiceClient();
+  const textServiceClient = new generativelanguage.TextServiceClient();
 }
 
 main();

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ function main(parent, workloadIdentityPoolProvider, workloadIdentityPoolProvider
   // const workloadIdentityPoolProviderId = 'abc123'
 
   // Imports the Iam library
-  const {WorkloadIdentityPoolsClient} = require('iam').v1beta;
+  const {WorkloadIdentityPoolsClient} = require('@google-cloud/iam').v1beta;
 
   // Instantiates a client
   const iamClient = new WorkloadIdentityPoolsClient();

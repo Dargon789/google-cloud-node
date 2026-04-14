@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/maintenance-api-v0.3.0...maintenance-api-v0.4.0) (2026-01-22)
+
+
+### Features
+
+* [Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior ([#7013](https://github.com/googleapis/google-cloud-node/issues/7013)) ([0dbd123](https://github.com/googleapis/google-cloud-node/commit/0dbd123f45ccc049dbc6697655cd861d1200bf07))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/maintenance-api-v0.2.0...maintenance-api-v0.3.0) (2025-12-15)
+
+
+### Features
+
+* Initial generation of library ([46ac6d1](https://github.com/googleapis/google-cloud-node/commit/46ac6d10178ff78a4771e2519b3540b322687115))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/maintenance-api-v0.1.1...maintenance-api-v0.2.0) (2025-12-09)
+
+
+### Features
+
+* [maintenance] add support for v1 version of Maintenance API ([#6925](https://github.com/googleapis/google-cloud-node/issues/6925)) ([a0c0db8](https://github.com/googleapis/google-cloud-node/commit/a0c0db8be96f32f2f3e115987664a23a1f38ae57))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/maintenance-api-v0.1.0...maintenance-api-v0.1.1) (2025-10-13)
 
 

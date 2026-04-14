@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [7.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.5.0...dialogflow-v7.6.0) (2026-04-08)
+
+
+### Features
+
+* [dialogflow] updated v2beta1 dialogflow client libraries ([#7853](https://github.com/googleapis/google-cloud-node/issues/7853)) ([75c76e1](https://github.com/googleapis/google-cloud-node/commit/75c76e1253982abc8e228c793dee684004e621f2))
+
+## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.4.0...dialogflow-v7.5.0) (2026-01-31)
+
+
+### Features
+
+* [dialogflow] added a new field StreamingAnalyzeContentRequest.output_multiple_utterances ([#7065](https://github.com/googleapis/google-cloud-node/issues/7065)) ([6b96607](https://github.com/googleapis/google-cloud-node/commit/6b96607a9b998d4572c8671adcbec50994ffc52a))
+
 ## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.3.0...dialogflow-v7.4.0) (2025-11-11)
 
 

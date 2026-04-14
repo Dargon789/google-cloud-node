@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.8.2](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.8.1...storage-control-v0.8.2) (2026-03-25)
+
+
+### Bug Fixes
+
+* **storage-control:** Update jsdocs headers in v2 clients to include … ([#7851](https://github.com/googleapis/google-cloud-node/issues/7851)) ([1dd5860](https://github.com/googleapis/google-cloud-node/commit/1dd586015cbc85409f4737c995c750bc694c14c3))
+
+## [0.8.1](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.8.0...storage-control-v0.8.1) (2026-03-18)
+
+
+### Bug Fixes
+
+* **storage-control:** Add utility to use correct client and update al… ([#7600](https://github.com/googleapis/google-cloud-node/issues/7600)) ([08e9bae](https://github.com/googleapis/google-cloud-node/commit/08e9bae6b1f756e2aa457b5f31e2d5096658912f))
+
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.7.0...storage-control-v0.8.0) (2026-01-31)
+
+
+### Features
+
+* [control] Added a new field `ComposeObjectRequest.delete_source_objects` field ([#7069](https://github.com/googleapis/google-cloud-node/issues/7069)) ([460c16e](https://github.com/googleapis/google-cloud-node/commit/460c16e6c9a744902cf4a2c3474108e172d17024))
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.6.1...storage-control-v0.7.0) (2025-12-15)
+
+
+### Features
+
+* [control] generate bucket ops into storage control lib for nodejs ([#6874](https://github.com/googleapis/google-cloud-node/issues/6874)) ([9dd2f04](https://github.com/googleapis/google-cloud-node/commit/9dd2f04b5926733923b9c46c45a4209099d30759))
+
 ## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.6.0...storage-control-v0.6.1) (2025-10-13)
 
 

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,7 +41,10 @@ function main(project, region, subnetwork) {
    */
   // const subnetwork = 'abc123'
   /**
-   *  Defines the extra views returned back in the subnetwork resource. Supported values: - WITH_UTILIZATION: Utilization data is included in the response.
+   *  Defines the extra views returned back in the subnetwork resource.
+   *  Supported values:
+   *     - WITH_UTILIZATION: Utilization data is included in the
+   *     response.
    *  Check the Views enum for the list of possible values.
    */
   // const views = 'abc123'

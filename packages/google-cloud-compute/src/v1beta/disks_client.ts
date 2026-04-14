@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2191,7 +2191,7 @@ export class DisksClient {
 /**
  * Updates the specified disk with the data included in the request.
  * The update is performed only on selected fields included as part
- * of update-mask. Only the following fields can be modified: user_license.
+ * of update-mask.
  *
  * @param {Object} request
  *   The request object that will be sent.

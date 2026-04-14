@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,6 +22,11 @@ const datamanager = require('@google-ads/datamanager');
 
 function main() {
   const ingestionServiceClient = new datamanager.IngestionServiceClient();
+  const marketingDataInsightsServiceClient = new datamanager.MarketingDataInsightsServiceClient();
+  const partnerLinkServiceClient = new datamanager.PartnerLinkServiceClient();
+  const userListDirectLicenseServiceClient = new datamanager.UserListDirectLicenseServiceClient();
+  const userListGlobalLicenseServiceClient = new datamanager.UserListGlobalLicenseServiceClient();
+  const userListServiceClient = new datamanager.UserListServiceClient();
 }
 
 main();

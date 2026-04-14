@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v3.6.0...generativelanguage-v3.7.0) (2026-01-22)
+
+
+### Features
+
+* [Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior ([#7013](https://github.com/googleapis/google-cloud-node/issues/7013)) ([0dbd123](https://github.com/googleapis/google-cloud-node/commit/0dbd123f45ccc049dbc6697655cd861d1200bf07))
+
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v3.5.0...generativelanguage-v3.6.0) (2026-01-12)
+
+
+### Features
+
+* [generativelanguage] add support for GoogleMaps and FileSearch tools ([#6957](https://github.com/googleapis/google-cloud-node/issues/6957)) ([869263a](https://github.com/googleapis/google-cloud-node/commit/869263a1675d4063fade629e9e92508b903497b9))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v3.4.1...generativelanguage-v3.5.0) (2025-10-16)
 
 

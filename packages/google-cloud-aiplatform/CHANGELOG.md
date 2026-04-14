@@ -1,5 +1,61 @@
 # Changelog
 
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.4.0...aiplatform-v6.5.0) (2026-03-02)
+
+
+### Features
+
+* Add `traffic_type, tool_use_prompt_tokens_details` to message `GenerateContentResponse.UsageMetadata` ([#7266](https://github.com/googleapis/google-cloud-node/issues/7266)) ([9f91e05](https://github.com/googleapis/google-cloud-node/commit/9f91e0513bf7a60239aef5e4222993184c63fbb2))
+
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.3.0...aiplatform-v6.4.0) (2026-02-03)
+
+
+### Features
+
+* Force-delete for RagCorpora, ignoring any external errors and ensuring deletion of the RagCorpus ([#7085](https://github.com/googleapis/google-cloud-node/issues/7085)) ([b69b8ae](https://github.com/googleapis/google-cloud-node/commit/b69b8aea0fd9e9066f78e86c346a0ab7d8be609a))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.2.0...aiplatform-v6.3.0) (2026-02-02)
+
+
+### Features
+
+* Add `fps` to message `VideoMetadata` ([#7074](https://github.com/googleapis/google-cloud-node/issues/7074)) ([779b172](https://github.com/googleapis/google-cloud-node/commit/779b17294b50e3c5ae2403d0a03f5c2704ce93cb))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.1.0...aiplatform-v6.2.0) (2026-01-22)
+
+
+### Features
+
+* [Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior ([#7013](https://github.com/googleapis/google-cloud-node/issues/7013)) ([0dbd123](https://github.com/googleapis/google-cloud-node/commit/0dbd123f45ccc049dbc6697655cd861d1200bf07))
+* RAG - add mode config to RagEngineConfig with Spanner and Serverless ([#7016](https://github.com/googleapis/google-cloud-node/issues/7016)) ([2273e3c](https://github.com/googleapis/google-cloud-node/commit/2273e3c0a7dc15bcdccd295851272ae75c14180e))
+
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.0.0...aiplatform-v6.1.0) (2026-01-12)
+
+
+### Features
+
+* Add Lustre support to the Vertex Training Custom Job API ([#6952](https://github.com/googleapis/google-cloud-node/issues/6952)) ([8e2862c](https://github.com/googleapis/google-cloud-node/commit/8e2862c632772bb21380731c23b85ef96f477350))
+* Add Lustre support to the Vertex Training Custom Job API ([#6959](https://github.com/googleapis/google-cloud-node/issues/6959)) ([168fe86](https://github.com/googleapis/google-cloud-node/commit/168fe8615035b62ef60d0283895e6c517c1f281d))
+
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.14.0...aiplatform-v6.0.0) (2025-12-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* fix issue when using UrlContext tool ([#6911](https://github.com/googleapis/google-cloud-node/issues/6911))
+
+### Bug Fixes
+
+* Fix issue when using UrlContext tool ([#6911](https://github.com/googleapis/google-cloud-node/issues/6911)) ([6fb8d09](https://github.com/googleapis/google-cloud-node/commit/6fb8d09786816740eb2c5128ce833d5bc649a915))
+
+## [5.14.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.13.0...aiplatform-v5.14.0) (2025-11-21)
+
+
+### Features
+
+* Add `ReplicatedVoiceConfig` to `VoiceConfig` to enable Gemini TTS voice replication ([#6899](https://github.com/googleapis/google-cloud-node/issues/6899)) ([beb5cac](https://github.com/googleapis/google-cloud-node/commit/beb5cac2dbd8cad292d67e3641306824c3ecab85))
+* Add support for developer connect based deployment ([#6900](https://github.com/googleapis/google-cloud-node/issues/6900)) ([7b6c79b](https://github.com/googleapis/google-cloud-node/commit/7b6c79b20551dde858cd932174c1fb558408172f))
+
 ## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.12.0...aiplatform-v5.13.0) (2025-11-11)
 
 
