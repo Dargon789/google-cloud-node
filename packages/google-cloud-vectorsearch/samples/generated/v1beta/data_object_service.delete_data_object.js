@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,6 +34,12 @@ function main(name) {
    *  `projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}`
    */
   // const name = 'abc123'
+  /**
+   *  Optional. The current etag of the DataObject.
+   *  If an etag is provided and does not match the current etag of the
+   *  DataObject, deletion will be blocked and an ABORTED error will be returned.
+   */
+  // const etag = 'abc123'
 
   // Imports the Vectorsearch library
   const {DataObjectServiceClient} = require('@google-cloud/vectorsearch').v1beta;

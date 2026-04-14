@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -5490,6 +5490,7 @@
                          * @property {google.cloud.alloydb.v1.SubscriptionType|null} [subscriptionType] Cluster subscriptionType
                          * @property {google.cloud.alloydb.v1.Cluster.ITrialMetadata|null} [trialMetadata] Cluster trialMetadata
                          * @property {Object.<string,string>|null} [tags] Cluster tags
+                         * @property {google.cloud.alloydb.v1.Cluster.IDataplexConfig|null} [dataplexConfig] Cluster dataplexConfig
                          */
     
                         /**
@@ -5782,6 +5783,14 @@
                          */
                         Cluster.prototype.tags = $util.emptyObject;
     
+                        /**
+                         * Cluster dataplexConfig.
+                         * @member {google.cloud.alloydb.v1.Cluster.IDataplexConfig|null|undefined} dataplexConfig
+                         * @memberof google.cloud.alloydb.v1.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.dataplexConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -5891,6 +5900,8 @@
                                     writer.uint32(/* id 41, wireType 2 =*/330).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.tags[keys[i]]).ldelim();
                             if (message.cloudsqlBackupRunSource != null && Object.hasOwnProperty.call(message, "cloudsqlBackupRunSource"))
                                 $root.google.cloud.alloydb.v1.CloudSQLBackupRunSource.encode(message.cloudsqlBackupRunSource, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
+                            if (message.dataplexConfig != null && Object.hasOwnProperty.call(message, "dataplexConfig"))
+                                $root.google.cloud.alloydb.v1.Cluster.DataplexConfig.encode(message.dataplexConfig, writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
                             return writer;
                         };
     
@@ -6118,6 +6129,10 @@
                                             }
                                         }
                                         message.tags[key] = value;
+                                        break;
+                                    }
+                                case 47: {
+                                        message.dataplexConfig = $root.google.cloud.alloydb.v1.Cluster.DataplexConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -6359,6 +6374,11 @@
                                 for (var i = 0; i < key.length; ++i)
                                     if (!$util.isString(message.tags[key[i]]))
                                         return "tags: string{k:string} expected";
+                            }
+                            if (message.dataplexConfig != null && message.hasOwnProperty("dataplexConfig")) {
+                                var error = $root.google.cloud.alloydb.v1.Cluster.DataplexConfig.verify(message.dataplexConfig);
+                                if (error)
+                                    return "dataplexConfig." + error;
                             }
                             return null;
                         };
@@ -6630,6 +6650,11 @@
                                 for (var keys = Object.keys(object.tags), i = 0; i < keys.length; ++i)
                                     message.tags[keys[i]] = String(object.tags[keys[i]]);
                             }
+                            if (object.dataplexConfig != null) {
+                                if (typeof object.dataplexConfig !== "object")
+                                    throw TypeError(".google.cloud.alloydb.v1.Cluster.dataplexConfig: object expected");
+                                message.dataplexConfig = $root.google.cloud.alloydb.v1.Cluster.DataplexConfig.fromObject(object.dataplexConfig);
+                            }
                             return message;
                         };
     
@@ -6680,6 +6705,7 @@
                                 object.maintenanceSchedule = null;
                                 object.subscriptionType = options.enums === String ? "SUBSCRIPTION_TYPE_UNSPECIFIED" : 0;
                                 object.trialMetadata = null;
+                                object.dataplexConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -6768,6 +6794,8 @@
                                 if (options.oneofs)
                                     object.source = "cloudsqlBackupRunSource";
                             }
+                            if (message.dataplexConfig != null && message.hasOwnProperty("dataplexConfig"))
+                                object.dataplexConfig = $root.google.cloud.alloydb.v1.Cluster.DataplexConfig.toObject(message.dataplexConfig, options);
                             return object;
                         };
     
@@ -7988,6 +8016,211 @@
                             };
     
                             return TrialMetadata;
+                        })();
+    
+                        Cluster.DataplexConfig = (function() {
+    
+                            /**
+                             * Properties of a DataplexConfig.
+                             * @memberof google.cloud.alloydb.v1.Cluster
+                             * @interface IDataplexConfig
+                             * @property {boolean|null} [enabled] DataplexConfig enabled
+                             */
+    
+                            /**
+                             * Constructs a new DataplexConfig.
+                             * @memberof google.cloud.alloydb.v1.Cluster
+                             * @classdesc Represents a DataplexConfig.
+                             * @implements IDataplexConfig
+                             * @constructor
+                             * @param {google.cloud.alloydb.v1.Cluster.IDataplexConfig=} [properties] Properties to set
+                             */
+                            function DataplexConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DataplexConfig enabled.
+                             * @member {boolean} enabled
+                             * @memberof google.cloud.alloydb.v1.Cluster.DataplexConfig
+                             * @instance
+                             */
+                            DataplexConfig.prototype.enabled = false;
+    
+                            /**
+                             * Creates a new DataplexConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.alloydb.v1.Cluster.DataplexConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1.Cluster.IDataplexConfig=} [properties] Properties to set
+                             * @returns {google.cloud.alloydb.v1.Cluster.DataplexConfig} DataplexConfig instance
+                             */
+                            DataplexConfig.create = function create(properties) {
+                                return new DataplexConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DataplexConfig message. Does not implicitly {@link google.cloud.alloydb.v1.Cluster.DataplexConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.alloydb.v1.Cluster.DataplexConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1.Cluster.IDataplexConfig} message DataplexConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataplexConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DataplexConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.Cluster.DataplexConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.alloydb.v1.Cluster.DataplexConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1.Cluster.IDataplexConfig} message DataplexConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataplexConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DataplexConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.alloydb.v1.Cluster.DataplexConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.alloydb.v1.Cluster.DataplexConfig} DataplexConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataplexConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.alloydb.v1.Cluster.DataplexConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enabled = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DataplexConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.alloydb.v1.Cluster.DataplexConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.alloydb.v1.Cluster.DataplexConfig} DataplexConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataplexConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DataplexConfig message.
+                             * @function verify
+                             * @memberof google.cloud.alloydb.v1.Cluster.DataplexConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DataplexConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    if (typeof message.enabled !== "boolean")
+                                        return "enabled: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DataplexConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.alloydb.v1.Cluster.DataplexConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.alloydb.v1.Cluster.DataplexConfig} DataplexConfig
+                             */
+                            DataplexConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.alloydb.v1.Cluster.DataplexConfig)
+                                    return object;
+                                var message = new $root.google.cloud.alloydb.v1.Cluster.DataplexConfig();
+                                if (object.enabled != null)
+                                    message.enabled = Boolean(object.enabled);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DataplexConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.alloydb.v1.Cluster.DataplexConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1.Cluster.DataplexConfig} message DataplexConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DataplexConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.enabled = false;
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    object.enabled = message.enabled;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DataplexConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.alloydb.v1.Cluster.DataplexConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DataplexConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DataplexConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.alloydb.v1.Cluster.DataplexConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DataplexConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.alloydb.v1.Cluster.DataplexConfig";
+                            };
+    
+                            return DataplexConfig;
                         })();
     
                         /**
@@ -38694,6 +38927,7 @@
                      * @property {number} POSTGRES_15=3 POSTGRES_15 value
                      * @property {number} POSTGRES_16=4 POSTGRES_16 value
                      * @property {number} POSTGRES_17=5 POSTGRES_17 value
+                     * @property {number} POSTGRES_18=6 POSTGRES_18 value
                      */
                     v1alpha.DatabaseVersion = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -38703,6 +38937,7 @@
                         values[valuesById[3] = "POSTGRES_15"] = 3;
                         values[valuesById[4] = "POSTGRES_16"] = 4;
                         values[valuesById[5] = "POSTGRES_17"] = 5;
+                        values[valuesById[6] = "POSTGRES_18"] = 6;
                         return values;
                     })();
     
@@ -43440,6 +43675,7 @@
                          * @property {google.cloud.alloydb.v1alpha.Cluster.ITrialMetadata|null} [trialMetadata] Cluster trialMetadata
                          * @property {Object.<string,string>|null} [tags] Cluster tags
                          * @property {string|null} [serviceAccountEmail] Cluster serviceAccountEmail
+                         * @property {google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig|null} [dataplexConfig] Cluster dataplexConfig
                          */
     
                         /**
@@ -43756,6 +43992,14 @@
                          */
                         Cluster.prototype.serviceAccountEmail = "";
     
+                        /**
+                         * Cluster dataplexConfig.
+                         * @member {google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig|null|undefined} dataplexConfig
+                         * @memberof google.cloud.alloydb.v1alpha.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.dataplexConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -43871,6 +44115,8 @@
                                 $root.google.cloud.alloydb.v1alpha.CloudSQLBackupRunSource.encode(message.cloudsqlBackupRunSource, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
                             if (message.serviceAccountEmail != null && Object.hasOwnProperty.call(message, "serviceAccountEmail"))
                                 writer.uint32(/* id 46, wireType 2 =*/370).string(message.serviceAccountEmail);
+                            if (message.dataplexConfig != null && Object.hasOwnProperty.call(message, "dataplexConfig"))
+                                $root.google.cloud.alloydb.v1alpha.Cluster.DataplexConfig.encode(message.dataplexConfig, writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
                             return writer;
                         };
     
@@ -44112,6 +44358,10 @@
                                         message.serviceAccountEmail = reader.string();
                                         break;
                                     }
+                                case 47: {
+                                        message.dataplexConfig = $root.google.cloud.alloydb.v1alpha.Cluster.DataplexConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -44243,6 +44493,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.networkConfig != null && message.hasOwnProperty("networkConfig")) {
@@ -44363,6 +44614,11 @@
                             if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
                                 if (!$util.isString(message.serviceAccountEmail))
                                     return "serviceAccountEmail: string expected";
+                            if (message.dataplexConfig != null && message.hasOwnProperty("dataplexConfig")) {
+                                var error = $root.google.cloud.alloydb.v1alpha.Cluster.DataplexConfig.verify(message.dataplexConfig);
+                                if (error)
+                                    return "dataplexConfig." + error;
+                            }
                             return null;
                         };
     
@@ -44520,6 +44776,10 @@
                             case 5:
                                 message.databaseVersion = 5;
                                 break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.databaseVersion = 6;
+                                break;
                             }
                             if (object.networkConfig != null) {
                                 if (typeof object.networkConfig !== "object")
@@ -44642,6 +44902,11 @@
                             }
                             if (object.serviceAccountEmail != null)
                                 message.serviceAccountEmail = String(object.serviceAccountEmail);
+                            if (object.dataplexConfig != null) {
+                                if (typeof object.dataplexConfig !== "object")
+                                    throw TypeError(".google.cloud.alloydb.v1alpha.Cluster.dataplexConfig: object expected");
+                                message.dataplexConfig = $root.google.cloud.alloydb.v1alpha.Cluster.DataplexConfig.fromObject(object.dataplexConfig);
+                            }
                             return message;
                         };
     
@@ -44695,6 +44960,7 @@
                                 object.subscriptionType = options.enums === String ? "SUBSCRIPTION_TYPE_UNSPECIFIED" : 0;
                                 object.trialMetadata = null;
                                 object.serviceAccountEmail = "";
+                                object.dataplexConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -44789,6 +45055,8 @@
                             }
                             if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
                                 object.serviceAccountEmail = message.serviceAccountEmail;
+                            if (message.dataplexConfig != null && message.hasOwnProperty("dataplexConfig"))
+                                object.dataplexConfig = $root.google.cloud.alloydb.v1alpha.Cluster.DataplexConfig.toObject(message.dataplexConfig, options);
                             return object;
                         };
     
@@ -46009,6 +46277,211 @@
                             };
     
                             return TrialMetadata;
+                        })();
+    
+                        Cluster.DataplexConfig = (function() {
+    
+                            /**
+                             * Properties of a DataplexConfig.
+                             * @memberof google.cloud.alloydb.v1alpha.Cluster
+                             * @interface IDataplexConfig
+                             * @property {boolean|null} [enabled] DataplexConfig enabled
+                             */
+    
+                            /**
+                             * Constructs a new DataplexConfig.
+                             * @memberof google.cloud.alloydb.v1alpha.Cluster
+                             * @classdesc Represents a DataplexConfig.
+                             * @implements IDataplexConfig
+                             * @constructor
+                             * @param {google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig=} [properties] Properties to set
+                             */
+                            function DataplexConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DataplexConfig enabled.
+                             * @member {boolean} enabled
+                             * @memberof google.cloud.alloydb.v1alpha.Cluster.DataplexConfig
+                             * @instance
+                             */
+                            DataplexConfig.prototype.enabled = false;
+    
+                            /**
+                             * Creates a new DataplexConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.alloydb.v1alpha.Cluster.DataplexConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig=} [properties] Properties to set
+                             * @returns {google.cloud.alloydb.v1alpha.Cluster.DataplexConfig} DataplexConfig instance
+                             */
+                            DataplexConfig.create = function create(properties) {
+                                return new DataplexConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DataplexConfig message. Does not implicitly {@link google.cloud.alloydb.v1alpha.Cluster.DataplexConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.alloydb.v1alpha.Cluster.DataplexConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig} message DataplexConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataplexConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DataplexConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.Cluster.DataplexConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.alloydb.v1alpha.Cluster.DataplexConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig} message DataplexConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataplexConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DataplexConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.alloydb.v1alpha.Cluster.DataplexConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.alloydb.v1alpha.Cluster.DataplexConfig} DataplexConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataplexConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.alloydb.v1alpha.Cluster.DataplexConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enabled = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DataplexConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.alloydb.v1alpha.Cluster.DataplexConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.alloydb.v1alpha.Cluster.DataplexConfig} DataplexConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataplexConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DataplexConfig message.
+                             * @function verify
+                             * @memberof google.cloud.alloydb.v1alpha.Cluster.DataplexConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DataplexConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    if (typeof message.enabled !== "boolean")
+                                        return "enabled: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DataplexConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.alloydb.v1alpha.Cluster.DataplexConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.alloydb.v1alpha.Cluster.DataplexConfig} DataplexConfig
+                             */
+                            DataplexConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.alloydb.v1alpha.Cluster.DataplexConfig)
+                                    return object;
+                                var message = new $root.google.cloud.alloydb.v1alpha.Cluster.DataplexConfig();
+                                if (object.enabled != null)
+                                    message.enabled = Boolean(object.enabled);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DataplexConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.alloydb.v1alpha.Cluster.DataplexConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1alpha.Cluster.DataplexConfig} message DataplexConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DataplexConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.enabled = false;
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    object.enabled = message.enabled;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DataplexConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.alloydb.v1alpha.Cluster.DataplexConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DataplexConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DataplexConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.alloydb.v1alpha.Cluster.DataplexConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DataplexConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.alloydb.v1alpha.Cluster.DataplexConfig";
+                            };
+    
+                            return DataplexConfig;
                         })();
     
                         /**
@@ -52152,6 +52625,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.tags != null && message.hasOwnProperty("tags")) {
@@ -52342,6 +52816,10 @@
                             case "POSTGRES_17":
                             case 5:
                                 message.databaseVersion = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.databaseVersion = 6;
                                 break;
                             }
                             if (object.tags) {
@@ -53149,6 +53627,7 @@
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
                                         break;
                                     }
                             }
@@ -53264,6 +53743,10 @@
                                     case "POSTGRES_17":
                                     case 5:
                                         message.supportedDbVersions[i] = 5;
+                                        break;
+                                    case "POSTGRES_18":
+                                    case 6:
+                                        message.supportedDbVersions[i] = 6;
                                         break;
                                     }
                             }
@@ -60949,6 +61432,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
@@ -61007,6 +61491,10 @@
                             case "POSTGRES_17":
                             case 5:
                                 message.version = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.version = 6;
                                 break;
                             }
                             if (object.requestId != null)
@@ -62332,6 +62820,7 @@
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
                                         break;
                                     }
                                 if (message.stageInfo != null && message.hasOwnProperty("stageInfo")) {
@@ -62459,6 +62948,10 @@
                                 case "POSTGRES_17":
                                 case 5:
                                     message.databaseVersion = 5;
+                                    break;
+                                case "POSTGRES_18":
+                                case 6:
+                                    message.databaseVersion = 6;
                                     break;
                                 }
                                 if (object.stageInfo) {
@@ -73000,6 +73493,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.targetVersion != null && message.hasOwnProperty("targetVersion"))
@@ -73012,6 +73506,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.stages != null && message.hasOwnProperty("stages")) {
@@ -73111,6 +73606,10 @@
                             case 5:
                                 message.sourceVersion = 5;
                                 break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.sourceVersion = 6;
+                                break;
                             }
                             switch (object.targetVersion) {
                             default:
@@ -73142,6 +73641,10 @@
                             case "POSTGRES_17":
                             case 5:
                                 message.targetVersion = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.targetVersion = 6;
                                 break;
                             }
                             if (object.stages) {
@@ -78514,6 +79017,7 @@
                      * @property {number} POSTGRES_15=3 POSTGRES_15 value
                      * @property {number} POSTGRES_16=4 POSTGRES_16 value
                      * @property {number} POSTGRES_17=5 POSTGRES_17 value
+                     * @property {number} POSTGRES_18=6 POSTGRES_18 value
                      */
                     v1beta.DatabaseVersion = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -78523,6 +79027,7 @@
                         values[valuesById[3] = "POSTGRES_15"] = 3;
                         values[valuesById[4] = "POSTGRES_16"] = 4;
                         values[valuesById[5] = "POSTGRES_17"] = 5;
+                        values[valuesById[6] = "POSTGRES_18"] = 6;
                         return values;
                     })();
     
@@ -83259,6 +83764,7 @@
                          * @property {google.cloud.alloydb.v1beta.Cluster.ITrialMetadata|null} [trialMetadata] Cluster trialMetadata
                          * @property {Object.<string,string>|null} [tags] Cluster tags
                          * @property {string|null} [serviceAccountEmail] Cluster serviceAccountEmail
+                         * @property {google.cloud.alloydb.v1beta.Cluster.IDataplexConfig|null} [dataplexConfig] Cluster dataplexConfig
                          */
     
                         /**
@@ -83567,6 +84073,14 @@
                          */
                         Cluster.prototype.serviceAccountEmail = "";
     
+                        /**
+                         * Cluster dataplexConfig.
+                         * @member {google.cloud.alloydb.v1beta.Cluster.IDataplexConfig|null|undefined} dataplexConfig
+                         * @memberof google.cloud.alloydb.v1beta.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.dataplexConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -83680,6 +84194,8 @@
                                 $root.google.cloud.alloydb.v1beta.CloudSQLBackupRunSource.encode(message.cloudsqlBackupRunSource, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
                             if (message.serviceAccountEmail != null && Object.hasOwnProperty.call(message, "serviceAccountEmail"))
                                 writer.uint32(/* id 46, wireType 2 =*/370).string(message.serviceAccountEmail);
+                            if (message.dataplexConfig != null && Object.hasOwnProperty.call(message, "dataplexConfig"))
+                                $root.google.cloud.alloydb.v1beta.Cluster.DataplexConfig.encode(message.dataplexConfig, writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
                             return writer;
                         };
     
@@ -83917,6 +84433,10 @@
                                         message.serviceAccountEmail = reader.string();
                                         break;
                                     }
+                                case 47: {
+                                        message.dataplexConfig = $root.google.cloud.alloydb.v1beta.Cluster.DataplexConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -84048,6 +84568,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.networkConfig != null && message.hasOwnProperty("networkConfig")) {
@@ -84165,6 +84686,11 @@
                             if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
                                 if (!$util.isString(message.serviceAccountEmail))
                                     return "serviceAccountEmail: string expected";
+                            if (message.dataplexConfig != null && message.hasOwnProperty("dataplexConfig")) {
+                                var error = $root.google.cloud.alloydb.v1beta.Cluster.DataplexConfig.verify(message.dataplexConfig);
+                                if (error)
+                                    return "dataplexConfig." + error;
+                            }
                             return null;
                         };
     
@@ -84322,6 +84848,10 @@
                             case 5:
                                 message.databaseVersion = 5;
                                 break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.databaseVersion = 6;
+                                break;
                             }
                             if (object.networkConfig != null) {
                                 if (typeof object.networkConfig !== "object")
@@ -84442,6 +84972,11 @@
                             }
                             if (object.serviceAccountEmail != null)
                                 message.serviceAccountEmail = String(object.serviceAccountEmail);
+                            if (object.dataplexConfig != null) {
+                                if (typeof object.dataplexConfig !== "object")
+                                    throw TypeError(".google.cloud.alloydb.v1beta.Cluster.dataplexConfig: object expected");
+                                message.dataplexConfig = $root.google.cloud.alloydb.v1beta.Cluster.DataplexConfig.fromObject(object.dataplexConfig);
+                            }
                             return message;
                         };
     
@@ -84494,6 +85029,7 @@
                                 object.subscriptionType = options.enums === String ? "SUBSCRIPTION_TYPE_UNSPECIFIED" : 0;
                                 object.trialMetadata = null;
                                 object.serviceAccountEmail = "";
+                                object.dataplexConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -84586,6 +85122,8 @@
                             }
                             if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
                                 object.serviceAccountEmail = message.serviceAccountEmail;
+                            if (message.dataplexConfig != null && message.hasOwnProperty("dataplexConfig"))
+                                object.dataplexConfig = $root.google.cloud.alloydb.v1beta.Cluster.DataplexConfig.toObject(message.dataplexConfig, options);
                             return object;
                         };
     
@@ -85806,6 +86344,211 @@
                             };
     
                             return TrialMetadata;
+                        })();
+    
+                        Cluster.DataplexConfig = (function() {
+    
+                            /**
+                             * Properties of a DataplexConfig.
+                             * @memberof google.cloud.alloydb.v1beta.Cluster
+                             * @interface IDataplexConfig
+                             * @property {boolean|null} [enabled] DataplexConfig enabled
+                             */
+    
+                            /**
+                             * Constructs a new DataplexConfig.
+                             * @memberof google.cloud.alloydb.v1beta.Cluster
+                             * @classdesc Represents a DataplexConfig.
+                             * @implements IDataplexConfig
+                             * @constructor
+                             * @param {google.cloud.alloydb.v1beta.Cluster.IDataplexConfig=} [properties] Properties to set
+                             */
+                            function DataplexConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DataplexConfig enabled.
+                             * @member {boolean} enabled
+                             * @memberof google.cloud.alloydb.v1beta.Cluster.DataplexConfig
+                             * @instance
+                             */
+                            DataplexConfig.prototype.enabled = false;
+    
+                            /**
+                             * Creates a new DataplexConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.alloydb.v1beta.Cluster.DataplexConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1beta.Cluster.IDataplexConfig=} [properties] Properties to set
+                             * @returns {google.cloud.alloydb.v1beta.Cluster.DataplexConfig} DataplexConfig instance
+                             */
+                            DataplexConfig.create = function create(properties) {
+                                return new DataplexConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DataplexConfig message. Does not implicitly {@link google.cloud.alloydb.v1beta.Cluster.DataplexConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.alloydb.v1beta.Cluster.DataplexConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1beta.Cluster.IDataplexConfig} message DataplexConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataplexConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DataplexConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.Cluster.DataplexConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.alloydb.v1beta.Cluster.DataplexConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1beta.Cluster.IDataplexConfig} message DataplexConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataplexConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DataplexConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.alloydb.v1beta.Cluster.DataplexConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.alloydb.v1beta.Cluster.DataplexConfig} DataplexConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataplexConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.alloydb.v1beta.Cluster.DataplexConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enabled = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DataplexConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.alloydb.v1beta.Cluster.DataplexConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.alloydb.v1beta.Cluster.DataplexConfig} DataplexConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataplexConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DataplexConfig message.
+                             * @function verify
+                             * @memberof google.cloud.alloydb.v1beta.Cluster.DataplexConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DataplexConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    if (typeof message.enabled !== "boolean")
+                                        return "enabled: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DataplexConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.alloydb.v1beta.Cluster.DataplexConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.alloydb.v1beta.Cluster.DataplexConfig} DataplexConfig
+                             */
+                            DataplexConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.alloydb.v1beta.Cluster.DataplexConfig)
+                                    return object;
+                                var message = new $root.google.cloud.alloydb.v1beta.Cluster.DataplexConfig();
+                                if (object.enabled != null)
+                                    message.enabled = Boolean(object.enabled);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DataplexConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.alloydb.v1beta.Cluster.DataplexConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1beta.Cluster.DataplexConfig} message DataplexConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DataplexConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.enabled = false;
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    object.enabled = message.enabled;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DataplexConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.alloydb.v1beta.Cluster.DataplexConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DataplexConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DataplexConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.alloydb.v1beta.Cluster.DataplexConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DataplexConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.alloydb.v1beta.Cluster.DataplexConfig";
+                            };
+    
+                            return DataplexConfig;
                         })();
     
                         /**
@@ -91908,6 +92651,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.tags != null && message.hasOwnProperty("tags")) {
@@ -92096,6 +92840,10 @@
                             case "POSTGRES_17":
                             case 5:
                                 message.databaseVersion = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.databaseVersion = 6;
                                 break;
                             }
                             if (object.tags) {
@@ -92900,6 +93648,7 @@
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
                                         break;
                                     }
                             }
@@ -93015,6 +93764,10 @@
                                     case "POSTGRES_17":
                                     case 5:
                                         message.supportedDbVersions[i] = 5;
+                                        break;
+                                    case "POSTGRES_18":
+                                    case 6:
+                                        message.supportedDbVersions[i] = 6;
                                         break;
                                     }
                             }
@@ -100700,6 +101453,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
@@ -100758,6 +101512,10 @@
                             case "POSTGRES_17":
                             case 5:
                                 message.version = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.version = 6;
                                 break;
                             }
                             if (object.requestId != null)
@@ -102083,6 +102841,7 @@
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
                                         break;
                                     }
                                 if (message.stageInfo != null && message.hasOwnProperty("stageInfo")) {
@@ -102210,6 +102969,10 @@
                                 case "POSTGRES_17":
                                 case 5:
                                     message.databaseVersion = 5;
+                                    break;
+                                case "POSTGRES_18":
+                                case 6:
+                                    message.databaseVersion = 6;
                                     break;
                                 }
                                 if (object.stageInfo) {
@@ -112751,6 +113514,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.targetVersion != null && message.hasOwnProperty("targetVersion"))
@@ -112763,6 +113527,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.stages != null && message.hasOwnProperty("stages")) {
@@ -112862,6 +113627,10 @@
                             case 5:
                                 message.sourceVersion = 5;
                                 break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.sourceVersion = 6;
+                                break;
                             }
                             switch (object.targetVersion) {
                             default:
@@ -112893,6 +113662,10 @@
                             case "POSTGRES_17":
                             case 5:
                                 message.targetVersion = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.targetVersion = 6;
                                 break;
                             }
                             if (object.stages) {

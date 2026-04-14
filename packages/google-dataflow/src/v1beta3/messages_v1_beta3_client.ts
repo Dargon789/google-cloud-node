@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,8 +33,7 @@ import * as gapicConfig from './messages_v1_beta3_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  The Dataflow Messages API is used for monitoring the progress of
- *  Dataflow jobs.
+ *  The Dataflow Messages API is used to monitor the progress of Dataflow jobs.
  * @class
  * @memberof v1beta3
  */

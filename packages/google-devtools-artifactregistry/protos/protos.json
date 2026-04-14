@@ -839,7 +839,8 @@
                           "values": {
                             "HASH_TYPE_UNSPECIFIED": 0,
                             "SHA256": 1,
-                            "MD5": 2
+                            "MD5": 2,
+                            "DIRSUM_SHA256": 3
                           }
                         }
                       }
@@ -1028,6 +1029,14 @@
                           "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "fingerprints": {
+                          "rule": "repeated",
+                          "type": "Hash",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }

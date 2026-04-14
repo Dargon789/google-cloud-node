@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -565,7 +565,9 @@ export class DataObjectSearchServiceClient {
  *   Required. The resource name of the Collection for which to search.
  *   Format: `projects/{project}/locations/{location}/collections/{collection}`
  * @param {number} [request.pageSize]
- *   Optional. The standard list page size.
+ *   Optional. The standard list page size. Only supported for KNN. If not set,
+ *   up to search_type.top_k results will be returned. The maximum value is
+ *   1000; values above 1000 will be coerced to 1000.
  * @param {string} [request.pageToken]
  *   Optional. The standard list page token.
  *   Typically obtained via
@@ -675,7 +677,9 @@ export class DataObjectSearchServiceClient {
  *   Required. The resource name of the Collection for which to search.
  *   Format: `projects/{project}/locations/{location}/collections/{collection}`
  * @param {number} [request.pageSize]
- *   Optional. The standard list page size.
+ *   Optional. The standard list page size. Only supported for KNN. If not set,
+ *   up to search_type.top_k results will be returned. The maximum value is
+ *   1000; values above 1000 will be coerced to 1000.
  * @param {string} [request.pageToken]
  *   Optional. The standard list page token.
  *   Typically obtained via
@@ -734,7 +738,9 @@ export class DataObjectSearchServiceClient {
  *   Required. The resource name of the Collection for which to search.
  *   Format: `projects/{project}/locations/{location}/collections/{collection}`
  * @param {number} [request.pageSize]
- *   Optional. The standard list page size.
+ *   Optional. The standard list page size. Only supported for KNN. If not set,
+ *   up to search_type.top_k results will be returned. The maximum value is
+ *   1000; values above 1000 will be coerced to 1000.
  * @param {string} [request.pageToken]
  *   Optional. The standard list page token.
  *   Typically obtained via
@@ -791,7 +797,8 @@ export class DataObjectSearchServiceClient {
  * @param {google.cloud.vectorsearch.v1beta.OutputFields} [request.outputFields]
  *   Optional. Mask specifying which fields to return.
  * @param {number} [request.pageSize]
- *   Optional. The standard list page size.
+ *   Optional. The standard list page size. Default is 100.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
  * @param {string} [request.pageToken]
  *   Optional. The standard list page token.
  *   Typically obtained via
@@ -900,7 +907,8 @@ export class DataObjectSearchServiceClient {
  * @param {google.cloud.vectorsearch.v1beta.OutputFields} [request.outputFields]
  *   Optional. Mask specifying which fields to return.
  * @param {number} [request.pageSize]
- *   Optional. The standard list page size.
+ *   Optional. The standard list page size. Default is 100.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
  * @param {string} [request.pageToken]
  *   Optional. The standard list page token.
  *   Typically obtained via
@@ -958,7 +966,8 @@ export class DataObjectSearchServiceClient {
  * @param {google.cloud.vectorsearch.v1beta.OutputFields} [request.outputFields]
  *   Optional. Mask specifying which fields to return.
  * @param {number} [request.pageSize]
- *   Optional. The standard list page size.
+ *   Optional. The standard list page size. Default is 100.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
  * @param {string} [request.pageToken]
  *   Optional. The standard list page token.
  *   Typically obtained via

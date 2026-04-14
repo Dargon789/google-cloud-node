@@ -22,7 +22,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 81,
+          "end": 83,
           "type": "FULL"
         }
       ],
@@ -82,7 +82,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 78,
+          "end": 79,
           "type": "FULL"
         }
       ],
@@ -454,7 +454,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 55,
+          "end": 61,
           "type": "FULL"
         }
       ],
@@ -465,6 +465,10 @@
         "parameters": [
           {
             "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
             "type": "TYPE_STRING"
           }
         ],
@@ -686,7 +690,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 85,
+          "end": 86,
           "type": "FULL"
         }
       ],
@@ -996,6 +1000,50 @@
         "method": {
           "shortName": "ImportDataObjects",
           "fullName": "google.cloud.vectorsearch.v1beta.VectorSearchService.ImportDataObjects",
+          "service": {
+            "shortName": "VectorSearchService",
+            "fullName": "google.cloud.vectorsearch.v1beta.VectorSearchService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vectorsearch_v1beta_generated_VectorSearchService_ExportDataObjects_async",
+      "title": "DataObjectSearchService exportDataObjects Sample",
+      "origin": "API_DEFINITION",
+      "description": " Initiates a Long-Running Operation to export DataObjects from a Collection.",
+      "canonical": true,
+      "file": "vector_search_service.export_data_objects.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportDataObjects",
+        "fullName": "google.cloud.vectorsearch.v1beta.VectorSearchService.ExportDataObjects",
+        "async": true,
+        "parameters": [
+          {
+            "name": "gcs_destination",
+            "type": ".google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.GcsExportDestination"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VectorSearchServiceClient",
+          "fullName": "google.cloud.vectorsearch.v1beta.VectorSearchServiceClient"
+        },
+        "method": {
+          "shortName": "ExportDataObjects",
+          "fullName": "google.cloud.vectorsearch.v1beta.VectorSearchService.ExportDataObjects",
           "service": {
             "shortName": "VectorSearchService",
             "fullName": "google.cloud.vectorsearch.v1beta.VectorSearchService"

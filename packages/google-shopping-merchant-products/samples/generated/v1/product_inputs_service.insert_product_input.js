@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,8 +41,8 @@ function main(parent, productInput, dataSource) {
    *  Required. The primary or supplemental product data source name. If the
    *  product already exists and data source provided is different, then the
    *  product will be moved to a new data source. For more information, see
-   *  Overview of Data sources
-   *  sub-API (/merchant/api/guides/data-sources/overview).
+   *  Create a primary data
+   *  source (/merchant/api/guides/data-sources/api-sources#create-primary-data-source).
    *  Only API data sources are supported.
    *  Format: `accounts/{account}/dataSources/{datasource}`. For example,
    *  `accounts/123456/dataSources/104628`.

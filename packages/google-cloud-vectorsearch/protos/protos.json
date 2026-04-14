@@ -6,12 +6,15 @@
           "nested": {
             "vectorsearch": {
               "nested": {
-                "v1beta": {
+                "v1": {
                   "options": {
-                    "go_package": "cloud.google.com/go/vectorsearch/apiv1beta/vectorsearchpb;vectorsearchpb",
+                    "csharp_namespace": "Google.Cloud.VectorSearch.V1",
+                    "go_package": "cloud.google.com/go/vectorsearch/apiv1/vectorsearchpb;vectorsearchpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "VectorSearchServiceProto",
-                    "java_package": "com.google.cloud.vectorsearch.v1beta"
+                    "java_package": "com.google.cloud.vectorsearch.v1",
+                    "php_namespace": "Google\\Cloud\\VectorSearch\\V1",
+                    "ruby_package": "Google::Cloud::VectorSearch::V1"
                   },
                   "nested": {
                     "DistanceMetric": {
@@ -24,21 +27,22 @@
                     "DataObject": {
                       "options": {
                         "(google.api.resource).type": "vectorsearch.googleapis.com/DataObject",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}",
+                        "(google.api.resource).plural": "dataObjects",
+                        "(google.api.resource).singular": "dataObject"
                       },
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "dataObjectId": {
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
@@ -70,6 +74,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -90,14 +101,6 @@
                         "sparse": {
                           "type": "SparseVector",
                           "id": 3
-                        },
-                        "values": {
-                          "rule": "repeated",
-                          "type": "float",
-                          "id": 1,
-                          "options": {
-                            "deprecated": true
-                          }
                         }
                       }
                     },
@@ -143,13 +146,13 @@
                           "requestType": "SearchDataObjectsRequest",
                           "responseType": "SearchDataObjectsResponse",
                           "options": {
-                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:search",
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects:search",
                             "(google.api.http).body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:search",
+                                "post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects:search",
                                 "body": "*"
                               }
                             }
@@ -159,13 +162,13 @@
                           "requestType": "QueryDataObjectsRequest",
                           "responseType": "QueryDataObjectsResponse",
                           "options": {
-                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:query",
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects:query",
                             "(google.api.http).body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:query",
+                                "post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects:query",
                                 "body": "*"
                               }
                             }
@@ -175,13 +178,13 @@
                           "requestType": "AggregateDataObjectsRequest",
                           "responseType": "AggregateDataObjectsResponse",
                           "options": {
-                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:aggregate",
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects:aggregate",
                             "(google.api.http).body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:aggregate",
+                                "post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects:aggregate",
                                 "body": "*"
                               }
                             }
@@ -191,13 +194,13 @@
                           "requestType": "BatchSearchDataObjectsRequest",
                           "responseType": "BatchSearchDataObjectsResponse",
                           "options": {
-                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchSearch",
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects:batchSearch",
                             "(google.api.http).body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchSearch",
+                                "post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects:batchSearch",
                                 "body": "*"
                               }
                             }
@@ -243,19 +246,25 @@
                       "oneofs": {
                         "indexType": {
                           "oneof": [
-                            "useIndex",
-                            "useKnn"
+                            "knnHint",
+                            "indexHint"
                           ]
                         }
                       },
                       "fields": {
-                        "useIndex": {
-                          "type": "IndexHint",
-                          "id": 1
+                        "knnHint": {
+                          "type": "KnnHint",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
-                        "useKnn": {
-                          "type": "bool",
-                          "id": 2
+                        "indexHint": {
+                          "type": "IndexHint",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -265,10 +274,14 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Index"
                               }
                             }
                           }
+                        },
+                        "KnnHint": {
+                          "fields": {}
                         }
                       }
                     },
@@ -392,7 +405,7 @@
                           "type": "EmbeddingTaskType",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "outputFields": {
@@ -415,6 +428,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "searchHint": {
+                          "type": "SearchHint",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -456,6 +476,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "filter": {
+                          "type": "google.protobuf.Struct",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -536,42 +563,6 @@
                         }
                       }
                     },
-                    "SearchResponseMetadata": {
-                      "oneofs": {
-                        "indexType": {
-                          "oneof": [
-                            "usedIndex",
-                            "usedKnn"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "usedIndex": {
-                          "type": "IndexInfo",
-                          "id": 1
-                        },
-                        "usedKnn": {
-                          "type": "bool",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "IndexInfo": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
                     "SearchDataObjectsResponse": {
                       "fields": {
                         "results": {
@@ -585,13 +576,6 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "searchResponseMetadata": {
-                          "type": "SearchResponseMetadata",
-                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -629,7 +613,10 @@
                         "aggregateResults": {
                           "rule": "repeated",
                           "type": "google.protobuf.Struct",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -678,11 +665,17 @@
                         "dataObjects": {
                           "rule": "repeated",
                           "type": "DataObject",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "nextPageToken": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -744,8 +737,7 @@
                       "oneofs": {
                         "ranker": {
                           "oneof": [
-                            "rrf",
-                            "vertex"
+                            "rrf"
                           ]
                         }
                       },
@@ -753,10 +745,6 @@
                         "rrf": {
                           "type": "ReciprocalRankFusion",
                           "id": 1
-                        },
-                        "vertex": {
-                          "type": "VertexRanker",
-                          "id": 2
                         }
                       }
                     },
@@ -766,38 +754,6 @@
                           "rule": "repeated",
                           "type": "double",
                           "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "VertexRanker": {
-                      "fields": {
-                        "query": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "titleTemplate": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "contentTemplate": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "model": {
-                          "type": "string",
-                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -864,14 +820,14 @@
                           "requestType": "CreateDataObjectRequest",
                           "responseType": "DataObject",
                           "options": {
-                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects",
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects",
                             "(google.api.http).body": "data_object",
                             "(google.api.method_signature)": "parent,data_object,data_object_id"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects",
+                                "post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects",
                                 "body": "data_object"
                               }
                             },
@@ -884,13 +840,13 @@
                           "requestType": "BatchCreateDataObjectsRequest",
                           "responseType": "BatchCreateDataObjectsResponse",
                           "options": {
-                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchCreate",
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects:batchCreate",
                             "(google.api.http).body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchCreate",
+                                "post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects:batchCreate",
                                 "body": "*"
                               }
                             }
@@ -900,13 +856,13 @@
                           "requestType": "GetDataObjectRequest",
                           "responseType": "DataObject",
                           "options": {
-                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/collections/*/dataObjects/*}",
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/collections/*/dataObjects/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta/{name=projects/*/locations/*/collections/*/dataObjects/*}"
+                                "get": "/v1/{name=projects/*/locations/*/collections/*/dataObjects/*}"
                               }
                             },
                             {
@@ -918,14 +874,14 @@
                           "requestType": "UpdateDataObjectRequest",
                           "responseType": "DataObject",
                           "options": {
-                            "(google.api.http).patch": "/v1beta/{data_object.name=projects/*/locations/*/collections/*/dataObjects/*}",
+                            "(google.api.http).patch": "/v1/{data_object.name=projects/*/locations/*/collections/*/dataObjects/*}",
                             "(google.api.http).body": "data_object",
                             "(google.api.method_signature)": "data_object,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "patch": "/v1beta/{data_object.name=projects/*/locations/*/collections/*/dataObjects/*}",
+                                "patch": "/v1/{data_object.name=projects/*/locations/*/collections/*/dataObjects/*}",
                                 "body": "data_object"
                               }
                             },
@@ -938,14 +894,14 @@
                           "requestType": "BatchUpdateDataObjectsRequest",
                           "responseType": "BatchUpdateDataObjectsResponse",
                           "options": {
-                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchUpdate",
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects:batchUpdate",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,requests"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchUpdate",
+                                "post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects:batchUpdate",
                                 "body": "*"
                               }
                             },
@@ -958,13 +914,13 @@
                           "requestType": "DeleteDataObjectRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/collections/*/dataObjects/*}",
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/collections/*/dataObjects/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v1beta/{name=projects/*/locations/*/collections/*/dataObjects/*}"
+                                "delete": "/v1/{name=projects/*/locations/*/collections/*/dataObjects/*}"
                               }
                             },
                             {
@@ -976,14 +932,14 @@
                           "requestType": "BatchDeleteDataObjectsRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchDelete",
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects:batchDelete",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,requests"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchDelete",
+                                "post": "/v1/{parent=projects/*/locations/*/collections/*}/dataObjects:batchDelete",
                                 "body": "*"
                               }
                             },
@@ -1045,7 +1001,10 @@
                         "dataObjects": {
                           "rule": "repeated",
                           "type": "DataObject",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -1111,6 +1070,13 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "vectorsearch.googleapis.com/DataObject"
                           }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1144,13 +1110,13 @@
                           "requestType": "ListCollectionsRequest",
                           "responseType": "ListCollectionsResponse",
                           "options": {
-                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*}/collections",
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/collections",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta/{parent=projects/*/locations/*}/collections"
+                                "get": "/v1/{parent=projects/*/locations/*}/collections"
                               }
                             },
                             {
@@ -1162,13 +1128,13 @@
                           "requestType": "GetCollectionRequest",
                           "responseType": "Collection",
                           "options": {
-                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/collections/*}",
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/collections/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta/{name=projects/*/locations/*/collections/*}"
+                                "get": "/v1/{name=projects/*/locations/*/collections/*}"
                               }
                             },
                             {
@@ -1180,7 +1146,7 @@
                           "requestType": "CreateCollectionRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
-                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*}/collections",
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/collections",
                             "(google.api.http).body": "collection",
                             "(google.api.method_signature)": "parent,collection,collection_id",
                             "(google.longrunning.operation_info).response_type": "Collection",
@@ -1189,7 +1155,7 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1beta/{parent=projects/*/locations/*}/collections",
+                                "post": "/v1/{parent=projects/*/locations/*}/collections",
                                 "body": "collection"
                               }
                             },
@@ -1208,7 +1174,7 @@
                           "requestType": "UpdateCollectionRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
-                            "(google.api.http).patch": "/v1beta/{collection.name=projects/*/locations/*/collections/*}",
+                            "(google.api.http).patch": "/v1/{collection.name=projects/*/locations/*/collections/*}",
                             "(google.api.http).body": "collection",
                             "(google.api.method_signature)": "collection,update_mask",
                             "(google.longrunning.operation_info).response_type": "Collection",
@@ -1217,7 +1183,7 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "patch": "/v1beta/{collection.name=projects/*/locations/*/collections/*}",
+                                "patch": "/v1/{collection.name=projects/*/locations/*/collections/*}",
                                 "body": "collection"
                               }
                             },
@@ -1236,7 +1202,7 @@
                           "requestType": "DeleteCollectionRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
-                            "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/collections/*}",
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/collections/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
@@ -1244,7 +1210,7 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v1beta/{name=projects/*/locations/*/collections/*}"
+                                "delete": "/v1/{name=projects/*/locations/*/collections/*}"
                               }
                             },
                             {
@@ -1262,13 +1228,13 @@
                           "requestType": "ListIndexesRequest",
                           "responseType": "ListIndexesResponse",
                           "options": {
-                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*/collections/*}/indexes",
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/collections/*}/indexes",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta/{parent=projects/*/locations/*/collections/*}/indexes"
+                                "get": "/v1/{parent=projects/*/locations/*/collections/*}/indexes"
                               }
                             },
                             {
@@ -1280,13 +1246,13 @@
                           "requestType": "GetIndexRequest",
                           "responseType": "Index",
                           "options": {
-                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/collections/*/indexes/*}",
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/collections/*/indexes/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta/{name=projects/*/locations/*/collections/*/indexes/*}"
+                                "get": "/v1/{name=projects/*/locations/*/collections/*/indexes/*}"
                               }
                             },
                             {
@@ -1298,7 +1264,7 @@
                           "requestType": "CreateIndexRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
-                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/indexes",
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/collections/*}/indexes",
                             "(google.api.http).body": "index",
                             "(google.api.method_signature)": "parent,index,index_id",
                             "(google.longrunning.operation_info).response_type": "Index",
@@ -1307,7 +1273,7 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/indexes",
+                                "post": "/v1/{parent=projects/*/locations/*/collections/*}/indexes",
                                 "body": "index"
                               }
                             },
@@ -1326,7 +1292,7 @@
                           "requestType": "DeleteIndexRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
-                            "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/collections/*/indexes/*}",
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/collections/*/indexes/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
@@ -1334,7 +1300,7 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v1beta/{name=projects/*/locations/*/collections/*/indexes/*}"
+                                "delete": "/v1/{name=projects/*/locations/*/collections/*/indexes/*}"
                               }
                             },
                             {
@@ -1352,7 +1318,7 @@
                           "requestType": "ImportDataObjectsRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
-                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/collections/*}:importDataObjects",
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/collections/*}:importDataObjects",
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "ImportDataObjectsResponse",
                             "(google.longrunning.operation_info).metadata_type": "ImportDataObjectsMetadata"
@@ -1360,7 +1326,7 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1beta/{name=projects/*/locations/*/collections/*}:importDataObjects",
+                                "post": "/v1/{name=projects/*/locations/*/collections/*}:importDataObjects",
                                 "body": "*"
                               }
                             },
@@ -1368,6 +1334,30 @@
                               "(google.longrunning.operation_info)": {
                                 "response_type": "ImportDataObjectsResponse",
                                 "metadata_type": "ImportDataObjectsMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ExportDataObjects": {
+                          "requestType": "ExportDataObjectsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/collections/*}:exportDataObjects",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ExportDataObjectsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ExportDataObjectsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/collections/*}:exportDataObjects",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExportDataObjectsResponse",
+                                "metadata_type": "ExportDataObjectsMetadata"
                               }
                             }
                           ]
@@ -1422,14 +1412,6 @@
                           "type": "string",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "schema": {
-                          "type": "google.protobuf.Struct",
-                          "id": 5,
-                          "options": {
-                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
@@ -1648,7 +1630,33 @@
                         "(google.api.resource).plural": "indexes",
                         "(google.api.resource).singular": "index"
                       },
+                      "oneofs": {
+                        "infraType": {
+                          "oneof": [
+                            "dedicatedInfrastructure"
+                          ]
+                        },
+                        "indexType": {
+                          "oneof": [
+                            "denseScann"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "dedicatedInfrastructure": {
+                          "type": "DedicatedInfrastructure",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "denseScann": {
+                          "type": "DenseScannIndex",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "name": {
                           "type": "string",
                           "id": 1,
@@ -1934,6 +1942,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "outputUri": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         }
@@ -1943,19 +1958,31 @@
                       "fields": {
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "successCount": {
                           "type": "int64",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "failureCount": {
                           "type": "int64",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -1964,6 +1991,2398 @@
                         "status": {
                           "type": "google.rpc.Status",
                           "id": 1
+                        }
+                      }
+                    },
+                    "ExportDataObjectsRequest": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsExportDestination",
+                          "id": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GcsExportDestination": {
+                          "fields": {
+                            "exportUri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "format": {
+                              "type": "Format",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Format": {
+                              "values": {
+                                "FORMAT_UNSPECIFIED": 0,
+                                "JSONL": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExportDataObjectsMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "finishTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ExportDataObjectsResponse": {
+                      "fields": {}
+                    },
+                    "DedicatedInfrastructure": {
+                      "oneofs": {
+                        "_mode": {
+                          "oneof": [
+                            "mode"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "autoscalingSpec": {
+                          "type": "AutoscalingSpec",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AutoscalingSpec": {
+                          "fields": {
+                            "minReplicaCount": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "maxReplicaCount": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "STORAGE_OPTIMIZED": 1,
+                            "PERFORMANCE_OPTIMIZED": 2
+                          }
+                        }
+                      }
+                    },
+                    "DenseScannIndex": {
+                      "fields": {
+                        "featureNormType": {
+                          "type": "FeatureNormType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "FeatureNormType": {
+                          "values": {
+                            "FEATURE_NORM_TYPE_UNSPECIFIED": 0,
+                            "NONE": 1,
+                            "UNIT_L2_NORM": 2
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "v1beta": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.VectorSearch.V1Beta",
+                    "go_package": "cloud.google.com/go/vectorsearch/apiv1beta/vectorsearchpb;vectorsearchpb",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "VectorSearchServiceProto",
+                    "java_package": "com.google.cloud.vectorsearch.v1beta",
+                    "php_namespace": "Google\\Cloud\\VectorSearch\\V1beta",
+                    "ruby_package": "Google::Cloud::VectorSearch::V1beta"
+                  },
+                  "nested": {
+                    "DistanceMetric": {
+                      "values": {
+                        "DISTANCE_METRIC_UNSPECIFIED": 0,
+                        "DOT_PRODUCT": 1,
+                        "COSINE_DISTANCE": 2
+                      }
+                    },
+                    "DataObject": {
+                      "options": {
+                        "(google.api.resource).type": "vectorsearch.googleapis.com/DataObject",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}",
+                        "(google.api.resource).plural": "dataObjects",
+                        "(google.api.resource).singular": "dataObject"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "dataObjectId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "data": {
+                          "type": "google.protobuf.Struct",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "vectors": {
+                          "keyType": "string",
+                          "type": "Vector",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Vector": {
+                      "oneofs": {
+                        "vectorType": {
+                          "oneof": [
+                            "dense",
+                            "sparse"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dense": {
+                          "type": "DenseVector",
+                          "id": 2
+                        },
+                        "sparse": {
+                          "type": "SparseVector",
+                          "id": 3
+                        },
+                        "values": {
+                          "rule": "repeated",
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "deprecated": true
+                          }
+                        }
+                      }
+                    },
+                    "DenseVector": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SparseVector": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "indices": {
+                          "rule": "repeated",
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DataObjectSearchService": {
+                      "options": {
+                        "(google.api.default_host)": "vectorsearch.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "SearchDataObjects": {
+                          "requestType": "SearchDataObjectsRequest",
+                          "responseType": "SearchDataObjectsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:search",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:search",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "QueryDataObjects": {
+                          "requestType": "QueryDataObjectsRequest",
+                          "responseType": "QueryDataObjectsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:query",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:query",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "AggregateDataObjects": {
+                          "requestType": "AggregateDataObjectsRequest",
+                          "responseType": "AggregateDataObjectsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:aggregate",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:aggregate",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "BatchSearchDataObjects": {
+                          "requestType": "BatchSearchDataObjectsRequest",
+                          "responseType": "BatchSearchDataObjectsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchSearch",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchSearch",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "AggregationMethod": {
+                      "values": {
+                        "AGGREGATION_METHOD_UNSPECIFIED": 0,
+                        "COUNT": 1
+                      }
+                    },
+                    "OutputFields": {
+                      "fields": {
+                        "dataFields": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "vectorFields": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "metadataFields": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchHint": {
+                      "oneofs": {
+                        "indexType": {
+                          "oneof": [
+                            "useIndex",
+                            "useKnn",
+                            "knnHint",
+                            "indexHint"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "useIndex": {
+                          "type": "IndexHint",
+                          "id": 1,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "useKnn": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "knnHint": {
+                          "type": "KnnHint",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "indexHint": {
+                          "type": "IndexHint",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "IndexHint": {
+                          "oneofs": {
+                            "params": {
+                              "oneof": [
+                                "denseScannParams"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "denseScannParams": {
+                              "type": "DenseScannParams",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Index"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "DenseScannParams": {
+                              "fields": {
+                                "searchLeavesPct": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "initialCandidateCount": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "KnnHint": {
+                          "fields": {}
+                        }
+                      }
+                    },
+                    "Search": {
+                      "oneofs": {
+                        "searchType": {
+                          "oneof": [
+                            "vectorSearch",
+                            "semanticSearch",
+                            "textSearch"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "vectorSearch": {
+                          "type": "VectorSearch",
+                          "id": 1
+                        },
+                        "semanticSearch": {
+                          "type": "SemanticSearch",
+                          "id": 2
+                        },
+                        "textSearch": {
+                          "type": "TextSearch",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "VectorSearch": {
+                      "oneofs": {
+                        "vectorType": {
+                          "oneof": [
+                            "vector",
+                            "sparseVector"
+                          ]
+                        },
+                        "_topK": {
+                          "oneof": [
+                            "topK"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "vector": {
+                          "type": "DenseVector",
+                          "id": 1
+                        },
+                        "sparseVector": {
+                          "type": "SparseVector",
+                          "id": 2
+                        },
+                        "searchField": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filter": {
+                          "type": "google.protobuf.Struct",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "topK": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "outputFields": {
+                          "type": "OutputFields",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "searchHint": {
+                          "type": "SearchHint",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "distanceMetric": {
+                          "type": "DistanceMetric",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SemanticSearch": {
+                      "oneofs": {
+                        "_topK": {
+                          "oneof": [
+                            "topK"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "searchText": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "searchField": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "taskType": {
+                          "type": "EmbeddingTaskType",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "outputFields": {
+                          "type": "OutputFields",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "google.protobuf.Struct",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "topK": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "searchHint": {
+                          "type": "SearchHint",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TextSearch": {
+                      "oneofs": {
+                        "_topK": {
+                          "oneof": [
+                            "topK"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "searchText": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "dataFieldNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "outputFields": {
+                          "type": "OutputFields",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "topK": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "filter": {
+                          "type": "google.protobuf.Struct",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchDataObjectsRequest": {
+                      "oneofs": {
+                        "searchType": {
+                          "oneof": [
+                            "vectorSearch",
+                            "semanticSearch",
+                            "textSearch"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "vectorSearch": {
+                          "type": "VectorSearch",
+                          "id": 2
+                        },
+                        "semanticSearch": {
+                          "type": "SemanticSearch",
+                          "id": 4
+                        },
+                        "textSearch": {
+                          "type": "TextSearch",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchResult": {
+                      "oneofs": {
+                        "_distance": {
+                          "oneof": [
+                            "distance"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dataObject": {
+                          "type": "DataObject",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "distance": {
+                          "type": "double",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "SearchResponseMetadata": {
+                      "oneofs": {
+                        "indexType": {
+                          "oneof": [
+                            "usedIndex",
+                            "usedKnn"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "usedIndex": {
+                          "type": "IndexInfo",
+                          "id": 1
+                        },
+                        "usedKnn": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "IndexInfo": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Index"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SearchDataObjectsResponse": {
+                      "fields": {
+                        "results": {
+                          "rule": "repeated",
+                          "type": "SearchResult",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "searchResponseMetadata": {
+                          "type": "SearchResponseMetadata",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "AggregateDataObjectsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        },
+                        "filter": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "aggregate": {
+                          "type": "AggregationMethod",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AggregateDataObjectsResponse": {
+                      "fields": {
+                        "aggregateResults": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Struct",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "QueryDataObjectsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        },
+                        "filter": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "outputFields": {
+                          "type": "OutputFields",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "QueryDataObjectsResponse": {
+                      "fields": {
+                        "dataObjects": {
+                          "rule": "repeated",
+                          "type": "DataObject",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "BatchSearchDataObjectsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        },
+                        "searches": {
+                          "rule": "repeated",
+                          "type": "Search",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "combine": {
+                          "type": "CombineResultsOptions",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CombineResultsOptions": {
+                          "fields": {
+                            "ranker": {
+                              "type": "Ranker",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "outputFields": {
+                              "type": "OutputFields",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "topK": {
+                              "type": "int32",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Ranker": {
+                      "oneofs": {
+                        "ranker": {
+                          "oneof": [
+                            "rrf"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "rrf": {
+                          "type": "ReciprocalRankFusion",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ReciprocalRankFusion": {
+                      "fields": {
+                        "weights": {
+                          "rule": "repeated",
+                          "type": "double",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchSearchDataObjectsResponse": {
+                      "fields": {
+                        "results": {
+                          "rule": "repeated",
+                          "type": "SearchDataObjectsResponse",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "EmbeddingTaskType": {
+                      "values": {
+                        "EMBEDDING_TASK_TYPE_UNSPECIFIED": 0,
+                        "RETRIEVAL_QUERY": 1,
+                        "RETRIEVAL_DOCUMENT": 2,
+                        "SEMANTIC_SIMILARITY": 3,
+                        "CLASSIFICATION": 4,
+                        "CLUSTERING": 5,
+                        "QUESTION_ANSWERING": 6,
+                        "FACT_VERIFICATION": 7,
+                        "CODE_RETRIEVAL_QUERY": 8
+                      }
+                    },
+                    "VertexEmbeddingConfig": {
+                      "fields": {
+                        "modelId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "textTemplate": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "taskType": {
+                          "type": "EmbeddingTaskType",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DataObjectService": {
+                      "options": {
+                        "(google.api.default_host)": "vectorsearch.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateDataObject": {
+                          "requestType": "CreateDataObjectRequest",
+                          "responseType": "DataObject",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects",
+                            "(google.api.http).body": "data_object",
+                            "(google.api.method_signature)": "parent,data_object,data_object_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects",
+                                "body": "data_object"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,data_object,data_object_id"
+                            }
+                          ]
+                        },
+                        "BatchCreateDataObjects": {
+                          "requestType": "BatchCreateDataObjectsRequest",
+                          "responseType": "BatchCreateDataObjectsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchCreate",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchCreate",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "GetDataObject": {
+                          "requestType": "GetDataObjectRequest",
+                          "responseType": "DataObject",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/collections/*/dataObjects/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/collections/*/dataObjects/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateDataObject": {
+                          "requestType": "UpdateDataObjectRequest",
+                          "responseType": "DataObject",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta/{data_object.name=projects/*/locations/*/collections/*/dataObjects/*}",
+                            "(google.api.http).body": "data_object",
+                            "(google.api.method_signature)": "data_object,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{data_object.name=projects/*/locations/*/collections/*/dataObjects/*}",
+                                "body": "data_object"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "data_object,update_mask"
+                            }
+                          ]
+                        },
+                        "BatchUpdateDataObjects": {
+                          "requestType": "BatchUpdateDataObjectsRequest",
+                          "responseType": "BatchUpdateDataObjectsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchUpdate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchUpdate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            }
+                          ]
+                        },
+                        "DeleteDataObject": {
+                          "requestType": "DeleteDataObjectRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/collections/*/dataObjects/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=projects/*/locations/*/collections/*/dataObjects/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "BatchDeleteDataObjects": {
+                          "requestType": "BatchDeleteDataObjectsRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchDelete",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/dataObjects:batchDelete",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateDataObjectRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        },
+                        "dataObjectId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "dataObject": {
+                          "type": "DataObject",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateDataObjectsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "CreateDataObjectRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateDataObjectsResponse": {
+                      "fields": {
+                        "dataObjects": {
+                          "rule": "repeated",
+                          "type": "DataObject",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GetDataObjectRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/DataObject"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateDataObjectRequest": {
+                      "fields": {
+                        "dataObject": {
+                          "type": "DataObject",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BatchUpdateDataObjectsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "UpdateDataObjectRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchUpdateDataObjectsResponse": {
+                      "fields": {}
+                    },
+                    "DeleteDataObjectRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/DataObject"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BatchDeleteDataObjectsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "DeleteDataObjectRequest",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "VectorSearchService": {
+                      "options": {
+                        "(google.api.default_host)": "vectorsearch.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListCollections": {
+                          "requestType": "ListCollectionsRequest",
+                          "responseType": "ListCollectionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*}/collections",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/locations/*}/collections"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetCollection": {
+                          "requestType": "GetCollectionRequest",
+                          "responseType": "Collection",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/collections/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/collections/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateCollection": {
+                          "requestType": "CreateCollectionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*}/collections",
+                            "(google.api.http).body": "collection",
+                            "(google.api.method_signature)": "parent,collection,collection_id",
+                            "(google.longrunning.operation_info).response_type": "Collection",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*}/collections",
+                                "body": "collection"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,collection,collection_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Collection",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateCollection": {
+                          "requestType": "UpdateCollectionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta/{collection.name=projects/*/locations/*/collections/*}",
+                            "(google.api.http).body": "collection",
+                            "(google.api.method_signature)": "collection,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Collection",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{collection.name=projects/*/locations/*/collections/*}",
+                                "body": "collection"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "collection,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Collection",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteCollection": {
+                          "requestType": "DeleteCollectionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/collections/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=projects/*/locations/*/collections/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListIndexes": {
+                          "requestType": "ListIndexesRequest",
+                          "responseType": "ListIndexesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*/collections/*}/indexes",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/locations/*/collections/*}/indexes"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetIndex": {
+                          "requestType": "GetIndexRequest",
+                          "responseType": "Index",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/collections/*/indexes/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/collections/*/indexes/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateIndex": {
+                          "requestType": "CreateIndexRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/collections/*}/indexes",
+                            "(google.api.http).body": "index",
+                            "(google.api.method_signature)": "parent,index,index_id",
+                            "(google.longrunning.operation_info).response_type": "Index",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*/collections/*}/indexes",
+                                "body": "index"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,index,index_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Index",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteIndex": {
+                          "requestType": "DeleteIndexRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/collections/*/indexes/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=projects/*/locations/*/collections/*/indexes/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ImportDataObjects": {
+                          "requestType": "ImportDataObjectsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/collections/*}:importDataObjects",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ImportDataObjectsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ImportDataObjectsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/locations/*/collections/*}:importDataObjects",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ImportDataObjectsResponse",
+                                "metadata_type": "ImportDataObjectsMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ExportDataObjects": {
+                          "requestType": "ExportDataObjectsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/collections/*}:exportDataObjects",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ExportDataObjectsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ExportDataObjectsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/locations/*/collections/*}:exportDataObjects",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExportDataObjectsResponse",
+                                "metadata_type": "ExportDataObjectsMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "Collection": {
+                      "options": {
+                        "(google.api.resource).type": "vectorsearch.googleapis.com/Collection",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}",
+                        "(google.api.resource).plural": "collections",
+                        "(google.api.resource).singular": "collection"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "schema": {
+                          "type": "google.protobuf.Struct",
+                          "id": 5,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "vectorSchema": {
+                          "keyType": "string",
+                          "type": "VectorField",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dataSchema": {
+                          "type": "google.protobuf.Struct",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "VectorField": {
+                      "oneofs": {
+                        "vectorTypeConfig": {
+                          "oneof": [
+                            "denseVector",
+                            "sparseVector"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "denseVector": {
+                          "type": "DenseVectorField",
+                          "id": 3
+                        },
+                        "sparseVector": {
+                          "type": "SparseVectorField",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "DenseVectorField": {
+                      "fields": {
+                        "dimensions": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "vertexEmbeddingConfig": {
+                          "type": "VertexEmbeddingConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SparseVectorField": {
+                      "fields": {}
+                    },
+                    "ListCollectionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListCollectionsResponse": {
+                      "fields": {
+                        "collections": {
+                          "rule": "repeated",
+                          "type": "Collection",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
+                        }
+                      }
+                    },
+                    "GetCollectionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        }
+                      }
+                    },
+                    "CreateCollectionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        },
+                        "collectionId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "collection": {
+                          "type": "Collection",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateCollectionRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "collection": {
+                          "type": "Collection",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteCollectionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Index": {
+                      "options": {
+                        "(google.api.resource).type": "vectorsearch.googleapis.com/Index",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/indexes/{index}",
+                        "(google.api.resource).plural": "indexes",
+                        "(google.api.resource).singular": "index"
+                      },
+                      "oneofs": {
+                        "infraType": {
+                          "oneof": [
+                            "dedicatedInfrastructure"
+                          ]
+                        },
+                        "indexType": {
+                          "oneof": [
+                            "denseScann"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dedicatedInfrastructure": {
+                          "type": "DedicatedInfrastructure",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "denseScann": {
+                          "type": "DenseScannIndex",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "distanceMetric": {
+                          "type": "DistanceMetric",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "indexField": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filterFields": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "storeFields": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CreateIndexRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        },
+                        "indexId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "index": {
+                          "type": "Index",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteIndexRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Index"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListIndexesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "vectorsearch.googleapis.com/Index"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListIndexesResponse": {
+                      "fields": {
+                        "indexes": {
+                          "rule": "repeated",
+                          "type": "Index",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetIndexRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Index"
+                          }
+                        }
+                      }
+                    },
+                    "OperationMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "verb": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "statusMessage": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "requestedCancellation": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "apiVersion": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ImportDataObjectsRequest": {
+                      "oneofs": {
+                        "config": {
+                          "oneof": [
+                            "gcsImport"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsImport": {
+                          "type": "GcsImportConfig",
+                          "id": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GcsImportConfig": {
+                          "fields": {
+                            "contentsUri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "errorUri": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "outputUri": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ImportDataObjectsMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "successCount": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "failureCount": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ImportDataObjectsResponse": {
+                      "fields": {
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ExportDataObjectsRequest": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsExportDestination",
+                          "id": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GcsExportDestination": {
+                          "fields": {
+                            "exportUri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "format": {
+                              "type": "Format",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Format": {
+                              "values": {
+                                "FORMAT_UNSPECIFIED": 0,
+                                "JSON": 1
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExportDataObjectsMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "finishTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ExportDataObjectsResponse": {
+                      "fields": {}
+                    },
+                    "DedicatedInfrastructure": {
+                      "oneofs": {
+                        "_mode": {
+                          "oneof": [
+                            "mode"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "autoscalingSpec": {
+                          "type": "AutoscalingSpec",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AutoscalingSpec": {
+                          "fields": {
+                            "minReplicaCount": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "maxReplicaCount": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "STORAGE_OPTIMIZED": 1,
+                            "PERFORMANCE_OPTIMIZED": 2
+                          }
+                        }
+                      }
+                    },
+                    "DenseScannIndex": {
+                      "fields": {
+                        "featureNormType": {
+                          "type": "FeatureNormType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "FeatureNormType": {
+                          "values": {
+                            "FEATURE_NORM_TYPE_UNSPECIFIED": 0,
+                            "NONE": 1,
+                            "UNIT_L2_NORM": 2
+                          }
                         }
                       }
                     }

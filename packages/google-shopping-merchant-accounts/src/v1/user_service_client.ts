@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -602,8 +602,7 @@ export class UserServiceClient {
 /**
  * Deletes a Merchant Center account user. Executing this method requires
  * admin access. The user to be deleted can't be the last admin user of that
- * account. Also a user is protected from deletion if it
- * is managed by Business Manager"
+ * account.
  *
  * @param {Object} request
  *   The request object that will be sent.

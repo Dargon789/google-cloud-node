@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -281,6 +281,7 @@
                          * @property {google.cloud.geminidataanalytics.v1alpha.IDatasourceReferences|null} [datasourceReferences] Context datasourceReferences
                          * @property {google.cloud.geminidataanalytics.v1alpha.IConversationOptions|null} [options] Context options
                          * @property {Array.<google.cloud.geminidataanalytics.v1alpha.IExampleQuery>|null} [exampleQueries] Context exampleQueries
+                         * @property {Array.<google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery>|null} [lookerGoldenQueries] Context lookerGoldenQueries
                          * @property {Array.<google.cloud.geminidataanalytics.v1alpha.IGlossaryTerm>|null} [glossaryTerms] Context glossaryTerms
                          * @property {Array.<google.cloud.geminidataanalytics.v1alpha.Context.ISchemaRelationship>|null} [schemaRelationships] Context schemaRelationships
                          */
@@ -295,6 +296,7 @@
                          */
                         function Context(properties) {
                             this.exampleQueries = [];
+                            this.lookerGoldenQueries = [];
                             this.glossaryTerms = [];
                             this.schemaRelationships = [];
                             if (properties)
@@ -334,6 +336,14 @@
                          * @instance
                          */
                         Context.prototype.exampleQueries = $util.emptyArray;
+    
+                        /**
+                         * Context lookerGoldenQueries.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery>} lookerGoldenQueries
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.Context
+                         * @instance
+                         */
+                        Context.prototype.lookerGoldenQueries = $util.emptyArray;
     
                         /**
                          * Context glossaryTerms.
@@ -390,6 +400,9 @@
                             if (message.schemaRelationships != null && message.schemaRelationships.length)
                                 for (var i = 0; i < message.schemaRelationships.length; ++i)
                                     $root.google.cloud.geminidataanalytics.v1alpha.Context.SchemaRelationship.encode(message.schemaRelationships[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.lookerGoldenQueries != null && message.lookerGoldenQueries.length)
+                                for (var i = 0; i < message.lookerGoldenQueries.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.encode(message.lookerGoldenQueries[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -442,6 +455,12 @@
                                         if (!(message.exampleQueries && message.exampleQueries.length))
                                             message.exampleQueries = [];
                                         message.exampleQueries.push($root.google.cloud.geminidataanalytics.v1alpha.ExampleQuery.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.lookerGoldenQueries && message.lookerGoldenQueries.length))
+                                            message.lookerGoldenQueries = [];
+                                        message.lookerGoldenQueries.push($root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 8: {
@@ -513,6 +532,15 @@
                                         return "exampleQueries." + error;
                                 }
                             }
+                            if (message.lookerGoldenQueries != null && message.hasOwnProperty("lookerGoldenQueries")) {
+                                if (!Array.isArray(message.lookerGoldenQueries))
+                                    return "lookerGoldenQueries: array expected";
+                                for (var i = 0; i < message.lookerGoldenQueries.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.verify(message.lookerGoldenQueries[i]);
+                                    if (error)
+                                        return "lookerGoldenQueries." + error;
+                                }
+                            }
                             if (message.glossaryTerms != null && message.hasOwnProperty("glossaryTerms")) {
                                 if (!Array.isArray(message.glossaryTerms))
                                     return "glossaryTerms: array expected";
@@ -568,6 +596,16 @@
                                     message.exampleQueries[i] = $root.google.cloud.geminidataanalytics.v1alpha.ExampleQuery.fromObject(object.exampleQueries[i]);
                                 }
                             }
+                            if (object.lookerGoldenQueries) {
+                                if (!Array.isArray(object.lookerGoldenQueries))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.Context.lookerGoldenQueries: array expected");
+                                message.lookerGoldenQueries = [];
+                                for (var i = 0; i < object.lookerGoldenQueries.length; ++i) {
+                                    if (typeof object.lookerGoldenQueries[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1alpha.Context.lookerGoldenQueries: object expected");
+                                    message.lookerGoldenQueries[i] = $root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.fromObject(object.lookerGoldenQueries[i]);
+                                }
+                            }
                             if (object.glossaryTerms) {
                                 if (!Array.isArray(object.glossaryTerms))
                                     throw TypeError(".google.cloud.geminidataanalytics.v1alpha.Context.glossaryTerms: array expected");
@@ -608,6 +646,7 @@
                                 object.exampleQueries = [];
                                 object.glossaryTerms = [];
                                 object.schemaRelationships = [];
+                                object.lookerGoldenQueries = [];
                             }
                             if (options.defaults) {
                                 object.systemInstruction = "";
@@ -634,6 +673,11 @@
                                 object.schemaRelationships = [];
                                 for (var j = 0; j < message.schemaRelationships.length; ++j)
                                     object.schemaRelationships[j] = $root.google.cloud.geminidataanalytics.v1alpha.Context.SchemaRelationship.toObject(message.schemaRelationships[j], options);
+                            }
+                            if (message.lookerGoldenQueries && message.lookerGoldenQueries.length) {
+                                object.lookerGoldenQueries = [];
+                                for (var j = 0; j < message.lookerGoldenQueries.length; ++j)
+                                    object.lookerGoldenQueries[j] = $root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.toObject(message.lookerGoldenQueries[j], options);
                             }
                             return object;
                         };
@@ -1514,6 +1558,256 @@
                         };
     
                         return ExampleQuery;
+                    })();
+    
+                    v1alpha.LookerGoldenQuery = (function() {
+    
+                        /**
+                         * Properties of a LookerGoldenQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface ILookerGoldenQuery
+                         * @property {Array.<string>|null} [naturalLanguageQuestions] LookerGoldenQuery naturalLanguageQuestions
+                         * @property {google.cloud.geminidataanalytics.v1alpha.ILookerQuery|null} [lookerQuery] LookerGoldenQuery lookerQuery
+                         */
+    
+                        /**
+                         * Constructs a new LookerGoldenQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a LookerGoldenQuery.
+                         * @implements ILookerGoldenQuery
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery=} [properties] Properties to set
+                         */
+                        function LookerGoldenQuery(properties) {
+                            this.naturalLanguageQuestions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LookerGoldenQuery naturalLanguageQuestions.
+                         * @member {Array.<string>} naturalLanguageQuestions
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @instance
+                         */
+                        LookerGoldenQuery.prototype.naturalLanguageQuestions = $util.emptyArray;
+    
+                        /**
+                         * LookerGoldenQuery lookerQuery.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.ILookerQuery|null|undefined} lookerQuery
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @instance
+                         */
+                        LookerGoldenQuery.prototype.lookerQuery = null;
+    
+                        /**
+                         * Creates a new LookerGoldenQuery instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery} LookerGoldenQuery instance
+                         */
+                        LookerGoldenQuery.create = function create(properties) {
+                            return new LookerGoldenQuery(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LookerGoldenQuery message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery} message LookerGoldenQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerGoldenQuery.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.naturalLanguageQuestions != null && message.naturalLanguageQuestions.length)
+                                for (var i = 0; i < message.naturalLanguageQuestions.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.naturalLanguageQuestions[i]);
+                            if (message.lookerQuery != null && Object.hasOwnProperty.call(message, "lookerQuery"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.encode(message.lookerQuery, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LookerGoldenQuery message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery} message LookerGoldenQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerGoldenQuery.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LookerGoldenQuery message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery} LookerGoldenQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerGoldenQuery.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 4: {
+                                        if (!(message.naturalLanguageQuestions && message.naturalLanguageQuestions.length))
+                                            message.naturalLanguageQuestions = [];
+                                        message.naturalLanguageQuestions.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.lookerQuery = $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LookerGoldenQuery message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery} LookerGoldenQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerGoldenQuery.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LookerGoldenQuery message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LookerGoldenQuery.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.naturalLanguageQuestions != null && message.hasOwnProperty("naturalLanguageQuestions")) {
+                                if (!Array.isArray(message.naturalLanguageQuestions))
+                                    return "naturalLanguageQuestions: array expected";
+                                for (var i = 0; i < message.naturalLanguageQuestions.length; ++i)
+                                    if (!$util.isString(message.naturalLanguageQuestions[i]))
+                                        return "naturalLanguageQuestions: string[] expected";
+                            }
+                            if (message.lookerQuery != null && message.hasOwnProperty("lookerQuery")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.verify(message.lookerQuery);
+                                if (error)
+                                    return "lookerQuery." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LookerGoldenQuery message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery} LookerGoldenQuery
+                         */
+                        LookerGoldenQuery.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery();
+                            if (object.naturalLanguageQuestions) {
+                                if (!Array.isArray(object.naturalLanguageQuestions))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.naturalLanguageQuestions: array expected");
+                                message.naturalLanguageQuestions = [];
+                                for (var i = 0; i < object.naturalLanguageQuestions.length; ++i)
+                                    message.naturalLanguageQuestions[i] = String(object.naturalLanguageQuestions[i]);
+                            }
+                            if (object.lookerQuery != null) {
+                                if (typeof object.lookerQuery !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.lookerQuery: object expected");
+                                message.lookerQuery = $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.fromObject(object.lookerQuery);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LookerGoldenQuery message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery} message LookerGoldenQuery
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LookerGoldenQuery.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.naturalLanguageQuestions = [];
+                            if (options.defaults)
+                                object.lookerQuery = null;
+                            if (message.naturalLanguageQuestions && message.naturalLanguageQuestions.length) {
+                                object.naturalLanguageQuestions = [];
+                                for (var j = 0; j < message.naturalLanguageQuestions.length; ++j)
+                                    object.naturalLanguageQuestions[j] = message.naturalLanguageQuestions[j];
+                            }
+                            if (message.lookerQuery != null && message.hasOwnProperty("lookerQuery"))
+                                object.lookerQuery = $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.toObject(message.lookerQuery, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LookerGoldenQuery to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LookerGoldenQuery.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LookerGoldenQuery
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LookerGoldenQuery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery";
+                        };
+    
+                        return LookerGoldenQuery;
                     })();
     
                     v1alpha.LookerQuery = (function() {
@@ -13106,6 +13400,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|createDataAgentSync}.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @typedef CreateDataAgentSyncCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.geminidataanalytics.v1alpha.DataAgent} [response] DataAgent
+                         */
+    
+                        /**
+                         * Calls CreateDataAgentSync.
+                         * @function createDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest} request CreateDataAgentRequest message or plain object
+                         * @param {google.cloud.geminidataanalytics.v1alpha.DataAgentService.CreateDataAgentSyncCallback} callback Node-style callback called with the error, if any, and DataAgent
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataAgentService.prototype.createDataAgentSync = function createDataAgentSync(request, callback) {
+                            return this.rpcCall(createDataAgentSync, $root.google.cloud.geminidataanalytics.v1alpha.CreateDataAgentRequest, $root.google.cloud.geminidataanalytics.v1alpha.DataAgent, request, callback);
+                        }, "name", { value: "CreateDataAgentSync" });
+    
+                        /**
+                         * Calls CreateDataAgentSync.
+                         * @function createDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest} request CreateDataAgentRequest message or plain object
+                         * @returns {Promise<google.cloud.geminidataanalytics.v1alpha.DataAgent>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|updateDataAgent}.
                          * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
                          * @typedef UpdateDataAgentCallback
@@ -13139,6 +13466,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|updateDataAgentSync}.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @typedef UpdateDataAgentSyncCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.geminidataanalytics.v1alpha.DataAgent} [response] DataAgent
+                         */
+    
+                        /**
+                         * Calls UpdateDataAgentSync.
+                         * @function updateDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest} request UpdateDataAgentRequest message or plain object
+                         * @param {google.cloud.geminidataanalytics.v1alpha.DataAgentService.UpdateDataAgentSyncCallback} callback Node-style callback called with the error, if any, and DataAgent
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataAgentService.prototype.updateDataAgentSync = function updateDataAgentSync(request, callback) {
+                            return this.rpcCall(updateDataAgentSync, $root.google.cloud.geminidataanalytics.v1alpha.UpdateDataAgentRequest, $root.google.cloud.geminidataanalytics.v1alpha.DataAgent, request, callback);
+                        }, "name", { value: "UpdateDataAgentSync" });
+    
+                        /**
+                         * Calls UpdateDataAgentSync.
+                         * @function updateDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest} request UpdateDataAgentRequest message or plain object
+                         * @returns {Promise<google.cloud.geminidataanalytics.v1alpha.DataAgent>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|deleteDataAgent}.
                          * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
                          * @typedef DeleteDataAgentCallback
@@ -13168,6 +13528,39 @@
                          * @instance
                          * @param {google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest} request DeleteDataAgentRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|deleteDataAgentSync}.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @typedef DeleteDataAgentSyncCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteDataAgentSync.
+                         * @function deleteDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest} request DeleteDataAgentRequest message or plain object
+                         * @param {google.cloud.geminidataanalytics.v1alpha.DataAgentService.DeleteDataAgentSyncCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataAgentService.prototype.deleteDataAgentSync = function deleteDataAgentSync(request, callback) {
+                            return this.rpcCall(deleteDataAgentSync, $root.google.cloud.geminidataanalytics.v1alpha.DeleteDataAgentRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteDataAgentSync" });
+    
+                        /**
+                         * Calls DeleteDataAgentSync.
+                         * @function deleteDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest} request DeleteDataAgentRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
                          * @variation 2
                          */
     
@@ -16695,6 +17088,7 @@
                          * @memberof google.cloud.geminidataanalytics.v1alpha
                          * @interface IQueryDataContext
                          * @property {google.cloud.geminidataanalytics.v1alpha.IDatasourceReferences|null} [datasourceReferences] QueryDataContext datasourceReferences
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IParameterizedSecureViewParameters|null} [parameterizedSecureViewParameters] QueryDataContext parameterizedSecureViewParameters
                          */
     
                         /**
@@ -16719,6 +17113,14 @@
                          * @instance
                          */
                         QueryDataContext.prototype.datasourceReferences = null;
+    
+                        /**
+                         * QueryDataContext parameterizedSecureViewParameters.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IParameterizedSecureViewParameters|null|undefined} parameterizedSecureViewParameters
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataContext
+                         * @instance
+                         */
+                        QueryDataContext.prototype.parameterizedSecureViewParameters = null;
     
                         /**
                          * Creates a new QueryDataContext instance using the specified properties.
@@ -16746,6 +17148,8 @@
                                 writer = $Writer.create();
                             if (message.datasourceReferences != null && Object.hasOwnProperty.call(message, "datasourceReferences"))
                                 $root.google.cloud.geminidataanalytics.v1alpha.DatasourceReferences.encode(message.datasourceReferences, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.parameterizedSecureViewParameters != null && Object.hasOwnProperty.call(message, "parameterizedSecureViewParameters"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters.encode(message.parameterizedSecureViewParameters, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -16784,6 +17188,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.datasourceReferences = $root.google.cloud.geminidataanalytics.v1alpha.DatasourceReferences.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.parameterizedSecureViewParameters = $root.google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -16826,6 +17234,11 @@
                                 if (error)
                                     return "datasourceReferences." + error;
                             }
+                            if (message.parameterizedSecureViewParameters != null && message.hasOwnProperty("parameterizedSecureViewParameters")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters.verify(message.parameterizedSecureViewParameters);
+                                if (error)
+                                    return "parameterizedSecureViewParameters." + error;
+                            }
                             return null;
                         };
     
@@ -16846,6 +17259,11 @@
                                     throw TypeError(".google.cloud.geminidataanalytics.v1alpha.QueryDataContext.datasourceReferences: object expected");
                                 message.datasourceReferences = $root.google.cloud.geminidataanalytics.v1alpha.DatasourceReferences.fromObject(object.datasourceReferences);
                             }
+                            if (object.parameterizedSecureViewParameters != null) {
+                                if (typeof object.parameterizedSecureViewParameters !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.QueryDataContext.parameterizedSecureViewParameters: object expected");
+                                message.parameterizedSecureViewParameters = $root.google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters.fromObject(object.parameterizedSecureViewParameters);
+                            }
                             return message;
                         };
     
@@ -16862,10 +17280,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.datasourceReferences = null;
+                                object.parameterizedSecureViewParameters = null;
+                            }
                             if (message.datasourceReferences != null && message.hasOwnProperty("datasourceReferences"))
                                 object.datasourceReferences = $root.google.cloud.geminidataanalytics.v1alpha.DatasourceReferences.toObject(message.datasourceReferences, options);
+                            if (message.parameterizedSecureViewParameters != null && message.hasOwnProperty("parameterizedSecureViewParameters"))
+                                object.parameterizedSecureViewParameters = $root.google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters.toObject(message.parameterizedSecureViewParameters, options);
                             return object;
                         };
     
@@ -16896,6 +17318,246 @@
                         };
     
                         return QueryDataContext;
+                    })();
+    
+                    v1alpha.ParameterizedSecureViewParameters = (function() {
+    
+                        /**
+                         * Properties of a ParameterizedSecureViewParameters.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface IParameterizedSecureViewParameters
+                         * @property {Object.<string,string>|null} [parameters] ParameterizedSecureViewParameters parameters
+                         */
+    
+                        /**
+                         * Constructs a new ParameterizedSecureViewParameters.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a ParameterizedSecureViewParameters.
+                         * @implements IParameterizedSecureViewParameters
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IParameterizedSecureViewParameters=} [properties] Properties to set
+                         */
+                        function ParameterizedSecureViewParameters(properties) {
+                            this.parameters = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ParameterizedSecureViewParameters parameters.
+                         * @member {Object.<string,string>} parameters
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters
+                         * @instance
+                         */
+                        ParameterizedSecureViewParameters.prototype.parameters = $util.emptyObject;
+    
+                        /**
+                         * Creates a new ParameterizedSecureViewParameters instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IParameterizedSecureViewParameters=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters} ParameterizedSecureViewParameters instance
+                         */
+                        ParameterizedSecureViewParameters.create = function create(properties) {
+                            return new ParameterizedSecureViewParameters(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ParameterizedSecureViewParameters message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IParameterizedSecureViewParameters} message ParameterizedSecureViewParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ParameterizedSecureViewParameters.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
+                                for (var keys = Object.keys(message.parameters), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.parameters[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ParameterizedSecureViewParameters message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IParameterizedSecureViewParameters} message ParameterizedSecureViewParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ParameterizedSecureViewParameters.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ParameterizedSecureViewParameters message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters} ParameterizedSecureViewParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ParameterizedSecureViewParameters.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (message.parameters === $util.emptyObject)
+                                            message.parameters = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.parameters[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ParameterizedSecureViewParameters message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters} ParameterizedSecureViewParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ParameterizedSecureViewParameters.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ParameterizedSecureViewParameters message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ParameterizedSecureViewParameters.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parameters != null && message.hasOwnProperty("parameters")) {
+                                if (!$util.isObject(message.parameters))
+                                    return "parameters: object expected";
+                                var key = Object.keys(message.parameters);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.parameters[key[i]]))
+                                        return "parameters: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ParameterizedSecureViewParameters message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters} ParameterizedSecureViewParameters
+                         */
+                        ParameterizedSecureViewParameters.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters();
+                            if (object.parameters) {
+                                if (typeof object.parameters !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters.parameters: object expected");
+                                message.parameters = {};
+                                for (var keys = Object.keys(object.parameters), i = 0; i < keys.length; ++i)
+                                    message.parameters[keys[i]] = String(object.parameters[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ParameterizedSecureViewParameters message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters} message ParameterizedSecureViewParameters
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ParameterizedSecureViewParameters.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.parameters = {};
+                            var keys2;
+                            if (message.parameters && (keys2 = Object.keys(message.parameters)).length) {
+                                object.parameters = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.parameters[keys2[j]] = message.parameters[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ParameterizedSecureViewParameters to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ParameterizedSecureViewParameters.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ParameterizedSecureViewParameters
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ParameterizedSecureViewParameters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.ParameterizedSecureViewParameters";
+                        };
+    
+                        return ParameterizedSecureViewParameters;
                     })();
     
                     v1alpha.QueryDataResponse = (function() {
@@ -19006,6 +19668,7 @@
                          * @property {string|null} [project] ChatRequest project
                          * @property {string|null} [parent] ChatRequest parent
                          * @property {Array.<google.cloud.geminidataanalytics.v1alpha.IMessage>|null} [messages] ChatRequest messages
+                         * @property {google.cloud.geminidataanalytics.v1alpha.ChatRequest.ThinkingMode|null} [thinkingMode] ChatRequest thinkingMode
                          */
     
                         /**
@@ -19080,6 +19743,14 @@
                          */
                         ChatRequest.prototype.messages = $util.emptyArray;
     
+                        /**
+                         * ChatRequest thinkingMode.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.ChatRequest.ThinkingMode} thinkingMode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ChatRequest
+                         * @instance
+                         */
+                        ChatRequest.prototype.thinkingMode = 0;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -19125,6 +19796,8 @@
                                     $root.google.cloud.geminidataanalytics.v1alpha.Message.encode(message.messages[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.parent);
+                            if (message.thinkingMode != null && Object.hasOwnProperty.call(message, "thinkingMode"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.thinkingMode);
                             if (message.inlineContext != null && Object.hasOwnProperty.call(message, "inlineContext"))
                                 $root.google.cloud.geminidataanalytics.v1alpha.Context.encode(message.inlineContext, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
                             if (message.conversationReference != null && Object.hasOwnProperty.call(message, "conversationReference"))
@@ -19197,6 +19870,10 @@
                                         if (!(message.messages && message.messages.length))
                                             message.messages = [];
                                         message.messages.push($root.google.cloud.geminidataanalytics.v1alpha.Message.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 9: {
+                                        message.thinkingMode = reader.int32();
                                         break;
                                     }
                                 default:
@@ -19288,6 +19965,15 @@
                                         return "messages." + error;
                                 }
                             }
+                            if (message.thinkingMode != null && message.hasOwnProperty("thinkingMode"))
+                                switch (message.thinkingMode) {
+                                default:
+                                    return "thinkingMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -19337,6 +20023,26 @@
                                     message.messages[i] = $root.google.cloud.geminidataanalytics.v1alpha.Message.fromObject(object.messages[i]);
                                 }
                             }
+                            switch (object.thinkingMode) {
+                            default:
+                                if (typeof object.thinkingMode === "number") {
+                                    message.thinkingMode = object.thinkingMode;
+                                    break;
+                                }
+                                break;
+                            case "THINKING_MODE_UNSPECIFIED":
+                            case 0:
+                                message.thinkingMode = 0;
+                                break;
+                            case "FAST":
+                            case 1:
+                                message.thinkingMode = 1;
+                                break;
+                            case "THINKING":
+                            case 2:
+                                message.thinkingMode = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -19358,6 +20064,7 @@
                             if (options.defaults) {
                                 object.project = "";
                                 object.parent = "";
+                                object.thinkingMode = options.enums === String ? "THINKING_MODE_UNSPECIFIED" : 0;
                             }
                             if (message.project != null && message.hasOwnProperty("project"))
                                 object.project = message.project;
@@ -19368,6 +20075,8 @@
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
+                            if (message.thinkingMode != null && message.hasOwnProperty("thinkingMode"))
+                                object.thinkingMode = options.enums === String ? $root.google.cloud.geminidataanalytics.v1alpha.ChatRequest.ThinkingMode[message.thinkingMode] === undefined ? message.thinkingMode : $root.google.cloud.geminidataanalytics.v1alpha.ChatRequest.ThinkingMode[message.thinkingMode] : message.thinkingMode;
                             if (message.inlineContext != null && message.hasOwnProperty("inlineContext")) {
                                 object.inlineContext = $root.google.cloud.geminidataanalytics.v1alpha.Context.toObject(message.inlineContext, options);
                                 if (options.oneofs)
@@ -19416,6 +20125,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.ChatRequest";
                         };
+    
+                        /**
+                         * ThinkingMode enum.
+                         * @name google.cloud.geminidataanalytics.v1alpha.ChatRequest.ThinkingMode
+                         * @enum {number}
+                         * @property {number} THINKING_MODE_UNSPECIFIED=0 THINKING_MODE_UNSPECIFIED value
+                         * @property {number} FAST=1 FAST value
+                         * @property {number} THINKING=2 THINKING value
+                         */
+                        ChatRequest.ThinkingMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "THINKING_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FAST"] = 1;
+                            values[valuesById[2] = "THINKING"] = 2;
+                            return values;
+                        })();
     
                         return ChatRequest;
                     })();
@@ -20761,6 +21486,7 @@
                          * @property {google.cloud.geminidataanalytics.v1alpha.IChartMessage|null} [chart] SystemMessage chart
                          * @property {google.cloud.geminidataanalytics.v1alpha.IErrorMessage|null} [error] SystemMessage error
                          * @property {google.cloud.geminidataanalytics.v1alpha.IExampleQueries|null} [exampleQueries] SystemMessage exampleQueries
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IClarificationMessage|null} [clarification] SystemMessage clarification
                          * @property {number|null} [groupId] SystemMessage groupId
                          */
     
@@ -20836,6 +21562,14 @@
                         SystemMessage.prototype.exampleQueries = null;
     
                         /**
+                         * SystemMessage clarification.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IClarificationMessage|null|undefined} clarification
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SystemMessage
+                         * @instance
+                         */
+                        SystemMessage.prototype.clarification = null;
+    
+                        /**
                          * SystemMessage groupId.
                          * @member {number|null|undefined} groupId
                          * @memberof google.cloud.geminidataanalytics.v1alpha.SystemMessage
@@ -20848,12 +21582,12 @@
     
                         /**
                          * SystemMessage kind.
-                         * @member {"text"|"schema"|"data"|"analysis"|"chart"|"error"|"exampleQueries"|undefined} kind
+                         * @member {"text"|"schema"|"data"|"analysis"|"chart"|"error"|"exampleQueries"|"clarification"|undefined} kind
                          * @memberof google.cloud.geminidataanalytics.v1alpha.SystemMessage
                          * @instance
                          */
                         Object.defineProperty(SystemMessage.prototype, "kind", {
-                            get: $util.oneOfGetter($oneOfFields = ["text", "schema", "data", "analysis", "chart", "error", "exampleQueries"]),
+                            get: $util.oneOfGetter($oneOfFields = ["text", "schema", "data", "analysis", "chart", "error", "exampleQueries", "clarification"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -20903,6 +21637,8 @@
                                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.groupId);
                             if (message.exampleQueries != null && Object.hasOwnProperty.call(message, "exampleQueries"))
                                 $root.google.cloud.geminidataanalytics.v1alpha.ExampleQueries.encode(message.exampleQueries, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.clarification != null && Object.hasOwnProperty.call(message, "clarification"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.encode(message.clarification, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -20965,6 +21701,10 @@
                                     }
                                 case 13: {
                                         message.exampleQueries = $root.google.cloud.geminidataanalytics.v1alpha.ExampleQueries.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.clarification = $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 12: {
@@ -21075,6 +21815,16 @@
                                         return "exampleQueries." + error;
                                 }
                             }
+                            if (message.clarification != null && message.hasOwnProperty("clarification")) {
+                                if (properties.kind === 1)
+                                    return "kind: multiple values";
+                                properties.kind = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.verify(message.clarification);
+                                    if (error)
+                                        return "clarification." + error;
+                                }
+                            }
                             if (message.groupId != null && message.hasOwnProperty("groupId")) {
                                 properties._groupId = 1;
                                 if (!$util.isInteger(message.groupId))
@@ -21129,6 +21879,11 @@
                                 if (typeof object.exampleQueries !== "object")
                                     throw TypeError(".google.cloud.geminidataanalytics.v1alpha.SystemMessage.exampleQueries: object expected");
                                 message.exampleQueries = $root.google.cloud.geminidataanalytics.v1alpha.ExampleQueries.fromObject(object.exampleQueries);
+                            }
+                            if (object.clarification != null) {
+                                if (typeof object.clarification !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.SystemMessage.clarification: object expected");
+                                message.clarification = $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.fromObject(object.clarification);
                             }
                             if (object.groupId != null)
                                 message.groupId = object.groupId | 0;
@@ -21188,6 +21943,11 @@
                                 if (options.oneofs)
                                     object.kind = "exampleQueries";
                             }
+                            if (message.clarification != null && message.hasOwnProperty("clarification")) {
+                                object.clarification = $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.toObject(message.clarification, options);
+                                if (options.oneofs)
+                                    object.kind = "clarification";
+                            }
                             return object;
                         };
     
@@ -21228,6 +21988,7 @@
                          * @interface ITextMessage
                          * @property {Array.<string>|null} [parts] TextMessage parts
                          * @property {google.cloud.geminidataanalytics.v1alpha.TextMessage.TextType|null} [textType] TextMessage textType
+                         * @property {Uint8Array|null} [thoughtSignature] TextMessage thoughtSignature
                          */
     
                         /**
@@ -21263,6 +22024,14 @@
                         TextMessage.prototype.textType = 0;
     
                         /**
+                         * TextMessage thoughtSignature.
+                         * @member {Uint8Array} thoughtSignature
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.TextMessage
+                         * @instance
+                         */
+                        TextMessage.prototype.thoughtSignature = $util.newBuffer([]);
+    
+                        /**
                          * Creates a new TextMessage instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.geminidataanalytics.v1alpha.TextMessage
@@ -21291,6 +22060,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.parts[i]);
                             if (message.textType != null && Object.hasOwnProperty.call(message, "textType"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.textType);
+                            if (message.thoughtSignature != null && Object.hasOwnProperty.call(message, "thoughtSignature"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.thoughtSignature);
                             return writer;
                         };
     
@@ -21335,6 +22106,10 @@
                                     }
                                 case 2: {
                                         message.textType = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.thoughtSignature = reader.bytes();
                                         break;
                                     }
                                 default:
@@ -21389,6 +22164,9 @@
                                 case 3:
                                     break;
                                 }
+                            if (message.thoughtSignature != null && message.hasOwnProperty("thoughtSignature"))
+                                if (!(message.thoughtSignature && typeof message.thoughtSignature.length === "number" || $util.isString(message.thoughtSignature)))
+                                    return "thoughtSignature: buffer expected";
                             return null;
                         };
     
@@ -21435,6 +22213,11 @@
                                 message.textType = 3;
                                 break;
                             }
+                            if (object.thoughtSignature != null)
+                                if (typeof object.thoughtSignature === "string")
+                                    $util.base64.decode(object.thoughtSignature, message.thoughtSignature = $util.newBuffer($util.base64.length(object.thoughtSignature)), 0);
+                                else if (object.thoughtSignature.length >= 0)
+                                    message.thoughtSignature = object.thoughtSignature;
                             return message;
                         };
     
@@ -21453,8 +22236,16 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.parts = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.textType = options.enums === String ? "TEXT_TYPE_UNSPECIFIED" : 0;
+                                if (options.bytes === String)
+                                    object.thoughtSignature = "";
+                                else {
+                                    object.thoughtSignature = [];
+                                    if (options.bytes !== Array)
+                                        object.thoughtSignature = $util.newBuffer(object.thoughtSignature);
+                                }
+                            }
                             if (message.parts && message.parts.length) {
                                 object.parts = [];
                                 for (var j = 0; j < message.parts.length; ++j)
@@ -21462,6 +22253,8 @@
                             }
                             if (message.textType != null && message.hasOwnProperty("textType"))
                                 object.textType = options.enums === String ? $root.google.cloud.geminidataanalytics.v1alpha.TextMessage.TextType[message.textType] === undefined ? message.textType : $root.google.cloud.geminidataanalytics.v1alpha.TextMessage.TextType[message.textType] : message.textType;
+                            if (message.thoughtSignature != null && message.hasOwnProperty("thoughtSignature"))
+                                object.thoughtSignature = options.bytes === String ? $util.base64.encode(message.thoughtSignature, 0, message.thoughtSignature.length) : options.bytes === Array ? Array.prototype.slice.call(message.thoughtSignature) : message.thoughtSignature;
                             return object;
                         };
     
@@ -22901,6 +23694,7 @@
                          * @property {string|null} [name] DataResult name
                          * @property {google.cloud.geminidataanalytics.v1alpha.ISchema|null} [schema] DataResult schema
                          * @property {Array.<google.protobuf.IStruct>|null} [data] DataResult data
+                         * @property {Array.<google.protobuf.IStruct>|null} [formattedData] DataResult formattedData
                          */
     
                         /**
@@ -22913,6 +23707,7 @@
                          */
                         function DataResult(properties) {
                             this.data = [];
+                            this.formattedData = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -22942,6 +23737,14 @@
                          * @instance
                          */
                         DataResult.prototype.data = $util.emptyArray;
+    
+                        /**
+                         * DataResult formattedData.
+                         * @member {Array.<google.protobuf.IStruct>} formattedData
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataResult
+                         * @instance
+                         */
+                        DataResult.prototype.formattedData = $util.emptyArray;
     
                         /**
                          * Creates a new DataResult instance using the specified properties.
@@ -22974,6 +23777,9 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
                             if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
                                 $root.google.cloud.geminidataanalytics.v1alpha.Schema.encode(message.schema, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.formattedData != null && message.formattedData.length)
+                                for (var i = 0; i < message.formattedData.length; ++i)
+                                    $root.google.protobuf.Struct.encode(message.formattedData[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -23022,6 +23828,12 @@
                                         if (!(message.data && message.data.length))
                                             message.data = [];
                                         message.data.push($root.google.protobuf.Struct.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.formattedData && message.formattedData.length))
+                                            message.formattedData = [];
+                                        message.formattedData.push($root.google.protobuf.Struct.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -23076,6 +23888,15 @@
                                         return "data." + error;
                                 }
                             }
+                            if (message.formattedData != null && message.hasOwnProperty("formattedData")) {
+                                if (!Array.isArray(message.formattedData))
+                                    return "formattedData: array expected";
+                                for (var i = 0; i < message.formattedData.length; ++i) {
+                                    var error = $root.google.protobuf.Struct.verify(message.formattedData[i]);
+                                    if (error)
+                                        return "formattedData." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -23108,6 +23929,16 @@
                                     message.data[i] = $root.google.protobuf.Struct.fromObject(object.data[i]);
                                 }
                             }
+                            if (object.formattedData) {
+                                if (!Array.isArray(object.formattedData))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.DataResult.formattedData: array expected");
+                                message.formattedData = [];
+                                for (var i = 0; i < object.formattedData.length; ++i) {
+                                    if (typeof object.formattedData[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1alpha.DataResult.formattedData: object expected");
+                                    message.formattedData[i] = $root.google.protobuf.Struct.fromObject(object.formattedData[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -23124,8 +23955,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.data = [];
+                                object.formattedData = [];
+                            }
                             if (options.defaults) {
                                 object.name = "";
                                 object.schema = null;
@@ -23139,6 +23972,11 @@
                                 object.name = message.name;
                             if (message.schema != null && message.hasOwnProperty("schema"))
                                 object.schema = $root.google.cloud.geminidataanalytics.v1alpha.Schema.toObject(message.schema, options);
+                            if (message.formattedData && message.formattedData.length) {
+                                object.formattedData = [];
+                                for (var j = 0; j < message.formattedData.length; ++j)
+                                    object.formattedData[j] = $root.google.protobuf.Struct.toObject(message.formattedData[j], options);
+                            }
                             return object;
                         };
     
@@ -25409,6 +26247,604 @@
                         return ErrorMessage;
                     })();
     
+                    v1alpha.ClarificationQuestion = (function() {
+    
+                        /**
+                         * Properties of a ClarificationQuestion.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface IClarificationQuestion
+                         * @property {string|null} [question] ClarificationQuestion question
+                         * @property {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.SelectionMode|null} [selectionMode] ClarificationQuestion selectionMode
+                         * @property {Array.<string>|null} [options] ClarificationQuestion options
+                         * @property {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.ClarificationQuestionType|null} [clarificationQuestionType] ClarificationQuestion clarificationQuestionType
+                         */
+    
+                        /**
+                         * Constructs a new ClarificationQuestion.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a ClarificationQuestion.
+                         * @implements IClarificationQuestion
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationQuestion=} [properties] Properties to set
+                         */
+                        function ClarificationQuestion(properties) {
+                            this.options = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ClarificationQuestion question.
+                         * @member {string} question
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.question = "";
+    
+                        /**
+                         * ClarificationQuestion selectionMode.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.SelectionMode} selectionMode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.selectionMode = 0;
+    
+                        /**
+                         * ClarificationQuestion options.
+                         * @member {Array.<string>} options
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.options = $util.emptyArray;
+    
+                        /**
+                         * ClarificationQuestion clarificationQuestionType.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.ClarificationQuestionType} clarificationQuestionType
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.clarificationQuestionType = 0;
+    
+                        /**
+                         * Creates a new ClarificationQuestion instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationQuestion=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion} ClarificationQuestion instance
+                         */
+                        ClarificationQuestion.create = function create(properties) {
+                            return new ClarificationQuestion(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationQuestion message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationQuestion} message ClarificationQuestion message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationQuestion.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.question != null && Object.hasOwnProperty.call(message, "question"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.question);
+                            if (message.selectionMode != null && Object.hasOwnProperty.call(message, "selectionMode"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.selectionMode);
+                            if (message.options != null && message.options.length)
+                                for (var i = 0; i < message.options.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.options[i]);
+                            if (message.clarificationQuestionType != null && Object.hasOwnProperty.call(message, "clarificationQuestionType"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.clarificationQuestionType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationQuestion message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationQuestion} message ClarificationQuestion message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationQuestion.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ClarificationQuestion message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion} ClarificationQuestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationQuestion.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.question = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.selectionMode = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.options && message.options.length))
+                                            message.options = [];
+                                        message.options.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.clarificationQuestionType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ClarificationQuestion message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion} ClarificationQuestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationQuestion.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ClarificationQuestion message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ClarificationQuestion.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.question != null && message.hasOwnProperty("question"))
+                                if (!$util.isString(message.question))
+                                    return "question: string expected";
+                            if (message.selectionMode != null && message.hasOwnProperty("selectionMode"))
+                                switch (message.selectionMode) {
+                                default:
+                                    return "selectionMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.options != null && message.hasOwnProperty("options")) {
+                                if (!Array.isArray(message.options))
+                                    return "options: array expected";
+                                for (var i = 0; i < message.options.length; ++i)
+                                    if (!$util.isString(message.options[i]))
+                                        return "options: string[] expected";
+                            }
+                            if (message.clarificationQuestionType != null && message.hasOwnProperty("clarificationQuestionType"))
+                                switch (message.clarificationQuestionType) {
+                                default:
+                                    return "clarificationQuestionType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ClarificationQuestion message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion} ClarificationQuestion
+                         */
+                        ClarificationQuestion.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion();
+                            if (object.question != null)
+                                message.question = String(object.question);
+                            switch (object.selectionMode) {
+                            default:
+                                if (typeof object.selectionMode === "number") {
+                                    message.selectionMode = object.selectionMode;
+                                    break;
+                                }
+                                break;
+                            case "SELECTION_MODE_UNSPECIFIED":
+                            case 0:
+                                message.selectionMode = 0;
+                                break;
+                            case "SINGLE_SELECT":
+                            case 1:
+                                message.selectionMode = 1;
+                                break;
+                            case "MULTI_SELECT":
+                            case 2:
+                                message.selectionMode = 2;
+                                break;
+                            }
+                            if (object.options) {
+                                if (!Array.isArray(object.options))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.options: array expected");
+                                message.options = [];
+                                for (var i = 0; i < object.options.length; ++i)
+                                    message.options[i] = String(object.options[i]);
+                            }
+                            switch (object.clarificationQuestionType) {
+                            default:
+                                if (typeof object.clarificationQuestionType === "number") {
+                                    message.clarificationQuestionType = object.clarificationQuestionType;
+                                    break;
+                                }
+                                break;
+                            case "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.clarificationQuestionType = 0;
+                                break;
+                            case "FILTER_VALUES":
+                            case 1:
+                                message.clarificationQuestionType = 1;
+                                break;
+                            case "FIELDS":
+                            case 2:
+                                message.clarificationQuestionType = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ClarificationQuestion message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion} message ClarificationQuestion
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ClarificationQuestion.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.options = [];
+                            if (options.defaults) {
+                                object.question = "";
+                                object.selectionMode = options.enums === String ? "SELECTION_MODE_UNSPECIFIED" : 0;
+                                object.clarificationQuestionType = options.enums === String ? "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.question != null && message.hasOwnProperty("question"))
+                                object.question = message.question;
+                            if (message.selectionMode != null && message.hasOwnProperty("selectionMode"))
+                                object.selectionMode = options.enums === String ? $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.SelectionMode[message.selectionMode] === undefined ? message.selectionMode : $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.SelectionMode[message.selectionMode] : message.selectionMode;
+                            if (message.options && message.options.length) {
+                                object.options = [];
+                                for (var j = 0; j < message.options.length; ++j)
+                                    object.options[j] = message.options[j];
+                            }
+                            if (message.clarificationQuestionType != null && message.hasOwnProperty("clarificationQuestionType"))
+                                object.clarificationQuestionType = options.enums === String ? $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.ClarificationQuestionType[message.clarificationQuestionType] === undefined ? message.clarificationQuestionType : $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.ClarificationQuestionType[message.clarificationQuestionType] : message.clarificationQuestionType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ClarificationQuestion to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ClarificationQuestion.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ClarificationQuestion
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ClarificationQuestion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion";
+                        };
+    
+                        /**
+                         * SelectionMode enum.
+                         * @name google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.SelectionMode
+                         * @enum {number}
+                         * @property {number} SELECTION_MODE_UNSPECIFIED=0 SELECTION_MODE_UNSPECIFIED value
+                         * @property {number} SINGLE_SELECT=1 SINGLE_SELECT value
+                         * @property {number} MULTI_SELECT=2 MULTI_SELECT value
+                         */
+                        ClarificationQuestion.SelectionMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SELECTION_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SINGLE_SELECT"] = 1;
+                            values[valuesById[2] = "MULTI_SELECT"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ClarificationQuestionType enum.
+                         * @name google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.ClarificationQuestionType
+                         * @enum {number}
+                         * @property {number} CLARIFICATION_QUESTION_TYPE_UNSPECIFIED=0 CLARIFICATION_QUESTION_TYPE_UNSPECIFIED value
+                         * @property {number} FILTER_VALUES=1 FILTER_VALUES value
+                         * @property {number} FIELDS=2 FIELDS value
+                         */
+                        ClarificationQuestion.ClarificationQuestionType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FILTER_VALUES"] = 1;
+                            values[valuesById[2] = "FIELDS"] = 2;
+                            return values;
+                        })();
+    
+                        return ClarificationQuestion;
+                    })();
+    
+                    v1alpha.ClarificationMessage = (function() {
+    
+                        /**
+                         * Properties of a ClarificationMessage.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface IClarificationMessage
+                         * @property {Array.<google.cloud.geminidataanalytics.v1alpha.IClarificationQuestion>|null} [questions] ClarificationMessage questions
+                         */
+    
+                        /**
+                         * Constructs a new ClarificationMessage.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a ClarificationMessage.
+                         * @implements IClarificationMessage
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationMessage=} [properties] Properties to set
+                         */
+                        function ClarificationMessage(properties) {
+                            this.questions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ClarificationMessage questions.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1alpha.IClarificationQuestion>} questions
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @instance
+                         */
+                        ClarificationMessage.prototype.questions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ClarificationMessage instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationMessage=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationMessage} ClarificationMessage instance
+                         */
+                        ClarificationMessage.create = function create(properties) {
+                            return new ClarificationMessage(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationMessage message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationMessage} message ClarificationMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationMessage.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.questions != null && message.questions.length)
+                                for (var i = 0; i < message.questions.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.encode(message.questions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationMessage message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationMessage} message ClarificationMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationMessage.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ClarificationMessage message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationMessage} ClarificationMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationMessage.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.questions && message.questions.length))
+                                            message.questions = [];
+                                        message.questions.push($root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ClarificationMessage message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationMessage} ClarificationMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationMessage.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ClarificationMessage message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ClarificationMessage.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.questions != null && message.hasOwnProperty("questions")) {
+                                if (!Array.isArray(message.questions))
+                                    return "questions: array expected";
+                                for (var i = 0; i < message.questions.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.verify(message.questions[i]);
+                                    if (error)
+                                        return "questions." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ClarificationMessage message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationMessage} ClarificationMessage
+                         */
+                        ClarificationMessage.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage();
+                            if (object.questions) {
+                                if (!Array.isArray(object.questions))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.questions: array expected");
+                                message.questions = [];
+                                for (var i = 0; i < object.questions.length; ++i) {
+                                    if (typeof object.questions[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.questions: object expected");
+                                    message.questions[i] = $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.fromObject(object.questions[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ClarificationMessage message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ClarificationMessage} message ClarificationMessage
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ClarificationMessage.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.questions = [];
+                            if (message.questions && message.questions.length) {
+                                object.questions = [];
+                                for (var j = 0; j < message.questions.length; ++j)
+                                    object.questions[j] = $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.toObject(message.questions[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ClarificationMessage to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ClarificationMessage.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ClarificationMessage
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ClarificationMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.ClarificationMessage";
+                        };
+    
+                        return ClarificationMessage;
+                    })();
+    
                     v1alpha.ExampleQueries = (function() {
     
                         /**
@@ -26100,6 +27536,7 @@
                          * @property {google.cloud.geminidataanalytics.v1beta.IDatasourceReferences|null} [datasourceReferences] Context datasourceReferences
                          * @property {google.cloud.geminidataanalytics.v1beta.IConversationOptions|null} [options] Context options
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.IExampleQuery>|null} [exampleQueries] Context exampleQueries
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.ILookerGoldenQuery>|null} [lookerGoldenQueries] Context lookerGoldenQueries
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.IGlossaryTerm>|null} [glossaryTerms] Context glossaryTerms
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.Context.ISchemaRelationship>|null} [schemaRelationships] Context schemaRelationships
                          */
@@ -26114,6 +27551,7 @@
                          */
                         function Context(properties) {
                             this.exampleQueries = [];
+                            this.lookerGoldenQueries = [];
                             this.glossaryTerms = [];
                             this.schemaRelationships = [];
                             if (properties)
@@ -26153,6 +27591,14 @@
                          * @instance
                          */
                         Context.prototype.exampleQueries = $util.emptyArray;
+    
+                        /**
+                         * Context lookerGoldenQueries.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.ILookerGoldenQuery>} lookerGoldenQueries
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Context
+                         * @instance
+                         */
+                        Context.prototype.lookerGoldenQueries = $util.emptyArray;
     
                         /**
                          * Context glossaryTerms.
@@ -26209,6 +27655,9 @@
                             if (message.schemaRelationships != null && message.schemaRelationships.length)
                                 for (var i = 0; i < message.schemaRelationships.length; ++i)
                                     $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.encode(message.schemaRelationships[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.lookerGoldenQueries != null && message.lookerGoldenQueries.length)
+                                for (var i = 0; i < message.lookerGoldenQueries.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.encode(message.lookerGoldenQueries[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -26261,6 +27710,12 @@
                                         if (!(message.exampleQueries && message.exampleQueries.length))
                                             message.exampleQueries = [];
                                         message.exampleQueries.push($root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.lookerGoldenQueries && message.lookerGoldenQueries.length))
+                                            message.lookerGoldenQueries = [];
+                                        message.lookerGoldenQueries.push($root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 8: {
@@ -26332,6 +27787,15 @@
                                         return "exampleQueries." + error;
                                 }
                             }
+                            if (message.lookerGoldenQueries != null && message.hasOwnProperty("lookerGoldenQueries")) {
+                                if (!Array.isArray(message.lookerGoldenQueries))
+                                    return "lookerGoldenQueries: array expected";
+                                for (var i = 0; i < message.lookerGoldenQueries.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.verify(message.lookerGoldenQueries[i]);
+                                    if (error)
+                                        return "lookerGoldenQueries." + error;
+                                }
+                            }
                             if (message.glossaryTerms != null && message.hasOwnProperty("glossaryTerms")) {
                                 if (!Array.isArray(message.glossaryTerms))
                                     return "glossaryTerms: array expected";
@@ -26387,6 +27851,16 @@
                                     message.exampleQueries[i] = $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.fromObject(object.exampleQueries[i]);
                                 }
                             }
+                            if (object.lookerGoldenQueries) {
+                                if (!Array.isArray(object.lookerGoldenQueries))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.Context.lookerGoldenQueries: array expected");
+                                message.lookerGoldenQueries = [];
+                                for (var i = 0; i < object.lookerGoldenQueries.length; ++i) {
+                                    if (typeof object.lookerGoldenQueries[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.Context.lookerGoldenQueries: object expected");
+                                    message.lookerGoldenQueries[i] = $root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.fromObject(object.lookerGoldenQueries[i]);
+                                }
+                            }
                             if (object.glossaryTerms) {
                                 if (!Array.isArray(object.glossaryTerms))
                                     throw TypeError(".google.cloud.geminidataanalytics.v1beta.Context.glossaryTerms: array expected");
@@ -26427,6 +27901,7 @@
                                 object.exampleQueries = [];
                                 object.glossaryTerms = [];
                                 object.schemaRelationships = [];
+                                object.lookerGoldenQueries = [];
                             }
                             if (options.defaults) {
                                 object.systemInstruction = "";
@@ -26453,6 +27928,11 @@
                                 object.schemaRelationships = [];
                                 for (var j = 0; j < message.schemaRelationships.length; ++j)
                                     object.schemaRelationships[j] = $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.toObject(message.schemaRelationships[j], options);
+                            }
+                            if (message.lookerGoldenQueries && message.lookerGoldenQueries.length) {
+                                object.lookerGoldenQueries = [];
+                                for (var j = 0; j < message.lookerGoldenQueries.length; ++j)
+                                    object.lookerGoldenQueries[j] = $root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.toObject(message.lookerGoldenQueries[j], options);
                             }
                             return object;
                         };
@@ -27333,6 +28813,875 @@
                         };
     
                         return ExampleQuery;
+                    })();
+    
+                    v1beta.LookerGoldenQuery = (function() {
+    
+                        /**
+                         * Properties of a LookerGoldenQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface ILookerGoldenQuery
+                         * @property {Array.<string>|null} [naturalLanguageQuestions] LookerGoldenQuery naturalLanguageQuestions
+                         * @property {google.cloud.geminidataanalytics.v1beta.ILookerQuery|null} [lookerQuery] LookerGoldenQuery lookerQuery
+                         */
+    
+                        /**
+                         * Constructs a new LookerGoldenQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a LookerGoldenQuery.
+                         * @implements ILookerGoldenQuery
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerGoldenQuery=} [properties] Properties to set
+                         */
+                        function LookerGoldenQuery(properties) {
+                            this.naturalLanguageQuestions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LookerGoldenQuery naturalLanguageQuestions.
+                         * @member {Array.<string>} naturalLanguageQuestions
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @instance
+                         */
+                        LookerGoldenQuery.prototype.naturalLanguageQuestions = $util.emptyArray;
+    
+                        /**
+                         * LookerGoldenQuery lookerQuery.
+                         * @member {google.cloud.geminidataanalytics.v1beta.ILookerQuery|null|undefined} lookerQuery
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @instance
+                         */
+                        LookerGoldenQuery.prototype.lookerQuery = null;
+    
+                        /**
+                         * Creates a new LookerGoldenQuery instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerGoldenQuery=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery} LookerGoldenQuery instance
+                         */
+                        LookerGoldenQuery.create = function create(properties) {
+                            return new LookerGoldenQuery(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LookerGoldenQuery message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerGoldenQuery} message LookerGoldenQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerGoldenQuery.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.naturalLanguageQuestions != null && message.naturalLanguageQuestions.length)
+                                for (var i = 0; i < message.naturalLanguageQuestions.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.naturalLanguageQuestions[i]);
+                            if (message.lookerQuery != null && Object.hasOwnProperty.call(message, "lookerQuery"))
+                                $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.encode(message.lookerQuery, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LookerGoldenQuery message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerGoldenQuery} message LookerGoldenQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerGoldenQuery.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LookerGoldenQuery message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery} LookerGoldenQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerGoldenQuery.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 4: {
+                                        if (!(message.naturalLanguageQuestions && message.naturalLanguageQuestions.length))
+                                            message.naturalLanguageQuestions = [];
+                                        message.naturalLanguageQuestions.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.lookerQuery = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LookerGoldenQuery message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery} LookerGoldenQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerGoldenQuery.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LookerGoldenQuery message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LookerGoldenQuery.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.naturalLanguageQuestions != null && message.hasOwnProperty("naturalLanguageQuestions")) {
+                                if (!Array.isArray(message.naturalLanguageQuestions))
+                                    return "naturalLanguageQuestions: array expected";
+                                for (var i = 0; i < message.naturalLanguageQuestions.length; ++i)
+                                    if (!$util.isString(message.naturalLanguageQuestions[i]))
+                                        return "naturalLanguageQuestions: string[] expected";
+                            }
+                            if (message.lookerQuery != null && message.hasOwnProperty("lookerQuery")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.verify(message.lookerQuery);
+                                if (error)
+                                    return "lookerQuery." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LookerGoldenQuery message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery} LookerGoldenQuery
+                         */
+                        LookerGoldenQuery.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery();
+                            if (object.naturalLanguageQuestions) {
+                                if (!Array.isArray(object.naturalLanguageQuestions))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.naturalLanguageQuestions: array expected");
+                                message.naturalLanguageQuestions = [];
+                                for (var i = 0; i < object.naturalLanguageQuestions.length; ++i)
+                                    message.naturalLanguageQuestions[i] = String(object.naturalLanguageQuestions[i]);
+                            }
+                            if (object.lookerQuery != null) {
+                                if (typeof object.lookerQuery !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.lookerQuery: object expected");
+                                message.lookerQuery = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.fromObject(object.lookerQuery);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LookerGoldenQuery message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery} message LookerGoldenQuery
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LookerGoldenQuery.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.naturalLanguageQuestions = [];
+                            if (options.defaults)
+                                object.lookerQuery = null;
+                            if (message.naturalLanguageQuestions && message.naturalLanguageQuestions.length) {
+                                object.naturalLanguageQuestions = [];
+                                for (var j = 0; j < message.naturalLanguageQuestions.length; ++j)
+                                    object.naturalLanguageQuestions[j] = message.naturalLanguageQuestions[j];
+                            }
+                            if (message.lookerQuery != null && message.hasOwnProperty("lookerQuery"))
+                                object.lookerQuery = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.toObject(message.lookerQuery, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LookerGoldenQuery to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LookerGoldenQuery.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LookerGoldenQuery
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LookerGoldenQuery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery";
+                        };
+    
+                        return LookerGoldenQuery;
+                    })();
+    
+                    v1beta.LookerQuery = (function() {
+    
+                        /**
+                         * Properties of a LookerQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface ILookerQuery
+                         * @property {string|null} [model] LookerQuery model
+                         * @property {string|null} [explore] LookerQuery explore
+                         * @property {Array.<string>|null} [fields] LookerQuery fields
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter>|null} [filters] LookerQuery filters
+                         * @property {Array.<string>|null} [sorts] LookerQuery sorts
+                         * @property {string|null} [limit] LookerQuery limit
+                         */
+    
+                        /**
+                         * Constructs a new LookerQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a LookerQuery.
+                         * @implements ILookerQuery
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery=} [properties] Properties to set
+                         */
+                        function LookerQuery(properties) {
+                            this.fields = [];
+                            this.filters = [];
+                            this.sorts = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LookerQuery model.
+                         * @member {string} model
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.model = "";
+    
+                        /**
+                         * LookerQuery explore.
+                         * @member {string} explore
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.explore = "";
+    
+                        /**
+                         * LookerQuery fields.
+                         * @member {Array.<string>} fields
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.fields = $util.emptyArray;
+    
+                        /**
+                         * LookerQuery filters.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter>} filters
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.filters = $util.emptyArray;
+    
+                        /**
+                         * LookerQuery sorts.
+                         * @member {Array.<string>} sorts
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.sorts = $util.emptyArray;
+    
+                        /**
+                         * LookerQuery limit.
+                         * @member {string|null|undefined} limit
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.limit = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LookerQuery.prototype, "_limit", {
+                            get: $util.oneOfGetter($oneOfFields = ["limit"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new LookerQuery instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery instance
+                         */
+                        LookerQuery.create = function create(properties) {
+                            return new LookerQuery(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LookerQuery message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery} message LookerQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerQuery.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.model);
+                            if (message.explore != null && Object.hasOwnProperty.call(message, "explore"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.explore);
+                            if (message.fields != null && message.fields.length)
+                                for (var i = 0; i < message.fields.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.fields[i]);
+                            if (message.filters != null && message.filters.length)
+                                for (var i = 0; i < message.filters.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.encode(message.filters[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.sorts != null && message.sorts.length)
+                                for (var i = 0; i < message.sorts.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.sorts[i]);
+                            if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.limit);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LookerQuery message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery} message LookerQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerQuery.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LookerQuery message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerQuery.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.model = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.explore = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.fields && message.fields.length))
+                                            message.fields = [];
+                                        message.fields.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.filters && message.filters.length))
+                                            message.filters = [];
+                                        message.filters.push($root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.sorts && message.sorts.length))
+                                            message.sorts = [];
+                                        message.sorts.push(reader.string());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.limit = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LookerQuery message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerQuery.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LookerQuery message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LookerQuery.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                if (!$util.isString(message.model))
+                                    return "model: string expected";
+                            if (message.explore != null && message.hasOwnProperty("explore"))
+                                if (!$util.isString(message.explore))
+                                    return "explore: string expected";
+                            if (message.fields != null && message.hasOwnProperty("fields")) {
+                                if (!Array.isArray(message.fields))
+                                    return "fields: array expected";
+                                for (var i = 0; i < message.fields.length; ++i)
+                                    if (!$util.isString(message.fields[i]))
+                                        return "fields: string[] expected";
+                            }
+                            if (message.filters != null && message.hasOwnProperty("filters")) {
+                                if (!Array.isArray(message.filters))
+                                    return "filters: array expected";
+                                for (var i = 0; i < message.filters.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.verify(message.filters[i]);
+                                    if (error)
+                                        return "filters." + error;
+                                }
+                            }
+                            if (message.sorts != null && message.hasOwnProperty("sorts")) {
+                                if (!Array.isArray(message.sorts))
+                                    return "sorts: array expected";
+                                for (var i = 0; i < message.sorts.length; ++i)
+                                    if (!$util.isString(message.sorts[i]))
+                                        return "sorts: string[] expected";
+                            }
+                            if (message.limit != null && message.hasOwnProperty("limit")) {
+                                properties._limit = 1;
+                                if (!$util.isString(message.limit))
+                                    return "limit: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LookerQuery message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery
+                         */
+                        LookerQuery.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.LookerQuery)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery();
+                            if (object.model != null)
+                                message.model = String(object.model);
+                            if (object.explore != null)
+                                message.explore = String(object.explore);
+                            if (object.fields) {
+                                if (!Array.isArray(object.fields))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.fields: array expected");
+                                message.fields = [];
+                                for (var i = 0; i < object.fields.length; ++i)
+                                    message.fields[i] = String(object.fields[i]);
+                            }
+                            if (object.filters) {
+                                if (!Array.isArray(object.filters))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.filters: array expected");
+                                message.filters = [];
+                                for (var i = 0; i < object.filters.length; ++i) {
+                                    if (typeof object.filters[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.filters: object expected");
+                                    message.filters[i] = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.fromObject(object.filters[i]);
+                                }
+                            }
+                            if (object.sorts) {
+                                if (!Array.isArray(object.sorts))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.sorts: array expected");
+                                message.sorts = [];
+                                for (var i = 0; i < object.sorts.length; ++i)
+                                    message.sorts[i] = String(object.sorts[i]);
+                            }
+                            if (object.limit != null)
+                                message.limit = String(object.limit);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LookerQuery message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery} message LookerQuery
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LookerQuery.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.fields = [];
+                                object.filters = [];
+                                object.sorts = [];
+                            }
+                            if (options.defaults) {
+                                object.model = "";
+                                object.explore = "";
+                            }
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                object.model = message.model;
+                            if (message.explore != null && message.hasOwnProperty("explore"))
+                                object.explore = message.explore;
+                            if (message.fields && message.fields.length) {
+                                object.fields = [];
+                                for (var j = 0; j < message.fields.length; ++j)
+                                    object.fields[j] = message.fields[j];
+                            }
+                            if (message.filters && message.filters.length) {
+                                object.filters = [];
+                                for (var j = 0; j < message.filters.length; ++j)
+                                    object.filters[j] = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.toObject(message.filters[j], options);
+                            }
+                            if (message.sorts && message.sorts.length) {
+                                object.sorts = [];
+                                for (var j = 0; j < message.sorts.length; ++j)
+                                    object.sorts[j] = message.sorts[j];
+                            }
+                            if (message.limit != null && message.hasOwnProperty("limit")) {
+                                object.limit = message.limit;
+                                if (options.oneofs)
+                                    object._limit = "limit";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LookerQuery to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LookerQuery.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LookerQuery
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LookerQuery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.LookerQuery";
+                        };
+    
+                        LookerQuery.Filter = (function() {
+    
+                            /**
+                             * Properties of a Filter.
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                             * @interface IFilter
+                             * @property {string|null} [field] Filter field
+                             * @property {string|null} [value] Filter value
+                             */
+    
+                            /**
+                             * Constructs a new Filter.
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                             * @classdesc Represents a Filter.
+                             * @implements IFilter
+                             * @constructor
+                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter=} [properties] Properties to set
+                             */
+                            function Filter(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Filter field.
+                             * @member {string} field
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @instance
+                             */
+                            Filter.prototype.field = "";
+    
+                            /**
+                             * Filter value.
+                             * @member {string} value
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @instance
+                             */
+                            Filter.prototype.value = "";
+    
+                            /**
+                             * Creates a new Filter instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter=} [properties] Properties to set
+                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter instance
+                             */
+                            Filter.create = function create(properties) {
+                                return new Filter(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Filter message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter} message Filter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Filter.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.field != null && Object.hasOwnProperty.call(message, "field"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.field);
+                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter} message Filter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Filter.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Filter message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Filter.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.field = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.value = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Filter message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Filter.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Filter message.
+                             * @function verify
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Filter.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.field != null && message.hasOwnProperty("field"))
+                                    if (!$util.isString(message.field))
+                                        return "field: string expected";
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    if (!$util.isString(message.value))
+                                        return "value: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Filter message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter
+                             */
+                            Filter.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter)
+                                    return object;
+                                var message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter();
+                                if (object.field != null)
+                                    message.field = String(object.field);
+                                if (object.value != null)
+                                    message.value = String(object.value);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Filter message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} message Filter
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Filter.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.field = "";
+                                    object.value = "";
+                                }
+                                if (message.field != null && message.hasOwnProperty("field"))
+                                    object.field = message.field;
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = message.value;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Filter to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Filter.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Filter
+                             * @function getTypeUrl
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Filter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter";
+                            };
+    
+                            return Filter;
+                        })();
+    
+                        return LookerQuery;
                     })();
     
                     v1beta.GlossaryTerm = (function() {
@@ -38306,6 +40655,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataAgentService|createDataAgentSync}.
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataAgentService
+                         * @typedef CreateDataAgentSyncCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.geminidataanalytics.v1beta.DataAgent} [response] DataAgent
+                         */
+    
+                        /**
+                         * Calls CreateDataAgentSync.
+                         * @function createDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1beta.ICreateDataAgentRequest} request CreateDataAgentRequest message or plain object
+                         * @param {google.cloud.geminidataanalytics.v1beta.DataAgentService.CreateDataAgentSyncCallback} callback Node-style callback called with the error, if any, and DataAgent
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataAgentService.prototype.createDataAgentSync = function createDataAgentSync(request, callback) {
+                            return this.rpcCall(createDataAgentSync, $root.google.cloud.geminidataanalytics.v1beta.CreateDataAgentRequest, $root.google.cloud.geminidataanalytics.v1beta.DataAgent, request, callback);
+                        }, "name", { value: "CreateDataAgentSync" });
+    
+                        /**
+                         * Calls CreateDataAgentSync.
+                         * @function createDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1beta.ICreateDataAgentRequest} request CreateDataAgentRequest message or plain object
+                         * @returns {Promise<google.cloud.geminidataanalytics.v1beta.DataAgent>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataAgentService|updateDataAgent}.
                          * @memberof google.cloud.geminidataanalytics.v1beta.DataAgentService
                          * @typedef UpdateDataAgentCallback
@@ -38339,6 +40721,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataAgentService|updateDataAgentSync}.
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataAgentService
+                         * @typedef UpdateDataAgentSyncCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.geminidataanalytics.v1beta.DataAgent} [response] DataAgent
+                         */
+    
+                        /**
+                         * Calls UpdateDataAgentSync.
+                         * @function updateDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1beta.IUpdateDataAgentRequest} request UpdateDataAgentRequest message or plain object
+                         * @param {google.cloud.geminidataanalytics.v1beta.DataAgentService.UpdateDataAgentSyncCallback} callback Node-style callback called with the error, if any, and DataAgent
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataAgentService.prototype.updateDataAgentSync = function updateDataAgentSync(request, callback) {
+                            return this.rpcCall(updateDataAgentSync, $root.google.cloud.geminidataanalytics.v1beta.UpdateDataAgentRequest, $root.google.cloud.geminidataanalytics.v1beta.DataAgent, request, callback);
+                        }, "name", { value: "UpdateDataAgentSync" });
+    
+                        /**
+                         * Calls UpdateDataAgentSync.
+                         * @function updateDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1beta.IUpdateDataAgentRequest} request UpdateDataAgentRequest message or plain object
+                         * @returns {Promise<google.cloud.geminidataanalytics.v1beta.DataAgent>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataAgentService|deleteDataAgent}.
                          * @memberof google.cloud.geminidataanalytics.v1beta.DataAgentService
                          * @typedef DeleteDataAgentCallback
@@ -38368,6 +40783,39 @@
                          * @instance
                          * @param {google.cloud.geminidataanalytics.v1beta.IDeleteDataAgentRequest} request DeleteDataAgentRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataAgentService|deleteDataAgentSync}.
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataAgentService
+                         * @typedef DeleteDataAgentSyncCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteDataAgentSync.
+                         * @function deleteDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDeleteDataAgentRequest} request DeleteDataAgentRequest message or plain object
+                         * @param {google.cloud.geminidataanalytics.v1beta.DataAgentService.DeleteDataAgentSyncCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataAgentService.prototype.deleteDataAgentSync = function deleteDataAgentSync(request, callback) {
+                            return this.rpcCall(deleteDataAgentSync, $root.google.cloud.geminidataanalytics.v1beta.DeleteDataAgentRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteDataAgentSync" });
+    
+                        /**
+                         * Calls DeleteDataAgentSync.
+                         * @function deleteDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDeleteDataAgentRequest} request DeleteDataAgentRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
                          * @variation 2
                          */
     
@@ -41895,6 +44343,7 @@
                          * @memberof google.cloud.geminidataanalytics.v1beta
                          * @interface IQueryDataContext
                          * @property {google.cloud.geminidataanalytics.v1beta.IDatasourceReferences|null} [datasourceReferences] QueryDataContext datasourceReferences
+                         * @property {google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters|null} [parameterizedSecureViewParameters] QueryDataContext parameterizedSecureViewParameters
                          */
     
                         /**
@@ -41919,6 +44368,14 @@
                          * @instance
                          */
                         QueryDataContext.prototype.datasourceReferences = null;
+    
+                        /**
+                         * QueryDataContext parameterizedSecureViewParameters.
+                         * @member {google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters|null|undefined} parameterizedSecureViewParameters
+                         * @memberof google.cloud.geminidataanalytics.v1beta.QueryDataContext
+                         * @instance
+                         */
+                        QueryDataContext.prototype.parameterizedSecureViewParameters = null;
     
                         /**
                          * Creates a new QueryDataContext instance using the specified properties.
@@ -41946,6 +44403,8 @@
                                 writer = $Writer.create();
                             if (message.datasourceReferences != null && Object.hasOwnProperty.call(message, "datasourceReferences"))
                                 $root.google.cloud.geminidataanalytics.v1beta.DatasourceReferences.encode(message.datasourceReferences, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.parameterizedSecureViewParameters != null && Object.hasOwnProperty.call(message, "parameterizedSecureViewParameters"))
+                                $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.encode(message.parameterizedSecureViewParameters, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -41984,6 +44443,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.datasourceReferences = $root.google.cloud.geminidataanalytics.v1beta.DatasourceReferences.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.parameterizedSecureViewParameters = $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -42026,6 +44489,11 @@
                                 if (error)
                                     return "datasourceReferences." + error;
                             }
+                            if (message.parameterizedSecureViewParameters != null && message.hasOwnProperty("parameterizedSecureViewParameters")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.verify(message.parameterizedSecureViewParameters);
+                                if (error)
+                                    return "parameterizedSecureViewParameters." + error;
+                            }
                             return null;
                         };
     
@@ -42046,6 +44514,11 @@
                                     throw TypeError(".google.cloud.geminidataanalytics.v1beta.QueryDataContext.datasourceReferences: object expected");
                                 message.datasourceReferences = $root.google.cloud.geminidataanalytics.v1beta.DatasourceReferences.fromObject(object.datasourceReferences);
                             }
+                            if (object.parameterizedSecureViewParameters != null) {
+                                if (typeof object.parameterizedSecureViewParameters !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.QueryDataContext.parameterizedSecureViewParameters: object expected");
+                                message.parameterizedSecureViewParameters = $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.fromObject(object.parameterizedSecureViewParameters);
+                            }
                             return message;
                         };
     
@@ -42062,10 +44535,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.datasourceReferences = null;
+                                object.parameterizedSecureViewParameters = null;
+                            }
                             if (message.datasourceReferences != null && message.hasOwnProperty("datasourceReferences"))
                                 object.datasourceReferences = $root.google.cloud.geminidataanalytics.v1beta.DatasourceReferences.toObject(message.datasourceReferences, options);
+                            if (message.parameterizedSecureViewParameters != null && message.hasOwnProperty("parameterizedSecureViewParameters"))
+                                object.parameterizedSecureViewParameters = $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.toObject(message.parameterizedSecureViewParameters, options);
                             return object;
                         };
     
@@ -42096,6 +44573,246 @@
                         };
     
                         return QueryDataContext;
+                    })();
+    
+                    v1beta.ParameterizedSecureViewParameters = (function() {
+    
+                        /**
+                         * Properties of a ParameterizedSecureViewParameters.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IParameterizedSecureViewParameters
+                         * @property {Object.<string,string>|null} [parameters] ParameterizedSecureViewParameters parameters
+                         */
+    
+                        /**
+                         * Constructs a new ParameterizedSecureViewParameters.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a ParameterizedSecureViewParameters.
+                         * @implements IParameterizedSecureViewParameters
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters=} [properties] Properties to set
+                         */
+                        function ParameterizedSecureViewParameters(properties) {
+                            this.parameters = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ParameterizedSecureViewParameters parameters.
+                         * @member {Object.<string,string>} parameters
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @instance
+                         */
+                        ParameterizedSecureViewParameters.prototype.parameters = $util.emptyObject;
+    
+                        /**
+                         * Creates a new ParameterizedSecureViewParameters instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters} ParameterizedSecureViewParameters instance
+                         */
+                        ParameterizedSecureViewParameters.create = function create(properties) {
+                            return new ParameterizedSecureViewParameters(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ParameterizedSecureViewParameters message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters} message ParameterizedSecureViewParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ParameterizedSecureViewParameters.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
+                                for (var keys = Object.keys(message.parameters), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.parameters[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ParameterizedSecureViewParameters message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IParameterizedSecureViewParameters} message ParameterizedSecureViewParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ParameterizedSecureViewParameters.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ParameterizedSecureViewParameters message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters} ParameterizedSecureViewParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ParameterizedSecureViewParameters.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (message.parameters === $util.emptyObject)
+                                            message.parameters = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.parameters[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ParameterizedSecureViewParameters message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters} ParameterizedSecureViewParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ParameterizedSecureViewParameters.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ParameterizedSecureViewParameters message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ParameterizedSecureViewParameters.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parameters != null && message.hasOwnProperty("parameters")) {
+                                if (!$util.isObject(message.parameters))
+                                    return "parameters: object expected";
+                                var key = Object.keys(message.parameters);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.parameters[key[i]]))
+                                        return "parameters: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ParameterizedSecureViewParameters message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters} ParameterizedSecureViewParameters
+                         */
+                        ParameterizedSecureViewParameters.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters();
+                            if (object.parameters) {
+                                if (typeof object.parameters !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters.parameters: object expected");
+                                message.parameters = {};
+                                for (var keys = Object.keys(object.parameters), i = 0; i < keys.length; ++i)
+                                    message.parameters[keys[i]] = String(object.parameters[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ParameterizedSecureViewParameters message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters} message ParameterizedSecureViewParameters
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ParameterizedSecureViewParameters.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.parameters = {};
+                            var keys2;
+                            if (message.parameters && (keys2 = Object.keys(message.parameters)).length) {
+                                object.parameters = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.parameters[keys2[j]] = message.parameters[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ParameterizedSecureViewParameters to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ParameterizedSecureViewParameters.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ParameterizedSecureViewParameters
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ParameterizedSecureViewParameters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.ParameterizedSecureViewParameters";
+                        };
+    
+                        return ParameterizedSecureViewParameters;
                     })();
     
                     v1beta.QueryDataResponse = (function() {
@@ -44206,6 +46923,7 @@
                          * @property {string|null} [project] ChatRequest project
                          * @property {string|null} [parent] ChatRequest parent
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.IMessage>|null} [messages] ChatRequest messages
+                         * @property {google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode|null} [thinkingMode] ChatRequest thinkingMode
                          */
     
                         /**
@@ -44280,6 +46998,14 @@
                          */
                         ChatRequest.prototype.messages = $util.emptyArray;
     
+                        /**
+                         * ChatRequest thinkingMode.
+                         * @member {google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode} thinkingMode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ChatRequest
+                         * @instance
+                         */
+                        ChatRequest.prototype.thinkingMode = 0;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -44325,6 +47051,8 @@
                                     $root.google.cloud.geminidataanalytics.v1beta.Message.encode(message.messages[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.parent);
+                            if (message.thinkingMode != null && Object.hasOwnProperty.call(message, "thinkingMode"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.thinkingMode);
                             if (message.inlineContext != null && Object.hasOwnProperty.call(message, "inlineContext"))
                                 $root.google.cloud.geminidataanalytics.v1beta.Context.encode(message.inlineContext, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
                             if (message.conversationReference != null && Object.hasOwnProperty.call(message, "conversationReference"))
@@ -44397,6 +47125,10 @@
                                         if (!(message.messages && message.messages.length))
                                             message.messages = [];
                                         message.messages.push($root.google.cloud.geminidataanalytics.v1beta.Message.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 9: {
+                                        message.thinkingMode = reader.int32();
                                         break;
                                     }
                                 default:
@@ -44488,6 +47220,15 @@
                                         return "messages." + error;
                                 }
                             }
+                            if (message.thinkingMode != null && message.hasOwnProperty("thinkingMode"))
+                                switch (message.thinkingMode) {
+                                default:
+                                    return "thinkingMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -44537,6 +47278,26 @@
                                     message.messages[i] = $root.google.cloud.geminidataanalytics.v1beta.Message.fromObject(object.messages[i]);
                                 }
                             }
+                            switch (object.thinkingMode) {
+                            default:
+                                if (typeof object.thinkingMode === "number") {
+                                    message.thinkingMode = object.thinkingMode;
+                                    break;
+                                }
+                                break;
+                            case "THINKING_MODE_UNSPECIFIED":
+                            case 0:
+                                message.thinkingMode = 0;
+                                break;
+                            case "FAST":
+                            case 1:
+                                message.thinkingMode = 1;
+                                break;
+                            case "THINKING":
+                            case 2:
+                                message.thinkingMode = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -44558,6 +47319,7 @@
                             if (options.defaults) {
                                 object.project = "";
                                 object.parent = "";
+                                object.thinkingMode = options.enums === String ? "THINKING_MODE_UNSPECIFIED" : 0;
                             }
                             if (message.project != null && message.hasOwnProperty("project"))
                                 object.project = message.project;
@@ -44568,6 +47330,8 @@
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
+                            if (message.thinkingMode != null && message.hasOwnProperty("thinkingMode"))
+                                object.thinkingMode = options.enums === String ? $root.google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode[message.thinkingMode] === undefined ? message.thinkingMode : $root.google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode[message.thinkingMode] : message.thinkingMode;
                             if (message.inlineContext != null && message.hasOwnProperty("inlineContext")) {
                                 object.inlineContext = $root.google.cloud.geminidataanalytics.v1beta.Context.toObject(message.inlineContext, options);
                                 if (options.oneofs)
@@ -44616,6 +47380,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.ChatRequest";
                         };
+    
+                        /**
+                         * ThinkingMode enum.
+                         * @name google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode
+                         * @enum {number}
+                         * @property {number} THINKING_MODE_UNSPECIFIED=0 THINKING_MODE_UNSPECIFIED value
+                         * @property {number} FAST=1 FAST value
+                         * @property {number} THINKING=2 THINKING value
+                         */
+                        ChatRequest.ThinkingMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "THINKING_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FAST"] = 1;
+                            values[valuesById[2] = "THINKING"] = 2;
+                            return values;
+                        })();
     
                         return ChatRequest;
                     })();
@@ -45961,6 +48741,7 @@
                          * @property {google.cloud.geminidataanalytics.v1beta.IChartMessage|null} [chart] SystemMessage chart
                          * @property {google.cloud.geminidataanalytics.v1beta.IErrorMessage|null} [error] SystemMessage error
                          * @property {google.cloud.geminidataanalytics.v1beta.IExampleQueries|null} [exampleQueries] SystemMessage exampleQueries
+                         * @property {google.cloud.geminidataanalytics.v1beta.IClarificationMessage|null} [clarification] SystemMessage clarification
                          * @property {number|null} [groupId] SystemMessage groupId
                          */
     
@@ -46036,6 +48817,14 @@
                         SystemMessage.prototype.exampleQueries = null;
     
                         /**
+                         * SystemMessage clarification.
+                         * @member {google.cloud.geminidataanalytics.v1beta.IClarificationMessage|null|undefined} clarification
+                         * @memberof google.cloud.geminidataanalytics.v1beta.SystemMessage
+                         * @instance
+                         */
+                        SystemMessage.prototype.clarification = null;
+    
+                        /**
                          * SystemMessage groupId.
                          * @member {number|null|undefined} groupId
                          * @memberof google.cloud.geminidataanalytics.v1beta.SystemMessage
@@ -46048,12 +48837,12 @@
     
                         /**
                          * SystemMessage kind.
-                         * @member {"text"|"schema"|"data"|"analysis"|"chart"|"error"|"exampleQueries"|undefined} kind
+                         * @member {"text"|"schema"|"data"|"analysis"|"chart"|"error"|"exampleQueries"|"clarification"|undefined} kind
                          * @memberof google.cloud.geminidataanalytics.v1beta.SystemMessage
                          * @instance
                          */
                         Object.defineProperty(SystemMessage.prototype, "kind", {
-                            get: $util.oneOfGetter($oneOfFields = ["text", "schema", "data", "analysis", "chart", "error", "exampleQueries"]),
+                            get: $util.oneOfGetter($oneOfFields = ["text", "schema", "data", "analysis", "chart", "error", "exampleQueries", "clarification"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -46103,6 +48892,8 @@
                                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.groupId);
                             if (message.exampleQueries != null && Object.hasOwnProperty.call(message, "exampleQueries"))
                                 $root.google.cloud.geminidataanalytics.v1beta.ExampleQueries.encode(message.exampleQueries, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.clarification != null && Object.hasOwnProperty.call(message, "clarification"))
+                                $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage.encode(message.clarification, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -46165,6 +48956,10 @@
                                     }
                                 case 13: {
                                         message.exampleQueries = $root.google.cloud.geminidataanalytics.v1beta.ExampleQueries.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.clarification = $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 12: {
@@ -46275,6 +49070,16 @@
                                         return "exampleQueries." + error;
                                 }
                             }
+                            if (message.clarification != null && message.hasOwnProperty("clarification")) {
+                                if (properties.kind === 1)
+                                    return "kind: multiple values";
+                                properties.kind = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage.verify(message.clarification);
+                                    if (error)
+                                        return "clarification." + error;
+                                }
+                            }
                             if (message.groupId != null && message.hasOwnProperty("groupId")) {
                                 properties._groupId = 1;
                                 if (!$util.isInteger(message.groupId))
@@ -46329,6 +49134,11 @@
                                 if (typeof object.exampleQueries !== "object")
                                     throw TypeError(".google.cloud.geminidataanalytics.v1beta.SystemMessage.exampleQueries: object expected");
                                 message.exampleQueries = $root.google.cloud.geminidataanalytics.v1beta.ExampleQueries.fromObject(object.exampleQueries);
+                            }
+                            if (object.clarification != null) {
+                                if (typeof object.clarification !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.SystemMessage.clarification: object expected");
+                                message.clarification = $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage.fromObject(object.clarification);
                             }
                             if (object.groupId != null)
                                 message.groupId = object.groupId | 0;
@@ -46388,6 +49198,11 @@
                                 if (options.oneofs)
                                     object.kind = "exampleQueries";
                             }
+                            if (message.clarification != null && message.hasOwnProperty("clarification")) {
+                                object.clarification = $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage.toObject(message.clarification, options);
+                                if (options.oneofs)
+                                    object.kind = "clarification";
+                            }
                             return object;
                         };
     
@@ -46428,6 +49243,7 @@
                          * @interface ITextMessage
                          * @property {Array.<string>|null} [parts] TextMessage parts
                          * @property {google.cloud.geminidataanalytics.v1beta.TextMessage.TextType|null} [textType] TextMessage textType
+                         * @property {Uint8Array|null} [thoughtSignature] TextMessage thoughtSignature
                          */
     
                         /**
@@ -46463,6 +49279,14 @@
                         TextMessage.prototype.textType = 0;
     
                         /**
+                         * TextMessage thoughtSignature.
+                         * @member {Uint8Array} thoughtSignature
+                         * @memberof google.cloud.geminidataanalytics.v1beta.TextMessage
+                         * @instance
+                         */
+                        TextMessage.prototype.thoughtSignature = $util.newBuffer([]);
+    
+                        /**
                          * Creates a new TextMessage instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.geminidataanalytics.v1beta.TextMessage
@@ -46491,6 +49315,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.parts[i]);
                             if (message.textType != null && Object.hasOwnProperty.call(message, "textType"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.textType);
+                            if (message.thoughtSignature != null && Object.hasOwnProperty.call(message, "thoughtSignature"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.thoughtSignature);
                             return writer;
                         };
     
@@ -46535,6 +49361,10 @@
                                     }
                                 case 2: {
                                         message.textType = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.thoughtSignature = reader.bytes();
                                         break;
                                     }
                                 default:
@@ -46589,6 +49419,9 @@
                                 case 3:
                                     break;
                                 }
+                            if (message.thoughtSignature != null && message.hasOwnProperty("thoughtSignature"))
+                                if (!(message.thoughtSignature && typeof message.thoughtSignature.length === "number" || $util.isString(message.thoughtSignature)))
+                                    return "thoughtSignature: buffer expected";
                             return null;
                         };
     
@@ -46635,6 +49468,11 @@
                                 message.textType = 3;
                                 break;
                             }
+                            if (object.thoughtSignature != null)
+                                if (typeof object.thoughtSignature === "string")
+                                    $util.base64.decode(object.thoughtSignature, message.thoughtSignature = $util.newBuffer($util.base64.length(object.thoughtSignature)), 0);
+                                else if (object.thoughtSignature.length >= 0)
+                                    message.thoughtSignature = object.thoughtSignature;
                             return message;
                         };
     
@@ -46653,8 +49491,16 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.parts = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.textType = options.enums === String ? "TEXT_TYPE_UNSPECIFIED" : 0;
+                                if (options.bytes === String)
+                                    object.thoughtSignature = "";
+                                else {
+                                    object.thoughtSignature = [];
+                                    if (options.bytes !== Array)
+                                        object.thoughtSignature = $util.newBuffer(object.thoughtSignature);
+                                }
+                            }
                             if (message.parts && message.parts.length) {
                                 object.parts = [];
                                 for (var j = 0; j < message.parts.length; ++j)
@@ -46662,6 +49508,8 @@
                             }
                             if (message.textType != null && message.hasOwnProperty("textType"))
                                 object.textType = options.enums === String ? $root.google.cloud.geminidataanalytics.v1beta.TextMessage.TextType[message.textType] === undefined ? message.textType : $root.google.cloud.geminidataanalytics.v1beta.TextMessage.TextType[message.textType] : message.textType;
+                            if (message.thoughtSignature != null && message.hasOwnProperty("thoughtSignature"))
+                                object.thoughtSignature = options.bytes === String ? $util.base64.encode(message.thoughtSignature, 0, message.thoughtSignature.length) : options.bytes === Array ? Array.prototype.slice.call(message.thoughtSignature) : message.thoughtSignature;
                             return object;
                         };
     
@@ -47770,625 +50618,6 @@
                         return DataMessage;
                     })();
     
-                    v1beta.LookerQuery = (function() {
-    
-                        /**
-                         * Properties of a LookerQuery.
-                         * @memberof google.cloud.geminidataanalytics.v1beta
-                         * @interface ILookerQuery
-                         * @property {string|null} [model] LookerQuery model
-                         * @property {string|null} [explore] LookerQuery explore
-                         * @property {Array.<string>|null} [fields] LookerQuery fields
-                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter>|null} [filters] LookerQuery filters
-                         * @property {Array.<string>|null} [sorts] LookerQuery sorts
-                         * @property {string|null} [limit] LookerQuery limit
-                         */
-    
-                        /**
-                         * Constructs a new LookerQuery.
-                         * @memberof google.cloud.geminidataanalytics.v1beta
-                         * @classdesc Represents a LookerQuery.
-                         * @implements ILookerQuery
-                         * @constructor
-                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery=} [properties] Properties to set
-                         */
-                        function LookerQuery(properties) {
-                            this.fields = [];
-                            this.filters = [];
-                            this.sorts = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * LookerQuery model.
-                         * @member {string} model
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.model = "";
-    
-                        /**
-                         * LookerQuery explore.
-                         * @member {string} explore
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.explore = "";
-    
-                        /**
-                         * LookerQuery fields.
-                         * @member {Array.<string>} fields
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.fields = $util.emptyArray;
-    
-                        /**
-                         * LookerQuery filters.
-                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter>} filters
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.filters = $util.emptyArray;
-    
-                        /**
-                         * LookerQuery sorts.
-                         * @member {Array.<string>} sorts
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.sorts = $util.emptyArray;
-    
-                        /**
-                         * LookerQuery limit.
-                         * @member {string|null|undefined} limit
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.limit = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(LookerQuery.prototype, "_limit", {
-                            get: $util.oneOfGetter($oneOfFields = ["limit"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new LookerQuery instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery=} [properties] Properties to set
-                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery instance
-                         */
-                        LookerQuery.create = function create(properties) {
-                            return new LookerQuery(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified LookerQuery message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery} message LookerQuery message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        LookerQuery.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.model);
-                            if (message.explore != null && Object.hasOwnProperty.call(message, "explore"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.explore);
-                            if (message.fields != null && message.fields.length)
-                                for (var i = 0; i < message.fields.length; ++i)
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.fields[i]);
-                            if (message.filters != null && message.filters.length)
-                                for (var i = 0; i < message.filters.length; ++i)
-                                    $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.encode(message.filters[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            if (message.sorts != null && message.sorts.length)
-                                for (var i = 0; i < message.sorts.length; ++i)
-                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.sorts[i]);
-                            if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
-                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.limit);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified LookerQuery message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery} message LookerQuery message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        LookerQuery.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a LookerQuery message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        LookerQuery.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.model = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.explore = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        if (!(message.fields && message.fields.length))
-                                            message.fields = [];
-                                        message.fields.push(reader.string());
-                                        break;
-                                    }
-                                case 4: {
-                                        if (!(message.filters && message.filters.length))
-                                            message.filters = [];
-                                        message.filters.push($root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 5: {
-                                        if (!(message.sorts && message.sorts.length))
-                                            message.sorts = [];
-                                        message.sorts.push(reader.string());
-                                        break;
-                                    }
-                                case 6: {
-                                        message.limit = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a LookerQuery message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        LookerQuery.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a LookerQuery message.
-                         * @function verify
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        LookerQuery.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.model != null && message.hasOwnProperty("model"))
-                                if (!$util.isString(message.model))
-                                    return "model: string expected";
-                            if (message.explore != null && message.hasOwnProperty("explore"))
-                                if (!$util.isString(message.explore))
-                                    return "explore: string expected";
-                            if (message.fields != null && message.hasOwnProperty("fields")) {
-                                if (!Array.isArray(message.fields))
-                                    return "fields: array expected";
-                                for (var i = 0; i < message.fields.length; ++i)
-                                    if (!$util.isString(message.fields[i]))
-                                        return "fields: string[] expected";
-                            }
-                            if (message.filters != null && message.hasOwnProperty("filters")) {
-                                if (!Array.isArray(message.filters))
-                                    return "filters: array expected";
-                                for (var i = 0; i < message.filters.length; ++i) {
-                                    var error = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.verify(message.filters[i]);
-                                    if (error)
-                                        return "filters." + error;
-                                }
-                            }
-                            if (message.sorts != null && message.hasOwnProperty("sorts")) {
-                                if (!Array.isArray(message.sorts))
-                                    return "sorts: array expected";
-                                for (var i = 0; i < message.sorts.length; ++i)
-                                    if (!$util.isString(message.sorts[i]))
-                                        return "sorts: string[] expected";
-                            }
-                            if (message.limit != null && message.hasOwnProperty("limit")) {
-                                properties._limit = 1;
-                                if (!$util.isString(message.limit))
-                                    return "limit: string expected";
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a LookerQuery message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery
-                         */
-                        LookerQuery.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.LookerQuery)
-                                return object;
-                            var message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery();
-                            if (object.model != null)
-                                message.model = String(object.model);
-                            if (object.explore != null)
-                                message.explore = String(object.explore);
-                            if (object.fields) {
-                                if (!Array.isArray(object.fields))
-                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.fields: array expected");
-                                message.fields = [];
-                                for (var i = 0; i < object.fields.length; ++i)
-                                    message.fields[i] = String(object.fields[i]);
-                            }
-                            if (object.filters) {
-                                if (!Array.isArray(object.filters))
-                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.filters: array expected");
-                                message.filters = [];
-                                for (var i = 0; i < object.filters.length; ++i) {
-                                    if (typeof object.filters[i] !== "object")
-                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.filters: object expected");
-                                    message.filters[i] = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.fromObject(object.filters[i]);
-                                }
-                            }
-                            if (object.sorts) {
-                                if (!Array.isArray(object.sorts))
-                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.sorts: array expected");
-                                message.sorts = [];
-                                for (var i = 0; i < object.sorts.length; ++i)
-                                    message.sorts[i] = String(object.sorts[i]);
-                            }
-                            if (object.limit != null)
-                                message.limit = String(object.limit);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a LookerQuery message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery} message LookerQuery
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        LookerQuery.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.fields = [];
-                                object.filters = [];
-                                object.sorts = [];
-                            }
-                            if (options.defaults) {
-                                object.model = "";
-                                object.explore = "";
-                            }
-                            if (message.model != null && message.hasOwnProperty("model"))
-                                object.model = message.model;
-                            if (message.explore != null && message.hasOwnProperty("explore"))
-                                object.explore = message.explore;
-                            if (message.fields && message.fields.length) {
-                                object.fields = [];
-                                for (var j = 0; j < message.fields.length; ++j)
-                                    object.fields[j] = message.fields[j];
-                            }
-                            if (message.filters && message.filters.length) {
-                                object.filters = [];
-                                for (var j = 0; j < message.filters.length; ++j)
-                                    object.filters[j] = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.toObject(message.filters[j], options);
-                            }
-                            if (message.sorts && message.sorts.length) {
-                                object.sorts = [];
-                                for (var j = 0; j < message.sorts.length; ++j)
-                                    object.sorts[j] = message.sorts[j];
-                            }
-                            if (message.limit != null && message.hasOwnProperty("limit")) {
-                                object.limit = message.limit;
-                                if (options.oneofs)
-                                    object._limit = "limit";
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this LookerQuery to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        LookerQuery.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for LookerQuery
-                         * @function getTypeUrl
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        LookerQuery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.LookerQuery";
-                        };
-    
-                        LookerQuery.Filter = (function() {
-    
-                            /**
-                             * Properties of a Filter.
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                             * @interface IFilter
-                             * @property {string|null} [field] Filter field
-                             * @property {string|null} [value] Filter value
-                             */
-    
-                            /**
-                             * Constructs a new Filter.
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                             * @classdesc Represents a Filter.
-                             * @implements IFilter
-                             * @constructor
-                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter=} [properties] Properties to set
-                             */
-                            function Filter(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Filter field.
-                             * @member {string} field
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @instance
-                             */
-                            Filter.prototype.field = "";
-    
-                            /**
-                             * Filter value.
-                             * @member {string} value
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @instance
-                             */
-                            Filter.prototype.value = "";
-    
-                            /**
-                             * Creates a new Filter instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter=} [properties] Properties to set
-                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter instance
-                             */
-                            Filter.create = function create(properties) {
-                                return new Filter(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Filter message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter} message Filter message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Filter.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.field != null && Object.hasOwnProperty.call(message, "field"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.field);
-                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter} message Filter message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Filter.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Filter message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Filter.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.field = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.value = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Filter message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Filter.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Filter message.
-                             * @function verify
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Filter.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.field != null && message.hasOwnProperty("field"))
-                                    if (!$util.isString(message.field))
-                                        return "field: string expected";
-                                if (message.value != null && message.hasOwnProperty("value"))
-                                    if (!$util.isString(message.value))
-                                        return "value: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Filter message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter
-                             */
-                            Filter.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter)
-                                    return object;
-                                var message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter();
-                                if (object.field != null)
-                                    message.field = String(object.field);
-                                if (object.value != null)
-                                    message.value = String(object.value);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Filter message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} message Filter
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Filter.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.field = "";
-                                    object.value = "";
-                                }
-                                if (message.field != null && message.hasOwnProperty("field"))
-                                    object.field = message.field;
-                                if (message.value != null && message.hasOwnProperty("value"))
-                                    object.value = message.value;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Filter to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Filter.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Filter
-                             * @function getTypeUrl
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Filter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter";
-                            };
-    
-                            return Filter;
-                        })();
-    
-                        return LookerQuery;
-                    })();
-    
                     v1beta.DataQuery = (function() {
     
                         /**
@@ -48720,6 +50949,7 @@
                          * @property {string|null} [name] DataResult name
                          * @property {google.cloud.geminidataanalytics.v1beta.ISchema|null} [schema] DataResult schema
                          * @property {Array.<google.protobuf.IStruct>|null} [data] DataResult data
+                         * @property {Array.<google.protobuf.IStruct>|null} [formattedData] DataResult formattedData
                          */
     
                         /**
@@ -48732,6 +50962,7 @@
                          */
                         function DataResult(properties) {
                             this.data = [];
+                            this.formattedData = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -48761,6 +50992,14 @@
                          * @instance
                          */
                         DataResult.prototype.data = $util.emptyArray;
+    
+                        /**
+                         * DataResult formattedData.
+                         * @member {Array.<google.protobuf.IStruct>} formattedData
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataResult
+                         * @instance
+                         */
+                        DataResult.prototype.formattedData = $util.emptyArray;
     
                         /**
                          * Creates a new DataResult instance using the specified properties.
@@ -48793,6 +51032,9 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
                             if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
                                 $root.google.cloud.geminidataanalytics.v1beta.Schema.encode(message.schema, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.formattedData != null && message.formattedData.length)
+                                for (var i = 0; i < message.formattedData.length; ++i)
+                                    $root.google.protobuf.Struct.encode(message.formattedData[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -48841,6 +51083,12 @@
                                         if (!(message.data && message.data.length))
                                             message.data = [];
                                         message.data.push($root.google.protobuf.Struct.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.formattedData && message.formattedData.length))
+                                            message.formattedData = [];
+                                        message.formattedData.push($root.google.protobuf.Struct.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -48895,6 +51143,15 @@
                                         return "data." + error;
                                 }
                             }
+                            if (message.formattedData != null && message.hasOwnProperty("formattedData")) {
+                                if (!Array.isArray(message.formattedData))
+                                    return "formattedData: array expected";
+                                for (var i = 0; i < message.formattedData.length; ++i) {
+                                    var error = $root.google.protobuf.Struct.verify(message.formattedData[i]);
+                                    if (error)
+                                        return "formattedData." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -48927,6 +51184,16 @@
                                     message.data[i] = $root.google.protobuf.Struct.fromObject(object.data[i]);
                                 }
                             }
+                            if (object.formattedData) {
+                                if (!Array.isArray(object.formattedData))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.DataResult.formattedData: array expected");
+                                message.formattedData = [];
+                                for (var i = 0; i < object.formattedData.length; ++i) {
+                                    if (typeof object.formattedData[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.DataResult.formattedData: object expected");
+                                    message.formattedData[i] = $root.google.protobuf.Struct.fromObject(object.formattedData[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -48943,8 +51210,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.data = [];
+                                object.formattedData = [];
+                            }
                             if (options.defaults) {
                                 object.name = "";
                                 object.schema = null;
@@ -48958,6 +51227,11 @@
                                 object.name = message.name;
                             if (message.schema != null && message.hasOwnProperty("schema"))
                                 object.schema = $root.google.cloud.geminidataanalytics.v1beta.Schema.toObject(message.schema, options);
+                            if (message.formattedData && message.formattedData.length) {
+                                object.formattedData = [];
+                                for (var j = 0; j < message.formattedData.length; ++j)
+                                    object.formattedData[j] = $root.google.protobuf.Struct.toObject(message.formattedData[j], options);
+                            }
                             return object;
                         };
     
@@ -51226,6 +53500,604 @@
                         };
     
                         return ErrorMessage;
+                    })();
+    
+                    v1beta.ClarificationQuestion = (function() {
+    
+                        /**
+                         * Properties of a ClarificationQuestion.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IClarificationQuestion
+                         * @property {string|null} [question] ClarificationQuestion question
+                         * @property {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.SelectionMode|null} [selectionMode] ClarificationQuestion selectionMode
+                         * @property {Array.<string>|null} [options] ClarificationQuestion options
+                         * @property {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.ClarificationQuestionType|null} [clarificationQuestionType] ClarificationQuestion clarificationQuestionType
+                         */
+    
+                        /**
+                         * Constructs a new ClarificationQuestion.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a ClarificationQuestion.
+                         * @implements IClarificationQuestion
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationQuestion=} [properties] Properties to set
+                         */
+                        function ClarificationQuestion(properties) {
+                            this.options = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ClarificationQuestion question.
+                         * @member {string} question
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.question = "";
+    
+                        /**
+                         * ClarificationQuestion selectionMode.
+                         * @member {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.SelectionMode} selectionMode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.selectionMode = 0;
+    
+                        /**
+                         * ClarificationQuestion options.
+                         * @member {Array.<string>} options
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.options = $util.emptyArray;
+    
+                        /**
+                         * ClarificationQuestion clarificationQuestionType.
+                         * @member {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.ClarificationQuestionType} clarificationQuestionType
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.clarificationQuestionType = 0;
+    
+                        /**
+                         * Creates a new ClarificationQuestion instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationQuestion=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion} ClarificationQuestion instance
+                         */
+                        ClarificationQuestion.create = function create(properties) {
+                            return new ClarificationQuestion(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationQuestion message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationQuestion} message ClarificationQuestion message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationQuestion.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.question != null && Object.hasOwnProperty.call(message, "question"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.question);
+                            if (message.selectionMode != null && Object.hasOwnProperty.call(message, "selectionMode"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.selectionMode);
+                            if (message.options != null && message.options.length)
+                                for (var i = 0; i < message.options.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.options[i]);
+                            if (message.clarificationQuestionType != null && Object.hasOwnProperty.call(message, "clarificationQuestionType"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.clarificationQuestionType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationQuestion message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationQuestion} message ClarificationQuestion message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationQuestion.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ClarificationQuestion message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion} ClarificationQuestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationQuestion.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.question = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.selectionMode = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.options && message.options.length))
+                                            message.options = [];
+                                        message.options.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.clarificationQuestionType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ClarificationQuestion message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion} ClarificationQuestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationQuestion.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ClarificationQuestion message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ClarificationQuestion.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.question != null && message.hasOwnProperty("question"))
+                                if (!$util.isString(message.question))
+                                    return "question: string expected";
+                            if (message.selectionMode != null && message.hasOwnProperty("selectionMode"))
+                                switch (message.selectionMode) {
+                                default:
+                                    return "selectionMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.options != null && message.hasOwnProperty("options")) {
+                                if (!Array.isArray(message.options))
+                                    return "options: array expected";
+                                for (var i = 0; i < message.options.length; ++i)
+                                    if (!$util.isString(message.options[i]))
+                                        return "options: string[] expected";
+                            }
+                            if (message.clarificationQuestionType != null && message.hasOwnProperty("clarificationQuestionType"))
+                                switch (message.clarificationQuestionType) {
+                                default:
+                                    return "clarificationQuestionType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ClarificationQuestion message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion} ClarificationQuestion
+                         */
+                        ClarificationQuestion.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion();
+                            if (object.question != null)
+                                message.question = String(object.question);
+                            switch (object.selectionMode) {
+                            default:
+                                if (typeof object.selectionMode === "number") {
+                                    message.selectionMode = object.selectionMode;
+                                    break;
+                                }
+                                break;
+                            case "SELECTION_MODE_UNSPECIFIED":
+                            case 0:
+                                message.selectionMode = 0;
+                                break;
+                            case "SINGLE_SELECT":
+                            case 1:
+                                message.selectionMode = 1;
+                                break;
+                            case "MULTI_SELECT":
+                            case 2:
+                                message.selectionMode = 2;
+                                break;
+                            }
+                            if (object.options) {
+                                if (!Array.isArray(object.options))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.options: array expected");
+                                message.options = [];
+                                for (var i = 0; i < object.options.length; ++i)
+                                    message.options[i] = String(object.options[i]);
+                            }
+                            switch (object.clarificationQuestionType) {
+                            default:
+                                if (typeof object.clarificationQuestionType === "number") {
+                                    message.clarificationQuestionType = object.clarificationQuestionType;
+                                    break;
+                                }
+                                break;
+                            case "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.clarificationQuestionType = 0;
+                                break;
+                            case "FILTER_VALUES":
+                            case 1:
+                                message.clarificationQuestionType = 1;
+                                break;
+                            case "FIELDS":
+                            case 2:
+                                message.clarificationQuestionType = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ClarificationQuestion message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion} message ClarificationQuestion
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ClarificationQuestion.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.options = [];
+                            if (options.defaults) {
+                                object.question = "";
+                                object.selectionMode = options.enums === String ? "SELECTION_MODE_UNSPECIFIED" : 0;
+                                object.clarificationQuestionType = options.enums === String ? "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.question != null && message.hasOwnProperty("question"))
+                                object.question = message.question;
+                            if (message.selectionMode != null && message.hasOwnProperty("selectionMode"))
+                                object.selectionMode = options.enums === String ? $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.SelectionMode[message.selectionMode] === undefined ? message.selectionMode : $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.SelectionMode[message.selectionMode] : message.selectionMode;
+                            if (message.options && message.options.length) {
+                                object.options = [];
+                                for (var j = 0; j < message.options.length; ++j)
+                                    object.options[j] = message.options[j];
+                            }
+                            if (message.clarificationQuestionType != null && message.hasOwnProperty("clarificationQuestionType"))
+                                object.clarificationQuestionType = options.enums === String ? $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.ClarificationQuestionType[message.clarificationQuestionType] === undefined ? message.clarificationQuestionType : $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.ClarificationQuestionType[message.clarificationQuestionType] : message.clarificationQuestionType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ClarificationQuestion to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ClarificationQuestion.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ClarificationQuestion
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ClarificationQuestion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.ClarificationQuestion";
+                        };
+    
+                        /**
+                         * SelectionMode enum.
+                         * @name google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.SelectionMode
+                         * @enum {number}
+                         * @property {number} SELECTION_MODE_UNSPECIFIED=0 SELECTION_MODE_UNSPECIFIED value
+                         * @property {number} SINGLE_SELECT=1 SINGLE_SELECT value
+                         * @property {number} MULTI_SELECT=2 MULTI_SELECT value
+                         */
+                        ClarificationQuestion.SelectionMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SELECTION_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SINGLE_SELECT"] = 1;
+                            values[valuesById[2] = "MULTI_SELECT"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ClarificationQuestionType enum.
+                         * @name google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.ClarificationQuestionType
+                         * @enum {number}
+                         * @property {number} CLARIFICATION_QUESTION_TYPE_UNSPECIFIED=0 CLARIFICATION_QUESTION_TYPE_UNSPECIFIED value
+                         * @property {number} FILTER_VALUES=1 FILTER_VALUES value
+                         * @property {number} FIELDS=2 FIELDS value
+                         */
+                        ClarificationQuestion.ClarificationQuestionType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FILTER_VALUES"] = 1;
+                            values[valuesById[2] = "FIELDS"] = 2;
+                            return values;
+                        })();
+    
+                        return ClarificationQuestion;
+                    })();
+    
+                    v1beta.ClarificationMessage = (function() {
+    
+                        /**
+                         * Properties of a ClarificationMessage.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IClarificationMessage
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.IClarificationQuestion>|null} [questions] ClarificationMessage questions
+                         */
+    
+                        /**
+                         * Constructs a new ClarificationMessage.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a ClarificationMessage.
+                         * @implements IClarificationMessage
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationMessage=} [properties] Properties to set
+                         */
+                        function ClarificationMessage(properties) {
+                            this.questions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ClarificationMessage questions.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.IClarificationQuestion>} questions
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @instance
+                         */
+                        ClarificationMessage.prototype.questions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ClarificationMessage instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationMessage=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationMessage} ClarificationMessage instance
+                         */
+                        ClarificationMessage.create = function create(properties) {
+                            return new ClarificationMessage(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationMessage message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ClarificationMessage.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationMessage} message ClarificationMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationMessage.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.questions != null && message.questions.length)
+                                for (var i = 0; i < message.questions.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.encode(message.questions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationMessage message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ClarificationMessage.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationMessage} message ClarificationMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationMessage.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ClarificationMessage message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationMessage} ClarificationMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationMessage.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.questions && message.questions.length))
+                                            message.questions = [];
+                                        message.questions.push($root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ClarificationMessage message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationMessage} ClarificationMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationMessage.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ClarificationMessage message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ClarificationMessage.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.questions != null && message.hasOwnProperty("questions")) {
+                                if (!Array.isArray(message.questions))
+                                    return "questions: array expected";
+                                for (var i = 0; i < message.questions.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.verify(message.questions[i]);
+                                    if (error)
+                                        return "questions." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ClarificationMessage message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationMessage} ClarificationMessage
+                         */
+                        ClarificationMessage.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage();
+                            if (object.questions) {
+                                if (!Array.isArray(object.questions))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.ClarificationMessage.questions: array expected");
+                                message.questions = [];
+                                for (var i = 0; i < object.questions.length; ++i) {
+                                    if (typeof object.questions[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.ClarificationMessage.questions: object expected");
+                                    message.questions[i] = $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.fromObject(object.questions[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ClarificationMessage message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ClarificationMessage} message ClarificationMessage
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ClarificationMessage.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.questions = [];
+                            if (message.questions && message.questions.length) {
+                                object.questions = [];
+                                for (var j = 0; j < message.questions.length; ++j)
+                                    object.questions[j] = $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.toObject(message.questions[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ClarificationMessage to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ClarificationMessage.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ClarificationMessage
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ClarificationMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.ClarificationMessage";
+                        };
+    
+                        return ClarificationMessage;
                     })();
     
                     v1beta.ExampleQueries = (function() {

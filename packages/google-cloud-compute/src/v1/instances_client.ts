@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -5409,6 +5409,9 @@ export class InstancesClient {
  *
  * @param {Object} request
  *   The request object that will be sent.
+ * @param {boolean} request.discardLocalSsd
+ *   Whether to discard local SSDs from the instance during restart
+ *   default value is false.
  * @param {string} request.instance
  *   Name of the instance resource to update.
  * @param {google.cloud.compute.v1.Instance} request.instanceResource

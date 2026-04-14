@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -700,6 +700,7 @@
                          * @property {string|null} [cloudSqlInstance] Endpoint cloudSqlInstance
                          * @property {string|null} [redisInstance] Endpoint redisInstance
                          * @property {string|null} [redisCluster] Endpoint redisCluster
+                         * @property {string|null} [gkePod] Endpoint gkePod
                          * @property {google.cloud.networkmanagement.v1.Endpoint.ICloudFunctionEndpoint|null} [cloudFunction] Endpoint cloudFunction
                          * @property {google.cloud.networkmanagement.v1.Endpoint.IAppEngineVersionEndpoint|null} [appEngineVersion] Endpoint appEngineVersion
                          * @property {google.cloud.networkmanagement.v1.Endpoint.ICloudRunRevisionEndpoint|null} [cloudRunRevision] Endpoint cloudRunRevision
@@ -818,6 +819,14 @@
                          * @instance
                          */
                         Endpoint.prototype.redisCluster = "";
+    
+                        /**
+                         * Endpoint gkePod.
+                         * @member {string} gkePod
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.gkePod = "";
     
                         /**
                          * Endpoint cloudFunction.
@@ -948,6 +957,8 @@
                                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.redisCluster);
                             if (message.fqdn != null && Object.hasOwnProperty.call(message, "fqdn"))
                                 writer.uint32(/* id 19, wireType 2 =*/154).string(message.fqdn);
+                            if (message.gkePod != null && Object.hasOwnProperty.call(message, "gkePod"))
+                                writer.uint32(/* id 21, wireType 2 =*/170).string(message.gkePod);
                             return writer;
                         };
     
@@ -1030,6 +1041,10 @@
                                     }
                                 case 18: {
                                         message.redisCluster = reader.string();
+                                        break;
+                                    }
+                                case 21: {
+                                        message.gkePod = reader.string();
                                         break;
                                     }
                                 case 10: {
@@ -1156,6 +1171,9 @@
                             if (message.redisCluster != null && message.hasOwnProperty("redisCluster"))
                                 if (!$util.isString(message.redisCluster))
                                     return "redisCluster: string expected";
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod"))
+                                if (!$util.isString(message.gkePod))
+                                    return "gkePod: string expected";
                             if (message.cloudFunction != null && message.hasOwnProperty("cloudFunction")) {
                                 var error = $root.google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint.verify(message.cloudFunction);
                                 if (error)
@@ -1181,6 +1199,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
@@ -1301,6 +1320,8 @@
                                 message.redisInstance = String(object.redisInstance);
                             if (object.redisCluster != null)
                                 message.redisCluster = String(object.redisCluster);
+                            if (object.gkePod != null)
+                                message.gkePod = String(object.gkePod);
                             if (object.cloudFunction != null) {
                                 if (typeof object.cloudFunction !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1.Endpoint.cloudFunction: object expected");
@@ -1337,6 +1358,10 @@
                             case 2:
                                 message.networkType = 2;
                                 break;
+                            case "INTERNET":
+                            case 3:
+                                message.networkType = 3;
+                                break;
                             }
                             if (object.projectId != null)
                                 message.projectId = String(object.projectId);
@@ -1372,6 +1397,7 @@
                                 object.redisInstance = "";
                                 object.redisCluster = "";
                                 object.fqdn = "";
+                                object.gkePod = "";
                             }
                             if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
                                 object.ipAddress = message.ipAddress;
@@ -1418,6 +1444,8 @@
                                 object.redisCluster = message.redisCluster;
                             if (message.fqdn != null && message.hasOwnProperty("fqdn"))
                                 object.fqdn = message.fqdn;
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod"))
+                                object.gkePod = message.gkePod;
                             return object;
                         };
     
@@ -1454,12 +1482,14 @@
                          * @property {number} NETWORK_TYPE_UNSPECIFIED=0 NETWORK_TYPE_UNSPECIFIED value
                          * @property {number} GCP_NETWORK=1 GCP_NETWORK value
                          * @property {number} NON_GCP_NETWORK=2 NON_GCP_NETWORK value
+                         * @property {number} INTERNET=3 INTERNET value
                          */
                         Endpoint.NetworkType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "NETWORK_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "GCP_NETWORK"] = 1;
                             values[valuesById[2] = "NON_GCP_NETWORK"] = 2;
+                            values[valuesById[3] = "INTERNET"] = 3;
                             return values;
                         })();
     
@@ -4411,6 +4441,10 @@
                          * @property {google.cloud.networkmanagement.v1.ILoadBalancerInfo|null} [loadBalancer] Step loadBalancer
                          * @property {google.cloud.networkmanagement.v1.INetworkInfo|null} [network] Step network
                          * @property {google.cloud.networkmanagement.v1.IGKEMasterInfo|null} [gkeMaster] Step gkeMaster
+                         * @property {google.cloud.networkmanagement.v1.IGkePodInfo|null} [gkePod] Step gkePod
+                         * @property {google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo|null} [ipMasqueradingSkipped] Step ipMasqueradingSkipped
+                         * @property {google.cloud.networkmanagement.v1.IGkeNetworkPolicyInfo|null} [gkeNetworkPolicy] Step gkeNetworkPolicy
+                         * @property {google.cloud.networkmanagement.v1.IGkeNetworkPolicySkippedInfo|null} [gkeNetworkPolicySkipped] Step gkeNetworkPolicySkipped
                          * @property {google.cloud.networkmanagement.v1.ICloudSQLInstanceInfo|null} [cloudSqlInstance] Step cloudSqlInstance
                          * @property {google.cloud.networkmanagement.v1.IRedisInstanceInfo|null} [redisInstance] Step redisInstance
                          * @property {google.cloud.networkmanagement.v1.IRedisClusterInfo|null} [redisCluster] Step redisCluster
@@ -4422,6 +4456,7 @@
                          * @property {google.cloud.networkmanagement.v1.ILoadBalancerBackendInfo|null} [loadBalancerBackendInfo] Step loadBalancerBackendInfo
                          * @property {google.cloud.networkmanagement.v1.IStorageBucketInfo|null} [storageBucket] Step storageBucket
                          * @property {google.cloud.networkmanagement.v1.IServerlessNegInfo|null} [serverlessNeg] Step serverlessNeg
+                         * @property {google.cloud.networkmanagement.v1.INgfwPacketInspectionInfo|null} [ngfwPacketInspection] Step ngfwPacketInspection
                          */
     
                         /**
@@ -4632,6 +4667,38 @@
                         Step.prototype.gkeMaster = null;
     
                         /**
+                         * Step gkePod.
+                         * @member {google.cloud.networkmanagement.v1.IGkePodInfo|null|undefined} gkePod
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.gkePod = null;
+    
+                        /**
+                         * Step ipMasqueradingSkipped.
+                         * @member {google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo|null|undefined} ipMasqueradingSkipped
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.ipMasqueradingSkipped = null;
+    
+                        /**
+                         * Step gkeNetworkPolicy.
+                         * @member {google.cloud.networkmanagement.v1.IGkeNetworkPolicyInfo|null|undefined} gkeNetworkPolicy
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.gkeNetworkPolicy = null;
+    
+                        /**
+                         * Step gkeNetworkPolicySkipped.
+                         * @member {google.cloud.networkmanagement.v1.IGkeNetworkPolicySkippedInfo|null|undefined} gkeNetworkPolicySkipped
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.gkeNetworkPolicySkipped = null;
+    
+                        /**
                          * Step cloudSqlInstance.
                          * @member {google.cloud.networkmanagement.v1.ICloudSQLInstanceInfo|null|undefined} cloudSqlInstance
                          * @memberof google.cloud.networkmanagement.v1.Step
@@ -4719,17 +4786,25 @@
                          */
                         Step.prototype.serverlessNeg = null;
     
+                        /**
+                         * Step ngfwPacketInspection.
+                         * @member {google.cloud.networkmanagement.v1.INgfwPacketInspectionInfo|null|undefined} ngfwPacketInspection
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.ngfwPacketInspection = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Step stepInfo.
-                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|undefined} stepInfo
+                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"gkePod"|"ipMasqueradingSkipped"|"gkeNetworkPolicy"|"gkeNetworkPolicySkipped"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|"ngfwPacketInspection"|undefined} stepInfo
                          * @memberof google.cloud.networkmanagement.v1.Step
                          * @instance
                          */
                         Object.defineProperty(Step.prototype, "stepInfo", {
-                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "hybridSubnet", "vpnGateway", "vpnTunnel", "interconnectAttachment", "vpcConnector", "directVpcEgressConnection", "serverlessExternalConnection", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "redisInstance", "redisCluster", "cloudFunction", "appEngineVersion", "cloudRunRevision", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket", "serverlessNeg"]),
+                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "hybridSubnet", "vpnGateway", "vpnTunnel", "interconnectAttachment", "vpcConnector", "directVpcEgressConnection", "serverlessExternalConnection", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "gkePod", "ipMasqueradingSkipped", "gkeNetworkPolicy", "gkeNetworkPolicySkipped", "cloudSqlInstance", "redisInstance", "redisCluster", "cloudFunction", "appEngineVersion", "cloudRunRevision", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket", "serverlessNeg", "ngfwPacketInspection"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4827,6 +4902,16 @@
                                 $root.google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.encode(message.interconnectAttachment, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
                             if (message.hybridSubnet != null && Object.hasOwnProperty.call(message, "hybridSubnet"))
                                 $root.google.cloud.networkmanagement.v1.HybridSubnetInfo.encode(message.hybridSubnet, writer.uint32(/* id 36, wireType 2 =*/290).fork()).ldelim();
+                            if (message.gkePod != null && Object.hasOwnProperty.call(message, "gkePod"))
+                                $root.google.cloud.networkmanagement.v1.GkePodInfo.encode(message.gkePod, writer.uint32(/* id 37, wireType 2 =*/298).fork()).ldelim();
+                            if (message.ipMasqueradingSkipped != null && Object.hasOwnProperty.call(message, "ipMasqueradingSkipped"))
+                                $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.encode(message.ipMasqueradingSkipped, writer.uint32(/* id 38, wireType 2 =*/306).fork()).ldelim();
+                            if (message.gkeNetworkPolicy != null && Object.hasOwnProperty.call(message, "gkeNetworkPolicy"))
+                                $root.google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo.encode(message.gkeNetworkPolicy, writer.uint32(/* id 39, wireType 2 =*/314).fork()).ldelim();
+                            if (message.gkeNetworkPolicySkipped != null && Object.hasOwnProperty.call(message, "gkeNetworkPolicySkipped"))
+                                $root.google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.encode(message.gkeNetworkPolicySkipped, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
+                            if (message.ngfwPacketInspection != null && Object.hasOwnProperty.call(message, "ngfwPacketInspection"))
+                                $root.google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo.encode(message.ngfwPacketInspection, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
                             return writer;
                         };
     
@@ -4959,6 +5044,22 @@
                                         message.gkeMaster = $root.google.cloud.networkmanagement.v1.GKEMasterInfo.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 37: {
+                                        message.gkePod = $root.google.cloud.networkmanagement.v1.GkePodInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 38: {
+                                        message.ipMasqueradingSkipped = $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 39: {
+                                        message.gkeNetworkPolicy = $root.google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 40: {
+                                        message.gkeNetworkPolicySkipped = $root.google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 19: {
                                         message.cloudSqlInstance = $root.google.cloud.networkmanagement.v1.CloudSQLInstanceInfo.decode(reader, reader.uint32());
                                         break;
@@ -5001,6 +5102,10 @@
                                     }
                                 case 29: {
                                         message.serverlessNeg = $root.google.cloud.networkmanagement.v1.ServerlessNegInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 42: {
+                                        message.ngfwPacketInspection = $root.google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -5053,6 +5158,7 @@
                                 case 3:
                                 case 21:
                                 case 22:
+                                case 39:
                                 case 32:
                                 case 33:
                                 case 23:
@@ -5075,9 +5181,16 @@
                                 case 13:
                                 case 37:
                                 case 24:
+                                case 44:
                                 case 35:
                                 case 36:
+                                case 47:
                                 case 14:
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 45:
+                                case 46:
                                 case 15:
                                 case 16:
                                 case 17:
@@ -5290,6 +5403,46 @@
                                         return "gkeMaster." + error;
                                 }
                             }
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.GkePodInfo.verify(message.gkePod);
+                                    if (error)
+                                        return "gkePod." + error;
+                                }
+                            }
+                            if (message.ipMasqueradingSkipped != null && message.hasOwnProperty("ipMasqueradingSkipped")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.verify(message.ipMasqueradingSkipped);
+                                    if (error)
+                                        return "ipMasqueradingSkipped." + error;
+                                }
+                            }
+                            if (message.gkeNetworkPolicy != null && message.hasOwnProperty("gkeNetworkPolicy")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo.verify(message.gkeNetworkPolicy);
+                                    if (error)
+                                        return "gkeNetworkPolicy." + error;
+                                }
+                            }
+                            if (message.gkeNetworkPolicySkipped != null && message.hasOwnProperty("gkeNetworkPolicySkipped")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.verify(message.gkeNetworkPolicySkipped);
+                                    if (error)
+                                        return "gkeNetworkPolicySkipped." + error;
+                                }
+                            }
                             if (message.cloudSqlInstance != null && message.hasOwnProperty("cloudSqlInstance")) {
                                 if (properties.stepInfo === 1)
                                     return "stepInfo: multiple values";
@@ -5400,6 +5553,16 @@
                                         return "serverlessNeg." + error;
                                 }
                             }
+                            if (message.ngfwPacketInspection != null && message.hasOwnProperty("ngfwPacketInspection")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo.verify(message.ngfwPacketInspection);
+                                    if (error)
+                                        return "ngfwPacketInspection." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -5451,6 +5614,10 @@
                             case "START_FROM_CLOUD_SQL_INSTANCE":
                             case 22:
                                 message.state = 22;
+                                break;
+                            case "START_FROM_GKE_POD":
+                            case 39:
+                                message.state = 39;
                                 break;
                             case "START_FROM_REDIS_INSTANCE":
                             case 32:
@@ -5540,6 +5707,10 @@
                             case 24:
                                 message.state = 24;
                                 break;
+                            case "ARRIVE_AT_GKE_POD":
+                            case 44:
+                                message.state = 44;
+                                break;
                             case "DIRECT_VPC_EGRESS_CONNECTION":
                             case 35:
                                 message.state = 35;
@@ -5548,9 +5719,33 @@
                             case 36:
                                 message.state = 36;
                                 break;
+                            case "NGFW_PACKET_INSPECTION":
+                            case 47:
+                                message.state = 47;
+                                break;
                             case "NAT":
                             case 14:
                                 message.state = 14;
+                                break;
+                            case "SKIP_GKE_POD_IP_MASQUERADING":
+                            case 40:
+                                message.state = 40;
+                                break;
+                            case "SKIP_GKE_INGRESS_NETWORK_POLICY":
+                            case 41:
+                                message.state = 41;
+                                break;
+                            case "SKIP_GKE_EGRESS_NETWORK_POLICY":
+                            case 42:
+                                message.state = 42;
+                                break;
+                            case "APPLY_INGRESS_GKE_NETWORK_POLICY":
+                            case 45:
+                                message.state = 45;
+                                break;
+                            case "APPLY_EGRESS_GKE_NETWORK_POLICY":
+                            case 46:
+                                message.state = 46;
                                 break;
                             case "PROXY_CONNECTION":
                             case 15:
@@ -5681,6 +5876,26 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1.Step.gkeMaster: object expected");
                                 message.gkeMaster = $root.google.cloud.networkmanagement.v1.GKEMasterInfo.fromObject(object.gkeMaster);
                             }
+                            if (object.gkePod != null) {
+                                if (typeof object.gkePod !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.gkePod: object expected");
+                                message.gkePod = $root.google.cloud.networkmanagement.v1.GkePodInfo.fromObject(object.gkePod);
+                            }
+                            if (object.ipMasqueradingSkipped != null) {
+                                if (typeof object.ipMasqueradingSkipped !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.ipMasqueradingSkipped: object expected");
+                                message.ipMasqueradingSkipped = $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.fromObject(object.ipMasqueradingSkipped);
+                            }
+                            if (object.gkeNetworkPolicy != null) {
+                                if (typeof object.gkeNetworkPolicy !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.gkeNetworkPolicy: object expected");
+                                message.gkeNetworkPolicy = $root.google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo.fromObject(object.gkeNetworkPolicy);
+                            }
+                            if (object.gkeNetworkPolicySkipped != null) {
+                                if (typeof object.gkeNetworkPolicySkipped !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.gkeNetworkPolicySkipped: object expected");
+                                message.gkeNetworkPolicySkipped = $root.google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.fromObject(object.gkeNetworkPolicySkipped);
+                            }
                             if (object.cloudSqlInstance != null) {
                                 if (typeof object.cloudSqlInstance !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1.Step.cloudSqlInstance: object expected");
@@ -5735,6 +5950,11 @@
                                 if (typeof object.serverlessNeg !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1.Step.serverlessNeg: object expected");
                                 message.serverlessNeg = $root.google.cloud.networkmanagement.v1.ServerlessNegInfo.fromObject(object.serverlessNeg);
+                            }
+                            if (object.ngfwPacketInspection != null) {
+                                if (typeof object.ngfwPacketInspection !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.ngfwPacketInspection: object expected");
+                                message.ngfwPacketInspection = $root.google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo.fromObject(object.ngfwPacketInspection);
                             }
                             return message;
                         };
@@ -5921,6 +6141,31 @@
                                 if (options.oneofs)
                                     object.stepInfo = "hybridSubnet";
                             }
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod")) {
+                                object.gkePod = $root.google.cloud.networkmanagement.v1.GkePodInfo.toObject(message.gkePod, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "gkePod";
+                            }
+                            if (message.ipMasqueradingSkipped != null && message.hasOwnProperty("ipMasqueradingSkipped")) {
+                                object.ipMasqueradingSkipped = $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.toObject(message.ipMasqueradingSkipped, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "ipMasqueradingSkipped";
+                            }
+                            if (message.gkeNetworkPolicy != null && message.hasOwnProperty("gkeNetworkPolicy")) {
+                                object.gkeNetworkPolicy = $root.google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo.toObject(message.gkeNetworkPolicy, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "gkeNetworkPolicy";
+                            }
+                            if (message.gkeNetworkPolicySkipped != null && message.hasOwnProperty("gkeNetworkPolicySkipped")) {
+                                object.gkeNetworkPolicySkipped = $root.google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.toObject(message.gkeNetworkPolicySkipped, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "gkeNetworkPolicySkipped";
+                            }
+                            if (message.ngfwPacketInspection != null && message.hasOwnProperty("ngfwPacketInspection")) {
+                                object.ngfwPacketInspection = $root.google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo.toObject(message.ngfwPacketInspection, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "ngfwPacketInspection";
+                            }
                             return object;
                         };
     
@@ -5961,6 +6206,7 @@
                          * @property {number} START_FROM_PRIVATE_NETWORK=3 START_FROM_PRIVATE_NETWORK value
                          * @property {number} START_FROM_GKE_MASTER=21 START_FROM_GKE_MASTER value
                          * @property {number} START_FROM_CLOUD_SQL_INSTANCE=22 START_FROM_CLOUD_SQL_INSTANCE value
+                         * @property {number} START_FROM_GKE_POD=39 START_FROM_GKE_POD value
                          * @property {number} START_FROM_REDIS_INSTANCE=32 START_FROM_REDIS_INSTANCE value
                          * @property {number} START_FROM_REDIS_CLUSTER=33 START_FROM_REDIS_CLUSTER value
                          * @property {number} START_FROM_CLOUD_FUNCTION=23 START_FROM_CLOUD_FUNCTION value
@@ -5983,9 +6229,16 @@
                          * @property {number} ARRIVE_AT_VPN_TUNNEL=13 ARRIVE_AT_VPN_TUNNEL value
                          * @property {number} ARRIVE_AT_INTERCONNECT_ATTACHMENT=37 ARRIVE_AT_INTERCONNECT_ATTACHMENT value
                          * @property {number} ARRIVE_AT_VPC_CONNECTOR=24 ARRIVE_AT_VPC_CONNECTOR value
+                         * @property {number} ARRIVE_AT_GKE_POD=44 ARRIVE_AT_GKE_POD value
                          * @property {number} DIRECT_VPC_EGRESS_CONNECTION=35 DIRECT_VPC_EGRESS_CONNECTION value
                          * @property {number} SERVERLESS_EXTERNAL_CONNECTION=36 SERVERLESS_EXTERNAL_CONNECTION value
+                         * @property {number} NGFW_PACKET_INSPECTION=47 NGFW_PACKET_INSPECTION value
                          * @property {number} NAT=14 NAT value
+                         * @property {number} SKIP_GKE_POD_IP_MASQUERADING=40 SKIP_GKE_POD_IP_MASQUERADING value
+                         * @property {number} SKIP_GKE_INGRESS_NETWORK_POLICY=41 SKIP_GKE_INGRESS_NETWORK_POLICY value
+                         * @property {number} SKIP_GKE_EGRESS_NETWORK_POLICY=42 SKIP_GKE_EGRESS_NETWORK_POLICY value
+                         * @property {number} APPLY_INGRESS_GKE_NETWORK_POLICY=45 APPLY_INGRESS_GKE_NETWORK_POLICY value
+                         * @property {number} APPLY_EGRESS_GKE_NETWORK_POLICY=46 APPLY_EGRESS_GKE_NETWORK_POLICY value
                          * @property {number} PROXY_CONNECTION=15 PROXY_CONNECTION value
                          * @property {number} DELIVER=16 DELIVER value
                          * @property {number} DROP=17 DROP value
@@ -6002,6 +6255,7 @@
                             values[valuesById[3] = "START_FROM_PRIVATE_NETWORK"] = 3;
                             values[valuesById[21] = "START_FROM_GKE_MASTER"] = 21;
                             values[valuesById[22] = "START_FROM_CLOUD_SQL_INSTANCE"] = 22;
+                            values[valuesById[39] = "START_FROM_GKE_POD"] = 39;
                             values[valuesById[32] = "START_FROM_REDIS_INSTANCE"] = 32;
                             values[valuesById[33] = "START_FROM_REDIS_CLUSTER"] = 33;
                             values[valuesById[23] = "START_FROM_CLOUD_FUNCTION"] = 23;
@@ -6024,9 +6278,16 @@
                             values[valuesById[13] = "ARRIVE_AT_VPN_TUNNEL"] = 13;
                             values[valuesById[37] = "ARRIVE_AT_INTERCONNECT_ATTACHMENT"] = 37;
                             values[valuesById[24] = "ARRIVE_AT_VPC_CONNECTOR"] = 24;
+                            values[valuesById[44] = "ARRIVE_AT_GKE_POD"] = 44;
                             values[valuesById[35] = "DIRECT_VPC_EGRESS_CONNECTION"] = 35;
                             values[valuesById[36] = "SERVERLESS_EXTERNAL_CONNECTION"] = 36;
+                            values[valuesById[47] = "NGFW_PACKET_INSPECTION"] = 47;
                             values[valuesById[14] = "NAT"] = 14;
+                            values[valuesById[40] = "SKIP_GKE_POD_IP_MASQUERADING"] = 40;
+                            values[valuesById[41] = "SKIP_GKE_INGRESS_NETWORK_POLICY"] = 41;
+                            values[valuesById[42] = "SKIP_GKE_EGRESS_NETWORK_POLICY"] = 42;
+                            values[valuesById[45] = "APPLY_INGRESS_GKE_NETWORK_POLICY"] = 45;
+                            values[valuesById[46] = "APPLY_EGRESS_GKE_NETWORK_POLICY"] = 46;
                             values[valuesById[15] = "PROXY_CONNECTION"] = 15;
                             values[valuesById[16] = "DELIVER"] = 16;
                             values[valuesById[17] = "DROP"] = 17;
@@ -7200,6 +7461,8 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
+                                case 8:
                                 case 100:
                                 case 101:
                                 case 102:
@@ -7296,6 +7559,14 @@
                             case "NETWORK_REGIONAL_FIREWALL_POLICY_RULE":
                             case 6:
                                 message.firewallRuleType = 6;
+                                break;
+                            case "SYSTEM_NETWORK_FIREWALL_POLICY_RULE":
+                            case 7:
+                                message.firewallRuleType = 7;
+                                break;
+                            case "SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE":
+                            case 8:
+                                message.firewallRuleType = 8;
                                 break;
                             case "UNSUPPORTED_FIREWALL_POLICY_RULE":
                             case 100:
@@ -7437,6 +7708,8 @@
                          * @property {number} SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE=4 SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE value
                          * @property {number} NETWORK_FIREWALL_POLICY_RULE=5 NETWORK_FIREWALL_POLICY_RULE value
                          * @property {number} NETWORK_REGIONAL_FIREWALL_POLICY_RULE=6 NETWORK_REGIONAL_FIREWALL_POLICY_RULE value
+                         * @property {number} SYSTEM_NETWORK_FIREWALL_POLICY_RULE=7 SYSTEM_NETWORK_FIREWALL_POLICY_RULE value
+                         * @property {number} SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE=8 SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE value
                          * @property {number} UNSUPPORTED_FIREWALL_POLICY_RULE=100 UNSUPPORTED_FIREWALL_POLICY_RULE value
                          * @property {number} TRACKING_STATE=101 TRACKING_STATE value
                          * @property {number} ANALYSIS_SKIPPED=102 ANALYSIS_SKIPPED value
@@ -7450,6 +7723,8 @@
                             values[valuesById[4] = "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"] = 4;
                             values[valuesById[5] = "NETWORK_FIREWALL_POLICY_RULE"] = 5;
                             values[valuesById[6] = "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"] = 6;
+                            values[valuesById[7] = "SYSTEM_NETWORK_FIREWALL_POLICY_RULE"] = 7;
+                            values[valuesById[8] = "SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE"] = 8;
                             values[valuesById[100] = "UNSUPPORTED_FIREWALL_POLICY_RULE"] = 100;
                             values[valuesById[101] = "TRACKING_STATE"] = 101;
                             values[valuesById[102] = "ANALYSIS_SKIPPED"] = 102;
@@ -12104,6 +12379,7 @@
                                 case 15:
                                 case 16:
                                 case 17:
+                                case 19:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -12223,6 +12499,10 @@
                             case "REDIS_CLUSTER":
                             case 17:
                                 message.target = 17;
+                                break;
+                            case "GKE_POD":
+                            case 19:
+                                message.target = 19;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -12352,6 +12632,7 @@
                          * @property {number} GOOGLE_MANAGED_SERVICE=15 GOOGLE_MANAGED_SERVICE value
                          * @property {number} REDIS_INSTANCE=16 REDIS_INSTANCE value
                          * @property {number} REDIS_CLUSTER=17 REDIS_CLUSTER value
+                         * @property {number} GKE_POD=19 GKE_POD value
                          */
                         DeliverInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -12373,6 +12654,7 @@
                             values[valuesById[15] = "GOOGLE_MANAGED_SERVICE"] = 15;
                             values[valuesById[16] = "REDIS_INSTANCE"] = 16;
                             values[valuesById[17] = "REDIS_CLUSTER"] = 17;
+                            values[valuesById[19] = "GKE_POD"] = 19;
                             return values;
                         })();
     
@@ -12952,6 +13234,9 @@
                                 case 29:
                                 case 36:
                                 case 5:
+                                case 42:
+                                case 43:
+                                case 44:
                                 case 6:
                                 case 9:
                                 case 10:
@@ -12966,6 +13251,7 @@
                                 case 19:
                                 case 39:
                                 case 20:
+                                case 45:
                                 case 34:
                                 case 35:
                                 case 21:
@@ -12974,6 +13260,7 @@
                                 case 31:
                                 case 37:
                                 case 40:
+                                case 41:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -13079,6 +13366,18 @@
                             case 5:
                                 message.cause = 5;
                                 break;
+                            case "NO_SOURCE_GCP_NETWORK_LOCATION":
+                            case 42:
+                                message.cause = 42;
+                                break;
+                            case "NO_SOURCE_NON_GCP_NETWORK_LOCATION":
+                            case 43:
+                                message.cause = 43;
+                                break;
+                            case "NO_SOURCE_INTERNET_LOCATION":
+                            case 44:
+                                message.cause = 44;
+                                break;
                             case "INVALID_ARGUMENT":
                             case 6:
                                 message.cause = 6;
@@ -13135,6 +13434,10 @@
                             case 20:
                                 message.cause = 20;
                                 break;
+                            case "SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED":
+                            case 45:
+                                message.cause = 45;
+                                break;
                             case "SOURCE_REDIS_CLUSTER_UNSUPPORTED":
                             case 34:
                                 message.cause = 34;
@@ -13166,6 +13469,10 @@
                             case "IP_VERSION_PROTOCOL_MISMATCH":
                             case 40:
                                 message.cause = 40;
+                                break;
+                            case "GKE_POD_UNKNOWN_ENDPOINT_LOCATION":
+                            case 41:
+                                message.cause = 41;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -13263,6 +13570,9 @@
                          * @property {number} PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS=29 PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS value
                          * @property {number} PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS=36 PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS value
                          * @property {number} NO_SOURCE_LOCATION=5 NO_SOURCE_LOCATION value
+                         * @property {number} NO_SOURCE_GCP_NETWORK_LOCATION=42 NO_SOURCE_GCP_NETWORK_LOCATION value
+                         * @property {number} NO_SOURCE_NON_GCP_NETWORK_LOCATION=43 NO_SOURCE_NON_GCP_NETWORK_LOCATION value
+                         * @property {number} NO_SOURCE_INTERNET_LOCATION=44 NO_SOURCE_INTERNET_LOCATION value
                          * @property {number} INVALID_ARGUMENT=6 INVALID_ARGUMENT value
                          * @property {number} TRACE_TOO_LONG=9 TRACE_TOO_LONG value
                          * @property {number} INTERNAL_ERROR=10 INTERNAL_ERROR value
@@ -13277,6 +13587,7 @@
                          * @property {number} GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT=19 GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT value
                          * @property {number} GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT=39 GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT value
                          * @property {number} SOURCE_PSC_CLOUD_SQL_UNSUPPORTED=20 SOURCE_PSC_CLOUD_SQL_UNSUPPORTED value
+                         * @property {number} SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED=45 SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED value
                          * @property {number} SOURCE_REDIS_CLUSTER_UNSUPPORTED=34 SOURCE_REDIS_CLUSTER_UNSUPPORTED value
                          * @property {number} SOURCE_REDIS_INSTANCE_UNSUPPORTED=35 SOURCE_REDIS_INSTANCE_UNSUPPORTED value
                          * @property {number} SOURCE_FORWARDING_RULE_UNSUPPORTED=21 SOURCE_FORWARDING_RULE_UNSUPPORTED value
@@ -13285,6 +13596,7 @@
                          * @property {number} UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG=31 UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG value
                          * @property {number} NO_SERVERLESS_IP_RANGES=37 NO_SERVERLESS_IP_RANGES value
                          * @property {number} IP_VERSION_PROTOCOL_MISMATCH=40 IP_VERSION_PROTOCOL_MISMATCH value
+                         * @property {number} GKE_POD_UNKNOWN_ENDPOINT_LOCATION=41 GKE_POD_UNKNOWN_ENDPOINT_LOCATION value
                          */
                         AbortInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -13305,6 +13617,9 @@
                             values[valuesById[29] = "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS"] = 29;
                             values[valuesById[36] = "PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS"] = 36;
                             values[valuesById[5] = "NO_SOURCE_LOCATION"] = 5;
+                            values[valuesById[42] = "NO_SOURCE_GCP_NETWORK_LOCATION"] = 42;
+                            values[valuesById[43] = "NO_SOURCE_NON_GCP_NETWORK_LOCATION"] = 43;
+                            values[valuesById[44] = "NO_SOURCE_INTERNET_LOCATION"] = 44;
                             values[valuesById[6] = "INVALID_ARGUMENT"] = 6;
                             values[valuesById[9] = "TRACE_TOO_LONG"] = 9;
                             values[valuesById[10] = "INTERNAL_ERROR"] = 10;
@@ -13319,6 +13634,7 @@
                             values[valuesById[19] = "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT"] = 19;
                             values[valuesById[39] = "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT"] = 39;
                             values[valuesById[20] = "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED"] = 20;
+                            values[valuesById[45] = "SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED"] = 45;
                             values[valuesById[34] = "SOURCE_REDIS_CLUSTER_UNSUPPORTED"] = 34;
                             values[valuesById[35] = "SOURCE_REDIS_INSTANCE_UNSUPPORTED"] = 35;
                             values[valuesById[21] = "SOURCE_FORWARDING_RULE_UNSUPPORTED"] = 21;
@@ -13327,6 +13643,7 @@
                             values[valuesById[31] = "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG"] = 31;
                             values[valuesById[37] = "NO_SERVERLESS_IP_RANGES"] = 37;
                             values[valuesById[40] = "IP_VERSION_PROTOCOL_MISMATCH"] = 40;
+                            values[valuesById[41] = "GKE_POD_UNKNOWN_ENDPOINT_LOCATION"] = 41;
                             return values;
                         })();
     
@@ -13575,6 +13892,7 @@
                                 case 52:
                                 case 53:
                                 case 44:
+                                case 109:
                                 case 98:
                                 case 45:
                                 case 46:
@@ -13589,6 +13907,7 @@
                                 case 85:
                                 case 14:
                                 case 27:
+                                case 103:
                                 case 28:
                                 case 68:
                                 case 69:
@@ -13651,6 +13970,7 @@
                                 case 88:
                                 case 89:
                                 case 90:
+                                case 107:
                                 case 96:
                                 case 97:
                                 case 99:
@@ -13659,6 +13979,9 @@
                                 case 102:
                                 case 104:
                                 case 105:
+                                case 106:
+                                case 108:
+                                case 110:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -13761,6 +14084,10 @@
                             case 44:
                                 message.cause = 44;
                                 break;
+                            case "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS":
+                            case 109:
+                                message.cause = 109;
+                                break;
                             case "NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS":
                             case 98:
                                 message.cause = 98;
@@ -13816,6 +14143,10 @@
                             case "GKE_CLUSTER_NOT_RUNNING":
                             case 27:
                                 message.cause = 27;
+                                break;
+                            case "GKE_POD_NOT_RUNNING":
+                            case 103:
+                                message.cause = 103;
                                 break;
                             case "CLOUD_SQL_INSTANCE_NOT_RUNNING":
                             case 28:
@@ -14065,6 +14396,10 @@
                             case 90:
                                 message.cause = 90;
                                 break;
+                            case "NO_CONFIGURED_PRIVATE_NAT64_RULE":
+                            case 107:
+                                message.cause = 107;
+                                break;
                             case "LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH":
                             case 96:
                                 message.cause = 96;
@@ -14096,6 +14431,18 @@
                             case "HYBRID_SUBNET_REGION_MISMATCH":
                             case 105:
                                 message.cause = 105;
+                                break;
+                            case "HYBRID_SUBNET_NO_ROUTE":
+                            case 106:
+                                message.cause = 106;
+                                break;
+                            case "GKE_NETWORK_POLICY":
+                            case 108:
+                                message.cause = 108;
+                                break;
+                            case "NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION":
+                            case 110:
+                                message.cause = 110;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -14197,6 +14544,7 @@
                          * @property {number} ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED=52 ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED value
                          * @property {number} ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID=53 ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID value
                          * @property {number} NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS=44 NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS value
+                         * @property {number} NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS=109 NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS value
                          * @property {number} NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS=98 NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS value
                          * @property {number} VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH=45 VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH value
                          * @property {number} VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH=46 VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH value
@@ -14211,6 +14559,7 @@
                          * @property {number} INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS=85 INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS value
                          * @property {number} INSTANCE_NOT_RUNNING=14 INSTANCE_NOT_RUNNING value
                          * @property {number} GKE_CLUSTER_NOT_RUNNING=27 GKE_CLUSTER_NOT_RUNNING value
+                         * @property {number} GKE_POD_NOT_RUNNING=103 GKE_POD_NOT_RUNNING value
                          * @property {number} CLOUD_SQL_INSTANCE_NOT_RUNNING=28 CLOUD_SQL_INSTANCE_NOT_RUNNING value
                          * @property {number} REDIS_INSTANCE_NOT_RUNNING=68 REDIS_INSTANCE_NOT_RUNNING value
                          * @property {number} REDIS_CLUSTER_NOT_RUNNING=69 REDIS_CLUSTER_NOT_RUNNING value
@@ -14273,6 +14622,7 @@
                          * @property {number} UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION=88 UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION value
                          * @property {number} TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED=89 TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED value
                          * @property {number} NO_MATCHING_NAT64_GATEWAY=90 NO_MATCHING_NAT64_GATEWAY value
+                         * @property {number} NO_CONFIGURED_PRIVATE_NAT64_RULE=107 NO_CONFIGURED_PRIVATE_NAT64_RULE value
                          * @property {number} LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH=96 LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH value
                          * @property {number} NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION=97 NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION value
                          * @property {number} CLOUD_NAT_PROTOCOL_UNSUPPORTED=99 CLOUD_NAT_PROTOCOL_UNSUPPORTED value
@@ -14281,6 +14631,9 @@
                          * @property {number} L2_INTERCONNECT_DESTINATION_IP_MISMATCH=102 L2_INTERCONNECT_DESTINATION_IP_MISMATCH value
                          * @property {number} NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED=104 NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED value
                          * @property {number} HYBRID_SUBNET_REGION_MISMATCH=105 HYBRID_SUBNET_REGION_MISMATCH value
+                         * @property {number} HYBRID_SUBNET_NO_ROUTE=106 HYBRID_SUBNET_NO_ROUTE value
+                         * @property {number} GKE_NETWORK_POLICY=108 GKE_NETWORK_POLICY value
+                         * @property {number} NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION=110 NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION value
                          */
                         DropInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -14299,6 +14652,7 @@
                             values[valuesById[52] = "ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED"] = 52;
                             values[valuesById[53] = "ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID"] = 53;
                             values[valuesById[44] = "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS"] = 44;
+                            values[valuesById[109] = "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS"] = 109;
                             values[valuesById[98] = "NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS"] = 98;
                             values[valuesById[45] = "VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH"] = 45;
                             values[valuesById[46] = "VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH"] = 46;
@@ -14313,6 +14667,7 @@
                             values[valuesById[85] = "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS"] = 85;
                             values[valuesById[14] = "INSTANCE_NOT_RUNNING"] = 14;
                             values[valuesById[27] = "GKE_CLUSTER_NOT_RUNNING"] = 27;
+                            values[valuesById[103] = "GKE_POD_NOT_RUNNING"] = 103;
                             values[valuesById[28] = "CLOUD_SQL_INSTANCE_NOT_RUNNING"] = 28;
                             values[valuesById[68] = "REDIS_INSTANCE_NOT_RUNNING"] = 68;
                             values[valuesById[69] = "REDIS_CLUSTER_NOT_RUNNING"] = 69;
@@ -14375,6 +14730,7 @@
                             values[valuesById[88] = "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION"] = 88;
                             values[valuesById[89] = "TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED"] = 89;
                             values[valuesById[90] = "NO_MATCHING_NAT64_GATEWAY"] = 90;
+                            values[valuesById[107] = "NO_CONFIGURED_PRIVATE_NAT64_RULE"] = 107;
                             values[valuesById[96] = "LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH"] = 96;
                             values[valuesById[97] = "NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION"] = 97;
                             values[valuesById[99] = "CLOUD_NAT_PROTOCOL_UNSUPPORTED"] = 99;
@@ -14383,6 +14739,9 @@
                             values[valuesById[102] = "L2_INTERCONNECT_DESTINATION_IP_MISMATCH"] = 102;
                             values[valuesById[104] = "NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED"] = 104;
                             values[valuesById[105] = "HYBRID_SUBNET_REGION_MISMATCH"] = 105;
+                            values[valuesById[106] = "HYBRID_SUBNET_NO_ROUTE"] = 106;
+                            values[valuesById[108] = "GKE_NETWORK_POLICY"] = 108;
+                            values[valuesById[110] = "NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION"] = 110;
                             return values;
                         })();
     
@@ -14685,6 +15044,1103 @@
                         };
     
                         return GKEMasterInfo;
+                    })();
+    
+                    v1.GkePodInfo = (function() {
+    
+                        /**
+                         * Properties of a GkePodInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IGkePodInfo
+                         * @property {string|null} [podUri] GkePodInfo podUri
+                         * @property {string|null} [ipAddress] GkePodInfo ipAddress
+                         * @property {string|null} [networkUri] GkePodInfo networkUri
+                         */
+    
+                        /**
+                         * Constructs a new GkePodInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a GkePodInfo.
+                         * @implements IGkePodInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IGkePodInfo=} [properties] Properties to set
+                         */
+                        function GkePodInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkePodInfo podUri.
+                         * @member {string} podUri
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @instance
+                         */
+                        GkePodInfo.prototype.podUri = "";
+    
+                        /**
+                         * GkePodInfo ipAddress.
+                         * @member {string} ipAddress
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @instance
+                         */
+                        GkePodInfo.prototype.ipAddress = "";
+    
+                        /**
+                         * GkePodInfo networkUri.
+                         * @member {string} networkUri
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @instance
+                         */
+                        GkePodInfo.prototype.networkUri = "";
+    
+                        /**
+                         * Creates a new GkePodInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IGkePodInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.GkePodInfo} GkePodInfo instance
+                         */
+                        GkePodInfo.create = function create(properties) {
+                            return new GkePodInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkePodInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.GkePodInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IGkePodInfo} message GkePodInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkePodInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.podUri != null && Object.hasOwnProperty.call(message, "podUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.podUri);
+                            if (message.ipAddress != null && Object.hasOwnProperty.call(message, "ipAddress"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.ipAddress);
+                            if (message.networkUri != null && Object.hasOwnProperty.call(message, "networkUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.networkUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkePodInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.GkePodInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IGkePodInfo} message GkePodInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkePodInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkePodInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.GkePodInfo} GkePodInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkePodInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.GkePodInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.podUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.ipAddress = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.networkUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkePodInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.GkePodInfo} GkePodInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkePodInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkePodInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkePodInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.podUri != null && message.hasOwnProperty("podUri"))
+                                if (!$util.isString(message.podUri))
+                                    return "podUri: string expected";
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                if (!$util.isString(message.ipAddress))
+                                    return "ipAddress: string expected";
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                if (!$util.isString(message.networkUri))
+                                    return "networkUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkePodInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.GkePodInfo} GkePodInfo
+                         */
+                        GkePodInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.GkePodInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.GkePodInfo();
+                            if (object.podUri != null)
+                                message.podUri = String(object.podUri);
+                            if (object.ipAddress != null)
+                                message.ipAddress = String(object.ipAddress);
+                            if (object.networkUri != null)
+                                message.networkUri = String(object.networkUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkePodInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.GkePodInfo} message GkePodInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkePodInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.podUri = "";
+                                object.ipAddress = "";
+                                object.networkUri = "";
+                            }
+                            if (message.podUri != null && message.hasOwnProperty("podUri"))
+                                object.podUri = message.podUri;
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                object.ipAddress = message.ipAddress;
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                object.networkUri = message.networkUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkePodInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkePodInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GkePodInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GkePodInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.GkePodInfo";
+                        };
+    
+                        return GkePodInfo;
+                    })();
+    
+                    v1.IpMasqueradingSkippedInfo = (function() {
+    
+                        /**
+                         * Properties of an IpMasqueradingSkippedInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IIpMasqueradingSkippedInfo
+                         * @property {google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason|null} [reason] IpMasqueradingSkippedInfo reason
+                         * @property {string|null} [nonMasqueradeRange] IpMasqueradingSkippedInfo nonMasqueradeRange
+                         */
+    
+                        /**
+                         * Constructs a new IpMasqueradingSkippedInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents an IpMasqueradingSkippedInfo.
+                         * @implements IIpMasqueradingSkippedInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo=} [properties] Properties to set
+                         */
+                        function IpMasqueradingSkippedInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IpMasqueradingSkippedInfo reason.
+                         * @member {google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason} reason
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @instance
+                         */
+                        IpMasqueradingSkippedInfo.prototype.reason = 0;
+    
+                        /**
+                         * IpMasqueradingSkippedInfo nonMasqueradeRange.
+                         * @member {string} nonMasqueradeRange
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @instance
+                         */
+                        IpMasqueradingSkippedInfo.prototype.nonMasqueradeRange = "";
+    
+                        /**
+                         * Creates a new IpMasqueradingSkippedInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo instance
+                         */
+                        IpMasqueradingSkippedInfo.create = function create(properties) {
+                            return new IpMasqueradingSkippedInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IpMasqueradingSkippedInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo} message IpMasqueradingSkippedInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IpMasqueradingSkippedInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.reason != null && Object.hasOwnProperty.call(message, "reason"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.reason);
+                            if (message.nonMasqueradeRange != null && Object.hasOwnProperty.call(message, "nonMasqueradeRange"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nonMasqueradeRange);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IpMasqueradingSkippedInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo} message IpMasqueradingSkippedInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IpMasqueradingSkippedInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IpMasqueradingSkippedInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.reason = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nonMasqueradeRange = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IpMasqueradingSkippedInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IpMasqueradingSkippedInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IpMasqueradingSkippedInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                switch (message.reason) {
+                                default:
+                                    return "reason: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.nonMasqueradeRange != null && message.hasOwnProperty("nonMasqueradeRange"))
+                                if (!$util.isString(message.nonMasqueradeRange))
+                                    return "nonMasqueradeRange: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IpMasqueradingSkippedInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo
+                         */
+                        IpMasqueradingSkippedInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo();
+                            switch (object.reason) {
+                            default:
+                                if (typeof object.reason === "number") {
+                                    message.reason = object.reason;
+                                    break;
+                                }
+                                break;
+                            case "REASON_UNSPECIFIED":
+                            case 0:
+                                message.reason = 0;
+                                break;
+                            case "DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE":
+                            case 1:
+                                message.reason = 1;
+                                break;
+                            case "DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE":
+                            case 2:
+                                message.reason = 2;
+                                break;
+                            case "DESTINATION_ON_SAME_NODE":
+                            case 3:
+                                message.reason = 3;
+                                break;
+                            case "DEFAULT_SNAT_DISABLED":
+                            case 4:
+                                message.reason = 4;
+                                break;
+                            case "NO_MASQUERADING_FOR_IPV6":
+                            case 5:
+                                message.reason = 5;
+                                break;
+                            case "POD_USES_NODE_NETWORK_NAMESPACE":
+                            case 6:
+                                message.reason = 6;
+                                break;
+                            case "NO_MASQUERADING_FOR_RETURN_PACKET":
+                            case 7:
+                                message.reason = 7;
+                                break;
+                            }
+                            if (object.nonMasqueradeRange != null)
+                                message.nonMasqueradeRange = String(object.nonMasqueradeRange);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IpMasqueradingSkippedInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo} message IpMasqueradingSkippedInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IpMasqueradingSkippedInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.reason = options.enums === String ? "REASON_UNSPECIFIED" : 0;
+                                object.nonMasqueradeRange = "";
+                            }
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                object.reason = options.enums === String ? $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason[message.reason] === undefined ? message.reason : $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason[message.reason] : message.reason;
+                            if (message.nonMasqueradeRange != null && message.hasOwnProperty("nonMasqueradeRange"))
+                                object.nonMasqueradeRange = message.nonMasqueradeRange;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IpMasqueradingSkippedInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IpMasqueradingSkippedInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for IpMasqueradingSkippedInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IpMasqueradingSkippedInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo";
+                        };
+    
+                        /**
+                         * Reason enum.
+                         * @name google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason
+                         * @enum {number}
+                         * @property {number} REASON_UNSPECIFIED=0 REASON_UNSPECIFIED value
+                         * @property {number} DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE=1 DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE value
+                         * @property {number} DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE=2 DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE value
+                         * @property {number} DESTINATION_ON_SAME_NODE=3 DESTINATION_ON_SAME_NODE value
+                         * @property {number} DEFAULT_SNAT_DISABLED=4 DEFAULT_SNAT_DISABLED value
+                         * @property {number} NO_MASQUERADING_FOR_IPV6=5 NO_MASQUERADING_FOR_IPV6 value
+                         * @property {number} POD_USES_NODE_NETWORK_NAMESPACE=6 POD_USES_NODE_NETWORK_NAMESPACE value
+                         * @property {number} NO_MASQUERADING_FOR_RETURN_PACKET=7 NO_MASQUERADING_FOR_RETURN_PACKET value
+                         */
+                        IpMasqueradingSkippedInfo.Reason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE"] = 1;
+                            values[valuesById[2] = "DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE"] = 2;
+                            values[valuesById[3] = "DESTINATION_ON_SAME_NODE"] = 3;
+                            values[valuesById[4] = "DEFAULT_SNAT_DISABLED"] = 4;
+                            values[valuesById[5] = "NO_MASQUERADING_FOR_IPV6"] = 5;
+                            values[valuesById[6] = "POD_USES_NODE_NETWORK_NAMESPACE"] = 6;
+                            values[valuesById[7] = "NO_MASQUERADING_FOR_RETURN_PACKET"] = 7;
+                            return values;
+                        })();
+    
+                        return IpMasqueradingSkippedInfo;
+                    })();
+    
+                    v1.GkeNetworkPolicyInfo = (function() {
+    
+                        /**
+                         * Properties of a GkeNetworkPolicyInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IGkeNetworkPolicyInfo
+                         * @property {string|null} [displayName] GkeNetworkPolicyInfo displayName
+                         * @property {string|null} [uri] GkeNetworkPolicyInfo uri
+                         * @property {string|null} [direction] GkeNetworkPolicyInfo direction
+                         * @property {string|null} [action] GkeNetworkPolicyInfo action
+                         */
+    
+                        /**
+                         * Constructs a new GkeNetworkPolicyInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a GkeNetworkPolicyInfo.
+                         * @implements IGkeNetworkPolicyInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IGkeNetworkPolicyInfo=} [properties] Properties to set
+                         */
+                        function GkeNetworkPolicyInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkeNetworkPolicyInfo displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo
+                         * @instance
+                         */
+                        GkeNetworkPolicyInfo.prototype.displayName = "";
+    
+                        /**
+                         * GkeNetworkPolicyInfo uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo
+                         * @instance
+                         */
+                        GkeNetworkPolicyInfo.prototype.uri = "";
+    
+                        /**
+                         * GkeNetworkPolicyInfo direction.
+                         * @member {string} direction
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo
+                         * @instance
+                         */
+                        GkeNetworkPolicyInfo.prototype.direction = "";
+    
+                        /**
+                         * GkeNetworkPolicyInfo action.
+                         * @member {string} action
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo
+                         * @instance
+                         */
+                        GkeNetworkPolicyInfo.prototype.action = "";
+    
+                        /**
+                         * Creates a new GkeNetworkPolicyInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IGkeNetworkPolicyInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo} GkeNetworkPolicyInfo instance
+                         */
+                        GkeNetworkPolicyInfo.create = function create(properties) {
+                            return new GkeNetworkPolicyInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkeNetworkPolicyInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IGkeNetworkPolicyInfo} message GkeNetworkPolicyInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeNetworkPolicyInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.direction != null && Object.hasOwnProperty.call(message, "direction"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.direction);
+                            if (message.action != null && Object.hasOwnProperty.call(message, "action"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.action);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkeNetworkPolicyInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IGkeNetworkPolicyInfo} message GkeNetworkPolicyInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeNetworkPolicyInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkeNetworkPolicyInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo} GkeNetworkPolicyInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeNetworkPolicyInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.direction = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.action = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkeNetworkPolicyInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo} GkeNetworkPolicyInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeNetworkPolicyInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkeNetworkPolicyInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkeNetworkPolicyInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.direction != null && message.hasOwnProperty("direction"))
+                                if (!$util.isString(message.direction))
+                                    return "direction: string expected";
+                            if (message.action != null && message.hasOwnProperty("action"))
+                                if (!$util.isString(message.action))
+                                    return "action: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkeNetworkPolicyInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo} GkeNetworkPolicyInfo
+                         */
+                        GkeNetworkPolicyInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.direction != null)
+                                message.direction = String(object.direction);
+                            if (object.action != null)
+                                message.action = String(object.action);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkeNetworkPolicyInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo} message GkeNetworkPolicyInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkeNetworkPolicyInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.uri = "";
+                                object.direction = "";
+                                object.action = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.direction != null && message.hasOwnProperty("direction"))
+                                object.direction = message.direction;
+                            if (message.action != null && message.hasOwnProperty("action"))
+                                object.action = message.action;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkeNetworkPolicyInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkeNetworkPolicyInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GkeNetworkPolicyInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GkeNetworkPolicyInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.GkeNetworkPolicyInfo";
+                        };
+    
+                        return GkeNetworkPolicyInfo;
+                    })();
+    
+                    v1.GkeNetworkPolicySkippedInfo = (function() {
+    
+                        /**
+                         * Properties of a GkeNetworkPolicySkippedInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IGkeNetworkPolicySkippedInfo
+                         * @property {google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.Reason|null} [reason] GkeNetworkPolicySkippedInfo reason
+                         */
+    
+                        /**
+                         * Constructs a new GkeNetworkPolicySkippedInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a GkeNetworkPolicySkippedInfo.
+                         * @implements IGkeNetworkPolicySkippedInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IGkeNetworkPolicySkippedInfo=} [properties] Properties to set
+                         */
+                        function GkeNetworkPolicySkippedInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkeNetworkPolicySkippedInfo reason.
+                         * @member {google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.Reason} reason
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo
+                         * @instance
+                         */
+                        GkeNetworkPolicySkippedInfo.prototype.reason = 0;
+    
+                        /**
+                         * Creates a new GkeNetworkPolicySkippedInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IGkeNetworkPolicySkippedInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo} GkeNetworkPolicySkippedInfo instance
+                         */
+                        GkeNetworkPolicySkippedInfo.create = function create(properties) {
+                            return new GkeNetworkPolicySkippedInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkeNetworkPolicySkippedInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IGkeNetworkPolicySkippedInfo} message GkeNetworkPolicySkippedInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeNetworkPolicySkippedInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.reason != null && Object.hasOwnProperty.call(message, "reason"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.reason);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkeNetworkPolicySkippedInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IGkeNetworkPolicySkippedInfo} message GkeNetworkPolicySkippedInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeNetworkPolicySkippedInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkeNetworkPolicySkippedInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo} GkeNetworkPolicySkippedInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeNetworkPolicySkippedInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.reason = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkeNetworkPolicySkippedInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo} GkeNetworkPolicySkippedInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeNetworkPolicySkippedInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkeNetworkPolicySkippedInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkeNetworkPolicySkippedInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                switch (message.reason) {
+                                default:
+                                    return "reason: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 100:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkeNetworkPolicySkippedInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo} GkeNetworkPolicySkippedInfo
+                         */
+                        GkeNetworkPolicySkippedInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo();
+                            switch (object.reason) {
+                            default:
+                                if (typeof object.reason === "number") {
+                                    message.reason = object.reason;
+                                    break;
+                                }
+                                break;
+                            case "REASON_UNSPECIFIED":
+                            case 0:
+                                message.reason = 0;
+                                break;
+                            case "NETWORK_POLICY_DISABLED":
+                            case 1:
+                                message.reason = 1;
+                                break;
+                            case "INGRESS_SOURCE_ON_SAME_NODE":
+                            case 2:
+                                message.reason = 2;
+                                break;
+                            case "EGRESS_FROM_NODE_NETWORK_NAMESPACE_POD":
+                            case 3:
+                                message.reason = 3;
+                                break;
+                            case "NETWORK_POLICY_NOT_APPLIED_TO_RESPONSE_TRAFFIC":
+                            case 4:
+                                message.reason = 4;
+                                break;
+                            case "NETWORK_POLICY_ANALYSIS_UNSUPPORTED":
+                            case 100:
+                                message.reason = 100;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkeNetworkPolicySkippedInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo} message GkeNetworkPolicySkippedInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkeNetworkPolicySkippedInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.reason = options.enums === String ? "REASON_UNSPECIFIED" : 0;
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                object.reason = options.enums === String ? $root.google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.Reason[message.reason] === undefined ? message.reason : $root.google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.Reason[message.reason] : message.reason;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkeNetworkPolicySkippedInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkeNetworkPolicySkippedInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GkeNetworkPolicySkippedInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GkeNetworkPolicySkippedInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo";
+                        };
+    
+                        /**
+                         * Reason enum.
+                         * @name google.cloud.networkmanagement.v1.GkeNetworkPolicySkippedInfo.Reason
+                         * @enum {number}
+                         * @property {number} REASON_UNSPECIFIED=0 REASON_UNSPECIFIED value
+                         * @property {number} NETWORK_POLICY_DISABLED=1 NETWORK_POLICY_DISABLED value
+                         * @property {number} INGRESS_SOURCE_ON_SAME_NODE=2 INGRESS_SOURCE_ON_SAME_NODE value
+                         * @property {number} EGRESS_FROM_NODE_NETWORK_NAMESPACE_POD=3 EGRESS_FROM_NODE_NETWORK_NAMESPACE_POD value
+                         * @property {number} NETWORK_POLICY_NOT_APPLIED_TO_RESPONSE_TRAFFIC=4 NETWORK_POLICY_NOT_APPLIED_TO_RESPONSE_TRAFFIC value
+                         * @property {number} NETWORK_POLICY_ANALYSIS_UNSUPPORTED=100 NETWORK_POLICY_ANALYSIS_UNSUPPORTED value
+                         */
+                        GkeNetworkPolicySkippedInfo.Reason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NETWORK_POLICY_DISABLED"] = 1;
+                            values[valuesById[2] = "INGRESS_SOURCE_ON_SAME_NODE"] = 2;
+                            values[valuesById[3] = "EGRESS_FROM_NODE_NETWORK_NAMESPACE_POD"] = 3;
+                            values[valuesById[4] = "NETWORK_POLICY_NOT_APPLIED_TO_RESPONSE_TRAFFIC"] = 4;
+                            values[valuesById[100] = "NETWORK_POLICY_ANALYSIS_UNSUPPORTED"] = 100;
+                            return values;
+                        })();
+    
+                        return GkeNetworkPolicySkippedInfo;
                     })();
     
                     v1.CloudSQLInstanceInfo = (function() {
@@ -17263,6 +18719,7 @@
                          * @property {number|null} [newDestinationPort] NatInfo newDestinationPort
                          * @property {string|null} [routerUri] NatInfo routerUri
                          * @property {string|null} [natGatewayName] NatInfo natGatewayName
+                         * @property {google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType|null} [cloudNatGatewayType] NatInfo cloudNatGatewayType
                          */
     
                         /**
@@ -17385,6 +18842,14 @@
                         NatInfo.prototype.natGatewayName = "";
     
                         /**
+                         * NatInfo cloudNatGatewayType.
+                         * @member {google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType} cloudNatGatewayType
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.cloudNatGatewayType = 0;
+    
+                        /**
                          * Creates a new NatInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1.NatInfo
@@ -17434,6 +18899,8 @@
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.routerUri);
                             if (message.natGatewayName != null && Object.hasOwnProperty.call(message, "natGatewayName"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.natGatewayName);
+                            if (message.cloudNatGatewayType != null && Object.hasOwnProperty.call(message, "cloudNatGatewayType"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.cloudNatGatewayType);
                             return writer;
                         };
     
@@ -17522,6 +18989,10 @@
                                         message.natGatewayName = reader.string();
                                         break;
                                     }
+                                case 14: {
+                                        message.cloudNatGatewayType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17605,6 +19076,18 @@
                             if (message.natGatewayName != null && message.hasOwnProperty("natGatewayName"))
                                 if (!$util.isString(message.natGatewayName))
                                     return "natGatewayName: string expected";
+                            if (message.cloudNatGatewayType != null && message.hasOwnProperty("cloudNatGatewayType"))
+                                switch (message.cloudNatGatewayType) {
+                                default:
+                                    return "cloudNatGatewayType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -17676,6 +19159,38 @@
                                 message.routerUri = String(object.routerUri);
                             if (object.natGatewayName != null)
                                 message.natGatewayName = String(object.natGatewayName);
+                            switch (object.cloudNatGatewayType) {
+                            default:
+                                if (typeof object.cloudNatGatewayType === "number") {
+                                    message.cloudNatGatewayType = object.cloudNatGatewayType;
+                                    break;
+                                }
+                                break;
+                            case "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.cloudNatGatewayType = 0;
+                                break;
+                            case "PUBLIC_NAT44":
+                            case 1:
+                                message.cloudNatGatewayType = 1;
+                                break;
+                            case "PUBLIC_NAT64":
+                            case 2:
+                                message.cloudNatGatewayType = 2;
+                                break;
+                            case "PRIVATE_NAT_NCC":
+                            case 3:
+                                message.cloudNatGatewayType = 3;
+                                break;
+                            case "PRIVATE_NAT_HYBRID":
+                            case 4:
+                                message.cloudNatGatewayType = 4;
+                                break;
+                            case "PRIVATE_NAT64":
+                            case 5:
+                                message.cloudNatGatewayType = 5;
+                                break;
+                            }
                             return message;
                         };
     
@@ -17706,6 +19221,7 @@
                                 object.newDestinationPort = 0;
                                 object.routerUri = "";
                                 object.natGatewayName = "";
+                                object.cloudNatGatewayType = options.enums === String ? "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.google.cloud.networkmanagement.v1.NatInfo.Type[message.type] === undefined ? message.type : $root.google.cloud.networkmanagement.v1.NatInfo.Type[message.type] : message.type;
@@ -17733,6 +19249,8 @@
                                 object.routerUri = message.routerUri;
                             if (message.natGatewayName != null && message.hasOwnProperty("natGatewayName"))
                                 object.natGatewayName = message.natGatewayName;
+                            if (message.cloudNatGatewayType != null && message.hasOwnProperty("cloudNatGatewayType"))
+                                object.cloudNatGatewayType = options.enums === String ? $root.google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType[message.cloudNatGatewayType] === undefined ? message.cloudNatGatewayType : $root.google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType[message.cloudNatGatewayType] : message.cloudNatGatewayType;
                             return object;
                         };
     
@@ -17781,6 +19299,28 @@
                             values[valuesById[3] = "CLOUD_NAT"] = 3;
                             values[valuesById[4] = "PRIVATE_SERVICE_CONNECT"] = 4;
                             values[valuesById[5] = "GKE_POD_IP_MASQUERADING"] = 5;
+                            return values;
+                        })();
+    
+                        /**
+                         * CloudNatGatewayType enum.
+                         * @name google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType
+                         * @enum {number}
+                         * @property {number} CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED=0 CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED value
+                         * @property {number} PUBLIC_NAT44=1 PUBLIC_NAT44 value
+                         * @property {number} PUBLIC_NAT64=2 PUBLIC_NAT64 value
+                         * @property {number} PRIVATE_NAT_NCC=3 PRIVATE_NAT_NCC value
+                         * @property {number} PRIVATE_NAT_HYBRID=4 PRIVATE_NAT_HYBRID value
+                         * @property {number} PRIVATE_NAT64=5 PRIVATE_NAT64 value
+                         */
+                        NatInfo.CloudNatGatewayType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PUBLIC_NAT44"] = 1;
+                            values[valuesById[2] = "PUBLIC_NAT64"] = 2;
+                            values[valuesById[3] = "PRIVATE_NAT_NCC"] = 3;
+                            values[valuesById[4] = "PRIVATE_NAT_HYBRID"] = 4;
+                            values[valuesById[5] = "PRIVATE_NAT64"] = 5;
                             return values;
                         })();
     
@@ -19130,6 +20670,211 @@
                         };
     
                         return ServerlessNegInfo;
+                    })();
+    
+                    v1.NgfwPacketInspectionInfo = (function() {
+    
+                        /**
+                         * Properties of a NgfwPacketInspectionInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface INgfwPacketInspectionInfo
+                         * @property {string|null} [securityProfileGroupUri] NgfwPacketInspectionInfo securityProfileGroupUri
+                         */
+    
+                        /**
+                         * Constructs a new NgfwPacketInspectionInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a NgfwPacketInspectionInfo.
+                         * @implements INgfwPacketInspectionInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.INgfwPacketInspectionInfo=} [properties] Properties to set
+                         */
+                        function NgfwPacketInspectionInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NgfwPacketInspectionInfo securityProfileGroupUri.
+                         * @member {string} securityProfileGroupUri
+                         * @memberof google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo
+                         * @instance
+                         */
+                        NgfwPacketInspectionInfo.prototype.securityProfileGroupUri = "";
+    
+                        /**
+                         * Creates a new NgfwPacketInspectionInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.INgfwPacketInspectionInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo} NgfwPacketInspectionInfo instance
+                         */
+                        NgfwPacketInspectionInfo.create = function create(properties) {
+                            return new NgfwPacketInspectionInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NgfwPacketInspectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.INgfwPacketInspectionInfo} message NgfwPacketInspectionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NgfwPacketInspectionInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.securityProfileGroupUri != null && Object.hasOwnProperty.call(message, "securityProfileGroupUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.securityProfileGroupUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NgfwPacketInspectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.INgfwPacketInspectionInfo} message NgfwPacketInspectionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NgfwPacketInspectionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NgfwPacketInspectionInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo} NgfwPacketInspectionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NgfwPacketInspectionInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.securityProfileGroupUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NgfwPacketInspectionInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo} NgfwPacketInspectionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NgfwPacketInspectionInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NgfwPacketInspectionInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NgfwPacketInspectionInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.securityProfileGroupUri != null && message.hasOwnProperty("securityProfileGroupUri"))
+                                if (!$util.isString(message.securityProfileGroupUri))
+                                    return "securityProfileGroupUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NgfwPacketInspectionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo} NgfwPacketInspectionInfo
+                         */
+                        NgfwPacketInspectionInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo();
+                            if (object.securityProfileGroupUri != null)
+                                message.securityProfileGroupUri = String(object.securityProfileGroupUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NgfwPacketInspectionInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo} message NgfwPacketInspectionInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NgfwPacketInspectionInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.securityProfileGroupUri = "";
+                            if (message.securityProfileGroupUri != null && message.hasOwnProperty("securityProfileGroupUri"))
+                                object.securityProfileGroupUri = message.securityProfileGroupUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NgfwPacketInspectionInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NgfwPacketInspectionInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NgfwPacketInspectionInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NgfwPacketInspectionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.NgfwPacketInspectionInfo";
+                        };
+    
+                        return NgfwPacketInspectionInfo;
                     })();
     
                     v1.ReachabilityService = (function() {
@@ -26960,6 +28705,7 @@
                          * @property {string|null} [cloudSqlInstance] Endpoint cloudSqlInstance
                          * @property {string|null} [redisInstance] Endpoint redisInstance
                          * @property {string|null} [redisCluster] Endpoint redisCluster
+                         * @property {string|null} [gkePod] Endpoint gkePod
                          * @property {google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint|null} [cloudFunction] Endpoint cloudFunction
                          * @property {google.cloud.networkmanagement.v1beta1.Endpoint.IAppEngineVersionEndpoint|null} [appEngineVersion] Endpoint appEngineVersion
                          * @property {google.cloud.networkmanagement.v1beta1.Endpoint.ICloudRunRevisionEndpoint|null} [cloudRunRevision] Endpoint cloudRunRevision
@@ -27078,6 +28824,14 @@
                          * @instance
                          */
                         Endpoint.prototype.redisCluster = "";
+    
+                        /**
+                         * Endpoint gkePod.
+                         * @member {string} gkePod
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.gkePod = "";
     
                         /**
                          * Endpoint cloudFunction.
@@ -27208,6 +28962,8 @@
                                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.redisCluster);
                             if (message.fqdn != null && Object.hasOwnProperty.call(message, "fqdn"))
                                 writer.uint32(/* id 19, wireType 2 =*/154).string(message.fqdn);
+                            if (message.gkePod != null && Object.hasOwnProperty.call(message, "gkePod"))
+                                writer.uint32(/* id 21, wireType 2 =*/170).string(message.gkePod);
                             return writer;
                         };
     
@@ -27290,6 +29046,10 @@
                                     }
                                 case 18: {
                                         message.redisCluster = reader.string();
+                                        break;
+                                    }
+                                case 21: {
+                                        message.gkePod = reader.string();
                                         break;
                                     }
                                 case 10: {
@@ -27416,6 +29176,9 @@
                             if (message.redisCluster != null && message.hasOwnProperty("redisCluster"))
                                 if (!$util.isString(message.redisCluster))
                                     return "redisCluster: string expected";
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod"))
+                                if (!$util.isString(message.gkePod))
+                                    return "gkePod: string expected";
                             if (message.cloudFunction != null && message.hasOwnProperty("cloudFunction")) {
                                 var error = $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint.verify(message.cloudFunction);
                                 if (error)
@@ -27441,6 +29204,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
@@ -27561,6 +29325,8 @@
                                 message.redisInstance = String(object.redisInstance);
                             if (object.redisCluster != null)
                                 message.redisCluster = String(object.redisCluster);
+                            if (object.gkePod != null)
+                                message.gkePod = String(object.gkePod);
                             if (object.cloudFunction != null) {
                                 if (typeof object.cloudFunction !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Endpoint.cloudFunction: object expected");
@@ -27597,6 +29363,10 @@
                             case 2:
                                 message.networkType = 2;
                                 break;
+                            case "INTERNET":
+                            case 3:
+                                message.networkType = 3;
+                                break;
                             }
                             if (object.projectId != null)
                                 message.projectId = String(object.projectId);
@@ -27632,6 +29402,7 @@
                                 object.redisInstance = "";
                                 object.redisCluster = "";
                                 object.fqdn = "";
+                                object.gkePod = "";
                             }
                             if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
                                 object.ipAddress = message.ipAddress;
@@ -27678,6 +29449,8 @@
                                 object.redisCluster = message.redisCluster;
                             if (message.fqdn != null && message.hasOwnProperty("fqdn"))
                                 object.fqdn = message.fqdn;
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod"))
+                                object.gkePod = message.gkePod;
                             return object;
                         };
     
@@ -27714,12 +29487,14 @@
                          * @property {number} NETWORK_TYPE_UNSPECIFIED=0 NETWORK_TYPE_UNSPECIFIED value
                          * @property {number} GCP_NETWORK=1 GCP_NETWORK value
                          * @property {number} NON_GCP_NETWORK=2 NON_GCP_NETWORK value
+                         * @property {number} INTERNET=3 INTERNET value
                          */
                         Endpoint.NetworkType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "NETWORK_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "GCP_NETWORK"] = 1;
                             values[valuesById[2] = "NON_GCP_NETWORK"] = 2;
+                            values[valuesById[3] = "INTERNET"] = 3;
                             return values;
                         })();
     
@@ -30671,6 +32446,10 @@
                          * @property {google.cloud.networkmanagement.v1beta1.ILoadBalancerInfo|null} [loadBalancer] Step loadBalancer
                          * @property {google.cloud.networkmanagement.v1beta1.INetworkInfo|null} [network] Step network
                          * @property {google.cloud.networkmanagement.v1beta1.IGKEMasterInfo|null} [gkeMaster] Step gkeMaster
+                         * @property {google.cloud.networkmanagement.v1beta1.IGkePodInfo|null} [gkePod] Step gkePod
+                         * @property {google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo|null} [ipMasqueradingSkipped] Step ipMasqueradingSkipped
+                         * @property {google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicyInfo|null} [gkeNetworkPolicy] Step gkeNetworkPolicy
+                         * @property {google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicySkippedInfo|null} [gkeNetworkPolicySkipped] Step gkeNetworkPolicySkipped
                          * @property {google.cloud.networkmanagement.v1beta1.ICloudSQLInstanceInfo|null} [cloudSqlInstance] Step cloudSqlInstance
                          * @property {google.cloud.networkmanagement.v1beta1.IRedisInstanceInfo|null} [redisInstance] Step redisInstance
                          * @property {google.cloud.networkmanagement.v1beta1.IRedisClusterInfo|null} [redisCluster] Step redisCluster
@@ -30682,6 +32461,7 @@
                          * @property {google.cloud.networkmanagement.v1beta1.ILoadBalancerBackendInfo|null} [loadBalancerBackendInfo] Step loadBalancerBackendInfo
                          * @property {google.cloud.networkmanagement.v1beta1.IStorageBucketInfo|null} [storageBucket] Step storageBucket
                          * @property {google.cloud.networkmanagement.v1beta1.IServerlessNegInfo|null} [serverlessNeg] Step serverlessNeg
+                         * @property {google.cloud.networkmanagement.v1beta1.INgfwPacketInspectionInfo|null} [ngfwPacketInspection] Step ngfwPacketInspection
                          */
     
                         /**
@@ -30892,6 +32672,38 @@
                         Step.prototype.gkeMaster = null;
     
                         /**
+                         * Step gkePod.
+                         * @member {google.cloud.networkmanagement.v1beta1.IGkePodInfo|null|undefined} gkePod
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.gkePod = null;
+    
+                        /**
+                         * Step ipMasqueradingSkipped.
+                         * @member {google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo|null|undefined} ipMasqueradingSkipped
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.ipMasqueradingSkipped = null;
+    
+                        /**
+                         * Step gkeNetworkPolicy.
+                         * @member {google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicyInfo|null|undefined} gkeNetworkPolicy
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.gkeNetworkPolicy = null;
+    
+                        /**
+                         * Step gkeNetworkPolicySkipped.
+                         * @member {google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicySkippedInfo|null|undefined} gkeNetworkPolicySkipped
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.gkeNetworkPolicySkipped = null;
+    
+                        /**
                          * Step cloudSqlInstance.
                          * @member {google.cloud.networkmanagement.v1beta1.ICloudSQLInstanceInfo|null|undefined} cloudSqlInstance
                          * @memberof google.cloud.networkmanagement.v1beta1.Step
@@ -30979,17 +32791,25 @@
                          */
                         Step.prototype.serverlessNeg = null;
     
+                        /**
+                         * Step ngfwPacketInspection.
+                         * @member {google.cloud.networkmanagement.v1beta1.INgfwPacketInspectionInfo|null|undefined} ngfwPacketInspection
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.ngfwPacketInspection = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Step stepInfo.
-                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|undefined} stepInfo
+                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"gkePod"|"ipMasqueradingSkipped"|"gkeNetworkPolicy"|"gkeNetworkPolicySkipped"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|"ngfwPacketInspection"|undefined} stepInfo
                          * @memberof google.cloud.networkmanagement.v1beta1.Step
                          * @instance
                          */
                         Object.defineProperty(Step.prototype, "stepInfo", {
-                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "hybridSubnet", "vpnGateway", "vpnTunnel", "interconnectAttachment", "vpcConnector", "directVpcEgressConnection", "serverlessExternalConnection", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "redisInstance", "redisCluster", "cloudFunction", "appEngineVersion", "cloudRunRevision", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket", "serverlessNeg"]),
+                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "hybridSubnet", "vpnGateway", "vpnTunnel", "interconnectAttachment", "vpcConnector", "directVpcEgressConnection", "serverlessExternalConnection", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "gkePod", "ipMasqueradingSkipped", "gkeNetworkPolicy", "gkeNetworkPolicySkipped", "cloudSqlInstance", "redisInstance", "redisCluster", "cloudFunction", "appEngineVersion", "cloudRunRevision", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket", "serverlessNeg", "ngfwPacketInspection"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -31087,6 +32907,16 @@
                                 $root.google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.encode(message.interconnectAttachment, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
                             if (message.hybridSubnet != null && Object.hasOwnProperty.call(message, "hybridSubnet"))
                                 $root.google.cloud.networkmanagement.v1beta1.HybridSubnetInfo.encode(message.hybridSubnet, writer.uint32(/* id 36, wireType 2 =*/290).fork()).ldelim();
+                            if (message.gkePod != null && Object.hasOwnProperty.call(message, "gkePod"))
+                                $root.google.cloud.networkmanagement.v1beta1.GkePodInfo.encode(message.gkePod, writer.uint32(/* id 37, wireType 2 =*/298).fork()).ldelim();
+                            if (message.ipMasqueradingSkipped != null && Object.hasOwnProperty.call(message, "ipMasqueradingSkipped"))
+                                $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.encode(message.ipMasqueradingSkipped, writer.uint32(/* id 38, wireType 2 =*/306).fork()).ldelim();
+                            if (message.gkeNetworkPolicy != null && Object.hasOwnProperty.call(message, "gkeNetworkPolicy"))
+                                $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo.encode(message.gkeNetworkPolicy, writer.uint32(/* id 39, wireType 2 =*/314).fork()).ldelim();
+                            if (message.gkeNetworkPolicySkipped != null && Object.hasOwnProperty.call(message, "gkeNetworkPolicySkipped"))
+                                $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.encode(message.gkeNetworkPolicySkipped, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
+                            if (message.ngfwPacketInspection != null && Object.hasOwnProperty.call(message, "ngfwPacketInspection"))
+                                $root.google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo.encode(message.ngfwPacketInspection, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
                             return writer;
                         };
     
@@ -31219,6 +33049,22 @@
                                         message.gkeMaster = $root.google.cloud.networkmanagement.v1beta1.GKEMasterInfo.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 37: {
+                                        message.gkePod = $root.google.cloud.networkmanagement.v1beta1.GkePodInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 38: {
+                                        message.ipMasqueradingSkipped = $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 39: {
+                                        message.gkeNetworkPolicy = $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 40: {
+                                        message.gkeNetworkPolicySkipped = $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 19: {
                                         message.cloudSqlInstance = $root.google.cloud.networkmanagement.v1beta1.CloudSQLInstanceInfo.decode(reader, reader.uint32());
                                         break;
@@ -31261,6 +33107,10 @@
                                     }
                                 case 29: {
                                         message.serverlessNeg = $root.google.cloud.networkmanagement.v1beta1.ServerlessNegInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 42: {
+                                        message.ngfwPacketInspection = $root.google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -31313,6 +33163,7 @@
                                 case 3:
                                 case 21:
                                 case 22:
+                                case 39:
                                 case 32:
                                 case 33:
                                 case 23:
@@ -31335,9 +33186,16 @@
                                 case 13:
                                 case 37:
                                 case 24:
+                                case 44:
                                 case 35:
                                 case 36:
+                                case 47:
                                 case 14:
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 45:
+                                case 46:
                                 case 15:
                                 case 16:
                                 case 17:
@@ -31550,6 +33408,46 @@
                                         return "gkeMaster." + error;
                                 }
                             }
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.GkePodInfo.verify(message.gkePod);
+                                    if (error)
+                                        return "gkePod." + error;
+                                }
+                            }
+                            if (message.ipMasqueradingSkipped != null && message.hasOwnProperty("ipMasqueradingSkipped")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.verify(message.ipMasqueradingSkipped);
+                                    if (error)
+                                        return "ipMasqueradingSkipped." + error;
+                                }
+                            }
+                            if (message.gkeNetworkPolicy != null && message.hasOwnProperty("gkeNetworkPolicy")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo.verify(message.gkeNetworkPolicy);
+                                    if (error)
+                                        return "gkeNetworkPolicy." + error;
+                                }
+                            }
+                            if (message.gkeNetworkPolicySkipped != null && message.hasOwnProperty("gkeNetworkPolicySkipped")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.verify(message.gkeNetworkPolicySkipped);
+                                    if (error)
+                                        return "gkeNetworkPolicySkipped." + error;
+                                }
+                            }
                             if (message.cloudSqlInstance != null && message.hasOwnProperty("cloudSqlInstance")) {
                                 if (properties.stepInfo === 1)
                                     return "stepInfo: multiple values";
@@ -31660,6 +33558,16 @@
                                         return "serverlessNeg." + error;
                                 }
                             }
+                            if (message.ngfwPacketInspection != null && message.hasOwnProperty("ngfwPacketInspection")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo.verify(message.ngfwPacketInspection);
+                                    if (error)
+                                        return "ngfwPacketInspection." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -31711,6 +33619,10 @@
                             case "START_FROM_CLOUD_SQL_INSTANCE":
                             case 22:
                                 message.state = 22;
+                                break;
+                            case "START_FROM_GKE_POD":
+                            case 39:
+                                message.state = 39;
                                 break;
                             case "START_FROM_REDIS_INSTANCE":
                             case 32:
@@ -31800,6 +33712,10 @@
                             case 24:
                                 message.state = 24;
                                 break;
+                            case "ARRIVE_AT_GKE_POD":
+                            case 44:
+                                message.state = 44;
+                                break;
                             case "DIRECT_VPC_EGRESS_CONNECTION":
                             case 35:
                                 message.state = 35;
@@ -31808,9 +33724,33 @@
                             case 36:
                                 message.state = 36;
                                 break;
+                            case "NGFW_PACKET_INSPECTION":
+                            case 47:
+                                message.state = 47;
+                                break;
                             case "NAT":
                             case 14:
                                 message.state = 14;
+                                break;
+                            case "SKIP_GKE_POD_IP_MASQUERADING":
+                            case 40:
+                                message.state = 40;
+                                break;
+                            case "SKIP_GKE_INGRESS_NETWORK_POLICY":
+                            case 41:
+                                message.state = 41;
+                                break;
+                            case "SKIP_GKE_EGRESS_NETWORK_POLICY":
+                            case 42:
+                                message.state = 42;
+                                break;
+                            case "APPLY_INGRESS_GKE_NETWORK_POLICY":
+                            case 45:
+                                message.state = 45;
+                                break;
+                            case "APPLY_EGRESS_GKE_NETWORK_POLICY":
+                            case 46:
+                                message.state = 46;
                                 break;
                             case "PROXY_CONNECTION":
                             case 15:
@@ -31941,6 +33881,26 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.gkeMaster: object expected");
                                 message.gkeMaster = $root.google.cloud.networkmanagement.v1beta1.GKEMasterInfo.fromObject(object.gkeMaster);
                             }
+                            if (object.gkePod != null) {
+                                if (typeof object.gkePod !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.gkePod: object expected");
+                                message.gkePod = $root.google.cloud.networkmanagement.v1beta1.GkePodInfo.fromObject(object.gkePod);
+                            }
+                            if (object.ipMasqueradingSkipped != null) {
+                                if (typeof object.ipMasqueradingSkipped !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.ipMasqueradingSkipped: object expected");
+                                message.ipMasqueradingSkipped = $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.fromObject(object.ipMasqueradingSkipped);
+                            }
+                            if (object.gkeNetworkPolicy != null) {
+                                if (typeof object.gkeNetworkPolicy !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.gkeNetworkPolicy: object expected");
+                                message.gkeNetworkPolicy = $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo.fromObject(object.gkeNetworkPolicy);
+                            }
+                            if (object.gkeNetworkPolicySkipped != null) {
+                                if (typeof object.gkeNetworkPolicySkipped !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.gkeNetworkPolicySkipped: object expected");
+                                message.gkeNetworkPolicySkipped = $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.fromObject(object.gkeNetworkPolicySkipped);
+                            }
                             if (object.cloudSqlInstance != null) {
                                 if (typeof object.cloudSqlInstance !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.cloudSqlInstance: object expected");
@@ -31995,6 +33955,11 @@
                                 if (typeof object.serverlessNeg !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.serverlessNeg: object expected");
                                 message.serverlessNeg = $root.google.cloud.networkmanagement.v1beta1.ServerlessNegInfo.fromObject(object.serverlessNeg);
+                            }
+                            if (object.ngfwPacketInspection != null) {
+                                if (typeof object.ngfwPacketInspection !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.ngfwPacketInspection: object expected");
+                                message.ngfwPacketInspection = $root.google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo.fromObject(object.ngfwPacketInspection);
                             }
                             return message;
                         };
@@ -32181,6 +34146,31 @@
                                 if (options.oneofs)
                                     object.stepInfo = "hybridSubnet";
                             }
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod")) {
+                                object.gkePod = $root.google.cloud.networkmanagement.v1beta1.GkePodInfo.toObject(message.gkePod, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "gkePod";
+                            }
+                            if (message.ipMasqueradingSkipped != null && message.hasOwnProperty("ipMasqueradingSkipped")) {
+                                object.ipMasqueradingSkipped = $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.toObject(message.ipMasqueradingSkipped, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "ipMasqueradingSkipped";
+                            }
+                            if (message.gkeNetworkPolicy != null && message.hasOwnProperty("gkeNetworkPolicy")) {
+                                object.gkeNetworkPolicy = $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo.toObject(message.gkeNetworkPolicy, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "gkeNetworkPolicy";
+                            }
+                            if (message.gkeNetworkPolicySkipped != null && message.hasOwnProperty("gkeNetworkPolicySkipped")) {
+                                object.gkeNetworkPolicySkipped = $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.toObject(message.gkeNetworkPolicySkipped, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "gkeNetworkPolicySkipped";
+                            }
+                            if (message.ngfwPacketInspection != null && message.hasOwnProperty("ngfwPacketInspection")) {
+                                object.ngfwPacketInspection = $root.google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo.toObject(message.ngfwPacketInspection, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "ngfwPacketInspection";
+                            }
                             return object;
                         };
     
@@ -32221,6 +34211,7 @@
                          * @property {number} START_FROM_PRIVATE_NETWORK=3 START_FROM_PRIVATE_NETWORK value
                          * @property {number} START_FROM_GKE_MASTER=21 START_FROM_GKE_MASTER value
                          * @property {number} START_FROM_CLOUD_SQL_INSTANCE=22 START_FROM_CLOUD_SQL_INSTANCE value
+                         * @property {number} START_FROM_GKE_POD=39 START_FROM_GKE_POD value
                          * @property {number} START_FROM_REDIS_INSTANCE=32 START_FROM_REDIS_INSTANCE value
                          * @property {number} START_FROM_REDIS_CLUSTER=33 START_FROM_REDIS_CLUSTER value
                          * @property {number} START_FROM_CLOUD_FUNCTION=23 START_FROM_CLOUD_FUNCTION value
@@ -32243,9 +34234,16 @@
                          * @property {number} ARRIVE_AT_VPN_TUNNEL=13 ARRIVE_AT_VPN_TUNNEL value
                          * @property {number} ARRIVE_AT_INTERCONNECT_ATTACHMENT=37 ARRIVE_AT_INTERCONNECT_ATTACHMENT value
                          * @property {number} ARRIVE_AT_VPC_CONNECTOR=24 ARRIVE_AT_VPC_CONNECTOR value
+                         * @property {number} ARRIVE_AT_GKE_POD=44 ARRIVE_AT_GKE_POD value
                          * @property {number} DIRECT_VPC_EGRESS_CONNECTION=35 DIRECT_VPC_EGRESS_CONNECTION value
                          * @property {number} SERVERLESS_EXTERNAL_CONNECTION=36 SERVERLESS_EXTERNAL_CONNECTION value
+                         * @property {number} NGFW_PACKET_INSPECTION=47 NGFW_PACKET_INSPECTION value
                          * @property {number} NAT=14 NAT value
+                         * @property {number} SKIP_GKE_POD_IP_MASQUERADING=40 SKIP_GKE_POD_IP_MASQUERADING value
+                         * @property {number} SKIP_GKE_INGRESS_NETWORK_POLICY=41 SKIP_GKE_INGRESS_NETWORK_POLICY value
+                         * @property {number} SKIP_GKE_EGRESS_NETWORK_POLICY=42 SKIP_GKE_EGRESS_NETWORK_POLICY value
+                         * @property {number} APPLY_INGRESS_GKE_NETWORK_POLICY=45 APPLY_INGRESS_GKE_NETWORK_POLICY value
+                         * @property {number} APPLY_EGRESS_GKE_NETWORK_POLICY=46 APPLY_EGRESS_GKE_NETWORK_POLICY value
                          * @property {number} PROXY_CONNECTION=15 PROXY_CONNECTION value
                          * @property {number} DELIVER=16 DELIVER value
                          * @property {number} DROP=17 DROP value
@@ -32262,6 +34260,7 @@
                             values[valuesById[3] = "START_FROM_PRIVATE_NETWORK"] = 3;
                             values[valuesById[21] = "START_FROM_GKE_MASTER"] = 21;
                             values[valuesById[22] = "START_FROM_CLOUD_SQL_INSTANCE"] = 22;
+                            values[valuesById[39] = "START_FROM_GKE_POD"] = 39;
                             values[valuesById[32] = "START_FROM_REDIS_INSTANCE"] = 32;
                             values[valuesById[33] = "START_FROM_REDIS_CLUSTER"] = 33;
                             values[valuesById[23] = "START_FROM_CLOUD_FUNCTION"] = 23;
@@ -32284,9 +34283,16 @@
                             values[valuesById[13] = "ARRIVE_AT_VPN_TUNNEL"] = 13;
                             values[valuesById[37] = "ARRIVE_AT_INTERCONNECT_ATTACHMENT"] = 37;
                             values[valuesById[24] = "ARRIVE_AT_VPC_CONNECTOR"] = 24;
+                            values[valuesById[44] = "ARRIVE_AT_GKE_POD"] = 44;
                             values[valuesById[35] = "DIRECT_VPC_EGRESS_CONNECTION"] = 35;
                             values[valuesById[36] = "SERVERLESS_EXTERNAL_CONNECTION"] = 36;
+                            values[valuesById[47] = "NGFW_PACKET_INSPECTION"] = 47;
                             values[valuesById[14] = "NAT"] = 14;
+                            values[valuesById[40] = "SKIP_GKE_POD_IP_MASQUERADING"] = 40;
+                            values[valuesById[41] = "SKIP_GKE_INGRESS_NETWORK_POLICY"] = 41;
+                            values[valuesById[42] = "SKIP_GKE_EGRESS_NETWORK_POLICY"] = 42;
+                            values[valuesById[45] = "APPLY_INGRESS_GKE_NETWORK_POLICY"] = 45;
+                            values[valuesById[46] = "APPLY_EGRESS_GKE_NETWORK_POLICY"] = 46;
                             values[valuesById[15] = "PROXY_CONNECTION"] = 15;
                             values[valuesById[16] = "DELIVER"] = 16;
                             values[valuesById[17] = "DROP"] = 17;
@@ -33460,6 +35466,8 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
+                                case 8:
                                 case 100:
                                 case 101:
                                 case 102:
@@ -33556,6 +35564,14 @@
                             case "NETWORK_REGIONAL_FIREWALL_POLICY_RULE":
                             case 6:
                                 message.firewallRuleType = 6;
+                                break;
+                            case "SYSTEM_NETWORK_FIREWALL_POLICY_RULE":
+                            case 7:
+                                message.firewallRuleType = 7;
+                                break;
+                            case "SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE":
+                            case 8:
+                                message.firewallRuleType = 8;
                                 break;
                             case "UNSUPPORTED_FIREWALL_POLICY_RULE":
                             case 100:
@@ -33697,6 +35713,8 @@
                          * @property {number} SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE=4 SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE value
                          * @property {number} NETWORK_FIREWALL_POLICY_RULE=5 NETWORK_FIREWALL_POLICY_RULE value
                          * @property {number} NETWORK_REGIONAL_FIREWALL_POLICY_RULE=6 NETWORK_REGIONAL_FIREWALL_POLICY_RULE value
+                         * @property {number} SYSTEM_NETWORK_FIREWALL_POLICY_RULE=7 SYSTEM_NETWORK_FIREWALL_POLICY_RULE value
+                         * @property {number} SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE=8 SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE value
                          * @property {number} UNSUPPORTED_FIREWALL_POLICY_RULE=100 UNSUPPORTED_FIREWALL_POLICY_RULE value
                          * @property {number} TRACKING_STATE=101 TRACKING_STATE value
                          * @property {number} ANALYSIS_SKIPPED=102 ANALYSIS_SKIPPED value
@@ -33710,6 +35728,8 @@
                             values[valuesById[4] = "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"] = 4;
                             values[valuesById[5] = "NETWORK_FIREWALL_POLICY_RULE"] = 5;
                             values[valuesById[6] = "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"] = 6;
+                            values[valuesById[7] = "SYSTEM_NETWORK_FIREWALL_POLICY_RULE"] = 7;
+                            values[valuesById[8] = "SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE"] = 8;
                             values[valuesById[100] = "UNSUPPORTED_FIREWALL_POLICY_RULE"] = 100;
                             values[valuesById[101] = "TRACKING_STATE"] = 101;
                             values[valuesById[102] = "ANALYSIS_SKIPPED"] = 102;
@@ -38364,6 +40384,7 @@
                                 case 15:
                                 case 16:
                                 case 17:
+                                case 19:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -38483,6 +40504,10 @@
                             case "REDIS_CLUSTER":
                             case 17:
                                 message.target = 17;
+                                break;
+                            case "GKE_POD":
+                            case 19:
+                                message.target = 19;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -38612,6 +40637,7 @@
                          * @property {number} GOOGLE_MANAGED_SERVICE=15 GOOGLE_MANAGED_SERVICE value
                          * @property {number} REDIS_INSTANCE=16 REDIS_INSTANCE value
                          * @property {number} REDIS_CLUSTER=17 REDIS_CLUSTER value
+                         * @property {number} GKE_POD=19 GKE_POD value
                          */
                         DeliverInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -38633,6 +40659,7 @@
                             values[valuesById[15] = "GOOGLE_MANAGED_SERVICE"] = 15;
                             values[valuesById[16] = "REDIS_INSTANCE"] = 16;
                             values[valuesById[17] = "REDIS_CLUSTER"] = 17;
+                            values[valuesById[19] = "GKE_POD"] = 19;
                             return values;
                         })();
     
@@ -39212,6 +41239,9 @@
                                 case 29:
                                 case 36:
                                 case 5:
+                                case 42:
+                                case 43:
+                                case 44:
                                 case 6:
                                 case 9:
                                 case 10:
@@ -39226,6 +41256,7 @@
                                 case 19:
                                 case 39:
                                 case 20:
+                                case 45:
                                 case 34:
                                 case 35:
                                 case 21:
@@ -39234,6 +41265,7 @@
                                 case 31:
                                 case 37:
                                 case 40:
+                                case 41:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -39339,6 +41371,18 @@
                             case 5:
                                 message.cause = 5;
                                 break;
+                            case "NO_SOURCE_GCP_NETWORK_LOCATION":
+                            case 42:
+                                message.cause = 42;
+                                break;
+                            case "NO_SOURCE_NON_GCP_NETWORK_LOCATION":
+                            case 43:
+                                message.cause = 43;
+                                break;
+                            case "NO_SOURCE_INTERNET_LOCATION":
+                            case 44:
+                                message.cause = 44;
+                                break;
                             case "INVALID_ARGUMENT":
                             case 6:
                                 message.cause = 6;
@@ -39395,6 +41439,10 @@
                             case 20:
                                 message.cause = 20;
                                 break;
+                            case "SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED":
+                            case 45:
+                                message.cause = 45;
+                                break;
                             case "SOURCE_REDIS_CLUSTER_UNSUPPORTED":
                             case 34:
                                 message.cause = 34;
@@ -39426,6 +41474,10 @@
                             case "IP_VERSION_PROTOCOL_MISMATCH":
                             case 40:
                                 message.cause = 40;
+                                break;
+                            case "GKE_POD_UNKNOWN_ENDPOINT_LOCATION":
+                            case 41:
+                                message.cause = 41;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -39523,6 +41575,9 @@
                          * @property {number} PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS=29 PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS value
                          * @property {number} PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS=36 PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS value
                          * @property {number} NO_SOURCE_LOCATION=5 NO_SOURCE_LOCATION value
+                         * @property {number} NO_SOURCE_GCP_NETWORK_LOCATION=42 NO_SOURCE_GCP_NETWORK_LOCATION value
+                         * @property {number} NO_SOURCE_NON_GCP_NETWORK_LOCATION=43 NO_SOURCE_NON_GCP_NETWORK_LOCATION value
+                         * @property {number} NO_SOURCE_INTERNET_LOCATION=44 NO_SOURCE_INTERNET_LOCATION value
                          * @property {number} INVALID_ARGUMENT=6 INVALID_ARGUMENT value
                          * @property {number} TRACE_TOO_LONG=9 TRACE_TOO_LONG value
                          * @property {number} INTERNAL_ERROR=10 INTERNAL_ERROR value
@@ -39537,6 +41592,7 @@
                          * @property {number} GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT=19 GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT value
                          * @property {number} GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT=39 GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT value
                          * @property {number} SOURCE_PSC_CLOUD_SQL_UNSUPPORTED=20 SOURCE_PSC_CLOUD_SQL_UNSUPPORTED value
+                         * @property {number} SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED=45 SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED value
                          * @property {number} SOURCE_REDIS_CLUSTER_UNSUPPORTED=34 SOURCE_REDIS_CLUSTER_UNSUPPORTED value
                          * @property {number} SOURCE_REDIS_INSTANCE_UNSUPPORTED=35 SOURCE_REDIS_INSTANCE_UNSUPPORTED value
                          * @property {number} SOURCE_FORWARDING_RULE_UNSUPPORTED=21 SOURCE_FORWARDING_RULE_UNSUPPORTED value
@@ -39545,6 +41601,7 @@
                          * @property {number} UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG=31 UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG value
                          * @property {number} NO_SERVERLESS_IP_RANGES=37 NO_SERVERLESS_IP_RANGES value
                          * @property {number} IP_VERSION_PROTOCOL_MISMATCH=40 IP_VERSION_PROTOCOL_MISMATCH value
+                         * @property {number} GKE_POD_UNKNOWN_ENDPOINT_LOCATION=41 GKE_POD_UNKNOWN_ENDPOINT_LOCATION value
                          */
                         AbortInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -39565,6 +41622,9 @@
                             values[valuesById[29] = "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS"] = 29;
                             values[valuesById[36] = "PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS"] = 36;
                             values[valuesById[5] = "NO_SOURCE_LOCATION"] = 5;
+                            values[valuesById[42] = "NO_SOURCE_GCP_NETWORK_LOCATION"] = 42;
+                            values[valuesById[43] = "NO_SOURCE_NON_GCP_NETWORK_LOCATION"] = 43;
+                            values[valuesById[44] = "NO_SOURCE_INTERNET_LOCATION"] = 44;
                             values[valuesById[6] = "INVALID_ARGUMENT"] = 6;
                             values[valuesById[9] = "TRACE_TOO_LONG"] = 9;
                             values[valuesById[10] = "INTERNAL_ERROR"] = 10;
@@ -39579,6 +41639,7 @@
                             values[valuesById[19] = "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT"] = 19;
                             values[valuesById[39] = "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT"] = 39;
                             values[valuesById[20] = "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED"] = 20;
+                            values[valuesById[45] = "SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED"] = 45;
                             values[valuesById[34] = "SOURCE_REDIS_CLUSTER_UNSUPPORTED"] = 34;
                             values[valuesById[35] = "SOURCE_REDIS_INSTANCE_UNSUPPORTED"] = 35;
                             values[valuesById[21] = "SOURCE_FORWARDING_RULE_UNSUPPORTED"] = 21;
@@ -39587,6 +41648,7 @@
                             values[valuesById[31] = "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG"] = 31;
                             values[valuesById[37] = "NO_SERVERLESS_IP_RANGES"] = 37;
                             values[valuesById[40] = "IP_VERSION_PROTOCOL_MISMATCH"] = 40;
+                            values[valuesById[41] = "GKE_POD_UNKNOWN_ENDPOINT_LOCATION"] = 41;
                             return values;
                         })();
     
@@ -39835,6 +41897,7 @@
                                 case 52:
                                 case 53:
                                 case 44:
+                                case 109:
                                 case 98:
                                 case 45:
                                 case 46:
@@ -39849,6 +41912,7 @@
                                 case 85:
                                 case 14:
                                 case 27:
+                                case 103:
                                 case 28:
                                 case 68:
                                 case 69:
@@ -39911,6 +41975,7 @@
                                 case 88:
                                 case 89:
                                 case 90:
+                                case 107:
                                 case 96:
                                 case 97:
                                 case 99:
@@ -39919,6 +41984,9 @@
                                 case 102:
                                 case 104:
                                 case 105:
+                                case 106:
+                                case 108:
+                                case 110:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -40021,6 +42089,10 @@
                             case 44:
                                 message.cause = 44;
                                 break;
+                            case "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS":
+                            case 109:
+                                message.cause = 109;
+                                break;
                             case "NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS":
                             case 98:
                                 message.cause = 98;
@@ -40076,6 +42148,10 @@
                             case "GKE_CLUSTER_NOT_RUNNING":
                             case 27:
                                 message.cause = 27;
+                                break;
+                            case "GKE_POD_NOT_RUNNING":
+                            case 103:
+                                message.cause = 103;
                                 break;
                             case "CLOUD_SQL_INSTANCE_NOT_RUNNING":
                             case 28:
@@ -40325,6 +42401,10 @@
                             case 90:
                                 message.cause = 90;
                                 break;
+                            case "NO_CONFIGURED_PRIVATE_NAT64_RULE":
+                            case 107:
+                                message.cause = 107;
+                                break;
                             case "LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH":
                             case 96:
                                 message.cause = 96;
@@ -40356,6 +42436,18 @@
                             case "HYBRID_SUBNET_REGION_MISMATCH":
                             case 105:
                                 message.cause = 105;
+                                break;
+                            case "HYBRID_SUBNET_NO_ROUTE":
+                            case 106:
+                                message.cause = 106;
+                                break;
+                            case "GKE_NETWORK_POLICY":
+                            case 108:
+                                message.cause = 108;
+                                break;
+                            case "NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION":
+                            case 110:
+                                message.cause = 110;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -40457,6 +42549,7 @@
                          * @property {number} ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED=52 ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED value
                          * @property {number} ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID=53 ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID value
                          * @property {number} NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS=44 NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS value
+                         * @property {number} NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS=109 NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS value
                          * @property {number} NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS=98 NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS value
                          * @property {number} VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH=45 VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH value
                          * @property {number} VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH=46 VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH value
@@ -40471,6 +42564,7 @@
                          * @property {number} INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS=85 INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS value
                          * @property {number} INSTANCE_NOT_RUNNING=14 INSTANCE_NOT_RUNNING value
                          * @property {number} GKE_CLUSTER_NOT_RUNNING=27 GKE_CLUSTER_NOT_RUNNING value
+                         * @property {number} GKE_POD_NOT_RUNNING=103 GKE_POD_NOT_RUNNING value
                          * @property {number} CLOUD_SQL_INSTANCE_NOT_RUNNING=28 CLOUD_SQL_INSTANCE_NOT_RUNNING value
                          * @property {number} REDIS_INSTANCE_NOT_RUNNING=68 REDIS_INSTANCE_NOT_RUNNING value
                          * @property {number} REDIS_CLUSTER_NOT_RUNNING=69 REDIS_CLUSTER_NOT_RUNNING value
@@ -40533,6 +42627,7 @@
                          * @property {number} UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION=88 UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION value
                          * @property {number} TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED=89 TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED value
                          * @property {number} NO_MATCHING_NAT64_GATEWAY=90 NO_MATCHING_NAT64_GATEWAY value
+                         * @property {number} NO_CONFIGURED_PRIVATE_NAT64_RULE=107 NO_CONFIGURED_PRIVATE_NAT64_RULE value
                          * @property {number} LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH=96 LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH value
                          * @property {number} NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION=97 NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION value
                          * @property {number} CLOUD_NAT_PROTOCOL_UNSUPPORTED=99 CLOUD_NAT_PROTOCOL_UNSUPPORTED value
@@ -40541,6 +42636,9 @@
                          * @property {number} L2_INTERCONNECT_DESTINATION_IP_MISMATCH=102 L2_INTERCONNECT_DESTINATION_IP_MISMATCH value
                          * @property {number} NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED=104 NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED value
                          * @property {number} HYBRID_SUBNET_REGION_MISMATCH=105 HYBRID_SUBNET_REGION_MISMATCH value
+                         * @property {number} HYBRID_SUBNET_NO_ROUTE=106 HYBRID_SUBNET_NO_ROUTE value
+                         * @property {number} GKE_NETWORK_POLICY=108 GKE_NETWORK_POLICY value
+                         * @property {number} NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION=110 NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION value
                          */
                         DropInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -40559,6 +42657,7 @@
                             values[valuesById[52] = "ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED"] = 52;
                             values[valuesById[53] = "ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID"] = 53;
                             values[valuesById[44] = "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS"] = 44;
+                            values[valuesById[109] = "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS"] = 109;
                             values[valuesById[98] = "NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS"] = 98;
                             values[valuesById[45] = "VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH"] = 45;
                             values[valuesById[46] = "VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH"] = 46;
@@ -40573,6 +42672,7 @@
                             values[valuesById[85] = "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS"] = 85;
                             values[valuesById[14] = "INSTANCE_NOT_RUNNING"] = 14;
                             values[valuesById[27] = "GKE_CLUSTER_NOT_RUNNING"] = 27;
+                            values[valuesById[103] = "GKE_POD_NOT_RUNNING"] = 103;
                             values[valuesById[28] = "CLOUD_SQL_INSTANCE_NOT_RUNNING"] = 28;
                             values[valuesById[68] = "REDIS_INSTANCE_NOT_RUNNING"] = 68;
                             values[valuesById[69] = "REDIS_CLUSTER_NOT_RUNNING"] = 69;
@@ -40635,6 +42735,7 @@
                             values[valuesById[88] = "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION"] = 88;
                             values[valuesById[89] = "TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED"] = 89;
                             values[valuesById[90] = "NO_MATCHING_NAT64_GATEWAY"] = 90;
+                            values[valuesById[107] = "NO_CONFIGURED_PRIVATE_NAT64_RULE"] = 107;
                             values[valuesById[96] = "LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH"] = 96;
                             values[valuesById[97] = "NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION"] = 97;
                             values[valuesById[99] = "CLOUD_NAT_PROTOCOL_UNSUPPORTED"] = 99;
@@ -40643,6 +42744,9 @@
                             values[valuesById[102] = "L2_INTERCONNECT_DESTINATION_IP_MISMATCH"] = 102;
                             values[valuesById[104] = "NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED"] = 104;
                             values[valuesById[105] = "HYBRID_SUBNET_REGION_MISMATCH"] = 105;
+                            values[valuesById[106] = "HYBRID_SUBNET_NO_ROUTE"] = 106;
+                            values[valuesById[108] = "GKE_NETWORK_POLICY"] = 108;
+                            values[valuesById[110] = "NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION"] = 110;
                             return values;
                         })();
     
@@ -40945,6 +43049,1103 @@
                         };
     
                         return GKEMasterInfo;
+                    })();
+    
+                    v1beta1.GkePodInfo = (function() {
+    
+                        /**
+                         * Properties of a GkePodInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IGkePodInfo
+                         * @property {string|null} [podUri] GkePodInfo podUri
+                         * @property {string|null} [ipAddress] GkePodInfo ipAddress
+                         * @property {string|null} [networkUri] GkePodInfo networkUri
+                         */
+    
+                        /**
+                         * Constructs a new GkePodInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a GkePodInfo.
+                         * @implements IGkePodInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkePodInfo=} [properties] Properties to set
+                         */
+                        function GkePodInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkePodInfo podUri.
+                         * @member {string} podUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @instance
+                         */
+                        GkePodInfo.prototype.podUri = "";
+    
+                        /**
+                         * GkePodInfo ipAddress.
+                         * @member {string} ipAddress
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @instance
+                         */
+                        GkePodInfo.prototype.ipAddress = "";
+    
+                        /**
+                         * GkePodInfo networkUri.
+                         * @member {string} networkUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @instance
+                         */
+                        GkePodInfo.prototype.networkUri = "";
+    
+                        /**
+                         * Creates a new GkePodInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkePodInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkePodInfo} GkePodInfo instance
+                         */
+                        GkePodInfo.create = function create(properties) {
+                            return new GkePodInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkePodInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkePodInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkePodInfo} message GkePodInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkePodInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.podUri != null && Object.hasOwnProperty.call(message, "podUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.podUri);
+                            if (message.ipAddress != null && Object.hasOwnProperty.call(message, "ipAddress"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.ipAddress);
+                            if (message.networkUri != null && Object.hasOwnProperty.call(message, "networkUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.networkUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkePodInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkePodInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkePodInfo} message GkePodInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkePodInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkePodInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkePodInfo} GkePodInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkePodInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.GkePodInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.podUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.ipAddress = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.networkUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkePodInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkePodInfo} GkePodInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkePodInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkePodInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkePodInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.podUri != null && message.hasOwnProperty("podUri"))
+                                if (!$util.isString(message.podUri))
+                                    return "podUri: string expected";
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                if (!$util.isString(message.ipAddress))
+                                    return "ipAddress: string expected";
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                if (!$util.isString(message.networkUri))
+                                    return "networkUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkePodInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkePodInfo} GkePodInfo
+                         */
+                        GkePodInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.GkePodInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.GkePodInfo();
+                            if (object.podUri != null)
+                                message.podUri = String(object.podUri);
+                            if (object.ipAddress != null)
+                                message.ipAddress = String(object.ipAddress);
+                            if (object.networkUri != null)
+                                message.networkUri = String(object.networkUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkePodInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.GkePodInfo} message GkePodInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkePodInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.podUri = "";
+                                object.ipAddress = "";
+                                object.networkUri = "";
+                            }
+                            if (message.podUri != null && message.hasOwnProperty("podUri"))
+                                object.podUri = message.podUri;
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                object.ipAddress = message.ipAddress;
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                object.networkUri = message.networkUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkePodInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkePodInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GkePodInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GkePodInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.GkePodInfo";
+                        };
+    
+                        return GkePodInfo;
+                    })();
+    
+                    v1beta1.IpMasqueradingSkippedInfo = (function() {
+    
+                        /**
+                         * Properties of an IpMasqueradingSkippedInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IIpMasqueradingSkippedInfo
+                         * @property {google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason|null} [reason] IpMasqueradingSkippedInfo reason
+                         * @property {string|null} [nonMasqueradeRange] IpMasqueradingSkippedInfo nonMasqueradeRange
+                         */
+    
+                        /**
+                         * Constructs a new IpMasqueradingSkippedInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents an IpMasqueradingSkippedInfo.
+                         * @implements IIpMasqueradingSkippedInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo=} [properties] Properties to set
+                         */
+                        function IpMasqueradingSkippedInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IpMasqueradingSkippedInfo reason.
+                         * @member {google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason} reason
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @instance
+                         */
+                        IpMasqueradingSkippedInfo.prototype.reason = 0;
+    
+                        /**
+                         * IpMasqueradingSkippedInfo nonMasqueradeRange.
+                         * @member {string} nonMasqueradeRange
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @instance
+                         */
+                        IpMasqueradingSkippedInfo.prototype.nonMasqueradeRange = "";
+    
+                        /**
+                         * Creates a new IpMasqueradingSkippedInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo instance
+                         */
+                        IpMasqueradingSkippedInfo.create = function create(properties) {
+                            return new IpMasqueradingSkippedInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IpMasqueradingSkippedInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo} message IpMasqueradingSkippedInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IpMasqueradingSkippedInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.reason != null && Object.hasOwnProperty.call(message, "reason"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.reason);
+                            if (message.nonMasqueradeRange != null && Object.hasOwnProperty.call(message, "nonMasqueradeRange"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nonMasqueradeRange);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IpMasqueradingSkippedInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo} message IpMasqueradingSkippedInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IpMasqueradingSkippedInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IpMasqueradingSkippedInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.reason = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nonMasqueradeRange = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IpMasqueradingSkippedInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IpMasqueradingSkippedInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IpMasqueradingSkippedInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                switch (message.reason) {
+                                default:
+                                    return "reason: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.nonMasqueradeRange != null && message.hasOwnProperty("nonMasqueradeRange"))
+                                if (!$util.isString(message.nonMasqueradeRange))
+                                    return "nonMasqueradeRange: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IpMasqueradingSkippedInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo
+                         */
+                        IpMasqueradingSkippedInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo();
+                            switch (object.reason) {
+                            default:
+                                if (typeof object.reason === "number") {
+                                    message.reason = object.reason;
+                                    break;
+                                }
+                                break;
+                            case "REASON_UNSPECIFIED":
+                            case 0:
+                                message.reason = 0;
+                                break;
+                            case "DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE":
+                            case 1:
+                                message.reason = 1;
+                                break;
+                            case "DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE":
+                            case 2:
+                                message.reason = 2;
+                                break;
+                            case "DESTINATION_ON_SAME_NODE":
+                            case 3:
+                                message.reason = 3;
+                                break;
+                            case "DEFAULT_SNAT_DISABLED":
+                            case 4:
+                                message.reason = 4;
+                                break;
+                            case "NO_MASQUERADING_FOR_IPV6":
+                            case 5:
+                                message.reason = 5;
+                                break;
+                            case "POD_USES_NODE_NETWORK_NAMESPACE":
+                            case 6:
+                                message.reason = 6;
+                                break;
+                            case "NO_MASQUERADING_FOR_RETURN_PACKET":
+                            case 7:
+                                message.reason = 7;
+                                break;
+                            }
+                            if (object.nonMasqueradeRange != null)
+                                message.nonMasqueradeRange = String(object.nonMasqueradeRange);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IpMasqueradingSkippedInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo} message IpMasqueradingSkippedInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IpMasqueradingSkippedInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.reason = options.enums === String ? "REASON_UNSPECIFIED" : 0;
+                                object.nonMasqueradeRange = "";
+                            }
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                object.reason = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason[message.reason] === undefined ? message.reason : $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason[message.reason] : message.reason;
+                            if (message.nonMasqueradeRange != null && message.hasOwnProperty("nonMasqueradeRange"))
+                                object.nonMasqueradeRange = message.nonMasqueradeRange;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IpMasqueradingSkippedInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IpMasqueradingSkippedInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for IpMasqueradingSkippedInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IpMasqueradingSkippedInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo";
+                        };
+    
+                        /**
+                         * Reason enum.
+                         * @name google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason
+                         * @enum {number}
+                         * @property {number} REASON_UNSPECIFIED=0 REASON_UNSPECIFIED value
+                         * @property {number} DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE=1 DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE value
+                         * @property {number} DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE=2 DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE value
+                         * @property {number} DESTINATION_ON_SAME_NODE=3 DESTINATION_ON_SAME_NODE value
+                         * @property {number} DEFAULT_SNAT_DISABLED=4 DEFAULT_SNAT_DISABLED value
+                         * @property {number} NO_MASQUERADING_FOR_IPV6=5 NO_MASQUERADING_FOR_IPV6 value
+                         * @property {number} POD_USES_NODE_NETWORK_NAMESPACE=6 POD_USES_NODE_NETWORK_NAMESPACE value
+                         * @property {number} NO_MASQUERADING_FOR_RETURN_PACKET=7 NO_MASQUERADING_FOR_RETURN_PACKET value
+                         */
+                        IpMasqueradingSkippedInfo.Reason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE"] = 1;
+                            values[valuesById[2] = "DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE"] = 2;
+                            values[valuesById[3] = "DESTINATION_ON_SAME_NODE"] = 3;
+                            values[valuesById[4] = "DEFAULT_SNAT_DISABLED"] = 4;
+                            values[valuesById[5] = "NO_MASQUERADING_FOR_IPV6"] = 5;
+                            values[valuesById[6] = "POD_USES_NODE_NETWORK_NAMESPACE"] = 6;
+                            values[valuesById[7] = "NO_MASQUERADING_FOR_RETURN_PACKET"] = 7;
+                            return values;
+                        })();
+    
+                        return IpMasqueradingSkippedInfo;
+                    })();
+    
+                    v1beta1.GkeNetworkPolicyInfo = (function() {
+    
+                        /**
+                         * Properties of a GkeNetworkPolicyInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IGkeNetworkPolicyInfo
+                         * @property {string|null} [displayName] GkeNetworkPolicyInfo displayName
+                         * @property {string|null} [uri] GkeNetworkPolicyInfo uri
+                         * @property {string|null} [direction] GkeNetworkPolicyInfo direction
+                         * @property {string|null} [action] GkeNetworkPolicyInfo action
+                         */
+    
+                        /**
+                         * Constructs a new GkeNetworkPolicyInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a GkeNetworkPolicyInfo.
+                         * @implements IGkeNetworkPolicyInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicyInfo=} [properties] Properties to set
+                         */
+                        function GkeNetworkPolicyInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkeNetworkPolicyInfo displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo
+                         * @instance
+                         */
+                        GkeNetworkPolicyInfo.prototype.displayName = "";
+    
+                        /**
+                         * GkeNetworkPolicyInfo uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo
+                         * @instance
+                         */
+                        GkeNetworkPolicyInfo.prototype.uri = "";
+    
+                        /**
+                         * GkeNetworkPolicyInfo direction.
+                         * @member {string} direction
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo
+                         * @instance
+                         */
+                        GkeNetworkPolicyInfo.prototype.direction = "";
+    
+                        /**
+                         * GkeNetworkPolicyInfo action.
+                         * @member {string} action
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo
+                         * @instance
+                         */
+                        GkeNetworkPolicyInfo.prototype.action = "";
+    
+                        /**
+                         * Creates a new GkeNetworkPolicyInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicyInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo} GkeNetworkPolicyInfo instance
+                         */
+                        GkeNetworkPolicyInfo.create = function create(properties) {
+                            return new GkeNetworkPolicyInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkeNetworkPolicyInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicyInfo} message GkeNetworkPolicyInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeNetworkPolicyInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.direction != null && Object.hasOwnProperty.call(message, "direction"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.direction);
+                            if (message.action != null && Object.hasOwnProperty.call(message, "action"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.action);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkeNetworkPolicyInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicyInfo} message GkeNetworkPolicyInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeNetworkPolicyInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkeNetworkPolicyInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo} GkeNetworkPolicyInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeNetworkPolicyInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.direction = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.action = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkeNetworkPolicyInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo} GkeNetworkPolicyInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeNetworkPolicyInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkeNetworkPolicyInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkeNetworkPolicyInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.direction != null && message.hasOwnProperty("direction"))
+                                if (!$util.isString(message.direction))
+                                    return "direction: string expected";
+                            if (message.action != null && message.hasOwnProperty("action"))
+                                if (!$util.isString(message.action))
+                                    return "action: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkeNetworkPolicyInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo} GkeNetworkPolicyInfo
+                         */
+                        GkeNetworkPolicyInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.direction != null)
+                                message.direction = String(object.direction);
+                            if (object.action != null)
+                                message.action = String(object.action);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkeNetworkPolicyInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo} message GkeNetworkPolicyInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkeNetworkPolicyInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.uri = "";
+                                object.direction = "";
+                                object.action = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.direction != null && message.hasOwnProperty("direction"))
+                                object.direction = message.direction;
+                            if (message.action != null && message.hasOwnProperty("action"))
+                                object.action = message.action;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkeNetworkPolicyInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkeNetworkPolicyInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GkeNetworkPolicyInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GkeNetworkPolicyInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.GkeNetworkPolicyInfo";
+                        };
+    
+                        return GkeNetworkPolicyInfo;
+                    })();
+    
+                    v1beta1.GkeNetworkPolicySkippedInfo = (function() {
+    
+                        /**
+                         * Properties of a GkeNetworkPolicySkippedInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IGkeNetworkPolicySkippedInfo
+                         * @property {google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.Reason|null} [reason] GkeNetworkPolicySkippedInfo reason
+                         */
+    
+                        /**
+                         * Constructs a new GkeNetworkPolicySkippedInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a GkeNetworkPolicySkippedInfo.
+                         * @implements IGkeNetworkPolicySkippedInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicySkippedInfo=} [properties] Properties to set
+                         */
+                        function GkeNetworkPolicySkippedInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkeNetworkPolicySkippedInfo reason.
+                         * @member {google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.Reason} reason
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo
+                         * @instance
+                         */
+                        GkeNetworkPolicySkippedInfo.prototype.reason = 0;
+    
+                        /**
+                         * Creates a new GkeNetworkPolicySkippedInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicySkippedInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo} GkeNetworkPolicySkippedInfo instance
+                         */
+                        GkeNetworkPolicySkippedInfo.create = function create(properties) {
+                            return new GkeNetworkPolicySkippedInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkeNetworkPolicySkippedInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicySkippedInfo} message GkeNetworkPolicySkippedInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeNetworkPolicySkippedInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.reason != null && Object.hasOwnProperty.call(message, "reason"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.reason);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkeNetworkPolicySkippedInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkeNetworkPolicySkippedInfo} message GkeNetworkPolicySkippedInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeNetworkPolicySkippedInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkeNetworkPolicySkippedInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo} GkeNetworkPolicySkippedInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeNetworkPolicySkippedInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.reason = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkeNetworkPolicySkippedInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo} GkeNetworkPolicySkippedInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeNetworkPolicySkippedInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkeNetworkPolicySkippedInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkeNetworkPolicySkippedInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                switch (message.reason) {
+                                default:
+                                    return "reason: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 100:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkeNetworkPolicySkippedInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo} GkeNetworkPolicySkippedInfo
+                         */
+                        GkeNetworkPolicySkippedInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo();
+                            switch (object.reason) {
+                            default:
+                                if (typeof object.reason === "number") {
+                                    message.reason = object.reason;
+                                    break;
+                                }
+                                break;
+                            case "REASON_UNSPECIFIED":
+                            case 0:
+                                message.reason = 0;
+                                break;
+                            case "NETWORK_POLICY_DISABLED":
+                            case 1:
+                                message.reason = 1;
+                                break;
+                            case "INGRESS_SOURCE_ON_SAME_NODE":
+                            case 2:
+                                message.reason = 2;
+                                break;
+                            case "EGRESS_FROM_NODE_NETWORK_NAMESPACE_POD":
+                            case 3:
+                                message.reason = 3;
+                                break;
+                            case "NETWORK_POLICY_NOT_APPLIED_TO_RESPONSE_TRAFFIC":
+                            case 4:
+                                message.reason = 4;
+                                break;
+                            case "NETWORK_POLICY_ANALYSIS_UNSUPPORTED":
+                            case 100:
+                                message.reason = 100;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkeNetworkPolicySkippedInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo} message GkeNetworkPolicySkippedInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkeNetworkPolicySkippedInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.reason = options.enums === String ? "REASON_UNSPECIFIED" : 0;
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                object.reason = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.Reason[message.reason] === undefined ? message.reason : $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.Reason[message.reason] : message.reason;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkeNetworkPolicySkippedInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkeNetworkPolicySkippedInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GkeNetworkPolicySkippedInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GkeNetworkPolicySkippedInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo";
+                        };
+    
+                        /**
+                         * Reason enum.
+                         * @name google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.Reason
+                         * @enum {number}
+                         * @property {number} REASON_UNSPECIFIED=0 REASON_UNSPECIFIED value
+                         * @property {number} NETWORK_POLICY_DISABLED=1 NETWORK_POLICY_DISABLED value
+                         * @property {number} INGRESS_SOURCE_ON_SAME_NODE=2 INGRESS_SOURCE_ON_SAME_NODE value
+                         * @property {number} EGRESS_FROM_NODE_NETWORK_NAMESPACE_POD=3 EGRESS_FROM_NODE_NETWORK_NAMESPACE_POD value
+                         * @property {number} NETWORK_POLICY_NOT_APPLIED_TO_RESPONSE_TRAFFIC=4 NETWORK_POLICY_NOT_APPLIED_TO_RESPONSE_TRAFFIC value
+                         * @property {number} NETWORK_POLICY_ANALYSIS_UNSUPPORTED=100 NETWORK_POLICY_ANALYSIS_UNSUPPORTED value
+                         */
+                        GkeNetworkPolicySkippedInfo.Reason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NETWORK_POLICY_DISABLED"] = 1;
+                            values[valuesById[2] = "INGRESS_SOURCE_ON_SAME_NODE"] = 2;
+                            values[valuesById[3] = "EGRESS_FROM_NODE_NETWORK_NAMESPACE_POD"] = 3;
+                            values[valuesById[4] = "NETWORK_POLICY_NOT_APPLIED_TO_RESPONSE_TRAFFIC"] = 4;
+                            values[valuesById[100] = "NETWORK_POLICY_ANALYSIS_UNSUPPORTED"] = 100;
+                            return values;
+                        })();
+    
+                        return GkeNetworkPolicySkippedInfo;
                     })();
     
                     v1beta1.CloudSQLInstanceInfo = (function() {
@@ -43523,6 +46724,7 @@
                          * @property {number|null} [newDestinationPort] NatInfo newDestinationPort
                          * @property {string|null} [routerUri] NatInfo routerUri
                          * @property {string|null} [natGatewayName] NatInfo natGatewayName
+                         * @property {google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType|null} [cloudNatGatewayType] NatInfo cloudNatGatewayType
                          */
     
                         /**
@@ -43645,6 +46847,14 @@
                         NatInfo.prototype.natGatewayName = "";
     
                         /**
+                         * NatInfo cloudNatGatewayType.
+                         * @member {google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType} cloudNatGatewayType
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.cloudNatGatewayType = 0;
+    
+                        /**
                          * Creates a new NatInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
@@ -43694,6 +46904,8 @@
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.routerUri);
                             if (message.natGatewayName != null && Object.hasOwnProperty.call(message, "natGatewayName"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.natGatewayName);
+                            if (message.cloudNatGatewayType != null && Object.hasOwnProperty.call(message, "cloudNatGatewayType"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.cloudNatGatewayType);
                             return writer;
                         };
     
@@ -43782,6 +46994,10 @@
                                         message.natGatewayName = reader.string();
                                         break;
                                     }
+                                case 14: {
+                                        message.cloudNatGatewayType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -43865,6 +47081,18 @@
                             if (message.natGatewayName != null && message.hasOwnProperty("natGatewayName"))
                                 if (!$util.isString(message.natGatewayName))
                                     return "natGatewayName: string expected";
+                            if (message.cloudNatGatewayType != null && message.hasOwnProperty("cloudNatGatewayType"))
+                                switch (message.cloudNatGatewayType) {
+                                default:
+                                    return "cloudNatGatewayType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -43936,6 +47164,38 @@
                                 message.routerUri = String(object.routerUri);
                             if (object.natGatewayName != null)
                                 message.natGatewayName = String(object.natGatewayName);
+                            switch (object.cloudNatGatewayType) {
+                            default:
+                                if (typeof object.cloudNatGatewayType === "number") {
+                                    message.cloudNatGatewayType = object.cloudNatGatewayType;
+                                    break;
+                                }
+                                break;
+                            case "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.cloudNatGatewayType = 0;
+                                break;
+                            case "PUBLIC_NAT44":
+                            case 1:
+                                message.cloudNatGatewayType = 1;
+                                break;
+                            case "PUBLIC_NAT64":
+                            case 2:
+                                message.cloudNatGatewayType = 2;
+                                break;
+                            case "PRIVATE_NAT_NCC":
+                            case 3:
+                                message.cloudNatGatewayType = 3;
+                                break;
+                            case "PRIVATE_NAT_HYBRID":
+                            case 4:
+                                message.cloudNatGatewayType = 4;
+                                break;
+                            case "PRIVATE_NAT64":
+                            case 5:
+                                message.cloudNatGatewayType = 5;
+                                break;
+                            }
                             return message;
                         };
     
@@ -43966,6 +47226,7 @@
                                 object.newDestinationPort = 0;
                                 object.routerUri = "";
                                 object.natGatewayName = "";
+                                object.cloudNatGatewayType = options.enums === String ? "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.NatInfo.Type[message.type] === undefined ? message.type : $root.google.cloud.networkmanagement.v1beta1.NatInfo.Type[message.type] : message.type;
@@ -43993,6 +47254,8 @@
                                 object.routerUri = message.routerUri;
                             if (message.natGatewayName != null && message.hasOwnProperty("natGatewayName"))
                                 object.natGatewayName = message.natGatewayName;
+                            if (message.cloudNatGatewayType != null && message.hasOwnProperty("cloudNatGatewayType"))
+                                object.cloudNatGatewayType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType[message.cloudNatGatewayType] === undefined ? message.cloudNatGatewayType : $root.google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType[message.cloudNatGatewayType] : message.cloudNatGatewayType;
                             return object;
                         };
     
@@ -44041,6 +47304,28 @@
                             values[valuesById[3] = "CLOUD_NAT"] = 3;
                             values[valuesById[4] = "PRIVATE_SERVICE_CONNECT"] = 4;
                             values[valuesById[5] = "GKE_POD_IP_MASQUERADING"] = 5;
+                            return values;
+                        })();
+    
+                        /**
+                         * CloudNatGatewayType enum.
+                         * @name google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType
+                         * @enum {number}
+                         * @property {number} CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED=0 CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED value
+                         * @property {number} PUBLIC_NAT44=1 PUBLIC_NAT44 value
+                         * @property {number} PUBLIC_NAT64=2 PUBLIC_NAT64 value
+                         * @property {number} PRIVATE_NAT_NCC=3 PRIVATE_NAT_NCC value
+                         * @property {number} PRIVATE_NAT_HYBRID=4 PRIVATE_NAT_HYBRID value
+                         * @property {number} PRIVATE_NAT64=5 PRIVATE_NAT64 value
+                         */
+                        NatInfo.CloudNatGatewayType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PUBLIC_NAT44"] = 1;
+                            values[valuesById[2] = "PUBLIC_NAT64"] = 2;
+                            values[valuesById[3] = "PRIVATE_NAT_NCC"] = 3;
+                            values[valuesById[4] = "PRIVATE_NAT_HYBRID"] = 4;
+                            values[valuesById[5] = "PRIVATE_NAT64"] = 5;
                             return values;
                         })();
     
@@ -45390,6 +48675,211 @@
                         };
     
                         return ServerlessNegInfo;
+                    })();
+    
+                    v1beta1.NgfwPacketInspectionInfo = (function() {
+    
+                        /**
+                         * Properties of a NgfwPacketInspectionInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface INgfwPacketInspectionInfo
+                         * @property {string|null} [securityProfileGroupUri] NgfwPacketInspectionInfo securityProfileGroupUri
+                         */
+    
+                        /**
+                         * Constructs a new NgfwPacketInspectionInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a NgfwPacketInspectionInfo.
+                         * @implements INgfwPacketInspectionInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.INgfwPacketInspectionInfo=} [properties] Properties to set
+                         */
+                        function NgfwPacketInspectionInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NgfwPacketInspectionInfo securityProfileGroupUri.
+                         * @member {string} securityProfileGroupUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo
+                         * @instance
+                         */
+                        NgfwPacketInspectionInfo.prototype.securityProfileGroupUri = "";
+    
+                        /**
+                         * Creates a new NgfwPacketInspectionInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.INgfwPacketInspectionInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo} NgfwPacketInspectionInfo instance
+                         */
+                        NgfwPacketInspectionInfo.create = function create(properties) {
+                            return new NgfwPacketInspectionInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NgfwPacketInspectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.INgfwPacketInspectionInfo} message NgfwPacketInspectionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NgfwPacketInspectionInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.securityProfileGroupUri != null && Object.hasOwnProperty.call(message, "securityProfileGroupUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.securityProfileGroupUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NgfwPacketInspectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.INgfwPacketInspectionInfo} message NgfwPacketInspectionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NgfwPacketInspectionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NgfwPacketInspectionInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo} NgfwPacketInspectionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NgfwPacketInspectionInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.securityProfileGroupUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NgfwPacketInspectionInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo} NgfwPacketInspectionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NgfwPacketInspectionInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NgfwPacketInspectionInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NgfwPacketInspectionInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.securityProfileGroupUri != null && message.hasOwnProperty("securityProfileGroupUri"))
+                                if (!$util.isString(message.securityProfileGroupUri))
+                                    return "securityProfileGroupUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NgfwPacketInspectionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo} NgfwPacketInspectionInfo
+                         */
+                        NgfwPacketInspectionInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo();
+                            if (object.securityProfileGroupUri != null)
+                                message.securityProfileGroupUri = String(object.securityProfileGroupUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NgfwPacketInspectionInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo} message NgfwPacketInspectionInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NgfwPacketInspectionInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.securityProfileGroupUri = "";
+                            if (message.securityProfileGroupUri != null && message.hasOwnProperty("securityProfileGroupUri"))
+                                object.securityProfileGroupUri = message.securityProfileGroupUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NgfwPacketInspectionInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NgfwPacketInspectionInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NgfwPacketInspectionInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NgfwPacketInspectionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo";
+                        };
+    
+                        return NgfwPacketInspectionInfo;
                     })();
     
                     v1beta1.ReachabilityService = (function() {

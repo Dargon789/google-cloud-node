@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,6 +28,11 @@ function main(instance, instanceResource, project, zone) {
    * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
+  /**
+   *  Whether to discard local SSDs from the instance during restart
+   *  default value is false.
+   */
+  // const discardLocalSsd = true
   /**
    *  Name of the instance resource to update.
    */

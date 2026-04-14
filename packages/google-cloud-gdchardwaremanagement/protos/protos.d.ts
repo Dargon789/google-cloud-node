@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1944,6 +1944,7 @@ export namespace google {
                         READY_FOR_CUSTOMER_FACTORY_TURNUP_CHECKS = 5,
                         CUSTOMER_FACTORY_TURNUP_CHECKS_STARTED = 8,
                         READY_FOR_SITE_TURNUP = 6,
+                        OFFLINE = 9,
                         CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED = 7,
                         ACTIVE = 3,
                         CANCELLED = 4

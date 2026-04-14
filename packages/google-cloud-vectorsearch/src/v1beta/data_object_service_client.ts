@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -350,7 +350,7 @@ export class DataObjectServiceClient {
  * @param {string} request.dataObjectId
  *   Required. The id of the dataObject to create.
  *   The id must be 1-63 characters long, and comply with
- *   <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
+ *   [RFC1035](https://www.ietf.org/rfc/rfc1035.txt).
  *   Specifically, it must be 1-63 characters long and match the regular
  *   expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?`.
  * @param {google.cloud.vectorsearch.v1beta.DataObject} request.dataObject
@@ -844,6 +844,10 @@ export class DataObjectServiceClient {
  *   Required. The name of the DataObject resource to be deleted.
  *   Format:
  *   `projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}`
+ * @param {string} [request.etag]
+ *   Optional. The current etag of the DataObject.
+ *   If an etag is provided and does not match the current etag of the
+ *   DataObject, deletion will be blocked and an ABORTED error will be returned.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

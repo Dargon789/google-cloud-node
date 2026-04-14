@@ -1,5 +1,26 @@
 # Changelog
 
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.7.0...dialogflow-cx-v5.8.0) (2026-04-08)
+
+
+### Features
+
+* [cx] updated v3 dialogflow client libraries with `dtmf_pattern` and `trace_blocks` ([#7846](https://github.com/googleapis/google-cloud-node/issues/7846)) ([24d9b56](https://github.com/googleapis/google-cloud-node/commit/24d9b56ef1840f2738920f4577d4f77fb0a5b8fd))
+
+## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.6.0...dialogflow-cx-v5.7.0) (2026-02-19)
+
+
+### Features
+
+* [cx] Add new value DETECT_INTENT_RESPONSE_VIEW_DEFAULT to enum DetectIntentResponseView ([3c18d2c](https://github.com/googleapis/google-cloud-node/commit/3c18d2c7d286ee0f5da9c83e5a929757ec3ab7f6))
+
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.5.0...dialogflow-cx-v5.6.0) (2026-01-22)
+
+
+### Features
+
+* [cx] updated v3 dialogflow client libraries ([#7005](https://github.com/googleapis/google-cloud-node/issues/7005)) ([abccd1b](https://github.com/googleapis/google-cloud-node/commit/abccd1b4e58cd733ff7416f1e554ceedd84a23c2))
+
 ## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.4.0...dialogflow-cx-v5.5.0) (2025-11-21)
 
 

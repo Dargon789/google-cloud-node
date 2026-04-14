@@ -3590,14 +3590,25 @@
                           "type": "int32",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "maxSpeakerCount": {
                           "type": "int32",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CustomPromptConfig": {
+                      "fields": {
+                        "customPrompt": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -3639,6 +3650,13 @@
                         "maxAlternatives": {
                           "type": "int32",
                           "id": 16
+                        },
+                        "customPromptConfig": {
+                          "type": "CustomPromptConfig",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3840,6 +3858,13 @@
                       }
                     },
                     "RecognitionResponseMetadata": {
+                      "oneofs": {
+                        "_prompt": {
+                          "oneof": [
+                            "prompt"
+                          ]
+                        }
+                      },
                       "fields": {
                         "requestId": {
                           "type": "string",
@@ -3851,6 +3876,14 @@
                         "totalBilledDuration": {
                           "type": "google.protobuf.Duration",
                           "id": 6
+                        },
+                        "prompt": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -3945,6 +3978,13 @@
                         "voiceActivityTimeout": {
                           "type": "VoiceActivityTimeout",
                           "id": 3
+                        },
+                        "endpointingSensitivity": {
+                          "type": "EndpointingSensitivity",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3958,6 +3998,14 @@
                               "type": "google.protobuf.Duration",
                               "id": 2
                             }
+                          }
+                        },
+                        "EndpointingSensitivity": {
+                          "values": {
+                            "ENDPOINTING_SENSITIVITY_UNSPECIFIED": 0,
+                            "ENDPOINTING_SENSITIVITY_STANDARD": 1,
+                            "ENDPOINTING_SENSITIVITY_SUPERSHORT": 2,
+                            "ENDPOINTING_SENSITIVITY_SHORT": 3
                           }
                         }
                       }

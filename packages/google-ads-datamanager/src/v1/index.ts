@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,3 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 export {IngestionServiceClient} from './ingestion_service_client';
+export {MarketingDataInsightsServiceClient} from './marketing_data_insights_service_client';
+export {PartnerLinkServiceClient} from './partner_link_service_client';
+export {UserListDirectLicenseServiceClient} from './user_list_direct_license_service_client';
+export {UserListGlobalLicenseServiceClient} from './user_list_global_license_service_client';
+export {UserListServiceClient} from './user_list_service_client';

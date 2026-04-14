@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,8 +34,8 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Requested page size. Server may return fewer items than
-   *  requested. If unspecified, server will pick an appropriate default.
+   *  Optional. Requested page size. If unspecified, a default size of 30 will be
+   *  used. The maximum value is 100; values above 100 will be coerced to 100.
    */
   // const pageSize = 1234
   /**

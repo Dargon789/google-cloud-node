@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -32638,6 +32638,7 @@
                  * @interface IFileLocation
                  * @property {string|null} [filePath] FileLocation filePath
                  * @property {grafeas.v1.ILayerDetails|null} [layerDetails] FileLocation layerDetails
+                 * @property {number|null} [lineNumber] FileLocation lineNumber
                  */
     
                 /**
@@ -32672,6 +32673,14 @@
                 FileLocation.prototype.layerDetails = null;
     
                 /**
+                 * FileLocation lineNumber.
+                 * @member {number} lineNumber
+                 * @memberof grafeas.v1.FileLocation
+                 * @instance
+                 */
+                FileLocation.prototype.lineNumber = 0;
+    
+                /**
                  * Creates a new FileLocation instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.FileLocation
@@ -32699,6 +32708,8 @@
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.filePath);
                     if (message.layerDetails != null && Object.hasOwnProperty.call(message, "layerDetails"))
                         $root.grafeas.v1.LayerDetails.encode(message.layerDetails, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.lineNumber != null && Object.hasOwnProperty.call(message, "lineNumber"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.lineNumber);
                     return writer;
                 };
     
@@ -32741,6 +32752,10 @@
                             }
                         case 2: {
                                 message.layerDetails = $root.grafeas.v1.LayerDetails.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.lineNumber = reader.int32();
                                 break;
                             }
                         default:
@@ -32786,6 +32801,9 @@
                         if (error)
                             return "layerDetails." + error;
                     }
+                    if (message.lineNumber != null && message.hasOwnProperty("lineNumber"))
+                        if (!$util.isInteger(message.lineNumber))
+                            return "lineNumber: integer expected";
                     return null;
                 };
     
@@ -32808,6 +32826,8 @@
                             throw TypeError(".grafeas.v1.FileLocation.layerDetails: object expected");
                         message.layerDetails = $root.grafeas.v1.LayerDetails.fromObject(object.layerDetails);
                     }
+                    if (object.lineNumber != null)
+                        message.lineNumber = object.lineNumber | 0;
                     return message;
                 };
     
@@ -32827,11 +32847,14 @@
                     if (options.defaults) {
                         object.filePath = "";
                         object.layerDetails = null;
+                        object.lineNumber = 0;
                     }
                     if (message.filePath != null && message.hasOwnProperty("filePath"))
                         object.filePath = message.filePath;
                     if (message.layerDetails != null && message.hasOwnProperty("layerDetails"))
                         object.layerDetails = $root.grafeas.v1.LayerDetails.toObject(message.layerDetails, options);
+                    if (message.lineNumber != null && message.hasOwnProperty("lineNumber"))
+                        object.lineNumber = message.lineNumber;
                     return object;
                 };
     
@@ -32873,6 +32896,7 @@
                  * @property {string|null} [name] BaseImage name
                  * @property {string|null} [repository] BaseImage repository
                  * @property {number|null} [layerCount] BaseImage layerCount
+                 * @property {string|null} [registry] BaseImage registry
                  */
     
                 /**
@@ -32915,6 +32939,14 @@
                 BaseImage.prototype.layerCount = 0;
     
                 /**
+                 * BaseImage registry.
+                 * @member {string} registry
+                 * @memberof grafeas.v1.BaseImage
+                 * @instance
+                 */
+                BaseImage.prototype.registry = "";
+    
+                /**
                  * Creates a new BaseImage instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.BaseImage
@@ -32944,6 +32976,8 @@
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.repository);
                     if (message.layerCount != null && Object.hasOwnProperty.call(message, "layerCount"))
                         writer.uint32(/* id 3, wireType 0 =*/24).int32(message.layerCount);
+                    if (message.registry != null && Object.hasOwnProperty.call(message, "registry"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.registry);
                     return writer;
                 };
     
@@ -32992,6 +33026,10 @@
                                 message.layerCount = reader.int32();
                                 break;
                             }
+                        case 4: {
+                                message.registry = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -33036,6 +33074,9 @@
                     if (message.layerCount != null && message.hasOwnProperty("layerCount"))
                         if (!$util.isInteger(message.layerCount))
                             return "layerCount: integer expected";
+                    if (message.registry != null && message.hasOwnProperty("registry"))
+                        if (!$util.isString(message.registry))
+                            return "registry: string expected";
                     return null;
                 };
     
@@ -33057,6 +33098,8 @@
                         message.repository = String(object.repository);
                     if (object.layerCount != null)
                         message.layerCount = object.layerCount | 0;
+                    if (object.registry != null)
+                        message.registry = String(object.registry);
                     return message;
                 };
     
@@ -33077,6 +33120,7 @@
                         object.name = "";
                         object.repository = "";
                         object.layerCount = 0;
+                        object.registry = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -33084,6 +33128,8 @@
                         object.repository = message.repository;
                     if (message.layerCount != null && message.hasOwnProperty("layerCount"))
                         object.layerCount = message.layerCount;
+                    if (message.registry != null && message.hasOwnProperty("registry"))
+                        object.registry = message.registry;
                     return object;
                 };
     

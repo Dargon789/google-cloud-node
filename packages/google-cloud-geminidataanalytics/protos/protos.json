@@ -59,6 +59,14 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "lookerGoldenQueries": {
+                          "rule": "repeated",
+                          "type": "LookerGoldenQuery",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "glossaryTerms": {
                           "rule": "repeated",
                           "type": "GlossaryTerm",
@@ -142,6 +150,25 @@
                         "naturalLanguageQuestion": {
                           "type": "string",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "LookerGoldenQuery": {
+                      "fields": {
+                        "naturalLanguageQuestions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "lookerQuery": {
+                          "type": "LookerQuery",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -405,7 +432,7 @@
                           "type": "BigQueryTableReference",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1361,6 +1388,26 @@
                             }
                           ]
                         },
+                        "CreateDataAgentSync": {
+                          "requestType": "CreateDataAgentRequest",
+                          "responseType": "DataAgent",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=projects/*/locations/*}/dataAgents:createSync",
+                            "(google.api.http).body": "data_agent",
+                            "(google.api.method_signature)": "parent,data_agent,data_agent_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=projects/*/locations/*}/dataAgents:createSync",
+                                "body": "data_agent"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,data_agent,data_agent_id"
+                            }
+                          ]
+                        },
                         "UpdateDataAgent": {
                           "requestType": "UpdateDataAgentRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1389,6 +1436,26 @@
                             }
                           ]
                         },
+                        "UpdateDataAgentSync": {
+                          "requestType": "UpdateDataAgentRequest",
+                          "responseType": "DataAgent",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{data_agent.name=projects/*/locations/*/dataAgents/*}:updateSync",
+                            "(google.api.http).body": "data_agent",
+                            "(google.api.method_signature)": "data_agent,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{data_agent.name=projects/*/locations/*/dataAgents/*}:updateSync",
+                                "body": "data_agent"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "data_agent,update_mask"
+                            }
+                          ]
+                        },
                         "DeleteDataAgent": {
                           "requestType": "DeleteDataAgentRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1412,6 +1479,24 @@
                                 "response_type": "google.protobuf.Empty",
                                 "metadata_type": "OperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "DeleteDataAgentSync": {
+                          "requestType": "DeleteDataAgentRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=projects/*/locations/*/dataAgents/*}:deleteSync",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=projects/*/locations/*/dataAgents/*}:deleteSync"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -1961,6 +2046,25 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "parameterizedSecureViewParameters": {
+                          "type": "ParameterizedSecureViewParameters",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ParameterizedSecureViewParameters": {
+                      "fields": {
+                        "parameters": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2167,6 +2271,22 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "thinkingMode": {
+                          "type": "ThinkingMode",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ThinkingMode": {
+                          "values": {
+                            "THINKING_MODE_UNSPECIFIED": 0,
+                            "FAST": 1,
+                            "THINKING": 2
+                          }
                         }
                       }
                     },
@@ -2308,7 +2428,8 @@
                             "analysis",
                             "chart",
                             "error",
-                            "exampleQueries"
+                            "exampleQueries",
+                            "clarification"
                           ]
                         },
                         "_groupId": {
@@ -2349,6 +2470,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "clarification": {
+                          "type": "ClarificationMessage",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "groupId": {
                           "type": "int32",
                           "id": 12,
@@ -2371,6 +2499,13 @@
                         "textType": {
                           "type": "TextType",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "thoughtSignature": {
+                          "type": "bytes",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2528,6 +2663,14 @@
                           "rule": "repeated",
                           "type": "google.protobuf.Struct",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "formattedData": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Struct",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2739,6 +2882,67 @@
                         }
                       }
                     },
+                    "ClarificationQuestion": {
+                      "fields": {
+                        "question": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "selectionMode": {
+                          "type": "SelectionMode",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "options": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clarificationQuestionType": {
+                          "type": "ClarificationQuestionType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SelectionMode": {
+                          "values": {
+                            "SELECTION_MODE_UNSPECIFIED": 0,
+                            "SINGLE_SELECT": 1,
+                            "MULTI_SELECT": 2
+                          }
+                        },
+                        "ClarificationQuestionType": {
+                          "values": {
+                            "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED": 0,
+                            "FILTER_VALUES": 1,
+                            "FIELDS": 2
+                          }
+                        }
+                      }
+                    },
+                    "ClarificationMessage": {
+                      "fields": {
+                        "questions": {
+                          "rule": "repeated",
+                          "type": "ClarificationQuestion",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "ExampleQueries": {
                       "fields": {
                         "exampleQueries": {
@@ -2820,6 +3024,14 @@
                           "rule": "repeated",
                           "type": "ExampleQuery",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "lookerGoldenQueries": {
+                          "rule": "repeated",
+                          "type": "LookerGoldenQuery",
+                          "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2909,6 +3121,102 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "LookerGoldenQuery": {
+                      "fields": {
+                        "naturalLanguageQuestions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "lookerQuery": {
+                          "type": "LookerQuery",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "LookerQuery": {
+                      "oneofs": {
+                        "_limit": {
+                          "oneof": [
+                            "limit"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "model": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "explore": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "fields": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filters": {
+                          "rule": "repeated",
+                          "type": "Filter",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sorts": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "limit": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Filter": {
+                          "fields": {
+                            "field": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "value": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
                           }
                         }
                       }
@@ -3093,7 +3401,7 @@
                           "type": "BigQueryTableReference",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -4049,6 +4357,26 @@
                             }
                           ]
                         },
+                        "CreateDataAgentSync": {
+                          "requestType": "CreateDataAgentRequest",
+                          "responseType": "DataAgent",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*}/dataAgents:createSync",
+                            "(google.api.http).body": "data_agent",
+                            "(google.api.method_signature)": "parent,data_agent,data_agent_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*}/dataAgents:createSync",
+                                "body": "data_agent"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,data_agent,data_agent_id"
+                            }
+                          ]
+                        },
                         "UpdateDataAgent": {
                           "requestType": "UpdateDataAgentRequest",
                           "responseType": "google.longrunning.Operation",
@@ -4077,6 +4405,26 @@
                             }
                           ]
                         },
+                        "UpdateDataAgentSync": {
+                          "requestType": "UpdateDataAgentRequest",
+                          "responseType": "DataAgent",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta/{data_agent.name=projects/*/locations/*/dataAgents/*}:updateSync",
+                            "(google.api.http).body": "data_agent",
+                            "(google.api.method_signature)": "data_agent,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{data_agent.name=projects/*/locations/*/dataAgents/*}:updateSync",
+                                "body": "data_agent"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "data_agent,update_mask"
+                            }
+                          ]
+                        },
                         "DeleteDataAgent": {
                           "requestType": "DeleteDataAgentRequest",
                           "responseType": "google.longrunning.Operation",
@@ -4100,6 +4448,24 @@
                                 "response_type": "google.protobuf.Empty",
                                 "metadata_type": "OperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "DeleteDataAgentSync": {
+                          "requestType": "DeleteDataAgentRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/dataAgents/*}:deleteSync",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=projects/*/locations/*/dataAgents/*}:deleteSync"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -4649,6 +5015,25 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "parameterizedSecureViewParameters": {
+                          "type": "ParameterizedSecureViewParameters",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ParameterizedSecureViewParameters": {
+                      "fields": {
+                        "parameters": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4855,6 +5240,22 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "thinkingMode": {
+                          "type": "ThinkingMode",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ThinkingMode": {
+                          "values": {
+                            "THINKING_MODE_UNSPECIFIED": 0,
+                            "FAST": 1,
+                            "THINKING": 2
+                          }
                         }
                       }
                     },
@@ -4996,7 +5397,8 @@
                             "analysis",
                             "chart",
                             "error",
-                            "exampleQueries"
+                            "exampleQueries",
+                            "clarification"
                           ]
                         },
                         "_groupId": {
@@ -5037,6 +5439,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "clarification": {
+                          "type": "ClarificationMessage",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "groupId": {
                           "type": "int32",
                           "id": 12,
@@ -5059,6 +5468,13 @@
                         "textType": {
                           "type": "TextType",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "thoughtSignature": {
+                          "type": "bytes",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5156,83 +5572,6 @@
                         }
                       }
                     },
-                    "LookerQuery": {
-                      "oneofs": {
-                        "_limit": {
-                          "oneof": [
-                            "limit"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "model": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "explore": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "fields": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "filters": {
-                          "rule": "repeated",
-                          "type": "Filter",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "sorts": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "limit": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "proto3_optional": true
-                          }
-                        }
-                      },
-                      "nested": {
-                        "Filter": {
-                          "fields": {
-                            "field": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "value": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
                     "DataQuery": {
                       "oneofs": {
                         "queryType": {
@@ -5293,6 +5632,14 @@
                           "rule": "repeated",
                           "type": "google.protobuf.Struct",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "formattedData": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Struct",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5500,6 +5847,67 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ClarificationQuestion": {
+                      "fields": {
+                        "question": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "selectionMode": {
+                          "type": "SelectionMode",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "options": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clarificationQuestionType": {
+                          "type": "ClarificationQuestionType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SelectionMode": {
+                          "values": {
+                            "SELECTION_MODE_UNSPECIFIED": 0,
+                            "SINGLE_SELECT": 1,
+                            "MULTI_SELECT": 2
+                          }
+                        },
+                        "ClarificationQuestionType": {
+                          "values": {
+                            "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED": 0,
+                            "FILTER_VALUES": 1,
+                            "FIELDS": 2
+                          }
+                        }
+                      }
+                    },
+                    "ClarificationMessage": {
+                      "fields": {
+                        "questions": {
+                          "rule": "repeated",
+                          "type": "ClarificationQuestion",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }

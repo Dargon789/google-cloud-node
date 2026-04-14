@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11267,6 +11267,9 @@ export namespace google {
                     /** Waypoint address */
                     address?: (string|null);
 
+                    /** Waypoint navigationPointToken */
+                    navigationPointToken?: (string|null);
+
                     /** Waypoint via */
                     via?: (boolean|null);
 
@@ -11295,6 +11298,9 @@ export namespace google {
                     /** Waypoint address. */
                     public address?: (string|null);
 
+                    /** Waypoint navigationPointToken. */
+                    public navigationPointToken?: (string|null);
+
                     /** Waypoint via. */
                     public via: boolean;
 
@@ -11305,7 +11311,7 @@ export namespace google {
                     public sideOfRoad: boolean;
 
                     /** Waypoint locationType. */
-                    public locationType?: ("location"|"placeId"|"address");
+                    public locationType?: ("location"|"placeId"|"address"|"navigationPointToken");
 
                     /**
                      * Creates a new Waypoint instance using the specified properties.

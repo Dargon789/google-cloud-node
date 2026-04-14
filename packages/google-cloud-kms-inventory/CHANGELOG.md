@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.4.0...kms-inventory-v2.5.0) (2026-03-02)
+
+
+### Features
+
+* [inventory] Add support for project level key usage tracking ([34a3659](https://github.com/googleapis/google-cloud-node/commit/34a365988184038c96de95cf0d8bf4bb5d8a8ccf))
+
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.3.0...kms-inventory-v2.4.0) (2026-02-19)
+
+
+### Features
+
+* [inventory] Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations ([#7240](https://github.com/googleapis/google-cloud-node/issues/7240)) ([a383b13](https://github.com/googleapis/google-cloud-node/commit/a383b135a8982a8857b465478d679a75e0b6e89e))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.2.1...kms-inventory-v2.3.0) (2026-01-22)
+
+
+### Features
+
+* [inventory] add the SingleTenantHsm functionality including the management API and resource types ([#7015](https://github.com/googleapis/google-cloud-node/issues/7015)) ([edeb409](https://github.com/googleapis/google-cloud-node/commit/edeb409b0538dbd59a9cba75c07e6bb56b35ab1a))
+
 ## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.2.0...kms-inventory-v2.2.1) (2025-10-13)
 
 

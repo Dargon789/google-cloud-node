@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2053,6 +2053,8 @@ export class TranslationServiceClient {
  *   `projects/{project}/locations/{location-id}/adaptiveMtDatasets/{dataset}`
  * @param {string[]} request.content
  *   Required. The content of the input in string format.
+ * @param {string} request.mimeType
+ *   The format of the source text.
  * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig} request.referenceSentenceConfig
  *   Configuration for caller provided reference sentences.
  * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig} [request.glossaryConfig]

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -801,6 +801,20 @@ export class RegionNetworkEndpointGroupsClient {
 /**
  * Creates a network endpoint group in the specified project using the
  * parameters that are included in the request.
+ *
+ * Note: Use the following APIs to manage network endpoint groups:
+ *
+ *    -
+ *    To manage NEGs with zonal scope (such as zonal NEGs, hybrid connectivity
+ *    NEGs): zonal
+ *    API
+ *    -
+ *    To manage NEGs with regional scope (such as regional internet NEGs,
+ *    serverless NEGs, Private Service Connect NEGs): regional
+ *    API
+ *    -
+ *    To manage NEGs with global scope (such as global internet NEGs):global
+ *    API
  *
  * @param {Object} request
  *   The request object that will be sent.

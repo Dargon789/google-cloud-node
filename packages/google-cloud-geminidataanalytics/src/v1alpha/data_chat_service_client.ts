@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -801,6 +801,9 @@ export class DataChatServiceClient {
  *   Pattern: `projects/{project}/locations/{location}`
  * @param {number[]} request.messages
  *   Required. Content of current conversation.
+ * @param {google.cloud.geminidataanalytics.v1alpha.ChatRequest.ThinkingMode} [request.thinkingMode]
+ *   Optional. The thinking mode to use for the agent loop.
+ *   Defaults to THINKING_MODE_UNSPECIFIED if not specified.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
