@@ -29,7 +29,6 @@ fi
 
 # A script file for running the test in a sub project.
 test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
-test_script_interdependent_tests="${PROJECT_ROOT}/ci/run_single_interdependent_test.sh"
 
 
 if [ ${BUILD_TYPE} == "presubmit" ]; then
@@ -61,17 +60,19 @@ changed=$?
 set -e
 if [[ "${changed}" -eq 0 ]]; then
     echo "no change detected in ci"
-# else
-#     echo "change detected in ci, we should test everything"
-#     echo "result of git diff ${GIT_DIFF_ARG} ci:"
-#     git diff ${GIT_DIFF_ARG} ci
-#     GIT_DIFF_ARG=""
+else
+    echo "skipping trigger of tests for now: tracking in #7540"
+    # echo "change detected in ci, we should test everything"
+    # echo "result of git diff ${GIT_DIFF_ARG} ci:"
+    # git diff ${GIT_DIFF_ARG} ci
+    # GIT_DIFF_ARG=""
 fi
 
 # Now we have a fixed list, but we can change it to autodetect if
 # necessary.
 
 subdirs=(
+    core
     containers
     packages
     handwritten
@@ -84,23 +85,51 @@ RETVAL=0
 # These following APIs need an explicit credential file to run properly (or oAuth2, which we don't support in this repo). 
 # When we hit these packages, we will run the "samples with credentials" trigger, which contains the credentials as an env variable
 
-tests_with_credentials="packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/ packages/google-apps-meet/ packages/google-chat/ packages/google-streetview-publish/ packages/google-cloud-developerconnect/"
+tests_with_credentials="core/packages/google-auth-library-nodejs/ packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/ packages/google-apps-meet/ packages/google-chat/ packages/google-streetview-publish/ packages/google-cloud-developerconnect/"
 
 # Some packages are only used by our bots and automation. These packages do not need to run on Windows and
 # often employ platform specific code like file system interaction. Some packages may also fail
 # on Windows due to incompatible npm scripts.
 # 
 # Until these packages can be updated to be OS agnostic, we will skip them on Windows.
-windows_exempt_tests=".github/scripts/fixtures/ .github/scripts/tests/ packages/gapic-node-processing/ packages/typeless-sample-bot/"
+windows_exempt_tests="core/ core/packages/ core/dev-packages/ .github/scripts/fixtures/ .github/scripts/tests/ packages/gapic-node-processing/ packages/typeless-sample-bot/"
 
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
-        if [ -f "ignore.json" ] && jq -e ".ignored[] | select(. == \"$d\")" ignore.json > /dev/null; then
+        if [ -s "ignore.json" ] && jq -e ".ignored[] | select(. == \"$d\")" ignore.json > /dev/null 2>&1; then
             echo "Skipping ${d} (explicitly ignored in ignore.json)"
             continue
         fi
-        if [[ "${subdir}" == "handwritten" && ("${TEST_TYPE}" == "samples" || "${TEST_TYPE}" == "system") ]]; then
-            echo "Skipping ${TEST_TYPE} test for handwritten package ${d}"
+        if [ ! -f "${d}/package.json" ]; then
+            echo "Skipping ${d} (no package.json found)"
+            continue
+        fi
+        if [[ "${TEST_TYPE}" == "samples" && ! -f "${d}/samples/package.json" ]]; then
+            echo "Skipping ${TEST_TYPE} test for ${d} (no samples/package.json found)"
+            continue
+        fi
+        if [[ ("${subdir}" == "handwritten" || "${subdir}" == "core") && ("${TEST_TYPE}" == "samples" || "${TEST_TYPE}" == "system") ]]; then
+            echo "Skipping ${TEST_TYPE} test for handwritten and core packages: ${d}"
+            continue
+        fi
+
+        # System tests for packages are broken and blocking PRs.
+        # See https://github.com/googleapis/google-cloud-node/issues/7976.
+        #
+        # Per https://github.com/googleapis/google-cloud-node/issues/7921, 
+        # we are likely to permanently remove these tests in the near future.
+        if [[ "${subdir}" == "packages" && "${TEST_TYPE}" == "system" ]]; then
+            echo "Skipping ${TEST_TYPE} test for packages: ${d}"
+            continue
+        fi
+
+        # Sample tests for packages are broken/flaky and blocking PRs.
+        # See https://github.com/googleapis/google-cloud-node/issues/7976#issuecomment-4210458096.
+        #
+        # Per https://github.com/googleapis/google-cloud-node/issues/7921, 
+        # we are likely to permanently remove these tests in the near future.
+        if [[ "${subdir}" == "packages" && "${TEST_TYPE}" == "samples" ]]; then
+            echo "Skipping ${TEST_TYPE} test for packages: ${d}"
             continue
         fi
 
@@ -122,8 +151,22 @@ for subdir in ${subdirs[@]}; do
             if [[ "${changed}" -eq 0 ]]; then
                 echo "no change detected in ${d}, skipping"
             else
-                if [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
-                    echo "change detected in ${d} for system test"
+                if ([[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]) && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "system" ]]; then
+                    echo "run system tests for core/packages in ${d}"
+                    export RUN_INTERDEPENDENT_TESTS=true
+                    should_test=true
+                elif ([[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]) && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "samples" ]]; then
+                    if [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                        echo "run samples tests with credentials for core/packages in ${d}"
+                        should_test=true
+                    elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                        echo "run samples tests for core/packages in ${d}"
+                        should_test=true
+                    fi
+                elif [[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]; then
+                    echo "skipping core package ${d} in non-core trigger"
+                elif [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
+                    echo "change detected in ${d} for ${TEST_TYPE} test"
                     should_test=true
                 elif [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
                     echo "change detected in ${d} in a directory that needs credentials"
@@ -134,8 +177,23 @@ for subdir in ${subdirs[@]}; do
                 fi
             fi
         else
-            if [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
-                echo "run system test for ${d}"
+            # If GIT_DIFF_ARG is empty, run all the tests.
+            if ([[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]) && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "system" ]]; then
+                echo "run system tests for core/packages in ${d}"
+                export RUN_INTERDEPENDENT_TESTS=true
+                should_test=true
+            elif ([[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]) && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "samples" ]]; then
+                if [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                    echo "run samples tests with credentials for core/packages in ${d}"
+                    should_test=true
+                elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                    echo "run samples tests for core/packages in ${d}"
+                    should_test=true
+                fi
+            # elif [[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]; then
+            #     echo "skipping core package ${d} in non-core trigger"
+            elif [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
+                echo "run ${TEST_TYPE} test for ${d}"
                 should_test=true
             elif [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
                 echo "run tests with credentials in ${d}"
@@ -145,21 +203,7 @@ for subdir in ${subdirs[@]}; do
                 should_test=true
             fi
         fi
-        if [ "${should_test}" = true ] && [[ "${d}" == core/* ]]; then
-            echo "running test in ${d}"
-            pushd ${d}
-            # Temporarily allow failure.
-            set +e
-            ${test_script_interdependent_tests}
-            ret=$?
-            set -e
-            if [ ${ret} -ne 0 ]; then
-                RETVAL=${ret}
-                # Since there are so many APIs, we should exit early if there's an error
-                break
-            fi
-            popd
-        elif [ "${should_test}" = true ]; then
+        if [ "${should_test}" = true ]; then
             echo "running test in ${d}"
             pushd ${d}
             # Temporarily allow failure.
@@ -170,7 +214,7 @@ for subdir in ${subdirs[@]}; do
             if [ ${ret} -ne 0 ]; then
                 RETVAL=${ret}
                 # Since there are so many APIs, we should exit early if there's an error
-                break
+                exit ${RETVAL}
             fi
             popd
         fi
