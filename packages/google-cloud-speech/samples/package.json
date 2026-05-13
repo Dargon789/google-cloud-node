@@ -22,7 +22,7 @@
     "google-proto-files": "^5.0.0",
     "node-record-lpcm16": "^1.0.1",
     "proto3-json-serializer": "^3.0.0",
-    "protobufjs": "^7.0.0",
+    "protobufjs": "^8.2.0",
     "sox": "^0.1.0",
     "yargs": "^17.0.0"
   },
@@ -30,6 +30,6 @@
     "c8": "^10.0.0",
     "chai": "^4.2.0",
     "mocha": "^8.0.0",
-    "uuid": "^9.0.0"
+    "uuid": "^14.0.0"
   }
 }
