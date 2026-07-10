@@ -1,5 +1,20 @@
 # Changelog
 
+
+## [5.0.4](https://github.com/googleapis/google-cloud-node/compare/jsdoc-fresh-v5.0.3...jsdoc-fresh-v5.0.4) (2026-06-25)
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+
+## [5.0.3](https://github.com/googleapis/google-cloud-node/compare/jsdoc-fresh-v5.0.2...jsdoc-fresh-v5.0.3) (2026-05-11)
+
+
+### Bug Fixes
+
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
+
 ## [5.0.2](https://github.com/googleapis/google-cloud-node-core/compare/jsdoc-fresh-v5.0.1...jsdoc-fresh-v5.0.2) (2025-10-07)
 
 

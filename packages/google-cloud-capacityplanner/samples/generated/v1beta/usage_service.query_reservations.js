@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(parent) {
+function main(parent, cloudResourceType, reservationType, reservationDataLevel) {
   // [START capacityplanner_v1beta_generated_UsageService_QueryReservations_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -58,12 +58,12 @@ function main(parent) {
    */
   // const gpuType = 'abc123'
   /**
-   *  Optional. The resource for the reserved values to return. Possible values
+   *  Required. The resource for the reserved values to return. Possible values
    *  include "gce-vcpus", "gce-ram", "gce-local-ssd", "gce-gpu" and "gce-vm".
    */
   // const cloudResourceType = 'abc123'
   /**
-   *  Optional. The Reservation type for example, future reservation request and
+   *  Required. The Reservation type for example, future reservation request and
    *  allocation. If unspecified, all types are
    *  included.
    */
@@ -81,7 +81,7 @@ function main(parent) {
    */
   // const ownershipType = {}
   /**
-   *  Optional. Reservations output data format.
+   *  Required. Reservations output data format.
    */
   // const reservationDataLevel = {}
   /**
@@ -112,6 +112,9 @@ function main(parent) {
     // Construct request
     const request = {
       parent,
+      cloudResourceType,
+      reservationType,
+      reservationDataLevel,
     };
 
     // Run request

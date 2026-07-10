@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,9 @@ const packageRoot = __dirname;
 const utilDir = path.join(packageRoot, 'src', 'util');
 
 try {
-  execSync('npm install', {cwd: packageRoot, stdio: 'inherit'});
+  // --ignore-scripts: prevents recursive build loops and race conditions (stops npm from running the "prepare" script).
+  // --cache=/tmp/npm-cache: redirects cache to a writable directory, avoiding permission crashes in non-root Docker environments.
+  execSync('npm install --ignore-scripts --cache=/tmp/npm-cache', {cwd: packageRoot, stdio: 'inherit'});
 
   const tscPath = path.join(packageRoot, 'node_modules', '.bin', 'tsc');
   execSync(`${tscPath} src/util/storage_control_utils.ts`, {
@@ -38,5 +40,5 @@ try {
   }
 } catch (error) {
   console.error(error);
-  process.exit(1);
+  process.exitCode = 1;
 }

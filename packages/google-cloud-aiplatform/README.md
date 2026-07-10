@@ -316,6 +316,8 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | stream raw predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_raw_predict.js) |
 | streaming predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.streaming_predict.js) |
 | streaming raw predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.streaming_raw_predict.js) |
+| async query reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.async_query_reasoning_engine.js) |
+| cancel async query reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.cancel_async_query_reasoning_engine.js) |
 | query reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.query_reasoning_engine.js) |
 | stream query reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.stream_query_reasoning_engine.js) |
 | create reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.create_reasoning_engine.js) |
@@ -337,7 +339,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/session_service.list_events.js) |
 | list sessions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/session_service.list_sessions.js) |
 | update session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/session_service.update_session.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/snippet_metadata_google.cloud.aiplatform.v1.json) |
 | create specialist pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.create_specialist_pool.js) |
 | delete specialist pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.delete_specialist_pool.js) |
 | get specialist pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.get_specialist_pool.js) |
@@ -445,6 +446,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update endpoint long running | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint_long_running.js) |
 | evaluate dataset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_dataset.js) |
 | evaluate instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_instances.js) |
+| generate instance rubrics | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.generate_instance_rubrics.js) |
 | create example store | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/example_store_service.create_example_store.js) |
 | delete example store | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/example_store_service.delete_example_store.js) |
 | fetch examples | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/example_store_service.fetch_examples.js) |
@@ -681,6 +683,13 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | stop notebook runtime | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js) |
 | update notebook runtime template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.update_notebook_runtime_template.js) |
 | upgrade notebook runtime | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.upgrade_notebook_runtime.js) |
+| activate online evaluator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/online_evaluator_service.activate_online_evaluator.js) |
+| create online evaluator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/online_evaluator_service.create_online_evaluator.js) |
+| delete online evaluator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/online_evaluator_service.delete_online_evaluator.js) |
+| get online evaluator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/online_evaluator_service.get_online_evaluator.js) |
+| list online evaluators | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/online_evaluator_service.list_online_evaluators.js) |
+| suspend online evaluator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/online_evaluator_service.suspend_online_evaluator.js) |
+| update online evaluator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/online_evaluator_service.update_online_evaluator.js) |
 | create persistent resource | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.create_persistent_resource.js) |
 | delete persistent resource | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.delete_persistent_resource.js) |
 | get persistent resource | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.get_persistent_resource.js) |
@@ -715,8 +724,13 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | stream raw predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_raw_predict.js) |
 | streaming predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.streaming_predict.js) |
 | streaming raw predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.streaming_raw_predict.js) |
+| async query reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.async_query_reasoning_engine.js) |
+| cancel async query reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.cancel_async_query_reasoning_engine.js) |
 | query reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.query_reasoning_engine.js) |
 | stream query reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.stream_query_reasoning_engine.js) |
+| delete reasoning engine runtime revision | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_runtime_revision_service.delete_reasoning_engine_runtime_revision.js) |
+| get reasoning engine runtime revision | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_runtime_revision_service.get_reasoning_engine_runtime_revision.js) |
+| list reasoning engine runtime revisions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_runtime_revision_service.list_reasoning_engine_runtime_revisions.js) |
 | create reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.create_reasoning_engine.js) |
 | delete reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.delete_reasoning_engine.js) |
 | get reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.get_reasoning_engine.js) |
@@ -736,7 +750,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/session_service.list_events.js) |
 | list sessions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/session_service.list_sessions.js) |
 | update session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/session_service.update_session.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/snippet_metadata_google.cloud.aiplatform.v1beta1.json) |
 | create specialist pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.create_specialist_pool.js) |
 | delete specialist pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.delete_specialist_pool.js) |
 | get specialist pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.get_specialist_pool.js) |
@@ -850,7 +863,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -860,7 +873,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

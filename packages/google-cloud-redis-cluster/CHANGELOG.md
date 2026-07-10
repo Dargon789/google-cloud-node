@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.11.0...redis-cluster-v0.12.0) (2026-07-07)
+
+
+### Features
+
+* Consolidate prettierignore and prettierrc files: handwritten ([#8081](https://github.com/googleapis/google-cloud-node/issues/8081)) ([a241532](https://github.com/googleapis/google-cloud-node/commit/a2415320b9c840f6ae27894451abb561a080ff82))
+
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.10.0...redis-cluster-v0.11.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 1 ([#8612](https://github.com/googleapis/google-cloud-node/issues/8612)) ([b4d5da7](https://github.com/googleapis/google-cloud-node/commit/b4d5da72a41c4d961eaeee7b7633c7885ecb9166))
+
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.9.1...redis-cluster-v0.10.0) (2026-05-01)
+
+
+### Features
+
+* [redis][Memorystore for Redis Cluster] Updating new node types added ([#8112](https://github.com/googleapis/google-cloud-node/issues/8112)) ([fb05789](https://github.com/googleapis/google-cloud-node/commit/fb0578975aa90d04c7de774b9d79201ec64ebbde))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
 ## [0.9.1](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.9.0...redis-cluster-v0.9.1) (2025-10-13)
 
 

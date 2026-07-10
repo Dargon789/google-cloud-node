@@ -34,7 +34,7 @@ import * as path from 'path';
 import pLimit from 'p-limit';
 import {promisify} from 'util';
 import AsyncRetry from 'async-retry';
-import {convertObjKeysToSnakeCase} from './util.js';
+import {convertObjKeysToSnakeCase, handleContextValidation} from './util.js';
 
 import {Acl, AclMetadata} from './acl.js';
 import {Channel} from './channel.js';
@@ -44,6 +44,7 @@ import {
   CreateResumableUploadOptions,
   CreateWriteStreamOptions,
   FileMetadata,
+  ContextValue,
 } from './file.js';
 import {Iam} from './iam.js';
 import {Notification, NotificationMetadata} from './notification.js';
@@ -66,6 +67,7 @@ import {CRC32CValidatorGenerator} from './crc32c.js';
 import {URL} from 'url';
 import {
   BaseMetadata,
+  DeleteOptions,
   SetMetadataOptions,
 } from './nodejs-common/service-object.js';
 
@@ -178,11 +180,18 @@ export interface GetFilesOptions {
   userProject?: string;
   versions?: boolean;
   fields?: string;
+  filter?: string;
 }
 
 export interface CombineOptions extends PreconditionOptions {
   kmsKeyName?: string;
   userProject?: string;
+  contexts?: {
+    custom: {
+      [key: string]: ContextValue;
+    } | null;
+  };
+  deleteSourceObjects?: boolean;
 }
 
 export interface CombineCallback {
@@ -190,6 +199,24 @@ export interface CombineCallback {
 }
 
 export type CombineResponse = [File, unknown];
+
+export class ComposeCleanupError extends Error {
+  errors: Error[];
+  newFile: File;
+  apiResponse: unknown;
+  constructor(
+    message: string,
+    errors: Error[],
+    newFile: File,
+    apiResponse: unknown
+  ) {
+    super(message);
+    this.name = 'ComposeCleanupError';
+    this.errors = errors;
+    this.newFile = newFile;
+    this.apiResponse = apiResponse;
+  }
+}
 
 export interface CreateChannelConfig extends WatchAllOptions {
   address: string;
@@ -1572,7 +1599,9 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * metadata's `kms_key_name` value, if any.
    * @property {string} [userProject] The ID of the project which will be
    *     billed for the request.
-   */
+    * @property {boolean} [deleteSourceObjects] If true, the source objects
+    *     will be permanently deleted after a successful compose operation.
+    */
   /**
    * @callback CombineCallback
    * @param {?Error} err Request error, if any.
@@ -1605,7 +1634,8 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * metadata's `kms_key_name` value, if any.
    * @param {string} [options.userProject] The ID of the project which will be
    *     billed for the request.
-
+   * @param {boolean} [options.deleteSourceObjects] If true, the source objects
+   *     will be permanently deleted after a successful compose operation.
    * @param {CombineCallback} [callback] Callback function.
    * @returns {Promise<CombineResponse>}
    *
@@ -1654,6 +1684,14 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       options = optionsOrCallback;
     }
 
+    if (options.contexts) {
+      const validationError = handleContextValidation(
+        options.contexts,
+        callback,
+      );
+      if (validationError) return validationError;
+    }
+
     this.disableAutoRetryConditionallyIdempotent_(
       this.methods.setMetadata, // Not relevant but param is required
       AvailableServiceObjectMethods.setMetadata, // Same as above
@@ -1694,8 +1732,17 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       maxRetries = 0;
     }
 
-    if (options.ifGenerationMatch === undefined) {
-      Object.assign(options, destinationFile.instancePreconditionOpts, options);
+    const deleteSourceObjects = options.deleteSourceObjects;
+
+    const requestQueryObject = Object.assign({}, options);
+    delete requestQueryObject.deleteSourceObjects;
+
+    if (requestQueryObject.ifGenerationMatch === undefined) {
+      Object.assign(
+        requestQueryObject,
+        destinationFile.instancePreconditionOpts,
+        requestQueryObject
+      );
     }
 
     // Make the request from the destination File object.
@@ -1708,22 +1755,23 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
           destination: {
             contentType: destinationFile.metadata.contentType,
             contentEncoding: destinationFile.metadata.contentEncoding,
+            contexts:
+              requestQueryObject.contexts || destinationFile.metadata.contexts,
           },
           sourceObjects: (sources as File[]).map(source => {
             const sourceObject = {
               name: source.name,
             } as SourceObject;
 
-            if (source.metadata && source.metadata.generation) {
-              sourceObject.generation = parseInt(
-                source.metadata.generation.toString(),
-              );
+            const generation = source.generation ?? source.metadata?.generation;
+            if (generation !== undefined) {
+              sourceObject.generation = parseInt(generation.toString());
             }
 
             return sourceObject;
           }),
         },
-        qs: options,
+        qs: requestQueryObject,
       },
       (err, resp) => {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
@@ -1732,8 +1780,45 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
           return;
         }
 
-        callback!(null, destinationFile, resp);
-      },
+        if (deleteSourceObjects) {
+          const deletePromises = (sources as File[]).map(source => {
+            const deleteOptions: DeleteOptions = {
+              ignoreNotFound: true,
+              userProject: options.userProject,
+            };
+
+            const generation = source.generation ?? source.metadata?.generation;
+            if (generation !== undefined) {
+              deleteOptions.ifGenerationMatch = generation;
+            }
+
+            return source
+              .delete(deleteOptions)
+              .catch(deleteErr => deleteErr as Error);
+          });
+
+          Promise.all(deletePromises).then(results => {
+            const errors = results.filter(
+              (res): res is Error => res instanceof Error
+            );
+
+            if (errors.length > 0) {
+              const cleanupErr = new ComposeCleanupError(
+                `Compose operation succeeded, but cleaning up source objects failed. Failed to delete ${errors.length} source object(s).`,
+                errors,
+                destinationFile,
+                resp
+              );
+              callback!(cleanupErr, destinationFile, resp);
+              return;
+            }
+
+            callback!(null, destinationFile, resp);
+          });
+        } else {
+          callback!(null, destinationFile, resp);
+        }
+      }
     );
   }
 
@@ -2673,6 +2758,10 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * in addition to the relevant part of the object name appearing in prefixes[].
    * @property {string} [prefix] Filter results to objects whose names begin
    *     with this prefix.
+   * @property {string} [filter] Filter results using a server-side filter
+   * expression. This is primarily used for filtering by Object Contexts.
+   * Syntax: `contexts."<key>"="<value>"` or `contexts."<key>":*`.
+   * Prepend `-` for negation (e.g., `-contexts."key":*`).
    * @property {string} [matchGlob] A glob pattern used to filter results,
    *     for example foo*bar
    * @property {number} [maxApiCalls] Maximum number of API calls to make.
@@ -2720,6 +2809,9 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * in addition to the relevant part of the object name appearing in prefixes[].
    * @param {string} [query.prefix] Filter results to objects whose names begin
    *     with this prefix.
+   * @param {string} [query.filter] Filter results using a server-side filter
+   *     expression. Supports Object Contexts with operators like `=`, `:`,
+   *     and `-` for negation.
    * @param {number} [query.maxApiCalls] Maximum number of API calls to make.
    * @param {number} [query.maxResults] Maximum number of items plus prefixes to
    *     return per call.
@@ -2739,6 +2831,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    *     billed for the request.
    * @param {boolean} [query.versions] If true, returns File objects scoped to
    *     their versions.
+   *
    * @param {GetFilesCallback} [callback] Callback function.
    * @returns {Promise<GetFilesResponse>}
    *
@@ -2829,6 +2922,31 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    *   // apiResponse.prefixes = [
    *   //   'a/b/'
    *   // ]
+   * });
+   * ```
+   *
+   * @example
+   * //-
+   * // Filter files using Object Contexts.
+   * //-
+   * ```
+   * const query = {
+   *    filter: 'contexts."status"="active"'
+   * };
+   * bucket.getFiles(query, function(err, files) {
+   *    if (!err) {
+   *      // files only contains objects with the 'status' context set to 'active'.
+   *    }
+   * });
+   *
+   * //-
+   * // You can also filter by the absence of a context key.
+   * //-
+   *
+   * bucket.getFiles({
+   *    filter: '-contexts."priority":*'
+   * }, function(err, files) {
+   *     // files contains objects that DO NOT have the 'priority' context key.
    * });
    * ```
    *

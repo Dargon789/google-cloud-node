@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,18 +19,32 @@
 import * as v1 from './v1';
 import * as v1beta4 from './v1beta4';
 
+
+
 const SqlBackupRunsServiceClient = v1.SqlBackupRunsServiceClient;
 type SqlBackupRunsServiceClient = v1.SqlBackupRunsServiceClient;
+
+
 const SqlConnectServiceClient = v1.SqlConnectServiceClient;
 type SqlConnectServiceClient = v1.SqlConnectServiceClient;
 const SqlDatabasesServiceClient = v1.SqlDatabasesServiceClient;
 type SqlDatabasesServiceClient = v1.SqlDatabasesServiceClient;
+
+
+
+
 const SqlFlagsServiceClient = v1.SqlFlagsServiceClient;
 type SqlFlagsServiceClient = v1.SqlFlagsServiceClient;
+
+
+
+
 const SqlInstancesServiceClient = v1.SqlInstancesServiceClient;
 type SqlInstancesServiceClient = v1.SqlInstancesServiceClient;
 const SqlOperationsServiceClient = v1.SqlOperationsServiceClient;
 type SqlOperationsServiceClient = v1.SqlOperationsServiceClient;
+
+
 const SqlSslCertsServiceClient = v1.SqlSslCertsServiceClient;
 type SqlSslCertsServiceClient = v1.SqlSslCertsServiceClient;
 const SqlTiersServiceClient = v1.SqlTiersServiceClient;

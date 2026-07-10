@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/ces-v0.4.1...ces-v0.5.0) (2026-06-25)
+
+
+### Features
+
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
+## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/ces-v0.4.0...ces-v0.4.1) (2026-06-16)
+
+
+### Bug Fixes
+
+* **php:** Remove abandoned deps ([602338b](https://github.com/googleapis/google-cloud-node/commit/602338ba5a448a7fe8b5a8c60dcb68adad39e20e))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/ces-v0.3.0...ces-v0.4.0) (2026-05-01)
+
+
+### Features
+
+* [ces] Add ability to specify mocked tool responses in ExecuteTool ([#8051](https://github.com/googleapis/google-cloud-node/issues/8051)) ([53e6db1](https://github.com/googleapis/google-cloud-node/commit/53e6db12d102cd0d7a54a062491b393de9bd3794))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/ces-v0.2.0...ces-v0.3.0) (2026-03-25)
 
 

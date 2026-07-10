@@ -3983,6 +3983,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an EncryptionSpec. */
+                interface IEncryptionSpec {
+
+                    /** EncryptionSpec cryptoKeyName */
+                    cryptoKeyName?: (string|null);
+                }
+
+                /** Represents an EncryptionSpec. */
+                class EncryptionSpec implements IEncryptionSpec {
+
+                    /**
+                     * Constructs a new EncryptionSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IEncryptionSpec);
+
+                    /** EncryptionSpec cryptoKeyName. */
+                    public cryptoKeyName: string;
+
+                    /**
+                     * Creates a new EncryptionSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EncryptionSpec instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IEncryptionSpec): google.cloud.vectorsearch.v1.EncryptionSpec;
+
+                    /**
+                     * Encodes the specified EncryptionSpec message. Does not implicitly {@link google.cloud.vectorsearch.v1.EncryptionSpec.verify|verify} messages.
+                     * @param message EncryptionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EncryptionSpec message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.EncryptionSpec.verify|verify} messages.
+                     * @param message EncryptionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EncryptionSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EncryptionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.EncryptionSpec;
+
+                    /**
+                     * Decodes an EncryptionSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EncryptionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.EncryptionSpec;
+
+                    /**
+                     * Verifies an EncryptionSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EncryptionSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EncryptionSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.EncryptionSpec;
+
+                    /**
+                     * Creates a plain object from an EncryptionSpec message. Also converts values to other types if specified.
+                     * @param message EncryptionSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.EncryptionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EncryptionSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EncryptionSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a VectorSearchService */
                 class VectorSearchService extends $protobuf.rpc.Service {
 
@@ -4116,6 +4213,20 @@ export namespace google {
                     public createIndex(request: google.cloud.vectorsearch.v1.ICreateIndexRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpdateIndex.
+                     * @param request UpdateIndexRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateIndex(request: google.cloud.vectorsearch.v1.IUpdateIndexRequest, callback: google.cloud.vectorsearch.v1.VectorSearchService.UpdateIndexCallback): void;
+
+                    /**
+                     * Calls UpdateIndex.
+                     * @param request UpdateIndexRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateIndex(request: google.cloud.vectorsearch.v1.IUpdateIndexRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DeleteIndex.
                      * @param request DeleteIndexRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -4217,6 +4328,13 @@ export namespace google {
                     type CreateIndexCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|updateIndex}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateIndexCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|deleteIndex}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -4264,6 +4382,9 @@ export namespace google {
 
                     /** Collection dataSchema */
                     dataSchema?: (google.protobuf.IStruct|null);
+
+                    /** Collection encryptionSpec */
+                    encryptionSpec?: (google.cloud.vectorsearch.v1.IEncryptionSpec|null);
                 }
 
                 /** Represents a Collection. */
@@ -4298,6 +4419,9 @@ export namespace google {
 
                     /** Collection dataSchema. */
                     public dataSchema?: (google.protobuf.IStruct|null);
+
+                    /** Collection encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.vectorsearch.v1.IEncryptionSpec|null);
 
                     /**
                      * Creates a new Collection instance using the specified properties.
@@ -5236,6 +5360,9 @@ export namespace google {
 
                     /** DeleteCollectionRequest requestId */
                     requestId?: (string|null);
+
+                    /** DeleteCollectionRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteCollectionRequest. */
@@ -5252,6 +5379,9 @@ export namespace google {
 
                     /** DeleteCollectionRequest requestId. */
                     public requestId: string;
+
+                    /** DeleteCollectionRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteCollectionRequest instance using the specified properties.
@@ -5609,6 +5739,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CreateIndexRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateIndexRequest. */
+                interface IUpdateIndexRequest {
+
+                    /** UpdateIndexRequest index */
+                    index?: (google.cloud.vectorsearch.v1.IIndex|null);
+
+                    /** UpdateIndexRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateIndexRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateIndexRequest. */
+                class UpdateIndexRequest implements IUpdateIndexRequest {
+
+                    /**
+                     * Constructs a new UpdateIndexRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IUpdateIndexRequest);
+
+                    /** UpdateIndexRequest index. */
+                    public index?: (google.cloud.vectorsearch.v1.IIndex|null);
+
+                    /** UpdateIndexRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateIndexRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateIndexRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateIndexRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IUpdateIndexRequest): google.cloud.vectorsearch.v1.UpdateIndexRequest;
+
+                    /**
+                     * Encodes the specified UpdateIndexRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.UpdateIndexRequest.verify|verify} messages.
+                     * @param message UpdateIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IUpdateIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateIndexRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.UpdateIndexRequest.verify|verify} messages.
+                     * @param message UpdateIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IUpdateIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateIndexRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.UpdateIndexRequest;
+
+                    /**
+                     * Decodes an UpdateIndexRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.UpdateIndexRequest;
+
+                    /**
+                     * Verifies an UpdateIndexRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateIndexRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateIndexRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.UpdateIndexRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateIndexRequest message. Also converts values to other types if specified.
+                     * @param message UpdateIndexRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.UpdateIndexRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateIndexRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateIndexRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -6610,6 +6849,9 @@ export namespace google {
 
                     /** ExportDataObjectsRequest name */
                     name?: (string|null);
+
+                    /** ExportDataObjectsRequest fieldFilter */
+                    fieldFilter?: (google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter|null);
                 }
 
                 /** Represents an ExportDataObjectsRequest. */
@@ -6626,6 +6868,9 @@ export namespace google {
 
                     /** ExportDataObjectsRequest name. */
                     public name: string;
+
+                    /** ExportDataObjectsRequest fieldFilter. */
+                    public fieldFilter?: (google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter|null);
 
                     /** ExportDataObjectsRequest destination. */
                     public destination?: "gcsDestination";
@@ -6819,6 +7064,212 @@ export namespace google {
                         enum Format {
                             FORMAT_UNSPECIFIED = 0,
                             JSONL = 2
+                        }
+                    }
+
+                    /** Properties of a FieldFilter. */
+                    interface IFieldFilter {
+
+                        /** FieldFilter includedFields */
+                        includedFields?: (google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+
+                        /** FieldFilter excludedFields */
+                        excludedFields?: (google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+                    }
+
+                    /** Represents a FieldFilter. */
+                    class FieldFilter implements IFieldFilter {
+
+                        /**
+                         * Constructs a new FieldFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter);
+
+                        /** FieldFilter includedFields. */
+                        public includedFields?: (google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+
+                        /** FieldFilter excludedFields. */
+                        public excludedFields?: (google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+
+                        /** FieldFilter selector. */
+                        public selector?: ("includedFields"|"excludedFields");
+
+                        /**
+                         * Creates a new FieldFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FieldFilter instance
+                         */
+                        public static create(properties?: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Encodes the specified FieldFilter message. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.verify|verify} messages.
+                         * @param message FieldFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FieldFilter message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.verify|verify} messages.
+                         * @param message FieldFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FieldFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FieldFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Decodes a FieldFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FieldFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Verifies a FieldFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FieldFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FieldFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Creates a plain object from a FieldFilter message. Also converts values to other types if specified.
+                         * @param message FieldFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FieldFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FieldFilter
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace FieldFilter {
+
+                        /** Properties of a FieldList. */
+                        interface IFieldList {
+
+                            /** FieldList fields */
+                            fields?: (string[]|null);
+                        }
+
+                        /** Represents a FieldList. */
+                        class FieldList implements IFieldList {
+
+                            /**
+                             * Constructs a new FieldList.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList);
+
+                            /** FieldList fields. */
+                            public fields: string[];
+
+                            /**
+                             * Creates a new FieldList instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FieldList instance
+                             */
+                            public static create(properties?: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Encodes the specified FieldList message. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.verify|verify} messages.
+                             * @param message FieldList message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FieldList message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.verify|verify} messages.
+                             * @param message FieldList message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FieldList message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FieldList
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Decodes a FieldList message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FieldList
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Verifies a FieldList message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FieldList message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FieldList
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Creates a plain object from a FieldList message. Also converts values to other types if specified.
+                             * @param message FieldList
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FieldList to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FieldList
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
                 }
@@ -9192,6 +9643,9 @@ export namespace google {
 
                     /** SearchResponseMetadata usedKnn */
                     usedKnn?: (boolean|null);
+
+                    /** SearchResponseMetadata warnings */
+                    warnings?: (google.rpc.IStatus[]|null);
                 }
 
                 /** Represents a SearchResponseMetadata. */
@@ -9208,6 +9662,9 @@ export namespace google {
 
                     /** SearchResponseMetadata usedKnn. */
                     public usedKnn?: (boolean|null);
+
+                    /** SearchResponseMetadata warnings. */
+                    public warnings: google.rpc.IStatus[];
 
                     /** SearchResponseMetadata indexType. */
                     public indexType?: ("usedIndex"|"usedKnn");
@@ -10155,6 +10612,9 @@ export namespace google {
 
                     /** Ranker rrf */
                     rrf?: (google.cloud.vectorsearch.v1beta.IReciprocalRankFusion|null);
+
+                    /** Ranker vertexRanker */
+                    vertexRanker?: (google.cloud.vectorsearch.v1beta.IVertexRanker|null);
                 }
 
                 /** Represents a Ranker. */
@@ -10169,8 +10629,14 @@ export namespace google {
                     /** Ranker rrf. */
                     public rrf?: (google.cloud.vectorsearch.v1beta.IReciprocalRankFusion|null);
 
+                    /** Ranker vertexRanker. */
+                    public vertexRanker?: (google.cloud.vectorsearch.v1beta.IVertexRanker|null);
+
                     /** Ranker ranker. */
                     public ranker?: "rrf";
+
+                    /** Ranker reranker. */
+                    public reranker?: "vertexRanker";
 
                     /**
                      * Creates a new Ranker instance using the specified properties.
@@ -10345,6 +10811,230 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VertexRanker. */
+                interface IVertexRanker {
+
+                    /** VertexRanker textRecordSpec */
+                    textRecordSpec?: (google.cloud.vectorsearch.v1beta.VertexRanker.ITextRecordSpec|null);
+
+                    /** VertexRanker model */
+                    model?: (string|null);
+
+                    /** VertexRanker topN */
+                    topN?: (number|null);
+                }
+
+                /** Represents a VertexRanker. */
+                class VertexRanker implements IVertexRanker {
+
+                    /**
+                     * Constructs a new VertexRanker.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1beta.IVertexRanker);
+
+                    /** VertexRanker textRecordSpec. */
+                    public textRecordSpec?: (google.cloud.vectorsearch.v1beta.VertexRanker.ITextRecordSpec|null);
+
+                    /** VertexRanker model. */
+                    public model: string;
+
+                    /** VertexRanker topN. */
+                    public topN: number;
+
+                    /** VertexRanker recordSpec. */
+                    public recordSpec?: "textRecordSpec";
+
+                    /**
+                     * Creates a new VertexRanker instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VertexRanker instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1beta.IVertexRanker): google.cloud.vectorsearch.v1beta.VertexRanker;
+
+                    /**
+                     * Encodes the specified VertexRanker message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.VertexRanker.verify|verify} messages.
+                     * @param message VertexRanker message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1beta.IVertexRanker, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VertexRanker message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.VertexRanker.verify|verify} messages.
+                     * @param message VertexRanker message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.IVertexRanker, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VertexRanker message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VertexRanker
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.VertexRanker;
+
+                    /**
+                     * Decodes a VertexRanker message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VertexRanker
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.VertexRanker;
+
+                    /**
+                     * Verifies a VertexRanker message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VertexRanker message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VertexRanker
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.VertexRanker;
+
+                    /**
+                     * Creates a plain object from a VertexRanker message. Also converts values to other types if specified.
+                     * @param message VertexRanker
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1beta.VertexRanker, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VertexRanker to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VertexRanker
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VertexRanker {
+
+                    /** Properties of a TextRecordSpec. */
+                    interface ITextRecordSpec {
+
+                        /** TextRecordSpec query */
+                        query?: (string|null);
+
+                        /** TextRecordSpec titleTemplate */
+                        titleTemplate?: (string|null);
+
+                        /** TextRecordSpec contentTemplate */
+                        contentTemplate?: (string|null);
+                    }
+
+                    /** Represents a TextRecordSpec. */
+                    class TextRecordSpec implements ITextRecordSpec {
+
+                        /**
+                         * Constructs a new TextRecordSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vectorsearch.v1beta.VertexRanker.ITextRecordSpec);
+
+                        /** TextRecordSpec query. */
+                        public query: string;
+
+                        /** TextRecordSpec titleTemplate. */
+                        public titleTemplate: string;
+
+                        /** TextRecordSpec contentTemplate. */
+                        public contentTemplate: string;
+
+                        /**
+                         * Creates a new TextRecordSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TextRecordSpec instance
+                         */
+                        public static create(properties?: google.cloud.vectorsearch.v1beta.VertexRanker.ITextRecordSpec): google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec;
+
+                        /**
+                         * Encodes the specified TextRecordSpec message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec.verify|verify} messages.
+                         * @param message TextRecordSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vectorsearch.v1beta.VertexRanker.ITextRecordSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TextRecordSpec message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec.verify|verify} messages.
+                         * @param message TextRecordSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.VertexRanker.ITextRecordSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TextRecordSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TextRecordSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec;
+
+                        /**
+                         * Decodes a TextRecordSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TextRecordSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec;
+
+                        /**
+                         * Verifies a TextRecordSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TextRecordSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TextRecordSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec;
+
+                        /**
+                         * Creates a plain object from a TextRecordSpec message. Also converts values to other types if specified.
+                         * @param message TextRecordSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TextRecordSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TextRecordSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a BatchSearchDataObjectsResponse. */
@@ -11646,6 +12336,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an EncryptionSpec. */
+                interface IEncryptionSpec {
+
+                    /** EncryptionSpec cryptoKeyName */
+                    cryptoKeyName?: (string|null);
+                }
+
+                /** Represents an EncryptionSpec. */
+                class EncryptionSpec implements IEncryptionSpec {
+
+                    /**
+                     * Constructs a new EncryptionSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1beta.IEncryptionSpec);
+
+                    /** EncryptionSpec cryptoKeyName. */
+                    public cryptoKeyName: string;
+
+                    /**
+                     * Creates a new EncryptionSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EncryptionSpec instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1beta.IEncryptionSpec): google.cloud.vectorsearch.v1beta.EncryptionSpec;
+
+                    /**
+                     * Encodes the specified EncryptionSpec message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.EncryptionSpec.verify|verify} messages.
+                     * @param message EncryptionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1beta.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EncryptionSpec message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.EncryptionSpec.verify|verify} messages.
+                     * @param message EncryptionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EncryptionSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EncryptionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.EncryptionSpec;
+
+                    /**
+                     * Decodes an EncryptionSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EncryptionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.EncryptionSpec;
+
+                    /**
+                     * Verifies an EncryptionSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EncryptionSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EncryptionSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.EncryptionSpec;
+
+                    /**
+                     * Creates a plain object from an EncryptionSpec message. Also converts values to other types if specified.
+                     * @param message EncryptionSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1beta.EncryptionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EncryptionSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EncryptionSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a VectorSearchService */
                 class VectorSearchService extends $protobuf.rpc.Service {
 
@@ -11779,6 +12566,20 @@ export namespace google {
                     public createIndex(request: google.cloud.vectorsearch.v1beta.ICreateIndexRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpdateIndex.
+                     * @param request UpdateIndexRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateIndex(request: google.cloud.vectorsearch.v1beta.IUpdateIndexRequest, callback: google.cloud.vectorsearch.v1beta.VectorSearchService.UpdateIndexCallback): void;
+
+                    /**
+                     * Calls UpdateIndex.
+                     * @param request UpdateIndexRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateIndex(request: google.cloud.vectorsearch.v1beta.IUpdateIndexRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DeleteIndex.
                      * @param request DeleteIndexRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -11880,6 +12681,13 @@ export namespace google {
                     type CreateIndexCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1beta.VectorSearchService|updateIndex}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateIndexCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.vectorsearch.v1beta.VectorSearchService|deleteIndex}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -11930,6 +12738,9 @@ export namespace google {
 
                     /** Collection dataSchema */
                     dataSchema?: (google.protobuf.IStruct|null);
+
+                    /** Collection encryptionSpec */
+                    encryptionSpec?: (google.cloud.vectorsearch.v1beta.IEncryptionSpec|null);
                 }
 
                 /** Represents a Collection. */
@@ -11967,6 +12778,9 @@ export namespace google {
 
                     /** Collection dataSchema. */
                     public dataSchema?: (google.protobuf.IStruct|null);
+
+                    /** Collection encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.vectorsearch.v1beta.IEncryptionSpec|null);
 
                     /**
                      * Creates a new Collection instance using the specified properties.
@@ -12905,6 +13719,9 @@ export namespace google {
 
                     /** DeleteCollectionRequest requestId */
                     requestId?: (string|null);
+
+                    /** DeleteCollectionRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteCollectionRequest. */
@@ -12921,6 +13738,9 @@ export namespace google {
 
                     /** DeleteCollectionRequest requestId. */
                     public requestId: string;
+
+                    /** DeleteCollectionRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteCollectionRequest instance using the specified properties.
@@ -13278,6 +14098,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CreateIndexRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateIndexRequest. */
+                interface IUpdateIndexRequest {
+
+                    /** UpdateIndexRequest index */
+                    index?: (google.cloud.vectorsearch.v1beta.IIndex|null);
+
+                    /** UpdateIndexRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateIndexRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateIndexRequest. */
+                class UpdateIndexRequest implements IUpdateIndexRequest {
+
+                    /**
+                     * Constructs a new UpdateIndexRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1beta.IUpdateIndexRequest);
+
+                    /** UpdateIndexRequest index. */
+                    public index?: (google.cloud.vectorsearch.v1beta.IIndex|null);
+
+                    /** UpdateIndexRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateIndexRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateIndexRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateIndexRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1beta.IUpdateIndexRequest): google.cloud.vectorsearch.v1beta.UpdateIndexRequest;
+
+                    /**
+                     * Encodes the specified UpdateIndexRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.UpdateIndexRequest.verify|verify} messages.
+                     * @param message UpdateIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1beta.IUpdateIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateIndexRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.UpdateIndexRequest.verify|verify} messages.
+                     * @param message UpdateIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.IUpdateIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateIndexRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.UpdateIndexRequest;
+
+                    /**
+                     * Decodes an UpdateIndexRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.UpdateIndexRequest;
+
+                    /**
+                     * Verifies an UpdateIndexRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateIndexRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateIndexRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.UpdateIndexRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateIndexRequest message. Also converts values to other types if specified.
+                     * @param message UpdateIndexRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1beta.UpdateIndexRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateIndexRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateIndexRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -14279,6 +15208,9 @@ export namespace google {
 
                     /** ExportDataObjectsRequest name */
                     name?: (string|null);
+
+                    /** ExportDataObjectsRequest fieldFilter */
+                    fieldFilter?: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter|null);
                 }
 
                 /** Represents an ExportDataObjectsRequest. */
@@ -14295,6 +15227,9 @@ export namespace google {
 
                     /** ExportDataObjectsRequest name. */
                     public name: string;
+
+                    /** ExportDataObjectsRequest fieldFilter. */
+                    public fieldFilter?: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter|null);
 
                     /** ExportDataObjectsRequest destination. */
                     public destination?: "gcsDestination";
@@ -14487,7 +15422,214 @@ export namespace google {
                         /** Format enum. */
                         enum Format {
                             FORMAT_UNSPECIFIED = 0,
-                            JSON = 1
+                            JSON = 1,
+                            JSONL = 2
+                        }
+                    }
+
+                    /** Properties of a FieldFilter. */
+                    interface IFieldFilter {
+
+                        /** FieldFilter includedFields */
+                        includedFields?: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+
+                        /** FieldFilter excludedFields */
+                        excludedFields?: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+                    }
+
+                    /** Represents a FieldFilter. */
+                    class FieldFilter implements IFieldFilter {
+
+                        /**
+                         * Constructs a new FieldFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter);
+
+                        /** FieldFilter includedFields. */
+                        public includedFields?: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+
+                        /** FieldFilter excludedFields. */
+                        public excludedFields?: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+
+                        /** FieldFilter selector. */
+                        public selector?: ("includedFields"|"excludedFields");
+
+                        /**
+                         * Creates a new FieldFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FieldFilter instance
+                         */
+                        public static create(properties?: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Encodes the specified FieldFilter message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.verify|verify} messages.
+                         * @param message FieldFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FieldFilter message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.verify|verify} messages.
+                         * @param message FieldFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FieldFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FieldFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Decodes a FieldFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FieldFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Verifies a FieldFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FieldFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FieldFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Creates a plain object from a FieldFilter message. Also converts values to other types if specified.
+                         * @param message FieldFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FieldFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FieldFilter
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace FieldFilter {
+
+                        /** Properties of a FieldList. */
+                        interface IFieldList {
+
+                            /** FieldList fields */
+                            fields?: (string[]|null);
+                        }
+
+                        /** Represents a FieldList. */
+                        class FieldList implements IFieldList {
+
+                            /**
+                             * Constructs a new FieldList.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList);
+
+                            /** FieldList fields. */
+                            public fields: string[];
+
+                            /**
+                             * Creates a new FieldList instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FieldList instance
+                             */
+                            public static create(properties?: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Encodes the specified FieldList message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.verify|verify} messages.
+                             * @param message FieldList message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FieldList message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.verify|verify} messages.
+                             * @param message FieldList message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FieldList message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FieldList
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Decodes a FieldList message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FieldList
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Verifies a FieldList message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FieldList message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FieldList
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Creates a plain object from a FieldList message. Also converts values to other types if specified.
+                             * @param message FieldList
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FieldList to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FieldList
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
                 }
@@ -15648,6 +16790,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -15664,6 +16809,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -16365,6 +17513,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -16378,6 +17529,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -16455,6 +17609,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -16783,6 +18049,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -16796,6 +18065,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -17121,6 +18393,109 @@ export namespace google {
             PACKAGE_MANAGER = 20
         }
 
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -17138,6 +18513,9 @@ export namespace google {
 
             /** FieldInfo format */
             format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
         }
 
         /** Represents a FieldInfo. */
@@ -17151,6 +18529,9 @@ export namespace google {
 
             /** FieldInfo format. */
             public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
 
             /**
              * Creates a new FieldInfo instance using the specified properties.
@@ -17240,6 +18621,103 @@ export namespace google {
                 IPV6 = 3,
                 IPV4_OR_IPV6 = 4
             }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -17346,6 +18824,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -17375,6 +18854,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -17424,6 +18906,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -17559,6 +19044,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -17599,6 +19087,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -18447,6 +19938,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -18472,6 +19966,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -19407,6 +20904,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -19464,6 +20964,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -19680,6 +21183,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -19923,6 +21541,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -19944,6 +21565,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -20537,6 +22161,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -20565,6 +22195,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -20688,6 +22324,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -20807,8 +22553,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -20823,8 +22572,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -21355,6 +23107,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Struct. */

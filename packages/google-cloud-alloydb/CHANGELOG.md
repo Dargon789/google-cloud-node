@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.6.0...alloydb-v2.7.0) (2026-06-25)
+
+
+### Features
+
+* Update API sources and regenerate ([#8672](https://github.com/googleapis/google-cloud-node/issues/8672)) ([3391fd2](https://github.com/googleapis/google-cloud-node/commit/3391fd27d1c15e051293207a07c6db00e760d370))
+
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.5.1...alloydb-v2.6.0) (2026-06-16)
+
+
+### Features
+
+* Migrate google-cloud-alloydb to librarian ([#8491](https://github.com/googleapis/google-cloud-node/issues/8491)) ([2a7f823](https://github.com/googleapis/google-cloud-node/commit/2a7f82336695397220cae1ee249f8ff5e1871b60))
+
+## [2.5.1](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.5.0...alloydb-v2.5.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
 ## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.4.0...alloydb-v2.5.0) (2026-03-18)
 
 

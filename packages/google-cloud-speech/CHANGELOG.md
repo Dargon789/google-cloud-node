@@ -4,6 +4,36 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.4.0...speech-v7.5.0) (2026-06-25)
+
+
+### Features
+
+* Migrate google-cloud-speech to librarian (keep helpers) ([#8648](https://github.com/googleapis/google-cloud-node/issues/8648)) ([4436002](https://github.com/googleapis/google-cloud-node/commit/44360026d32a0461beb10de497803b658c96c668))
+
+## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.3.2...speech-v7.4.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 4 ([#8615](https://github.com/googleapis/google-cloud-node/issues/8615)) ([f629251](https://github.com/googleapis/google-cloud-node/commit/f629251e27e51aa06003b4846a497d5a7c411cc2))
+
+## [7.3.2](https://github.com/googleapis/google-cloud-node/compare/speech-v7.3.1...speech-v7.3.2) (2026-06-01)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
+## [7.3.1](https://github.com/googleapis/google-cloud-node/compare/speech-v7.3.0...speech-v7.3.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
 ## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.2.1...speech-v7.3.0) (2026-03-02)
 
 

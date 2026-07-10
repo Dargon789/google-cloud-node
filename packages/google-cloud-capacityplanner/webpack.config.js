@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'CapacityPlanningService',
-    filename: './capacity-planning-service.js',
+    library: 'UsageService',
+    filename: './usage-service.js',
   },
   node: {
     child_process: 'empty',

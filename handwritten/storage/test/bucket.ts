@@ -191,6 +191,8 @@ describe('Bucket', () => {
   let Bucket: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let bucket: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let ComposeCleanupError: any;
 
   const STORAGE = {
     createBucket: util.noop,
@@ -211,7 +213,7 @@ describe('Bucket', () => {
   const BUCKET_NAME = 'test-bucket';
 
   before(() => {
-    Bucket = proxyquire('../src/bucket.js', {
+    const bucketModule = proxyquire('../src/bucket.js', {
       fs: fakeFs,
       'p-limit': fakePLimit,
       '@google-cloud/promisify': fakePromisify,
@@ -225,7 +227,9 @@ describe('Bucket', () => {
       './iam.js': {Iam: FakeIam},
       './notification.js': {Notification: FakeNotification},
       './signer.js': fakeSigner,
-    }).Bucket;
+    });
+    Bucket = bucketModule.Bucket;
+    ComposeCleanupError = bucketModule.ComposeCleanupError;
   });
 
   beforeEach(() => {
@@ -755,6 +759,7 @@ describe('Bucket', () => {
           destination: {
             contentType: mime.getType(destination.name) || undefined,
             contentEncoding: undefined,
+            contexts: undefined,
           },
           sourceObjects: [{name: sources[0].name}, {name: sources[1].name}],
         });
@@ -805,7 +810,7 @@ describe('Bucket', () => {
       const destination = bucket.file('destination.txt');
 
       destination.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs, options);
+        assert.deepStrictEqual(reqOpts.qs, options);
         done();
       };
 
@@ -914,6 +919,141 @@ describe('Bucket', () => {
       };
 
       bucket.combine(sources, destination, done);
+    });
+
+    it('should delete source objects if deleteSourceObjects is true', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+
+      // Set generation on the first file and leave second file without generation
+      sources[0].generation = 12345;
+
+      let deletedCount = 0;
+      sources[0].delete = async (opts?: any) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
+        assert.strictEqual(opts?.ifGenerationMatch, 12345);
+        deletedCount++;
+        return [{}];
+      };
+      sources[1].delete = async (opts?: any) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
+        assert.strictEqual(opts?.ifGenerationMatch, undefined);
+        deletedCount++;
+        return [{}];
+      };
+
+      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+        assert.strictEqual(reqOpts.qs.deleteSourceObjects, undefined);
+        assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
+        assert.strictEqual(reqOpts.json.sourceObjects[0].generation, 12345);
+        callback(null, {});
+      };
+
+      bucket.combine(
+        sources,
+        destination,
+        {deleteSourceObjects: true, userProject: 'user-project-id'},
+        (err: any) => {
+          assert.ifError(err);
+          assert.strictEqual(deletedCount, 2);
+          done();
+        }
+      );
+    });
+
+    it('should not delete source objects if deleteSourceObjects is false/omitted', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+
+      let deletedCount = 0;
+      sources.forEach(source => {
+        source.delete = async () => {
+          deletedCount++;
+          return [{}];
+        };
+      });
+
+      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+        assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
+        callback(null, {});
+      };
+
+      bucket.combine(sources, destination, (err: any) => {
+        assert.ifError(err);
+        assert.strictEqual(deletedCount, 0);
+        done();
+      });
+    });
+
+    it('should not delete source objects if compose operation fails', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+      const composeError = new Error('Compose failed.');
+
+      let deletedCount = 0;
+      sources.forEach(source => {
+        source.delete = async () => {
+          deletedCount++;
+          return [{}];
+        };
+      });
+
+      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+        assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
+        callback(composeError);
+      };
+
+      bucket.combine(sources, destination, {deleteSourceObjects: true}, (err: any) => {
+        assert.strictEqual(err, composeError);
+        assert.strictEqual(deletedCount, 0);
+        done();
+      });
+    });
+
+    it('should return ComposeCleanupError if deleting source objects fails', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+      const deleteError = new Error('Delete failed.');
+
+      sources[0].delete = async (opts?: any) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
+        throw deleteError;
+      };
+      sources[1].delete = async (opts?: any) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
+        return [{}];
+      };
+
+      destination.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
+        assert.strictEqual(reqOpts.json.deleteSourceObjects, undefined);
+        callback(null, {success: true});
+      };
+
+      bucket.combine(
+        sources,
+        destination,
+        {deleteSourceObjects: true, userProject: 'user-project-id'},
+        (err: any, newFile: any, apiResponse: any) => {
+          try {
+            assert.ok(err instanceof ComposeCleanupError);
+            assert.strictEqual(err.name, 'ComposeCleanupError');
+            assert.deepStrictEqual((err as any).errors, [deleteError]);
+            assert.strictEqual((err as any).newFile, destination);
+            assert.deepStrictEqual((err as any).apiResponse, {success: true});
+
+            // Also check callback arguments
+            assert.strictEqual(newFile, destination);
+            assert.deepStrictEqual(apiResponse, {success: true});
+            done();
+          } catch (assertErr) {
+            done(assertErr);
+          }
+        }
+      );
     });
   });
 
@@ -2004,6 +2144,72 @@ describe('Bucket', () => {
       bucket.getFiles((err: Error, files: FakeFile[]) => {
         assert.ifError(err);
         assert.deepStrictEqual(files[0].metadata, fileMetadata);
+        done();
+      });
+    });
+
+    it('should filter by presence of key/value pair', done => {
+      const filter = 'contexts."status"="active"';
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(reqOpts.qs.filter, filter);
+        done();
+      };
+
+      bucket.getFiles({filter}, util.noop);
+    });
+
+    it('should filter by absence of key/value pair (NOT)', done => {
+      const filter = '-contexts."status"="active"';
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(reqOpts.qs.filter, filter);
+        done();
+      };
+
+      bucket.getFiles({filter}, util.noop);
+    });
+
+    it('should filter by presence of key regardless of value (Existence)', done => {
+      const filter = 'contexts."status":*';
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(reqOpts.qs.filter, filter);
+        done();
+      };
+
+      bucket.getFiles({filter}, util.noop);
+    });
+
+    it('should filter by absence of key regardless of value (Non-existence)', done => {
+      const filter = '-contexts."status":*';
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(reqOpts.qs.filter, filter);
+        done();
+      };
+
+      bucket.getFiles({filter}, util.noop);
+    });
+
+    it('should include contexts in the returned File metadata', done => {
+      const fileMetadata = {
+        name: 'filename',
+        contexts: {
+          custom: {
+            dept: {value: 'eng', createTime: '...'},
+          },
+        },
+      };
+      bucket.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        callback(null, {items: [fileMetadata]});
+      };
+
+      bucket.getFiles((err: Error, files: FakeFile[]) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(
+          files[0].metadata.contexts,
+          fileMetadata.contexts
+        );
         done();
       });
     });

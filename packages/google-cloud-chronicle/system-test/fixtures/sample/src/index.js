@@ -21,10 +21,18 @@
 const chronicle = require('@google-cloud/chronicle');
 
 function main() {
+  const bigQueryExportServiceClient = new chronicle.BigQueryExportServiceClient();
+  const dashboardChartServiceClient = new chronicle.DashboardChartServiceClient();
+  const dashboardQueryServiceClient = new chronicle.DashboardQueryServiceClient();
   const dataAccessControlServiceClient = new chronicle.DataAccessControlServiceClient();
+  const dataTableServiceClient = new chronicle.DataTableServiceClient();
   const entityServiceClient = new chronicle.EntityServiceClient();
+  const featuredContentNativeDashboardServiceClient = new chronicle.FeaturedContentNativeDashboardServiceClient();
+  const findingsRefinementServiceClient = new chronicle.FindingsRefinementServiceClient();
   const instanceServiceClient = new chronicle.InstanceServiceClient();
+  const nativeDashboardServiceClient = new chronicle.NativeDashboardServiceClient();
   const referenceListServiceClient = new chronicle.ReferenceListServiceClient();
+  const ruleExecutionErrorServiceClient = new chronicle.RuleExecutionErrorServiceClient();
   const ruleServiceClient = new chronicle.RuleServiceClient();
 }
 

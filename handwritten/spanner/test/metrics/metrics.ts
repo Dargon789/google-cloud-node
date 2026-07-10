@@ -164,6 +164,7 @@ describe('Test metrics with mock server', () => {
       port,
       sslCreds: grpc.credentials.createInsecure(),
     });
+    (spanner as any)._metricsEnabled = true;
     instance = spanner.instance('instance');
   }
 
@@ -173,7 +174,7 @@ describe('Test metrics with mock server', () => {
   });
 
   after(async () => {
-    spanner.close();
+    await spanner.close();
     server.tryShutdown(() => {});
     sandbox.restore();
     await MetricsTracerFactory.resetInstance();
@@ -199,7 +200,7 @@ describe('Test metrics with mock server', () => {
       );
     });
 
-    after(() => {
+    after(async () => {
       exporterStub.restore();
     });
 
