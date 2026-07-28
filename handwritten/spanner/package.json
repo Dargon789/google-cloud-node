@@ -53,7 +53,7 @@
     "coverage": "c8 mocha build/test build/test/common && c8 report --check-coverage"
   },
   "dependencies": {
-    "@babel/core": "7.27.7",
+    "@babel/core": "7.29.6",
     "@babel/helpers": "7.27.6",
     "@babel/traverse": "7.27.7",
     "@google-cloud/common": "^6.0.0",
@@ -82,7 +82,7 @@
     "lodash.snakecase": "^4.1.1",
     "merge-stream": "^2.0.0",
     "p-queue": "^6.0.2",
-    "protobufjs": "^7.4.0",
+    "protobufjs": "^8.7.1",
     "retry-request": "^8.0.0",
     "split-array-stream": "^2.0.0",
     "stack-trace": "0.0.10",

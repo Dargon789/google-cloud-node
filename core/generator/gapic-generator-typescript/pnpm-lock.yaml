@@ -24,11 +24,11 @@ dependencies:
     specifier: ^3.0.3
     version: 3.0.4
   protobufjs:
-    specifier: ^7.6.5
-    version: 7.6.5
+    specifier: ^8.6.6
+    version: 8.6.6
   protobufjs-cli:
     specifier: ^1.2.0
-    version: 1.2.0(protobufjs@7.6.5)
+    version: 1.2.0(protobufjs@8.6.6)
   yargs:
     specifier: ^17.7.2
     version: 17.7.2
@@ -63,7 +63,7 @@ devDependencies:
     version: 0.1.7
   gapic-tools:
     specifier: ^1.0.3
-    version: 1.0.5(protobufjs@7.6.5)
+    version: 1.0.5(protobufjs@8.6.6)
   google-gax:
     specifier: ^5.1.1-rc.1
     version: 5.1.1-rc.1
@@ -1999,7 +1999,7 @@ packages:
       - supports-color
     dev: true
 
-  /gapic-tools@1.0.5(protobufjs@7.6.5):
+  /gapic-tools@1.0.5(protobufjs@8.6.6):
     resolution: {integrity: sha512-4KfYejUWVXQ3AoEOS4/xr7DpUkyXFED8VbdvtY0Y1i+nB7r1Dj3kUD5M0faSkw9hS9s9i2W9FIMcirSf1Rn2ng==}
     engines: {node: '>=18'}
     hasBin: true
@@ -2008,7 +2008,7 @@ packages:
       '@babel/traverse': 7.29.0
       google-gax: 5.0.6
       google-proto-files: 5.0.1
-      protobufjs-cli: 1.2.0(protobufjs@7.6.5)
+      protobufjs-cli: 1.2.0(protobufjs@8.6.6)
       rimraf: 5.0.10
       uglify-js: 3.19.3
       walk-up-path: 3.0.1
@@ -3218,7 +3218,7 @@ packages:
     dependencies:
       protobufjs: 7.6.5
 
-  /protobufjs-cli@1.2.0(protobufjs@7.6.5):
+  /protobufjs-cli@1.2.0(protobufjs@8.6.6):
     resolution: {integrity: sha512-+YvqJEmsmZHGzE5j0tvEzFeHm0sX7pzRFpyj7+GazhkS4Y0r+jgbioVvFxxSWIlPzUel/lxeOnLChBmV8NmyHA==}
     engines: {node: '>=12.0.0'}
     hasBin: true
@@ -3232,7 +3232,7 @@ packages:
       glob: 8.1.0
       jsdoc: 4.0.5
       minimist: 1.2.8
-      protobufjs: 7.6.5
+      protobufjs: 8.6.6
       semver: 7.7.4
       tmp: 0.2.5
       uglify-js: 3.19.3
@@ -3271,6 +3271,12 @@ packages:
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.2
       '@types/node': 22.19.17
+      long: 5.3.2
+
+  /protobufjs@8.6.6:
+    resolution: {integrity: sha512-RkLIhE+Tdc2Kpq1F4Uw6OnpAXPca7B+GSDov/GqGCqNBpVyDskQ9yReZfgM+C7xw9AAix873iQZXbBWXj6NzYQ==}
+    engines: {node: '>=12.0.0'}
+    dependencies:
       long: 5.3.2
 
   /punycode.js@2.3.1:
