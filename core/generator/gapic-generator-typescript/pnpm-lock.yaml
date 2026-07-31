@@ -9,8 +9,8 @@ dependencies:
     specifier: ^4.0.9
     version: 4.0.9
   js-yaml:
-    specifier: ^4.1.1
-    version: 4.1.1
+    specifier: ^4.3.0
+    version: 4.3.0
   long:
     specifier: ^5.3.2
     version: 5.3.2
@@ -24,11 +24,11 @@ dependencies:
     specifier: ^3.0.3
     version: 3.0.4
   protobufjs:
-    specifier: ^7.6.5
-    version: 7.6.5
+    specifier: ^8.6.6
+    version: 8.6.6
   protobufjs-cli:
     specifier: ^1.2.0
-    version: 1.2.0(protobufjs@7.6.5)
+    version: 1.2.0(protobufjs@8.6.6)
   yargs:
     specifier: ^17.7.2
     version: 17.7.2
@@ -63,7 +63,7 @@ devDependencies:
     version: 0.1.7
   gapic-tools:
     specifier: ^1.0.3
-    version: 1.0.5(protobufjs@7.6.5)
+    version: 1.0.5(protobufjs@8.6.6)
   google-gax:
     specifier: ^5.1.1-rc.1
     version: 5.1.1-rc.1
@@ -266,7 +266,7 @@ packages:
       globals: 13.24.0
       ignore: 5.3.2
       import-fresh: 3.3.1
-      js-yaml: 4.1.1
+      js-yaml: 4.3.0
       minimatch: 3.1.5
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
@@ -1657,7 +1657,7 @@ packages:
       imurmurhash: 0.1.4
       is-glob: 4.0.3
       is-path-inside: 3.0.3
-      js-yaml: 4.1.1
+      js-yaml: 4.3.0
       json-stable-stringify-without-jsonify: 1.0.1
       levn: 0.4.1
       lodash.merge: 4.6.2
@@ -1990,7 +1990,7 @@ packages:
     dependencies:
       '@google-cloud/storage': 7.19.0
       '@octokit/rest': 20.1.2
-      js-yaml: 4.1.1
+      js-yaml: 4.3.0
       nunjucks: 3.2.4
       yargs: 17.7.2
     transitivePeerDependencies:
@@ -1999,7 +1999,7 @@ packages:
       - supports-color
     dev: true
 
-  /gapic-tools@1.0.5(protobufjs@7.6.5):
+  /gapic-tools@1.0.5(protobufjs@8.6.6):
     resolution: {integrity: sha512-4KfYejUWVXQ3AoEOS4/xr7DpUkyXFED8VbdvtY0Y1i+nB7r1Dj3kUD5M0faSkw9hS9s9i2W9FIMcirSf1Rn2ng==}
     engines: {node: '>=18'}
     hasBin: true
@@ -2008,7 +2008,7 @@ packages:
       '@babel/traverse': 7.29.0
       google-gax: 5.0.6
       google-proto-files: 5.0.1
-      protobufjs-cli: 1.2.0(protobufjs@7.6.5)
+      protobufjs-cli: 1.2.0(protobufjs@8.6.6)
       rimraf: 5.0.10
       uglify-js: 3.19.3
       walk-up-path: 3.0.1
@@ -2572,8 +2572,8 @@ packages:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
     dev: true
 
-  /js-yaml@4.1.1:
-    resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
+  /js-yaml@4.3.0:
+    resolution: {integrity: sha512-1td788aAnnZ5qs7V2QIRl1owjtYpbKt749Y3xauqQgwIIGF/xXWz1wMTEBx5O3LK3lXLVuqXPdPxj2BoFHaW9Q==}
     hasBin: true
     dependencies:
       argparse: 2.0.1
@@ -2917,7 +2917,7 @@ packages:
       glob: 10.5.0
       he: 1.2.0
       is-path-inside: 3.0.3
-      js-yaml: 4.1.1
+      js-yaml: 4.3.0
       log-symbols: 4.1.0
       minimatch: 9.0.9
       ms: 2.1.3
@@ -3218,7 +3218,7 @@ packages:
     dependencies:
       protobufjs: 7.6.5
 
-  /protobufjs-cli@1.2.0(protobufjs@7.6.5):
+  /protobufjs-cli@1.2.0(protobufjs@8.6.6):
     resolution: {integrity: sha512-+YvqJEmsmZHGzE5j0tvEzFeHm0sX7pzRFpyj7+GazhkS4Y0r+jgbioVvFxxSWIlPzUel/lxeOnLChBmV8NmyHA==}
     engines: {node: '>=12.0.0'}
     hasBin: true
@@ -3232,7 +3232,7 @@ packages:
       glob: 8.1.0
       jsdoc: 4.0.5
       minimist: 1.2.8
-      protobufjs: 7.6.5
+      protobufjs: 8.6.6
       semver: 7.7.4
       tmp: 0.2.5
       uglify-js: 3.19.3
@@ -3271,6 +3271,12 @@ packages:
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.2
       '@types/node': 22.19.17
+      long: 5.3.2
+
+  /protobufjs@8.6.6:
+    resolution: {integrity: sha512-RkLIhE+Tdc2Kpq1F4Uw6OnpAXPca7B+GSDov/GqGCqNBpVyDskQ9yReZfgM+C7xw9AAix873iQZXbBWXj6NzYQ==}
+    engines: {node: '>=12.0.0'}
+    dependencies:
       long: 5.3.2
 
   /punycode.js@2.3.1:
